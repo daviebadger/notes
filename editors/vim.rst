@@ -2,7 +2,7 @@
  Vim
 =====
 ---------------------------------------
- Textový editor zabudovaný v terminálu 
+ Textový editor zabudovaný v terminálu
 ---------------------------------------
 
 :Author: Davie Badger
@@ -26,7 +26,7 @@
         :help
 
     2. online na stránce http://vimhelp.appspot.com/
-    
+
     Kromě toho má Vim i oficiální interaktivní tutoriál v terminálu, ve kterém
     se lze prakticky naučit ovládat základy Vimu během 25 - 30 minut. Tento
     tutoriál se spouští pomocí::
@@ -71,7 +71,7 @@ s Vimem ve svém archívu), tak je třeba postupovat následujícím postupem:
     $ sudo apt install vim
 
 4. ověřit, že se nainstalovala verze 8::
-   
+
     $ vim --version | head -1
 
 Kdyby Vim přestal vyhovovat, lze jej odinstalovat spolu s odstraněním archívu
@@ -108,11 +108,11 @@ Když pro příkaz "vim" uvedu ještě cestu k souboru, tak zde záleží, zdá 
 jedná o:
 
 a) existující soubor
- 
+
    - zobrazí se jeho obsah
    - např.::
 
-       $ vim ~/.profile 
+       $ vim ~/.profile
 
 b) neexistující soubor
 
@@ -196,21 +196,21 @@ Aby bylo na čem procvičovat, je dobré mít nějaký pracovní text.
 5. vratťe se zpět do Normal módu
 6. v případě potřeby uložte pro budoucí použití
 
-Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud 
-quaeque eu, an his hendrerit prodesset, nonumes oportere gloriatur qui 
-ut. Cu malis summo saperet nec, eam ei purto fastidii sententiae. Graece 
-detracto reformidans ex mel. At oportere moderatius ius, sea at scripta 
+Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
+quaeque eu, an his hendrerit prodesset, nonumes oportere gloriatur qui
+ut. Cu malis summo saperet nec, eam ei purto fastidii sententiae. Graece
+detracto reformidans ex mel. At oportere moderatius ius, sea at scripta
 regione dissentiunt.
 
-Vel no ferri aeterno deleniti. Ne eam nisl dissentiunt comprehensam, ea 
-accusata vulputate mea. Ne duo assum meliore tincidunt, ius option 
-molestiae et. Magna porro lucilius ea mea. Tota malorum ut vis, vim id 
+Vel no ferri aeterno deleniti. Ne eam nisl dissentiunt comprehensam, ea
+accusata vulputate mea. Ne duo assum meliore tincidunt, ius option
+molestiae et. Magna porro lucilius ea mea. Tota malorum ut vis, vim id
 posse civibus praesent.
 
-Quot cibo eloquentiam eum id, tation mentitum consectetuer pri ad. Ei mel 
-exerci explicari, equidem aliquando nec et, an sed assum hendrerit. Id 
-vel modus philosophia. Ea quo dicant minimum, choro scaevola ex mel. Tale 
-vide nostrum ei usu, his illum scriptorem te. Ex legere cotidieque pro, 
+Quot cibo eloquentiam eum id, tation mentitum consectetuer pri ad. Ei mel
+exerci explicari, equidem aliquando nec et, an sed assum hendrerit. Id
+vel modus philosophia. Ea quo dicant minimum, choro scaevola ex mel. Tale
+vide nostrum ei usu, his illum scriptorem te. Ex legere cotidieque pro,
 quo nisl dolor assentior an, et iriure scripta blandit per.
 
 Základní pohyb po znacích
@@ -228,7 +228,7 @@ Klasický pohyb kurzoru doleva, dolu, nahoru, doprava tvoří písmenka::
 
    Samozřejmě lze použít i šipky (pokud fungují), nicméně se tím ztrácí
    výhoda mít umístěnou pravou ruku ve výchozi poloze pro psaní všemi deseti
-   (ukazováček je na pozici písmenka "j"). 
+   (ukazováček je na pozici písmenka "j").
 
 Klávesy h / j / k / l jde samožejmě podržet, kdy dojde k opakování jejich
 stisku. Pokud však vím, o kolik se chci posunout na jiné misto, můžů před
@@ -246,7 +246,7 @@ doprava, stisknu následující písmenka:
 
    - hledá vpravo od kurzoru po konec řádku výskyt daného znaku
    - příklad::
-    
+
        # Mějme následující řádek:
 
        Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
@@ -270,7 +270,7 @@ doprava, stisknu následující písmenka:
 Skákání na konkrétní sloupec
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sloupcem se myslí pořadí (místo) znaků na řádku. 
+Sloupcem se myslí pořadí (místo) znaků na řádku.
 
 - |
 
@@ -488,14 +488,14 @@ Další vstupy do Insert módu
 ---------------------------
 
 Teď, když umíme se pohybovat v textu, je dobré vědět o dalších možnostech,
-jak si usnadnit vstup do Insert módu (kromě klasického "i"): 
+jak si usnadnit vstup do Insert módu (kromě klasického "i"):
 
 - a
 
   - na rozdíl od "i" nezačně Insert mód v místě, kde je kurzor, ale o
     jeden znak napravo
   - rozdíl bude patrný z následujícího příkladu::
-    
+
       # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
       # " je super."
 
@@ -602,7 +602,7 @@ Mazání po znacích
 
 - x
 
-  - smaže znak, který se nachází v místě kurzoru 
+  - smaže znak, který se nachází v místě kurzoru
   - když uvedu i číslo, tak smažu X znaků doprava::
 
       5x
@@ -621,7 +621,7 @@ na začátek / konec řádku to bude::
 
    Bylo by dobré vědět do budoucna, že písmenko "d" nejenom, že maže určitý
    úsek textu, ale taky tuto smaznou část si ještě zapamatuje. Toto se bude
-   hodit do situaci, kdy je třeba vystřihnout text a přemístit ho jinam.  
+   hodit do situaci, kdy je třeba vystřihnout text a přemístit ho jinam.
 
 Mazání po slovech
 ^^^^^^^^^^^^^^^^^
@@ -728,7 +728,7 @@ Dále ještě existuje speciální varianta označení textu a to pomocí CTRL +
 kde se jedná o takový sloupcový výběr. Příklad::
 
     # Mějme následující text, ve kterém chci změnit najednou mezery na
-    # dvojtečky.  
+    # dvojtečky.
 
     01 45
     05 00
@@ -758,7 +758,7 @@ Nyní zpět k mazání. Pro smazání označeného textu stisknu klasicky "d" ne
 
    - >
 
-     - posune (odsadí) text doprava o jeden tabulátor.           
+     - posune (odsadí) text doprava o jeden tabulátor.
 
    - <
 
@@ -846,7 +846,7 @@ Přepisování po řádcích
 
   - smaže celý řádek, kde je kurzor a přepnutí na Insert mód
 
-Pro více řádku pak platí stejné kombinace, jako jsou uvedené v sekcí "Mazání 
+Pro více řádku pak platí stejné kombinace, jako jsou uvedené v sekcí "Mazání
 po řádcích", kde akorát místo písmenka "d" se bude použít "c".
 
 Přepisování ve vymezené části textu
@@ -984,7 +984,7 @@ všechny viděl najednou a v případě potřeby mohl mezi nimi přepínat. Okna
 být jak vedle sebe (vertikálně), tak i nad / pod sebou (horizontálně).
 
 .. note::
-    
+
    V každé záložce mohou být jinak rozvrstveny okna.
 
 Vytvoření a zavření oken
@@ -1045,7 +1045,7 @@ Přesouvání oken
 
 .. note::
 
-   Toto může i změnit rozhraní oken (z vertikálního na horizontálního a 
+   Toto může i změnit rozhraní oken (z vertikálního na horizontálního a
    naopak).
 
 Úprava velikosti oken
@@ -1106,7 +1106,7 @@ Se záložkami
 
 Na rozdíl od varianty bez záložek jednak uvidím ve výchozím stavu nahoře ve
 Vimu přehledně záložky se jmény souborů, které v nich mám otevřeny a druhak
-mohu mít v nich jinak rozvrstevny okna, což by ve variantě bez záložek nešlo. 
+mohu mít v nich jinak rozvrstevny okna, což by ve variantě bez záložek nešlo.
 
 Otevírání a zavírání záložek
 """"""""""""""""""""""""""""
@@ -1266,7 +1266,7 @@ Poté stačí při dalším otevření editoru použít příkaz::
 
    Pokud budete používat plugin NERDTree, tak při otevření pracovního
    prostředí nebude strom vidět (BUG). Stačí si otevřít další a hned ho opět
-   zavřít (budou vidět dva najednou). 
+   zavřít (budou vidět dva najednou).
 
 Obnovení souborů
 ----------------
@@ -1500,7 +1500,7 @@ mohu použít i speciální pro navigaci ve stromu.
 
 - p
 
-  - pokud mám rozbalené vnořené adresáře, tak kurzor skočí na řádek s 
+  - pokud mám rozbalené vnořené adresáře, tak kurzor skočí na řádek s
     nadřazeným adresářem
 
 - J
@@ -1673,7 +1673,7 @@ Já nicméně preferuji následující dvě varianty:
 1. ukaž strom, když není uveden soubor
 
    - když v terminálu při otevření Vimu neuvedu žádný soubor::
-    
+
        $ vim
 
    - nastavení::
@@ -1688,14 +1688,14 @@ Já nicméně preferuji následující dvě varianty:
        $ vim název_adresáře/
 
    - nastavení::
-    
+
        autocmd StdinReadPre * let s:std_in=1
        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
 
 ----
 
 .. [#] Vim (text editor). Wikipedia: the free encyclopedia. [online].
-       2001- [cit. 2017-01-07]. 
+       2001- [cit. 2017-01-07].
        Dostupné z: https://en.wikipedia.org/wiki/Vim_(text_editor)
 
 .. [#] Vi. Wikipedia: the free encyclopedia. [online].
