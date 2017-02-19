@@ -11,8 +11,9 @@
 
 :Abstract:
 
-    Markdown [#]_ vznikl v roce 2004 s cílem vytvořit takový formát, který by
-    byl jednoduchý pro jak pro psaní, tak i čtení. Vytvořil ho John Gruber.
+    Markdown [#]_ (zkráceně MD) vznikl v roce 2004 s cílem vytvořit takový
+    formát, který by byl jednoduchý pro jak pro psaní, tak i čtení. Vytvořil
+    ho John Gruber.
 
     Tento formát se začal masivně používat v diskusních příspěvcích na
     stránkách jako jsou `Github`_, `StackOverflow`_ či `Reddit`_. Na tento
@@ -27,6 +28,9 @@
 
     O standardizaci tohoto jazyka se snaží skupina lidí z výše uvedených
     stránek pod značkou `CommonMark`_.
+
+    Markdown (respektive CommonMark) lze vyzkoušet online na stránce
+    http://spec.commonmark.org/dingus/.
 
 .. contents:: Obsah
 
@@ -148,8 +152,8 @@ hvězdička::
     - Brno
     - Ostrava
 
-Seznamy lze samozřejmě vnořovat (je nutné střídat označení). Velikost odsazení
-je buď čtyři mezery nebo jeden tabulátor::
+Seznamy lze samozřejmě vnořovat (není třeba střídat označení). Velikost
+odsazení je buď čtyři mezery nebo jeden tabulátor::
 
     * ananas
         + Audi
