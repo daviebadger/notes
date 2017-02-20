@@ -50,36 +50,6 @@ musím nainstalovat pomocí::
 
     $ sudo apt install vim
 
-Verzi nainstalovaného Vimu zkontroluji příkazem::
-
-    $ vim --version | head -1
-
-Pokud se nainstalovala starší verze 7.4 (Ubuntu ještě neaktualizovalo balíček
-s Vimem ve svém archívu), tak je třeba postupovat následujícím postupem:
-
-1. odinstalovat starou verzi::
-
-    $ sudo apt remove vim
-
-2. přidat baličkovací archív od Jonathona Fernyhougha pro Vim::
-
-    $ sudo add-apt-repository ppa:jonathonf/vim
-    $ sudo apt update
-
-3. nainstalovat novější Vim::
-
-    $ sudo apt install vim
-
-4. ověřit, že se nainstalovala verze 8::
-
-    $ vim --version | head -1
-
-Kdyby Vim přestal vyhovovat, lze jej odinstalovat spolu s odstraněním archívu
-následujícími příkazy::
-
-    $ sudo apt remove vim
-    $ sudo add-apt-repository --remove ppa:jonathonf/vim
-
 Základní ovládání
 =================
 
