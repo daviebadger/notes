@@ -11,9 +11,10 @@
 
 :Abstract:
 
-   reStructuredText [#]_ (zkráceně RST, ReST či reST) vznikl v roce 2002 jako
+   `reStructuredText`_ (zkráceně RST, ReST či reST) vznikl v roce 2002 jako
    součást projektu `Docutils`_, který zpracováva text a dál jej zkonvertuje
-   do dalších textových formátu jako je HTML, PDF aj.
+   do dalších textových formátu jako je HTML, PDF aj. Je vyvíjen Davidem
+   Goodgerem.
 
    RST se uchytil nejvíce v dokumentaci projektů v Pythonu. Je v něm dokoncena
    popsána celá standardní knihovna toho jazyka.
@@ -657,11 +658,72 @@ Panel, který se objeví naboku vedle textu::
 
       Samotný obsah.
 
+Textové role
+------------
+
+Nějakému označenému textu může být přisouzena nějaká textová role, např.
+aby byl kurzívou. Tento text lze označit buď klasickými hvězdičami na obou
+stranách nebo pomocí textové role::
+
+   :emphasis:`Toto je text kurzívou.`
+
+Vlastní textové role
+""""""""""""""""""""
+
+Pokud chci vytvořit vlastní textovou roli (platí jen pro krátké texty) a
+tímpadem jinak nastylovat označený text, tak pomohu podle následujícího
+postupu:
+
+1. vytvořit novou roli před samotným použitím::
+
+   .. role:: název_role
+
+2. využít ji v textu::
+
+   :název_role:`Text pro tuto roli.`
+
+3. nastylovat pomocí CSS danou roli, která bude mít stejnojmenný název "class"
+   elementu
+
+   - vyrendrovaná role v HTML vypadá následovně::
+
+      <p><span class="název_role">Text</p>
+
+.. note::
+
+   CSS pro RST lze aplikovat buď u Sphinxu (dokumentační nástroj pro Python
+   spolu s RST) nebo u konvetorů (rst2html / rst2html5), kde lze uvést cestu
+   k CSS souboru, který se má použít.
+
+Zabudované textové role
+"""""""""""""""""""""""
+
+- sup (superscript)
+
+  - text v horním indexu::
+
+     Tento :sup:`Text` je v hodním indexu.
+
+- sub (subscript)
+
+  - text v dolním indexu::
+
+     Tento :sub:`Text` je v dolním indexu.
+
+- PEP
+
+  - pro hypertextový odkaz na nějaký PEP (Python Enhancement Proposal)::
+
+     Viz :PEP:`8`.
+
+- RFC
+
+  - dokumenty pro internetové protokoly RFC (Request For Comments)::
+
+     Viz :RFC:`2822`.
+
 ----
 
-.. [#] reStructuredText. Wikipedia: the free encyclopedia. [online].
-       2001- [cit. 2017-02-19].
-       Dostupné z: https://en.wikipedia.org/wiki/ReStructuredText
-
+.. _reStructuredText: Dostupné z: https://en.wikipedia.org/wiki/ReStructuredText
 .. _Docutils: http://docutils.sourceforge.net/
 .. _Sphinx: http://www.sphinx-doc.org/en/stable/
