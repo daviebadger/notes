@@ -26,8 +26,7 @@
    - zabudovaný terminál
    - simplifikováné API, které může použít jakýkoliv programovací jazyk
 
-   Online dokumentace Neovimu se nachází `ZDE`_ (je vesměs stejná jako u
-   původního Vimu).
+   `Online dokumentace`_ Neovimu je vesměs stejná jako u původního Vimu).
 
 Instalace
 =========
@@ -112,5 +111,7 @@ Zpátky do Terminal módu se vrací klasicky přes písmenko "i".
           :tnoremap <Esc> <C-\><C-n>
       endif
 
+----
+
 .. _Neovim: https://neovim.io
-.. _ZDE: https://neovim.io/doc/user/
+.. _Online dokumentace: https://neovim.io/doc/user/

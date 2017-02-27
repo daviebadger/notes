@@ -11,9 +11,8 @@
 
 :Abstract:
 
-    Vi IMproved, zkráceně Vim [#]_, vznikl v roce 1991 klonem původního Vi
-    [#]_ editoru určeného pro operační systém Unix. Vytvořil ho Bram
-    Moonlenaar.
+    Vi IMproved, zkráceně `Vim`_, vznikl v roce 1991 klonem původního `Vi`_
+    editoru určeného pro operační systém Unix. Vytvořil ho Bram Moonlenaar.
 
     Vim je zdarma a lze ho spustit na jakémkoliv operačním systému (pokud je
     nainstalovaný). Jeho zdrojové kódy lze najít na `GitHubu`_. Poslední
@@ -1664,13 +1663,7 @@ Já nicméně preferuji následující dvě varianty:
 
 ----
 
-.. [#] Vim (text editor). Wikipedia: the free encyclopedia. [online].
-       2001- [cit. 2017-01-07].
-       Dostupné z: https://en.wikipedia.org/wiki/Vim_(text_editor)
-
-.. [#] Vi. Wikipedia: the free encyclopedia. [online].
-       2001- [cit. 2017-01-07].
-       Dostupné z: https://en.wikipedia.org/wiki/Vi
-
+.. _Vim: https://en.wikipedia.org/wiki/Vim_(text_editor)
+.. _Vi: https://en.wikipedia.org/wiki/Vi
 .. _GitHubu: https://github.com/vim/vim
 .. _Vim tahák: https://vim.rtorr.com/

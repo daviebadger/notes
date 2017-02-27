@@ -11,7 +11,7 @@
 
 :Abstract:
 
-    Markdown [#]_ (zkráceně MD) vznikl v roce 2004 s cílem vytvořit takový
+    `Markdown`_ (zkráceně MD) vznikl v roce 2004 s cílem vytvořit takový
     formát, který by byl jednoduchý pro jak pro psaní, tak i čtení. Vytvořil
     ho John Gruber.
 
@@ -306,10 +306,7 @@ Zdrojové kódy
 
 ----
 
-.. [#] Markdown. Wikipedia: the free encyclopedia. [online].
-       2001- [cit. 2017-02-13].
-       Dostupné z: https://en.wikipedia.org/wiki/Markdown
-
+.. _Markdown: https://en.wikipedia.org/wiki/Markdown
 .. _GitHub: https://github.com/
 .. _StackOverflow: http://stackoverflow.com/
 .. _Reddit: https://www.reddit.com/
