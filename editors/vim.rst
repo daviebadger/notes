@@ -11,28 +11,28 @@
 
 :Abstract:
 
-    Vi IMproved, zkráceně `Vim`_, vznikl v roce 1991 klonem původního `Vi`_
-    editoru určeného pro operační systém Unix. Vytvořil ho Bram Moonlenaar.
+   Vi IMproved, zkráceně `Vim`_, vznikl v roce 1991 klonem původního `Vi`_
+   editoru určeného pro operační systém Unix. Vytvořil ho Bram Moonlenaar.
 
-    Vim je zdarma a lze ho spustit na jakémkoliv operačním systému (pokud je
-    nainstalovaný). Jeho zdrojové kódy lze najít na `GitHubu`_. Poslední
-    hlavní verze je č. 8 (od října 2016).
+   Vim je zdarma a lze ho spustit na jakémkoliv operačním systému (pokud je
+   nainstalovaný). Jeho zdrojové kódy lze najít na `GitHubu`_. Poslední
+   hlavní verze je č. 8 (od října 2016).
 
-    Oficiální dokumentaci lze najít:
+   Oficiální dokumentaci lze najít:
 
-    1. uvnitř Vimu spuštěním příkazu pro nápovědu v normal módu::
+   1. uvnitř Vimu spuštěním příkazu pro nápovědu v normal módu::
 
-        :help
+      :help
 
-    2. online na stránce http://vimhelp.appspot.com/
+   2. online na stránce http://vimhelp.appspot.com/
 
-    Kromě toho má Vim i oficiální interaktivní tutoriál v terminálu, ve kterém
-    se lze prakticky naučit ovládat základy Vimu během 25 - 30 minut. Tento
-    tutoriál se spouští pomocí::
+   Kromě toho má Vim i oficiální interaktivní tutoriál v terminálu, ve kterém
+   se lze prakticky naučit ovládat základy Vimu během 25 - 30 minut. Tento
+   tutoriál se spouští pomocí::
 
-        $ vimtutor
+      $ vimtutor
 
-    Na závěr doporučuji i přehledný `Vim tahák`_ (v angličtině).
+   Na závěr doporučuji i přehledný `Vim tahák`_ (v angličtině).
 
 .. contents:: Obsah
 
@@ -42,12 +42,12 @@ Instalace
 Defaultně v Ubuntu je už Vim nainstalovaný, avšak ve své omezené podobě kvůli
 kompatibilitě s původním Vi editorem. Spouští se příkazem::
 
-    $ vi
+   $ vi
 
 Jestliže však chci používat Vim se všemi možnostmi, které nabízí, tak jej
 musím nainstalovat pomocí::
 
-    $ sudo apt install vim
+   $ sudo apt install vim
 
 Základní ovládání
 =================
@@ -57,13 +57,13 @@ Spuštění a ukončení
 
 Editor Vim se spuští svým stejnojmenným příkazem::
 
-    $ vim
+   $ vim
 
 Bez uvedení cesty k nějakému souboru se otevře prázdný editor s výchozím
 textem o Vimu (jeho aktuální verze, jméno autora atd.). Pro "zavření" Vimu
 (respektive okna, ve kterém se nacházím) se nápíše uvnitř editoru příkaz::
 
-    :q
+   :q
 
 .. note::
 
@@ -71,7 +71,7 @@ textem o Vimu (jeho aktuální verze, jméno autora atd.). Pro "zavření" Vimu
    tak je třeba zmáčknout klávescu ESC (vypne "Insert" mód) a příkaz pro
    násilné ukončení Vimu bez uložení textu do souboru::
 
-       :q!
+      :q!
 
 Když pro příkaz "vim" uvedu ještě cestu k souboru, tak zde záleží, zdá se
 jedná o:
@@ -81,7 +81,7 @@ a) existující soubor
    - zobrazí se jeho obsah
    - např.::
 
-       $ vim ~/.profile
+      $ vim ~/.profile
 
 b) neexistující soubor
 
@@ -90,13 +90,13 @@ b) neexistující soubor
 
 Soubor lze samozřejme ještě otevřít uvnitř Vimu a to příkazem::
 
-    :o název_souboru
+   :o název_souboru
 
 Tento postup platí jen pro lokální a vnořené soubory. Pro otevření souboru
 někde v jiném nadřazeném adresáři, kde je třeba použít absolutní cestu se
 použíje příkaz::
 
-    :e /cesta/k/souboru
+   :e /cesta/k/souboru
 
 Módy
 ----
@@ -137,21 +137,21 @@ Ukládání do souboru
 Jestliže došlo k požadované změně obsahu a tu chci uložit, tak se přepnu z
 Insert do Normal a spustím::
 
-    :w
+   :w
 
 Pokud jsem otevřel prázdný Vim (bez uvedení cesty k souboru), tak musím uvést,
 kam chci obsah uložit::
 
-    :w ~/Documents/test.txt
+   :w ~/Documents/test.txt
 
 Pro uložení obsahu existujícího souboru do jiného souboru (uložit jako) je
 příkaz::
 
-    :sav /cesta/k/souboru
+   :sav /cesta/k/souboru
 
 Když chci uložit a dál nepokračovat v práci (zavřít Vim)::
 
-    :wq
+   :wq
 
 Pohyb kurzoru
 -------------
@@ -187,11 +187,11 @@ Základní pohyb po znacích
 
 Klasický pohyb kurzoru doleva, dolu, nahoru, doprava tvoří písmenka::
 
-          ^
-          k
-    < h       l >
-          j
-          v
+         ^
+         k
+   < h       l >
+         j
+         v
 
 .. note::
 
@@ -203,7 +203,7 @@ Klávesy h / j / k / l jde samožejmě podržet, kdy dojde k opakování jejich
 stisku. Pokud však vím, o kolik se chci posunout na jiné misto, můžů před
 jejich stiskem uvést číslo. Např. pohyb o 10 řádku dolu::
 
-    10j
+   10j
 
 Skákání na konkrétní znak na řádku
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -216,21 +216,21 @@ doprava, stisknu následující písmenka:
    - hledá vpravo od kurzoru po konec řádku výskyt daného znaku
    - příklad::
 
-       # Mějme následující řádek:
+      # Mějme následující řádek:
 
-       Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
+      Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
 
-       # Chci skočit na začátek další věty, tak stisknu
+      # Chci skočit na začátek další věty, tak stisknu
 
-       fE
+      fE
 
-       # a kurzor skutečně skočí na onen začátek, neboť jinde velké písmeno E
-       # není.
+      # a kurzor skutečně skočí na onen začátek, neboť jinde velké písmeno E
+      # není.
 
    - jestliže se daný znak vyskutuje vícekrát na řádku, tak mohu skočit až na
      Ntý výskut pomocí::
 
-       2fe
+      2fe
 
 2. F + znak
 
@@ -262,19 +262,19 @@ Pohyb mezi slovy zajišťují tyto písmenka:
     interpunkčního znaménka
   - příklad::
 
-      # Mějme následující větu:
+     # Mějme následující větu:
 
-      Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+     Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
 
-      # Pokud bychom skákali od začátku věty pomocí písmenka "w" a aktuálně
-      # by se kurzor nacházel na začátku slova "amet":
+     # Pokud bychom skákali od začátku věty pomocí písmenka "w" a aktuálně
+     # by se kurzor nacházel na začátku slova "amet":
 
-      Lorem ipsum dolor sit |a|met, eos eu aperiri moderatius.
+     Lorem ipsum dolor sit |a|met, eos eu aperiri moderatius.
 
-      # Tak při dalším skoku kurzor neskočí na začátek slova "eos", ale na
-      # čárku:
+     # Tak při dalším skoku kurzor neskočí na začátek slova "eos", ale na
+     # čárku:
 
-      Lorem ipsum dolor sit amet|,| eos eu aperiri moderatius.
+     Lorem ipsum dolor sit amet|,| eos eu aperiri moderatius.
 
   - pro ignorování interpunkčních znamének je třeba stisknout velké "W"
 
@@ -297,7 +297,7 @@ Pohyb mezi slovy zajišťují tyto písmenka:
 
 Stejně jako u znacích mohu skákat po více slovech, např. o tři slova dopředu::
 
-  3w
+   3w
 
 Skákání na konkrétní slova
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -335,8 +335,8 @@ které jsou spíše typické při vyhledávání slov(a) v textu:
 Oba způsoby jsou defaultně citlivé na rozdíl velkých a malých písmen. Pro
 dočasné vypnutí tohoto chování lze na konec napsat suffix "\c"::
 
-    /pattern\c
-    ?pattern\c
+   /pattern\c
+   ?pattern\c
 
 .. tip::
 
@@ -393,14 +393,14 @@ Skákání po větách a odstavcích
   - na začátek další věty
   - příklad::
 
-      # Mějme text:
+     # Mějme text:
 
-      Toto je věta A. Toto je věta B.
+     Toto je věta A. Toto je věta B.
 
-      # a kurzor na začátku řádku. Stiskem ")" se kurzor přesune na znak "T"
-      # v druhé větě:
+     # a kurzor na začátku řádku. Stiskem ")" se kurzor přesune na znak "T"
+     # v druhé větě:
 
-      Toto je věta A. |T|oto je věta B.
+     Toto je věta A. |T|oto je věta B.
 
 - (
 
@@ -465,21 +465,21 @@ jak si usnadnit vstup do Insert módu (kromě klasického "i"):
     jeden znak napravo
   - rozdíl bude patrný z následujícího příkladu::
 
-      # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
-      # " je super."
+     # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
+     # " je super."
 
-      Vim
+     Vim
 
-      # Navigujeme kurzorem na konec řádku. Pokud bychom do Insert módu
-      # vstoupili pomocí "i" a začali psát dovětek, vypadalo by to takhle:
+     # Navigujeme kurzorem na konec řádku. Pokud bychom do Insert módu
+     # vstoupili pomocí "i" a začali psát dovětek, vypadalo by to takhle:
 
-      Vi je super.m
+     Vi je super.m
 
-      # Naopak při stisku "a" se kurzor posune o jeden znak doprava za
-      # písmenko "m" (vznikne mezera, která zanikne po stisku ESC,
-      # jestliže nic nenapíšeme), pak lze v pořádku dopsat zbytek:
+     # Naopak při stisku "a" se kurzor posune o jeden znak doprava za
+     # písmenko "m" (vznikne mezera, která zanikne po stisku ESC,
+     # jestliže nic nenapíšeme), pak lze v pořádku dopsat zbytek:
 
-      Vim je super.
+     Vim je super.
 
 - A
 
@@ -499,7 +499,7 @@ jak si usnadnit vstup do Insert módu (kromě klasického "i"):
 
    Např. chci třikrát vložit písmenko "X"::
 
-       3iX + ESC
+      3iX + ESC
 
 Pokud chci při vstupu rovnou vložit i prázdný řádek, tak mám na výběr, zda
 ho chci vložit:
@@ -509,16 +509,16 @@ a) o řádek výše, než je kurzor
    - stisknu "O" (velké o)
    - příklad::
 
-       # Mám kurzor na prvním řádku souboru, který obsahuje větu:
+      # Mám kurzor na prvním řádku souboru, který obsahuje větu:
 
-       |U|čím se Vim.
+      |U|čím se Vim.
 
-       # Pokud stisknu "O", tak se celá věta posune na druhý řádek a první
-       # řádek bude prázdný, kam se přesune i kurzor a mód bude klasiky
-       # Insert.
+      # Pokud stisknu "O", tak se celá věta posune na druhý řádek a první
+      # řádek bude prázdný, kam se přesune i kurzor a mód bude klasiky
+      # Insert.
 
-       | |
-       Učím se Vim.
+      | |
+      Učím se Vim.
 
 b) o řádek níž
 
@@ -574,17 +574,17 @@ Mazání po znacích
   - smaže znak, který se nachází v místě kurzoru
   - když uvedu i číslo, tak smažu X znaků doprava::
 
-      5x
+     5x
 
 Pro mazání více znaků doleva mimo klasické způsoby lze následovně::
 
-    3dj
+   3dj
 
 Toto smaže od aktuálního kurzoru 3 znaky nalevo. Pro smazání všech znaků až
 na začátek / konec řádku to bude::
 
-    d0
-    d$
+   d0
+   d$
 
 .. tip::
 
@@ -601,15 +601,15 @@ uprostřed mezi nimi.
 Co se týče mazání slova, tak lze použít zkratku namísto skoku na nějaký kraj
 a až pak smazat znaky na druhý kraj. Jde o::
 
-    daw
+   daw
 
 .. tip::
 
    Kromě mazání slova (aw = a word) lze mazat i věty (as = a sentence) nebo
    celé odstavce (ap = a paragraph)::
 
-       das
-       dap
+      das
+      dap
 
    Tyto zkratky se budou hodit i v kapitolce `Přepisování textu`_-
 
@@ -661,14 +661,14 @@ c) od aktuálního řádku nahoru
 
    Pokud bych měl nějaký zalomený text, např::
 
-       Dnes je
-       pondělí.
+      Dnes je
+      pondělí.
 
    a chtěl tuto větu spojit na jeden řádek spolu s přidáním mezery za slovo
    "je", tak mohu stisknout "J" kdekoliv na prvním řádku pro sjednocení
    s následujícím řádkem. Výsledek pak bude::
 
-       Dnes je pondělí.
+      Dnes je pondělí.
 
 Mazání vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -696,26 +696,26 @@ těmito dvěmi místy skákat pomocí "o" (malé o).
 Dále ještě existuje speciální varianta označení textu a to pomocí CTRL + v,
 kde se jedná o takový sloupcový výběr. Příklad::
 
-    # Mějme následující text, ve kterém chci změnit najednou mezery na
-    # dvojtečky.
+   # Mějme následující text, ve kterém chci změnit najednou mezery na
+   # dvojtečky.
 
-    01 45
-    05 00
-    08 24
+   01 45
+   05 00
+   08 24
 
-    # Kurzorem najedu na místo první mezery, stisknu CTRL + v a dvojitým
-    # kliknutím "j" označím i dva řádky pod tím.
+   # Kurzorem najedu na místo první mezery, stisknu CTRL + v a dvojitým
+   # kliknutím "j" označím i dva řádky pod tím.
 
-    01| |45
-    05| |00
-    08| |24
+   01| |45
+   05| |00
+   08| |24
 
-    # Stisknu "r" pro náhrazení znaku (bude probráno za chvíli) a zmáčknu ":".
-    # Text nyní bude vypadát následovně:
+   # Stisknu "r" pro náhrazení znaku (bude probráno za chvíli) a zmáčknu ":".
+   # Text nyní bude vypadát následovně:
 
-    01:45
-    05:00
-    08:24
+   01:45
+   05:00
+   08:24
 
 Nyní zpět k mazání. Pro smazání označeného textu stisknu klasicky "d" nebo i
 "x".
@@ -751,20 +751,20 @@ okamžitý vstup do Insert módu.
 
    Příklad::
 
-       # Mějme klasickou větu:
+      # Mějme klasickou větu:
 
-       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+      Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
 
-       # Pokud bych vstoupil do Replace módu na začátku řádku a začal psát,
-       # tak tento nový text překryje ten starý:
+      # Pokud bych vstoupil do Replace módu na začátku řádku a začal psát,
+      # tak tento nový text překryje ten starý:
 
-       Přepisuji tuto větu.t amet, eos eu aperiri moderatius.
+      Přepisuji tuto větu.t amet, eos eu aperiri moderatius.
 
-       # Kdybych ještě zůstal v Replace módu, neodcházel do Normalu a začal
-       # mazat to, co jsem nově napsal, tak uvidím zpět původní text, který
-       # byl překryt:
+      # Kdybych ještě zůstal v Replace módu, neodcházel do Normalu a začal
+      # mazat to, co jsem nově napsal, tak uvidím zpět původní text, který
+      # byl překryt:
 
-       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+      Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
 
 Přepisování po znacích
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -791,22 +791,22 @@ Co se týče kombinace "c" s objekty pro slova (aw) / věty (as) / odstavce (ap)
 tak zde je naopak nevýhoda, že zmizí i mezery za / před daný objekt, viz
 následující příklad::
 
-    # Mějme větu:
+   # Mějme větu:
 
-    Dnes je pondělí.
+   Dnes je pondělí.
 
-    # ve které chci změnit "pondělí" na "úterý". Pokud použiju kombinaci
-    # "caw", tak vstup do Insert módu bude vypadat následovně:
+   # ve které chci změnit "pondělí" na "úterý". Pokud použiju kombinaci
+   # "caw", tak vstup do Insert módu bude vypadat následovně:
 
-    Dnes je|.|
+   Dnes je|.|
 
-    # tzn. že první musím vložit mezeru a až pak slovo "úterý". Proto, abych
-    # si ušetřil čas, tak budu chtít zanechat při přepisování mezeru (v tomto
-    # případě před slovem) pomocí "ciw":
+   # tzn. že první musím vložit mezeru a až pak slovo "úterý". Proto, abych
+   # si ušetřil čas, tak budu chtít zanechat při přepisování mezeru (v tomto
+   # případě před slovem) pomocí "ciw":
 
-    Dnes je |.|
+   Dnes je |.|
 
-    # Pro větu to bude "cis" a odstavec "cip".
+   # Pro větu to bude "cis" a odstavec "cip".
 
 Přepisování po řádcích
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -856,11 +856,11 @@ Nahrazování na více řádcích
 Pokud chci nahrazovat jen ve vymezeném území, např. jen od prvního po pátý
 řádek včetně, tak použiju::
 
-    :1,5s/starý_text/nový_text + ENTER
+   :1,5s/starý_text/nový_text + ENTER
 
-    # nebo
+   # nebo
 
-    :1,5s/starý_text/nový_text/g + ENTER
+   :1,5s/starý_text/nový_text/g + ENTER
 
 Přesouvání textu
 ----------------
@@ -983,19 +983,19 @@ b) různé soubory v oknech
 
 Okno, ve kterém je kurzor se zavírá pomocí::
 
-    CTRL + wq
+   CTRL + wq
 
-    # nebo taktéž klasicky
+   # nebo taktéž klasicky
 
-    :q
-    :q!
-    :qa
-    :qa!
-    :wq
+   :q
+   :q!
+   :qa
+   :qa!
+   :wq
 
 Zavření všechn ostatních oken kromě aktuálního okna::
 
-    :on
+   :on
 
 Přepínání mezi okny
 """""""""""""""""""
@@ -1008,14 +1008,19 @@ Přepínání mezi okny
 Přesouvání oken
 """""""""""""""
 
+- CTRL + w + r
+
+  - přesune okno dolů / doprava, avšak zaleží na typech oknech (nelze
+    kombinovat horizontální okno s vertikálním)
+
+- CTRL + w + R
+
+  - přesune okno nahoru / doleva (platá stejná podmína, jako před chvíli)
+
 - CTRL + w + H / J / K / L
 
-  - přesune dané okno na jinou pozici podle zvoleného směru
-
-.. note::
-
-   Toto může i změnit rozhraní oken (z vertikálního na horizontálního a
-   naopak).
+  - přesune dané okno na úplně vlevo / dolu / nahoru / doprava, přičemž se
+    může změnit i typ okna, např. z vertikálního na horizontálního
 
 Úprava velikosti oken
 """""""""""""""""""""
@@ -1068,7 +1073,7 @@ b) na šířku
 
    Pokud bych chtěl mít 2 okna vedle / pod sebe stejně velká, stisknu::
 
-       CTRL + w + =
+      CTRL + w + =
 
 Se záložkami
 ^^^^^^^^^^^^
@@ -1094,7 +1099,7 @@ a) prázná záložka
      - pokud bych načíst do této prázdné záložky obsah nějakého souboru,
        tak použiju syntaxi::
 
-         :o cesta_k_souboru
+        :o cesta_k_souboru
 
 b) záložka se souborem
 
@@ -1106,16 +1111,17 @@ Zavřít záložku/y mohu několika způsoby:
 
 1. :tabc
 
-   - zavře záložku, na které se nacházím
+   - zavře záložku, na které se nacházím, nicméne soubor bude stále otevřený
+     v paměti
    - jestliže jsou v daném souboru na dané záložce nějaké změny, které nejsou
      uložené, tak Vim odmítne exekuci tohoto příkazu
    - pro zavření záložky bez uložení je třeba používat ještě vykričník::
 
-       :tabc!
+      :tabc!
 
    - pro zavření záložky s uložením změn se použije standardně::
 
-       :wq
+      :wq
 
    - pro za
 
@@ -1148,7 +1154,7 @@ Přecházení mezi záložkami
    Pokud bych chtěl najednou ve všech záložkách spustit stejný příkaz,
    použiju následující syntaxi::
 
-       :tabd příkaz
+      :tabd příkaz
 
    U příkazu není třeba na začátku používat dvojtečku.
 
@@ -1157,14 +1163,14 @@ Přesouvání záložek
 
 Jestli se mi nelíbí pořádí záložek, tak si ho můžu upravit pomocí syntaxe::
 
-    :tabm nová_pozice_záložky
+   :tabm nová_pozice_záložky
 
 .. note::
 
    Zde se naopak čísluje od nuly. Tudíž, pokud chci přesunout aktuální
    záložku na úplný začátek, použiju právě nulu::
 
-       :tabm 0
+      :tabm 0
 
 Exekuce externích příkazů
 -------------------------
@@ -1175,7 +1181,7 @@ S dočasným opuštěním Vimu
 Externí terminálové příkazy se z Vimu spouštějí pomocí vykřičníku za klasickou
 dvoutečkou a názvem daného příkazu::
 
-    :!ls -l
+   :!ls -l
 
 Vim bude dočasně schovaný, neboť se zobrazí klasický terminál s výsledkem
 příkazu. Pro návrat do editoru se pak stiskne ENTER.
@@ -1184,11 +1190,11 @@ Další možností je:
 
 1. přesunout editor na pozadí klávesovou zkratkou::
 
-    CTRL + z
+   CTRL + z
 
 2. spustit příkaz a do editoru se vrátit příkazem::
 
-    fg
+   fg
 
 Bez opuštění Vimu
 ^^^^^^^^^^^^^^^^^
@@ -1203,13 +1209,13 @@ Bez opuštění Vimu
   - pro jiné místo v souboru je nutné uvést i číslo řádku (počítá se od
     nuly, takže vždy 1 dílek ubrat), např. pro 5 řádek v souboru to bude::
 
-      :4r !ls
+     :4r !ls
 
 .. tip::
 
    Pro vložení obsahu je jiného souboru lze zkratka:
 
-       :r cesta/k/souboru
+      :r cesta/k/souboru
 
 Pracovní prostředí
 ------------------
@@ -1217,19 +1223,19 @@ Pracovní prostředí
 Rozvržení oken a záložek si mohu uložit a zpětně zobrazit při dalším spuštění
 Vimu. Stačí aktuální nastavení uložit pomocí příkazu::
 
-    :mks cesta/pro/uložení/souboru.vim
+   :mks cesta/pro/uložení/souboru.vim
 
-    # Doporučuji vytvořit adresář "~/.vim/sessions/" a ukládat tam
+   # Doporučuji vytvořit adresář "~/.vim/sessions/" a ukládat tam
 
-    :mks ~/.vim/sessions/název_uloženého_pracovního_prostředí.vim
+   :mks ~/.vim/sessions/název_uloženého_pracovního_prostředí.vim
 
 Poté stačí při dalším otevření editoru použít příkaz::
 
-    $ vim ~/.vim/sessions/název_pracovního_prostředí.vim
+   $ vim ~/.vim/sessions/název_pracovního_prostředí.vim
 
-    # nebo taktéž uvnitř Vimu pomocí:
+   # nebo taktéž uvnitř Vimu pomocí:
 
-    :source ~/.vim/sessions/název_pracovního_prostředí.vim
+   :source ~/.vim/sessions/název_pracovního_prostředí.vim
 
 .. note::
 
@@ -1248,7 +1254,7 @@ Při editaci souborů se v daném adresáři objeví skrytý soubor se stejným
 názvem editovaného souboru a koncovkou ".swp". Soubor ze zálohy se spustí
 pomocí příkazu::
 
-    $ vim -r název_souboru
+   $ vim -r název_souboru
 
 Objeví se hláška o obnově a doporučení uložit obnovený soubor pod jiným
 názvem. Hláška se vypne stisknutím ENTER klávesy. Po editaci v obnoveném
@@ -1256,7 +1262,7 @@ souboru je pak potřeba smazat již starý ".swp" soubor.
 
 Seznam souboru k obnově lze zobrazit příkazem::
 
-    $ vim -r
+   $ vim -r
 
 Přízpůsobení Vimu
 =================
@@ -1270,28 +1276,28 @@ Konfigurační soubor
 Slouží pro ukládání nastavení pro každé budoucí spuštení Vimu. Je třeba jej
 vytvořit v domovském adresáři se jménem::
 
-    .vimrc
+   .vimrc
 
 Rovnou si můžeme napsat i nějaké to základní nastavení::
 
-    set number          " zobraz čísla řádků
-    set colorcolumn=80  " ukáž vodorovnou čáru na 80. znaku (lze překročit)
+   set number          " zobraz čísla řádků
+   set colorcolumn=80  " ukáž vodorovnou čáru na 80. znaku (lze překročit)
 
-    " Globální nastavení tabulátorů
+   " Globální nastavení tabulátorů
 
-    set tabstop=4       " velikost tabulátoru podle znaků
-    set softtabstop=4  " v souboru nechá původní velikost tabu, ale já
-                        " uvidím ve Vimu jen 4 mezery
-    set shiftwidth=4    " velikost odsazení (např. ve Visual módu přes ">")
-    set expandtab       " zkonvertuje tabulátory na mezery
-    set smarttab        " pokud mám nastavený expandtab, tak při mazání se
-                        " smažou 4 mezery najednou a ne jen po jedné
+   set tabstop=4       " velikost tabulátoru podle znaků
+   set softtabstop=4  " v souboru nechá původní velikost tabu, ale já
+                       " uvidím ve Vimu jen 4 mezery
+   set shiftwidth=4    " velikost odsazení (např. ve Visual módu přes ">")
+   set expandtab       " zkonvertuje tabulátory na mezery
+   set smarttab        " pokud mám nastavený expandtab, tak při mazání se
+                       " smažou 4 mezery najednou a ne jen po jedné
 
-    " Nastavení pro jednotlivé soubory
+   " Nastavení pro jednotlivé soubory
 
-    autocmd Filetype html setlocal ts=2 sw=2 sts=2
-    autocmd Filetype css setlocal ts=2 sw=2 sts=2
-    autocmd Filetype js setlocal ts=2 sw=2 sts=2
+   autocmd Filetype html setlocal ts=2 sw=2 sts=2
+   autocmd Filetype css setlocal ts=2 sw=2 sts=2
+   autocmd Filetype js setlocal ts=2 sw=2 sts=2
 
 .. note::
 
@@ -1313,35 +1319,35 @@ externí moduly, nainstalovat je a aktivovat je pro každou instanci Vimu.
 
 Lze ho stáhnout příkazem::
 
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 DÁle není třeba nic instalovat. Stačí jen ve Vimu vyjmenovat moduly (externí),
 které chci použivat::
 
-    call plug#begin('~/.vim/plugged')
+   call plug#begin('~/.vim/plugged')
 
-    Plug 'název_uživatele/název_repozitáře_na_githubu'
-    Plug 'https://adresa.doména/cesta/k/git/repozitáři.git'
+   Plug 'název_uživatele/název_repozitáře_na_githubu'
+   Plug 'https://adresa.doména/cesta/k/git/repozitáři.git'
 
-    call plug#end()
+   call plug#end()
 
 Nyní je třeba znovu načíst konfigurační soubor (lze rovnou z Vimu)::
 
-    :source ~/.vimrc
+   :source ~/.vimrc
 
 Pak stačí spustit příkaz pro instalaci vyjmenovaných modulů::
 
-    :PlugInstall
+   :PlugInstall
 
 Kdybych přestal nějaký plugin používat, tak jej odstraním z konfiguráku a
 odintaluji pomocí::
 
-    :PlugClean
+   :PlugClean
 
-    # nebo bez potvrzení
+   # nebo bez potvrzení
 
-    :PlugClean!
+   :PlugClean!
 
 Colorschemes
 ^^^^^^^^^^^^
@@ -1351,15 +1357,15 @@ https://github.com/flazz/vim-colorschemes
 Kompletní balík s několika barevnými schématy pro vzhled Vimu včetně
 zvýrazňování syntaxe::
 
-    Plug 'flazz/vim-colorschemes'
+   Plug 'flazz/vim-colorschemes'
 
-    colorscheme název_schématu " např. colorscheme badwolf
+   colorscheme název_schématu " např. colorscheme badwolf
 
 Seznam všech schémat lze najít ve složce "colors", viz odkaz nahoře na
 GitHub repozitář. Ve Vimu si je lze všechy po jednom dočasně prohlížet
 pomocí příkazu::
 
-    :colorscheme název_schématu
+   :colorscheme název_schématu
 
 Polyglot
 ^^^^^^^^
@@ -1370,7 +1376,7 @@ Kompletní balík s podporou pro několik programovacích jazyků a speciálníc
 typů souborů, který vylepší zvýraznění (zbarvení) syntaxe (pro komentáře,
 funkce aj. budou použity barvy z námi vybraného barevného schématu)::
 
-    Plug 'vim-polyglot'
+   Plug 'vim-polyglot'
 
 Airline
 ^^^^^^^
@@ -1382,28 +1388,28 @@ Ukazuje informace o aktuálním módu, čísla řádku / sloupečku aj.
 
 Instalace a nastavení::
 
-    Plug 'vim-airline/vim-airline'
+   Plug 'vim-airline/vim-airline'
 
-    set laststatus=2                           " vždy zobraz Airline lištu
-    let g:airline_powerline_fonts=1            " včetně ikonek
-    let g:airline#extensions#tabline#enabled=1 " nastyluj i záložky nahoře
+   set laststatus=2                           " vždy zobraz Airline lištu
+   let g:airline_powerline_fonts=1            " včetně ikonek
+   let g:airline#extensions#tabline#enabled=1 " nastyluj i záložky nahoře
 
 Aby Airline správně fungoval (správné zobrazení šipek a ikonek), tak je třeba
 použít takový font, který obsahuje speciální znaky. Pro Ubuntu existuje
 stejnojmenný rozšiřující font. Stačí je stáhnout následujícími příkazy::
 
-    wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf
-    wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold.ttf
-    wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Italic.ttf
-    wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold%20Italic.ttf
+   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf
+   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold.ttf
+   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Italic.ttf
+   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold%20Italic.ttf
 
 Posléze je načíst pomocí::
 
-    fc-cache -vf ~/.local/share/fonts/
+   fc-cache -vf ~/.local/share/fonts/
 
 a v neposlední řádě změnit font pro terminál v grafickém rozhraní na::
 
-    Ubuntu Mono derivative Powerline Regular
+   Ubuntu Mono derivative Powerline Regular
 
 Pro Airline taky existují barevná schémeta, mě nicméně vyhovuje výchozí
 vzhled.
@@ -1418,15 +1424,15 @@ kterému lze klasicky procházet adresářovou strukturou a otevírat soubory.
 
 Instalace::
 
-    Plug 'scrooloose/nerdtree'
+   Plug 'scrooloose/nerdtree'
 
 Defaultně není strom po spuštění Vimu vidět, tak si ho musím otevřít
 příkazem::
 
-    :NERDTree
+   :NERDTree
 
-    # nebo stačí jen ":N", stisknout tabulátor pro automatické dokončení a
-    # ENTER.
+   # nebo stačí jen ":N", stisknout tabulátor pro automatické dokončení a
+   # ENTER.
 
 Strom se různými písmenky a klávesovými zkratkami. Jejich přehled lze najít
 v nápovědě. Je nutné být kurzorem v okně stromu a stisknout "?". Po zavření
@@ -1437,12 +1443,12 @@ Popis stromu
 
 Ukázkový strom::
 
-    " Press ? for help
+   " Press ? for help
 
-    .. (up a dir)
-    /home/jméno_uživatele/
-    > název_složky/
-      název_souboru
+   .. (up a dir)
+   /home/jméno_uživatele/
+   > název_složky/
+     název_souboru
 
 Význam posledních dvou řádku je více než zřejmý, nicméně pro jistotu
 vysvětlím i dva nadřazenější:
@@ -1550,7 +1556,7 @@ neuvidím, dokud se neaktualizuje.
 Tyto akce se provádí až v menu, které je třeba otevřít v okně stromu pomocí
 písmenka::
 
-    m
+   m
 
 Dole v příkazovém řádku pak uvidím, jaké akce mám na výběr a pomocí jakých
 písmenek je vyvolám. Pro zavření menu bez žádné akce se stiskne ESC.
@@ -1635,7 +1641,7 @@ Konfigurace NERDTree
 Pokud někdo chce, aby pokaždé při startu viděl NERDTree strom, tak nechť
 napíše do konfiguračního souboru následující řádek::
 
-    autocmd vimenter * NERDTree
+   autocmd vimenter * NERDTree
 
 Já nicméně preferuji následující dvě varianty:
 
@@ -1643,23 +1649,23 @@ Já nicméně preferuji následující dvě varianty:
 
    - když v terminálu při otevření Vimu neuvedu žádný soubor::
 
-       $ vim
+      $ vim
 
    - nastavení::
 
-       autocmd StdinReadPre * let s:std_in=1
-       autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+      autocmd StdinReadPre * let s:std_in=1
+      autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 2. ukaž strom, pokud otevírám adresář
 
    - když v terminálu místo názvu souboru odkažu na název adresáře::
 
-       $ vim název_adresáře/
+      $ vim název_adresáře/
 
    - nastavení::
 
-       autocmd StdinReadPre * let s:std_in=1
-       autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
+      autocmd StdinReadPre * let s:std_in=1
+      autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
 
 ----
 
