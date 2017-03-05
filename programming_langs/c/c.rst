@@ -11,9 +11,10 @@
 
 :Abstract:
 
-   `C`_ je imperatovní programovací jazyk, kdy se jednotlivé příkazy pouští
-   postupně krok za krokem. Vytvořil jej Dennis Ritchie na přelomu 70. let
-   20. století, přičemž jako oficiální datum uvedení se uvádí rok 1972.
+   `C`_ je imperativní, kompilovaný programovací jazyk, kdy se jednotlivé
+   příkazy pouští postupně krok za krokem. Vytvořil jej Dennis Ritchie na
+   přelomu 70. let 20. století, přičemž jako oficiální datum uvedení se uvádí
+   rok 1972.
 
    Jedna se o jeden z nejpoužívanějších programovacích jazyků vůbec. Jsou v
    něm psány operační systémy (Linux), databázové enginy (Postgres), textové
