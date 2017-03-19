@@ -11,9 +11,125 @@
 
 :Abstract:
 
-   `Sphinx`_ ...
+   `Sphinx`_ je dokumentační generátor, který vznikl pro interní potřebu
+   Pythonu jako takového. Byl napsán Georgem Brandlem a od roku 2008 je vyvíjen
+   zcela otevřeně (open source).
+
+   Tento nástroj využívá drtivá většina balíčků pro Python. Mezi nejznámnější
+   lze jmenovat Django, Flask, Requests, Virtualenv atd. Dokonce i samotná
+   dokumentace Pythonu a jeho standardní knihovny jej využívá.
+
+   Sphinx staví zejména na značkovacím jazyku reStructuredText, který je velmi
+   flexibilní a lze do něj přidat nové značky. Taktéž umí převést celou
+   dokumentaci na jiné formátovy, jako je HTML či PDF. V neposlední řade si
+   lze napsat vlastní rozšíření do Sphinxu.
 
 .. contents:: Obsah
+
+Instalace
+=========
+
+Příkazem::
+
+   $ pip install sphinx
+
+Ovládání
+========
+
+Vytvoření adresáře s dokumentací
+--------------------------------
+
+Pro vytvoření adresáře se Sphinx dokumentací se použíje následující skript,
+který je třeba spustit z rootu projektu::
+
+   $ sphinx-quickstart
+
+Jedná se o průvodce, který se ptá na několik věci, a na základě nich vytvoří
+patřičnou adresářovou strukturu spolu s konfiguračním souborem.
+
+K otázkám lze odpovídat buď vlastními hodnotami nebo nechat defaultní hodnoty
+v hranatých závorkách pomocí ENTER.
+
+**Hlavní otázky v průvodci:**
+
+1. root path for documentation
+
+   - cesta do adresáře s dokumentací
+   - zpravidla se uvadí hodnota "doc" (documentation) nebo "docs"
+     (documentation files)
+
+2. separate source and build directories
+
+   - zda se má zvlášť do adresářů separovat zdrojový obsah dokumentace a její
+     build
+   - nechat výchozí hodnotu (n)
+
+3. name prefix for templates and static dir
+
+   - jaký prefix bude mít složka "templates" a "static", pokud bych chtěl
+     tvořit vlastní vzhled HTML stránek
+   - nechat výchozí hodnotu (_)
+
+4. project name
+
+   - název projektu
+
+5. author name(s)
+
+   - název autora/ů
+
+6. project version
+
+   - verze projektu
+   - Sphinx rozlišuje termíny "version" pro hlavní verzi projektu (např. Python
+     3.5) a "release" pro jednotlivé subvydání (např. Python 3.5.2)
+
+7. project release
+
+   - release projektu
+   - pokud nechci duální verzování (zvlášť pro "version" a "release"), tak
+     nechám defaultní hodnotu (stejná jako verze projektu)
+
+8. project language
+
+   - jazyk dokumentace
+   - pokud nebude dokumentace psaná v angličtině (výchozí možnost), tak musím
+     uvést kód jazyka, který bude použít
+   - pro češtinu platí kód "cs", ostatní kódy lze najít na stránce
+     http://www.sphinx-doc.org/en/stable/config.html#confval-language
+
+9. source file suffix
+
+   - suffix (koncovka) souborů, ve kterých bude dokumentace
+   - nechat výchozí hodnotu (.rst)
+
+10. name of you master document
+
+    - název hlavního souboru (úvodní soubor s úvodem a obsahem)
+    - nechat výchozí hodnotu (index)
+
+11. create Makefile
+
+    - zda se má vytvořit soubor "Makefile", pomocí kterého se bude ovládat
+      celá dokumentace
+    - nechat výchozí hodnotu (y)
+
+.. note::
+
+   Na zde nezmíněné otázky lze všude odpovídat klávesou ENTER s ponecháním
+   výchozích hodnot. Akorát u poslední otázky na "Windows command file" je
+   třeba odpovědět "n", pokud nepoužívám OS Windows.
+
+
+Po dokončení průvodce by se ve zvoleném dokumentačním adresáři měla vytvořit
+následující adresářová struktura::
+
+   _build/
+   _static/
+   _templates/
+   conf.py
+   index.rst
+   Makefile
 
 TODO
 ====
@@ -187,18 +303,18 @@ Popis Google sekcí
 
 7. příklady
 
-    - ukázka použítí dané funkce ve stylu interpretu::
+   - ukázka použítí dané funkce ve stylu interpretu::
 
-       Example:
-           Popis příkladu::
+      Example:
+          Popis příkladu::
 
-               $ python example.py
+              $ python example.py
 
-       Examples:
-           Popis příkladu.
+      Examples:
+          Popis příkladu.
 
-           >>> print(True)
-           True
+          >>> print(True)
+          True
 
 Ostatní sekce:
 
@@ -435,3 +551,7 @@ Co se týče dokumentace pro třídy, tak tam jsou ještě další dvě sekce:
 
    Dokumentace konstruktoru se píše v rámci docstringu pro třídu a nikoliv
    v samotné magické metodě.
+
+----
+
+.. _Sphinx: https://en.wikipedia.org/wiki/Sphinx_(documentation_generator)
