@@ -78,14 +78,14 @@ jedná o:
 
 a) existující soubor
 
-   - zobrazí se jeho obsah
-   - např.::
+   * zobrazí se jeho obsah
+   * např.::
 
-      $ vim ~/.profile
+        $ vim ~/.profile
 
 b) neexistující soubor
 
-   - otevře se opět prázdný editor, ale pokud se změní jeho obsah (přibude
+   * otevře se opět prázdný editor, ale pokud se změní jeho obsah (přibude
      nějaký text) a ten se uloží, tak již není třeba uvádět jméno souboru.
 
 Soubor lze samozřejme ještě otevřít uvnitř Vimu a to příkazem::
@@ -106,30 +106,30 @@ zavedené tzv. módy. Pro začátek postačí znát tyto tři základní:
 
 1. Normal
 
-   - výchozí stav po spuštení Vimu, který slouží pro navigaci v textu a jeho
+   * výchozí stav po spuštení Vimu, který slouží pro navigaci v textu a jeho
      editaci pomoci
-   - některé písmenka (znaky) a klávesové zkratky jsou vyhrazena pro
+   * některé písmenka (znaky) a klávesové zkratky jsou vyhrazena pro
      jednotlivé úkony, např. pohyb kurzoru doprava o 1 znak
-   - při přepnutí z jiného módu na Normal se použije klávesa ESC
+   * při přepnutí z jiného módu na Normal se použije klávesa ESC
 
 2. Insert
 
-   - mód, ve kterém přestanou fungovat speciální písmena (znaky), ty se
+   * mód, ve kterém přestanou fungovat speciální písmena (znaky), ty se
      budou nyní zapisovat do textu
-   - spustí se z Normal módu stisknutím písmenka "i" (v levém dolním rohu
+   * spustí se z Normal módu stisknutím písmenka "i" (v levém dolním rohu
      bude vidět tučným písmem "-- INSERT --")
-   - do Insert módu lze vstupovat i jinými písmenkami, ale o tom až v
+   * do Insert módu lze vstupovat i jinými písmenkami, ale o tom až v
      kapitole `Další vstupy do Insert módu`_
 
 3. Command-line
 
-   - pro ovládání Vimu jako takového pomocí příkazů jako je např. otevírání a
+   * pro ovládání Vimu jako takového pomocí příkazů jako je např. otevírání a
      zavírání souborů nebo jeho nastavení (přízpůsobení)
-   - zapíná se převážně stiskem ":", za který následuje název daného příkazu
-   - tento mód se pozná tak, že se dole ve Vimu objeví příkazový řádek
-   - pokud si nejsem jistý, jestli píšu příkaz správně, mohu stisknout
+   * zapíná se převážně stiskem ":", za který následuje název daného příkazu
+   * tento mód se pozná tak, že se dole ve Vimu objeví příkazový řádek
+   * pokud si nejsem jistý, jestli píšu příkaz správně, mohu stisknout
      klávesovou zkratku CTRL + d, která mi ukáže všechny možné možnosti
-   - klávesa TAB slouží klasicky pro automatické doplnění příkazů
+   * klávesa TAB slouží klasicky pro automatické doplnění příkazů
 
 Ukládání do souboru
 -------------------
@@ -213,42 +213,42 @@ doprava, stisknu následující písmenka:
 
 1. f + znak
 
-   - hledá vpravo od kurzoru po konec řádku výskyt daného znaku
-   - příklad::
+   * hledá vpravo od kurzoru po konec řádku výskyt daného znaku
+   * příklad::
 
-      # Mějme následující řádek:
+        # Mějme následující řádek:
 
-      Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
+        Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
 
-      # Chci skočit na začátek další věty, tak stisknu
+        # Chci skočit na začátek další věty, tak stisknu
 
-      fE
+        fE
 
-      # a kurzor skutečně skočí na onen začátek, neboť jinde velké písmeno E
-      # není.
+        # a kurzor skutečně skočí na onen začátek, neboť jinde velké písmeno E
+        # není.
 
-   - jestliže se daný znak vyskutuje vícekrát na řádku, tak mohu skočit až na
+   * jestliže se daný znak vyskutuje vícekrát na řádku, tak mohu skočit až na
      Ntý výskut pomocí::
 
-      2fe
+        2fe
 
 2. F + znak
 
-   - to samé jako malé "f", akorát hledá nalevo po začátek řádku
+   * to samé jako malé "f", akorát hledá nalevo po začátek řádku
 
 Skákání na konkrétní sloupec
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sloupcem se myslí pořadí (místo) znaků na řádku.
 
-- |
+* |
 
-  - skočí na první sloupec (znak) na řádku
+  * skočí na první sloupec (znak) na řádku
 
-- 80|
+* 80|
 
-  - skočí na 80. sloupec (znak) na řádku
-  - platí jen pro takové řádky, které jsou takhle dlouhé. Když bude řádek
+  * skočí na 80. sloupec (znak) na řádku
+  * platí jen pro takové řádky, které jsou takhle dlouhé. Když bude řádek
     obsahovat méně znaků než 80, tak kurzor skočí na ten poslední znak
 
 Skákání po slovech
@@ -256,44 +256,44 @@ Skákání po slovech
 
 Pohyb mezi slovy zajišťují tyto písmenka:
 
-- w
+* w
 
-  - skočí na začátek dalšího slova (může jej tvořit i číslo), ale i
+  * skočí na začátek dalšího slova (může jej tvořit i číslo), ale i
     interpunkčního znaménka
-  - příklad::
+  * příklad::
 
-     # Mějme následující větu:
+       # Mějme následující větu:
 
-     Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
 
-     # Pokud bychom skákali od začátku věty pomocí písmenka "w" a aktuálně
-     # by se kurzor nacházel na začátku slova "amet":
+       # Pokud bychom skákali od začátku věty pomocí písmenka "w" a aktuálně
+       # by se kurzor nacházel na začátku slova "amet":
 
-     Lorem ipsum dolor sit |a|met, eos eu aperiri moderatius.
+       Lorem ipsum dolor sit |a|met, eos eu aperiri moderatius.
 
-     # Tak při dalším skoku kurzor neskočí na začátek slova "eos", ale na
-     # čárku:
+       # Tak při dalším skoku kurzor neskočí na začátek slova "eos", ale na
+       # čárku:
 
-     Lorem ipsum dolor sit amet|,| eos eu aperiri moderatius.
+       Lorem ipsum dolor sit amet|,| eos eu aperiri moderatius.
 
-  - pro ignorování interpunkčních znamének je třeba stisknout velké "W"
+  * pro ignorování interpunkčních znamének je třeba stisknout velké "W"
 
-- e
+* e
 
-  - skočí na konec aktuální slova (pokud se kurzor nachází kdekoliv od
+  * skočí na konec aktuální slova (pokud se kurzor nachází kdekoliv od
     prvního po předposlední znak slova) nebo konec dalšího slova
-  - taky respektuje interpunkční znaménka, pro jejich ignoraci je třeba
+  * taky respektuje interpunkční znaménka, pro jejich ignoraci je třeba
     stisk "E"
 
-- ge
+* ge
 
-  - skočí na začátek předchozí slova (opak "e")
-  - pro ignoraci interpunkčních znamének se stiskne "gE"
+  * skočí na začátek předchozí slova (opak "e")
+  * pro ignoraci interpunkčních znamének se stiskne "gE"
 
-- b
+* b
 
-  - skočí na začátek aktuálního nebo předchozího slova (opak "w")
-  - pro ignoranci interpunkčních znamének se stiskne "B"
+  * skočí na začátek aktuálního nebo předchozího slova (opak "w")
+  * pro ignoranci interpunkčních znamének se stiskne "B"
 
 Stejně jako u znacích mohu skákat po více slovech, např. o tři slova dopředu::
 
@@ -305,32 +305,32 @@ Skákání na konkrétní slova
 Pokud je kurzor v místě nějakého slova a já hledám zrovna další / předchozí
 výskyt tohoto slova, tak mohu stisknout tyto znaky:
 
-- *
+* \*
 
-  - skočí dopředu na další výskyt slova (pokud je v souboru)
+  * skočí dopředu na další výskyt slova (pokud je v souboru)
 
-- #
+* #
 
-  - skočí dozadu na předchozí výskyt slova
+  * skočí dozadu na předchozí výskyt slova
 
 Když nemám v daném slově kurzor, mohu si vypomoct příkazy (Command-line mód),
 které jsou spíše typické při vyhledávání slov(a) v textu:
 
-- /pattern
+* /pattern
 
-  - hledá výskyt daného patternu napravo od kurzoru až po poslední řádek v
+  * hledá výskyt daného patternu napravo od kurzoru až po poslední řádek v
     souboru
-  - pokud se pattern najde, tak je třeba stisknout ENTER, aby se na něho
+  * pokud se pattern najde, tak je třeba stisknout ENTER, aby se na něho
     přemístil kurzor
-  - kdyby se na stejném řádku vyskytoval daný vzor vícekrát, tak na další
+  * kdyby se na stejném řádku vyskytoval daný vzor vícekrát, tak na další
     pozici patternu skáče stisknutím písmene "n" po ESC
-  - na předchozí výskyt se místo malého "n" bude klikat velké "N"
+  * na předchozí výskyt se místo malého "n" bude klikat velké "N"
 
-- ?pattern
+* ?pattern
 
-  - zde naopak se bude hledat pattern nalevo od kurzoru až po začátek
+  * zde naopak se bude hledat pattern nalevo od kurzoru až po začátek
     souboru
-  - lze taktéž použít "n" a "N" pro skákání na předchozí / další výskytu
+  * lze taktéž použít "n" a "N" pro skákání na předchozí / další výskytu
 
 Oba způsoby jsou defaultně citlivé na rozdíl velkých a malých písmen. Pro
 dočasné vypnutí tohoto chování lze na konec napsat suffix "\c"::
@@ -347,13 +347,13 @@ dočasné vypnutí tohoto chování lze na konec napsat suffix "\c"::
 Skákání na kraje řádku
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- 0 (nula)
+* 0 (nula)
 
-  - na začátek řádku
+  * na začátek řádku
 
-- $
+* $
 
-  - na konec řádku
+  * na konec řádku
 
 Jestliže řádek začíná odsazením a já nechci skočit do tohoto prázdného
 prostoru, ale na první slovo, tak zmáčknu "^".
@@ -361,17 +361,17 @@ prostoru, ale na první slovo, tak zmáčknu "^".
 Skákání na konkrétní řádky
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- gg (nebo 1G)
+* gg (nebo 1G)
 
-  - na začátek souboru (první řádek)
+  * na začátek souboru (první řádek)
 
-- 3G
+* 3G
 
-  - na 3. řádek v souboru
+  * na 3. řádek v souboru
 
-- G
+* G
 
-  - na konec souboru (poslední řádek)
+  * na konec souboru (poslední řádek)
 
 .. note::
 
@@ -388,70 +388,70 @@ otevírající.
 Skákání po větách a odstavcích
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- )
+* )
 
-  - na začátek další věty
-  - příklad::
+  * na začátek další věty
+  * příklad::
 
-     # Mějme text:
+       # Mějme text:
 
-     Toto je věta A. Toto je věta B.
+       Toto je věta A. Toto je věta B.
 
-     # a kurzor na začátku řádku. Stiskem ")" se kurzor přesune na znak "T"
-     # v druhé větě:
+       # a kurzor na začátku řádku. Stiskem ")" se kurzor přesune na znak "T"
+       # v druhé větě:
 
-     Toto je věta A. |T|oto je věta B.
+       Toto je věta A. |T|oto je věta B.
 
-- (
+* (
 
-  - na začátek předchozí věty
+  * na začátek předchozí věty
 
-- }
+* }
 
-  - na další odstavec (taktéž blok kódu)
+  * na další odstavec (taktéž blok kódu)
 
-- {
+* {
 
-  - na předchozí odstavec
+  * na předchozí odstavec
 
 Skákání na kraje a doprostřed obrazovky
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- L
+* L
 
-  - škočí na poslední řádek, který vidím v okně terminálu
+  * škočí na poslední řádek, který vidím v okně terminálu
 
-- H
+* H
 
-  - skočí na první řádek, který vidím v okně
+  * skočí na první řádek, který vidím v okně
 
-- M
+* M
 
-  - škočí doprostřed obrazovky
+  * škočí doprostřed obrazovky
 
 Skákání po stránkách
 ^^^^^^^^^^^^^^^^^^^^
 
 Abych nemusel skákat po X řádcích, ale rovnou podle velikosti okna terminálu.
 
-- CTRL + f
+* CTRL + f
 
-  - skočí na další "okno" (přesně o tolik řádků, kolik vidím celkem v
+  * skočí na další "okno" (přesně o tolik řádků, kolik vidím celkem v
     terminálu)
 
-- CTRL + b
+* CTRL + b
 
-  - na předchozí okno
+  * na předchozí okno
 
 Pro poloviční velikost to pak je:
 
-- CTRL + d
+* CTRL + d
 
-  - o půlku okna dolu
+  * o půlku okna dolu
 
-- CTRL + u
+* CTRL + u
 
-  - o půlku okna nahoru
+  * o půlku okna nahoru
 
 Další vstupy do Insert módu
 ---------------------------
@@ -459,36 +459,36 @@ Další vstupy do Insert módu
 Teď, když umíme se pohybovat v textu, je dobré vědět o dalších možnostech,
 jak si usnadnit vstup do Insert módu (kromě klasického "i"):
 
-- a
+* a
 
-  - na rozdíl od "i" nezačně Insert mód v místě, kde je kurzor, ale o
+  * na rozdíl od "i" nezačně Insert mód v místě, kde je kurzor, ale o
     jeden znak napravo
-  - rozdíl bude patrný z následujícího příkladu::
+  * rozdíl bude patrný z následujícího příkladu::
 
-     # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
-     # " je super."
+       # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
+       # " je super."
 
-     Vim
+       Vim
 
-     # Navigujeme kurzorem na konec řádku. Pokud bychom do Insert módu
-     # vstoupili pomocí "i" a začali psát dovětek, vypadalo by to takhle:
+       # Navigujeme kurzorem na konec řádku. Pokud bychom do Insert módu
+       # vstoupili pomocí "i" a začali psát dovětek, vypadalo by to takhle:
 
-     Vi je super.m
+       Vi je super.m
 
-     # Naopak při stisku "a" se kurzor posune o jeden znak doprava za
-     # písmenko "m" (vznikne mezera, která zanikne po stisku ESC,
-     # jestliže nic nenapíšeme), pak lze v pořádku dopsat zbytek:
+       # Naopak při stisku "a" se kurzor posune o jeden znak doprava za
+       # písmenko "m" (vznikne mezera, která zanikne po stisku ESC,
+       # jestliže nic nenapíšeme), pak lze v pořádku dopsat zbytek:
 
-     Vim je super.
+       Vim je super.
 
-- A
+* A
 
-  - kurzor skočí na konec řádku a interně stiskne "a", abychom mohli
+  * kurzor skočí na konec řádku a interně stiskne "a", abychom mohli
     pokračovat v psaní nové věty či odentrovat na jiný řádek
 
-- I
+* I
 
-  - relativně opak stisku "A", kdy se kurzor přemístí na úplný začátek
+  * relativně opak stisku "A", kdy se kurzor přemístí na úplný začátek
     souboru
 
 .. tip::
@@ -506,23 +506,23 @@ ho chci vložit:
 
 a) o řádek výše, než je kurzor
 
-   - stisknu "O" (velké o)
-   - příklad::
+   * stisknu "O" (velké o)
+   * příklad::
 
-      # Mám kurzor na prvním řádku souboru, který obsahuje větu:
+        # Mám kurzor na prvním řádku souboru, který obsahuje větu:
 
-      |U|čím se Vim.
+        |U|čím se Vim.
 
-      # Pokud stisknu "O", tak se celá věta posune na druhý řádek a první
-      # řádek bude prázdný, kam se přesune i kurzor a mód bude klasiky
-      # Insert.
+        # Pokud stisknu "O", tak se celá věta posune na druhý řádek a první
+        # řádek bude prázdný, kam se přesune i kurzor a mód bude klasiky
+        # Insert.
 
-      | |
-      Učím se Vim.
+        | |
+        Učím se Vim.
 
 b) o řádek níž
 
-   - stisknu "o" (malé o), opak k předchozí variantě
+   * stisknu "o" (malé o), opak k předchozí variantě
 
 Editace textu
 =============
@@ -530,15 +530,15 @@ Editace textu
 Občas se může stát, že provedete nějakou akci, které lituje a chtěli byste se
 vrátít v čase zpátky nebo naopak vrátit z minulosti dopředu:
 
-- u
+* u
 
-  - odstraní poslední akci (může se jednat o příkaz či vložený text)
-  - lze několikrát stisknout za sebou (přesne o tolik stisknutí se vrátí
+  * odstraní poslední akci (může se jednat o příkaz či vložený text)
+  * lze několikrát stisknout za sebou (přesne o tolik stisknutí se vrátí
     do minulosti)
 
-- CTRL + r
+* CTRL + r
 
-  - vrátí se o jednu akci z minulosti dopředu (taktéž lze opakovat)
+  * vrátí se o jednu akci z minulosti dopředu (taktéž lze opakovat)
 
 Co se týče jednotlivých editačních akcí (mazání, kopírování aj.) uvedených
 níže v textu, tak ve většině případů lze skloubit speciální znaky pro danou
@@ -569,12 +569,12 @@ Při použítí následujícíh způsobu mazání je třeba být klasicky v Norm
 Mazání po znacích
 ^^^^^^^^^^^^^^^^^
 
-- x
+* x
 
-  - smaže znak, který se nachází v místě kurzoru
-  - když uvedu i číslo, tak smažu X znaků doprava::
+  * smaže znak, který se nachází v místě kurzoru
+  * když uvedu i číslo, tak smažu X znaků doprava::
 
-     5x
+       5x
 
 Pro mazání více znaků doleva mimo klasické způsoby lze následovně::
 
@@ -618,44 +618,43 @@ Mazání po řádcích
 
 a) aktuální řádek
 
-   - dd
+   * dd
 
-     - smaže řádek, na kterém se nachází kurzor
+     * smaže řádek, na kterém se nachází kurzor
 
 b) od aktuálního řádku dolu
 
-   - dj
+   * dj
 
-     - smaže aktuální řádek a řádek pod ním
+     * smaže aktuální řádek a řádek pod ním
 
-   - 3dd
+   * 3dd
 
-     - smaže aktuální řádek a dva řádky pod ním
+     * smaže aktuální řádek a dva řádky pod ním
 
-   - d + číslo_řádku + G
+   * d + číslo_řádku + G
 
-     - pokud je číslo_řádku větší než číslo řádku, na kterém se nacházím,
+     * pokud je číslo_řádku větší než číslo řádku, na kterém se nacházím,
        tak maže řádky až po dané číslo_řádku
 
-   - dG
+   * dG
 
-     - až na konec souboru
-
+     * až na konec souboru
 
 c) od aktuálního řádku nahoru
 
-   - dk
+   * dk
 
-     - smaže aktuální řádek a řádek nad ním
+     * smaže aktuální řádek a řádek nad ním
 
-   - d + číslo_řádku + G
+   * d + číslo_řádku + G
 
-     - pokud je číslo_řádku menší, než číslo aktuálního řádku, tak se maže
+     * pokud je číslo_řádku menší, než číslo aktuálního řádku, tak se maže
        až po daný řádek nahoru
 
-   - dgg
+   * dgg
 
-     - až na začátek souboru
+     * až na začátek souboru
 
 .. tip::
 
@@ -676,14 +675,14 @@ Mazání vymezené části textu
 Zde bude k zapotřebí si představit další mód a to Visual. Ten slouží pro
 označení textu, se kterým chci dál pracovat. Mám na výběr ze dvou znaků:
 
-- v
+* v
 
-  - chci označovat po znacích
-  - lze opět kombinovat s pohybovými znaky "h", "e", "$" atd.
+  * chci označovat po znacích
+  * lze opět kombinovat s pohybovými znaky "h", "e", "$" atd.
 
-- V
+* V
 
-  - chci označovat po celých řadcích
+  * chci označovat po celých řadcích
 
 Pokud potřebuji upravit začátek výběru textu a naopak konec, tak můžu mezi
 těmito dvěmi místy skákat pomocí "o" (malé o).
@@ -725,17 +724,17 @@ Nyní zpět k mazání. Pro smazání označeného textu stisknu klasicky "d" ne
    Pro práci s označeným textem se může hodit do budoucnosti vědět i o
    dalších speciálních znacích, které jdou stisknout ve Visual módu:
 
-   - >
+   * >
 
-     - posune (odsadí) text doprava o jeden tabulátor.
+     * posune (odsadí) text doprava o jeden tabulátor.
 
-   - <
+   * <
 
-     - posune text doleva o jeden tabulátor
+     * posune text doleva o jeden tabulátor
 
-   - ~
+   * ~
 
-     - změní označení text na opačnou velikost písma. např. pokud nějaké
+     * změní označení text na opačnou velikost písma. např. pokud nějaké
        písmenko  bylo malé, tak se změní na velké a naopak
 
 Přepisování textu
@@ -769,23 +768,23 @@ okamžitý vstup do Insert módu.
 Přepisování po znacích
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- r
+* r
 
-  - hned po stisknutí písmenka "r" stisknu nový znak, který nahradí ten
+  * hned po stisknutí písmenka "r" stisknu nový znak, který nahradí ten
     starý
-  - při použití této varianty není žádný vstup do Insert módu, vše probíhá
+  * při použití této varianty není žádný vstup do Insert módu, vše probíhá
     v Normal módu
 
-- s
+* s
 
-  - smaže daný znak a stále zůstává v Insert módu pro přepisování
+  * smaže daný znak a stále zůstává v Insert módu pro přepisování
 
 Přepisování po slovech
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- c
+* c
 
-  - kombinace písmena "c" s "w" / "e" / "b" a potažmo i čísly (počtem)
+  * kombinace písmena "c" s "w" / "e" / "b" a potažmo i čísly (počtem)
 
 Co se týče kombinace "c" s objekty pro slova (aw) / věty (as) / odstavce (ap),
 tak zde je naopak nevýhoda, že zmizí i mezery za / před daný objekt, viz
@@ -811,9 +810,9 @@ následující příklad::
 Přepisování po řádcích
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- cc (nebo i přes "S")
+* cc (nebo i přes "S")
 
-  - smaže celý řádek, kde je kurzor a přepnutí na Insert mód
+  * smaže celý řádek, kde je kurzor a přepnutí na Insert mód
 
 Pro více řádku pak platí stejné kombinace, jako jsou uvedené v sekcí "Mazání
 po řádcích", kde akorát místo písmenka "d" se bude použít "c".
@@ -833,25 +832,25 @@ Alias přepisování na několika místech najednou.
 Nahrazování na řádku
 ^^^^^^^^^^^^^^^^^^^
 
-- :s/starý_text/nový_text + ENTER
+* :s/starý_text/nový_text + ENTER
 
-  - pokud se na daném řadku, kde je kurzor, nachází "starý_text" vícekrát,
+  * pokud se na daném řadku, kde je kurzor, nachází "starý_text" vícekrát,
     tak bude nahrazen novým textem jen jednou
 
-- :s/starý_text/nový_text/g + ENTER
+* :s/starý_text/nový_text/g + ENTER
 
-  - nahradí všechen "starý_text" na řádku
+  * nahradí všechen "starý_text" na řádku
 
 Nahrazování na více řádcích
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- :%s/starý_text/nový_text + ENTER
+* :%s/starý_text/nový_text + ENTER
 
-  - nahradí "starý_text" jen jednou na každém řádku v souboru
+  * nahradí "starý_text" jen jednou na každém řádku v souboru
 
-- :%s/starý_text/nový_text/g + ENTER
+* :%s/starý_text/nový_text/g + ENTER
 
-  - nahradí "starý_text" všude v celém souboru
+  * nahradí "starý_text" všude v celém souboru
 
 Pokud chci nahrazovat jen ve vymezeném území, např. jen od prvního po pátý
 řádek včetně, tak použiju::
@@ -871,25 +870,25 @@ Při mazání (přes "d", případně i "x") se obsah smazaného textu ještě u
 paměti. Jednak je to kvůli historii (procházení zpět a vpřed) a druhak pro
 opětovné vkládání na stejném / jiném místě, což je nyní náš případ.
 
-- p
+* p
 
-  - vloží smazaný text za kurzorem (napravo)
+  * vloží smazaný text za kurzorem (napravo)
 
-- P
+* P
 
-  - vloží smazný text před kurzorem (nalevo)
+  * vloží smazný text před kurzorem (nalevo)
 
 Kopirování textu
 ----------------
 
-- y
+* y
 
-  - hlavní písmenko pro kopírování, které lze použít samostatně jen ve
+  * hlavní písmenko pro kopírování, které lze použít samostatně jen ve
     Visual módu
 
-- yy
+* yy
 
-  - zkopíruje celý řádek, na kterém se nacházím
+  * zkopíruje celý řádek, na kterém se nacházím
 
 Pří použití "y" s jakýmkoliv dalším pohybovým znakem lze kopírovat ještě v
 Normal módu (netřeba přepínat na Visual). Pro vkládání tohoto zkopírovaného
@@ -911,39 +910,39 @@ přehled, jaké soubory jsou otevřené v pozadí, pokud nepoužiju příkaz / p
 Otevírání souborů nad sebe a jejich zavírání
 """"""""""""""""""""""""""""""""""""""""""""
 
-- :e cesta_k_souboru
+* :e cesta_k_souboru
 
-  - otevře daný soubor a ostatní otevřené soubory schová
+  * otevře daný soubor a ostatní otevřené soubory schová
 
-- :bd (:bd!)
+* :bd (:bd!)
 
-  - zavře daný soubor
-  - pokud je to jediný soubor, který mám otevřevený, tak na rozdíl od ":q"
+  * zavře daný soubor
+  * pokud je to jediný soubor, který mám otevřevený, tak na rozdíl od ":q"
     se Vim nezavře, jen zůstané prázdný
 
 Zobrazení přehledu otevřených souborů
 """""""""""""""""""""""""""""""""""""
 
-- :ls
+* :ls
 
-  - zobrazení všech souborů, které jsou otevřeny a pod jakým pořadovým
+  * zobrazení všech souborů, které jsou otevřeny a pod jakým pořadovým
     číslem (bude se hodit pro přepínání)
-  - číslování je od jedničky
+  * číslování je od jedničky
 
 Přepínání mezi soubory
 """"""""""""""""""""""
 
-- :bn
+* :bn
 
-  - přepne se další soubor v pořadí
+  * přepne se další soubor v pořadí
 
-- :bp
+* :bp
 
-  - přepne se na předchozí soubor v pořadí
+  * přepne se na předchozí soubor v pořadí
 
-- :b2
+* :b2
 
-  - přepne se na soubor s pořadovým číslem 2
+  * přepne se na soubor s pořadovým číslem 2
 
 V oknech
 ^^^^^^^^
@@ -961,25 +960,25 @@ Vytvoření a zavření oken
 
 a) stejný soubor ve více oknech
 
-   - CTRL + ws (:sp)
+   * CTRL + ws (:sp)
 
-     - vytvořii kopii aktuálního souboru včetně změn a otevře jej v dalším
+     * vytvořii kopii aktuálního souboru včetně změn a otevře jej v dalším
        okně horizontálním způsobem (pod aktuálním oknem)
 
-   - CTRL + wv (:vsp)
+   * CTRL + wv (:vsp)
 
-     - to samé, ale nové okno vznikne vpravo vedle aktuálního okna
+     * to samé, ale nové okno vznikne vpravo vedle aktuálního okna
        (vertikální způsob)
 
 b) různé soubory v oknech
 
-   - :sp cesta_k_souboru
+   * :sp cesta_k_souboru
 
-     - načte obsah daného souboru a zobrazí ho v okně pod aktuálním oknem
+     * načte obsah daného souboru a zobrazí ho v okně pod aktuálním oknem
 
-   - :vsp cesta_k_souboru
+   * :vsp cesta_k_souboru
 
-     - to samé, ale zobrazí ho ve vedlejším okne napravo
+     * to samé, ale zobrazí ho ve vedlejším okne napravo
 
 Okno, ve kterém je kurzor se zavírá pomocí::
 
@@ -1000,26 +999,26 @@ Zavření všechn ostatních oken kromě aktuálního okna::
 Přepínání mezi okny
 """""""""""""""""""
 
-- CTRL + w + pohybový_směrový_znak
+* CTRL + w + pohybový_směrový_znak
 
-  - tím pohybovým směrovým znakem mám na mysli klasické "h" / "j" / "k" a
+  * tím pohybovým směrovým znakem mám na mysli klasické "h" / "j" / "k" a
     "l", pomocí kterých se lze přepínat mezi okny
 
 Přesouvání oken
 """""""""""""""
 
-- CTRL + w + r
+* CTRL + w + r
 
-  - přesune okno dolů / doprava, avšak zaleží na typech oknech (nelze
+  * přesune okno dolů / doprava, avšak zaleží na typech oknech (nelze
     kombinovat horizontální okno s vertikálním)
 
-- CTRL + w + R
+* CTRL + w + R
 
-  - přesune okno nahoru / doleva (platá stejná podmína, jako před chvíli)
+  * přesune okno nahoru / doleva (platá stejná podmína, jako před chvíli)
 
-- CTRL + w + H / J / K / L
+* CTRL + w + H / J / K / L
 
-  - přesune dané okno na úplně vlevo / dolu / nahoru / doprava, přičemž se
+  * přesune dané okno na úplně vlevo / dolu / nahoru / doprava, přičemž se
     může změnit i typ okna, např. z vertikálního na horizontálního
 
 Úprava velikosti oken
@@ -1027,47 +1026,47 @@ Přesouvání oken
 
 a) na výšku
 
-   - CTRL + w + +
+   * CTRL + w + +
 
-     - zvětší okno na výšku o jeden řádek
+     * zvětší okno na výšku o jeden řádek
 
-   - 5 + CTRL + w + +
+   * 5 + CTRL + w + +
 
-     - zvětší okno o 5 řádků
+     * zvětší okno o 5 řádků
 
-   - CTRL + w + -
+   * CTRL + w + -
 
-     - zmenší okno o jeden řádek
+     * zmenší okno o jeden řádek
 
-   - 5 + CTRL + w + -
+   * 5 + CTRL + w + -
 
-     - zmenší okno o 5 řádků
+     * zmenší okno o 5 řádků
 
-   - :res 20
+   * :res 20
 
-     - nastaví fixní výšku na 20 řádků
+     * nastaví fixní výšku na 20 řádků
 
 b) na šířku
 
-   - CTRL + w + >
+   * CTRL + w + >
 
-     - zvětší okno na šířku o jeden sloupec
+     * zvětší okno na šířku o jeden sloupec
 
-   - 5 + CTRL + w + >
+   * 5 + CTRL + w + >
 
-     - zvětší okno o 5 sloupců
+     * zvětší okno o 5 sloupců
 
-   - CTRL + w + <
+   * CTRL + w + <
 
-     - zmenší okno o jeden sloupec
+     * zmenší okno o jeden sloupec
 
-   - 5 + CTRL + w + -
+   * 5 + CTRL + w + -
 
-     - zmenší okno o 5 sloupců
+     * zmenší okno o 5 sloupců
 
-   - :vert res 80
+   * :vert res 80
 
-     - nastaví fixní šířku na 80 znaků
+     * nastaví fixní šířku na 80 znaků
 
 .. tip::
 
@@ -1090,64 +1089,64 @@ souboru:
 
 a) prázná záložka
 
-   - :tabnew
+   * :tabnew
 
-     - otevře prázdnou záložku (nahoře v terminálu bych měl vidět
+     * otevře prázdnou záložku (nahoře v terminálu bych měl vidět
        rozdělení na záložky)
-     - aktuální záložku poznám jednak podle tučného písmena a druhak podle
+     * aktuální záložku poznám jednak podle tučného písmena a druhak podle
        barvy pozadí (je stejné, jako u řádků pod záložkami)
-     - pokud bych načíst do této prázdné záložky obsah nějakého souboru,
+     * pokud bych načíst do této prázdné záložky obsah nějakého souboru,
        tak použiju syntaxi::
 
-        :o cesta_k_souboru
+          :o cesta_k_souboru
 
 b) záložka se souborem
 
-   - :tabnew cesta_k_souboru
+   * :tabnew cesta_k_souboru
 
-     - načte do záložky rovnou obsah daného souboru
+     * načte do záložky rovnou obsah daného souboru
 
 Zavřít záložku/y mohu několika způsoby:
 
 1. :tabc
 
-   - zavře záložku, na které se nacházím, nicméne soubor bude stále otevřený
+   * zavře záložku, na které se nacházím, nicméne soubor bude stále otevřený
      v paměti
-   - jestliže jsou v daném souboru na dané záložce nějaké změny, které nejsou
+   * jestliže jsou v daném souboru na dané záložce nějaké změny, které nejsou
      uložené, tak Vim odmítne exekuci tohoto příkazu
-   - pro zavření záložky bez uložení je třeba používat ještě vykričník::
+   * pro zavření záložky bez uložení je třeba používat ještě vykričník::
 
-      :tabc!
+        :tabc!
 
-   - pro zavření záložky s uložením změn se použije standardně::
+   * pro zavření záložky s uložením změn se použije standardně::
 
-      :wq
+        :wq
 
-   - pro za
+   * pro za
 
 2. :tabo (:tabo!)
 
-   - zavře všechny ostatní záložky, ale aktuální ne
-   - taktéž Vim zařve, pokud nějaká změna v nějaké záložce není uložena
+   * zavře všechny ostatní záložky, ale aktuální ne
+   * taktéž Vim zařve, pokud nějaká změna v nějaké záložce není uložena
 
 3. :qa (:qa!)
 
-   - zavření všech záložek a ukončení Vimu
+   * zavření všech záložek a ukončení Vimu
 
 Přecházení mezi záložkami
 """""""""""""""""""""""""
 
-- qt (:tabn)
+* qt (:tabn)
 
-  - přepne se na další záložku (vpravo)
+  * přepne se na další záložku (vpravo)
 
-- qT (:tabp)
+* qT (:tabp)
 
-  - přepne se na předchozí záložku (vlevo)
+  * přepne se na předchozí záložku (vlevo)
 
-- 3gt
+* 3gt
 
-  - přene se na třetí záložku v pořadí (počítá se od jedničky)
+  * přene se na třetí záložku v pořadí (počítá se od jedničky)
 
 .. tip::
 
@@ -1190,26 +1189,26 @@ Další možností je:
 
 1. přesunout editor na pozadí klávesovou zkratkou::
 
-   CTRL + z
+      CTRL + z
 
 2. spustit příkaz a do editoru se vrátit příkazem::
 
-   fg
+      fg
 
 Bez opuštění Vimu
 ^^^^^^^^^^^^^^^^^
 
-- :w !příkaz
+* :w !příkaz
 
-  - výstup příkazu se zobrazí v přikazovém řádku dole
+  * výstup příkazu se zobrazí v přikazovém řádku dole
 
-- :r !příkaz
+* :r !příkaz
 
-  - výstup se zapíše na aktuální místo kurzoru v souboru
-  - pro jiné místo v souboru je nutné uvést i číslo řádku (počítá se od
+  * výstup se zapíše na aktuální místo kurzoru v souboru
+  * pro jiné místo v souboru je nutné uvést i číslo řádku (počítá se od
     nuly, takže vždy 1 dílek ubrat), např. pro 5 řádek v souboru to bude::
 
-     :4r !ls
+       :4r !ls
 
 .. tip::
 
@@ -1453,13 +1452,13 @@ Ukázkový strom::
 Význam posledních dvou řádku je více než zřejmý, nicméně pro jistotu
 vysvětlím i dva nadřazenější:
 
-- .. (up a dir)
+* .. (up a dir)
 
-  - pro vstupování do nadřazeného adresáře
+  * pro vstupování do nadřazeného adresáře
 
-- /home/jméno_uživatele/
+* /home/jméno_uživatele/
 
-  - cesta (místo na disku), kde se nacházejí adresáře a složky, které vidím
+  * cesta (místo na disku), kde se nacházejí adresáře a složky, které vidím
     ve stromu pod tímto řádkem
 
 Navigace ve stromu
@@ -1468,44 +1467,44 @@ Navigace ve stromu
 Abych nemusel zdlouhavě jezdit / skákat klasickými kurzorovými pohyby, tak
 mohu použít i speciální pro navigaci ve stromu.
 
-- P
+* P
 
-  - skočí kurzorem pod řádek ".. (up a dir)", kde vidím cestu na místo, kde
+  * skočí kurzorem pod řádek ".. (up a dir)", kde vidím cestu na místo, kde
     se nacházejí adresáře a soubory, které právě vidím
 
-- p
+* p
 
-  - pokud mám rozbalené vnořené adresáře, tak kurzor skočí na řádek s
+  * pokud mám rozbalené vnořené adresáře, tak kurzor skočí na řádek s
     nadřazeným adresářem
 
-- J
+* J
 
-  - skočí na poslední řádek obsahu daného adresáře
+  * skočí na poslední řádek obsahu daného adresáře
 
-- K
+* K
 
-  - skočí na první řádek obsahu daného adresáře
+  * skočí na první řádek obsahu daného adresáře
 
-- CTRL + J
+* CTRL + J
 
-  - skočí na vedlejší adresář dolu, pokud je kurzor u nějakého adresáře
+  * skočí na vedlejší adresář dolu, pokud je kurzor u nějakého adresáře
 
-- CTRL + K
+* CTRL + K
 
-  - to samé, akorát na vedlejší adresář nahoru
+  * to samé, akorát na vedlejší adresář nahoru
 
 Práce s adresářemí
 """"""""""""""""""
 
 **Rozbalování a zabalování adresářů:**
 
-- o
+* o
 
-  - rozbalí / zabalí obsah daného adresáře
+  * rozbalí / zabalí obsah daného adresáře
 
-- x
+* x
 
-  - zabalí adresář, ve kterém se nachází kurzor (ten může být klidně u
+  * zabalí adresář, ve kterém se nachází kurzor (ten může být klidně u
     souboru) a ten se posune na nadřazený adresář
 
 **Vstupování do adresářů a vystupování z nich:**
@@ -1514,28 +1513,28 @@ Je nutné rozlišit, zda vstupuji / vystupuji jen vizuálně nebo i reálně. U
 vizuální varianta uvidím jiný obsah adresáře, kdežto u reálně se virtuálně
 nastaví cesta na daný adresář (vhodné pro exekuci externích příkazů odsud).
 
-- C
+* C
 
-  - vstoupí dovnitř daného adresáře a zobrazí jeho obsah
-  - pozor, může nastat i menší prodleva, neboť NERDTree musí rozhodnout, zda
+  * vstoupí dovnitř daného adresáře a zobrazí jeho obsah
+  * pozor, může nastat i menší prodleva, neboť NERDTree musí rozhodnout, zda
     jsem zmáčknul jen "C" nebo "CD" (viz níže)
 
-- u
+* u
 
-  - vstoupí do nadřazeného adresáře
+  * vstoupí do nadřazeného adresáře
 
-- U
+* U
 
-  - taktéž vstoupí do nadřazeného adresáře, ale nechá rozbalený adresář, ve
+  * taktéž vstoupí do nadřazeného adresáře, ale nechá rozbalený adresář, ve
     kterém jsem byl předtím
 
-- cd
+* cd
 
-  - nastaví reálnou cestu na daný adresář
+  * nastaví reálnou cestu na daný adresář
 
-- CD
+* CD
 
-  - vrátí se zpátky do adresáře, na kterou mám nastavenou cestu přes "cd" a
+  * vrátí se zpátky do adresáře, na kterou mám nastavenou cestu přes "cd" a
     zobrazí jeho obsah
 
 **Aktualizace obsahu adresáře:**
@@ -1543,13 +1542,13 @@ nastaví cesta na daný adresář (vhodné pro exekuci externích příkazů ods
 Pokud vznikne v daném adresáři nová adresář / soubor, tak ho ve stromu
 neuvidím, dokud se neaktualizuje.
 
-- r
+* r
 
-  - aktualizuje obsah daného adresáře
+  * aktualizuje obsah daného adresáře
 
-- R
+* R
 
-  - aktualizuje obsah ve všech adresářích, které právě vidím ve stromu
+  * aktualizuje obsah ve všech adresářích, které právě vidím ve stromu
 
 **Tvoření / přejmenování / přesouvání / kopírování / mazání adresářů:**
 
@@ -1561,51 +1560,51 @@ písmenka::
 Dole v příkazovém řádku pak uvidím, jaké akce mám na výběr a pomocí jakých
 písmenek je vyvolám. Pro zavření menu bez žádné akce se stiskne ESC.
 
-- m + a + název_podadresáře/ + ENTER
+* m + a + název_podadresáře/ + ENTER
 
-  - přidá jeden nebo více vnořených podadresářů najednou
+  * přidá jeden nebo více vnořených podadresářů najednou
     (nezapomenout na lomítko na konci, jinak se vytvoří soubor)
 
-- m + m + nový_název_adresáře + ENTER
+* m + m + nový_název_adresáře + ENTER
 
-  - přejmenuje daný adresář (netřeba lomítko na konci)
+  * přejmenuje daný adresář (netřeba lomítko na konci)
 
-- m + m + upravená_cesta_do_adresáře + ENTER
+* m + m + upravená_cesta_do_adresáře + ENTER
 
-  - přesune daný adresář na jiné místo
+  * přesune daný adresář na jiné místo
 
-- m + c + cesta_pro_vložení_zkopírovaného_adresáře + ENTER
+* m + c + cesta_pro_vložení_zkopírovaného_adresáře + ENTER
 
-  - zkopíruje daný adresář a jeho kopii vloží na vybrané místo
+  * zkopíruje daný adresář a jeho kopii vloží na vybrané místo
 
-- m + d + potvrzení_či_odmínutí
+* m + d + potvrzení_či_odmínutí
 
-  - smaže daný adresář, pokud ho potvrdím ještě stiskem "y"
+  * smaže daný adresář, pokud ho potvrdím ještě stiskem "y"
 
 Práce se soubory
 """"""""""""""""
 
 **Otevírání souborů:**
 
-- o
+* o
 
-  - otevře daný sobor na další okno (při opětovném stisku se nic nebude dít)
+  * otevře daný sobor na další okno (při opětovném stisku se nic nebude dít)
 
-- s
+* s
 
-  - otevře soubor do dalšího okna vedle sebe (lze opakovat)
+  * otevře soubor do dalšího okna vedle sebe (lze opakovat)
 
-- i
+* i
 
-  - otevře soubor do dalšího okna pod sebe (lze opakovat)
+  * otevře soubor do dalšího okna pod sebe (lze opakovat)
 
-- t
+* t
 
-  - otevře soubor na další záložku a hned se na ní přepne
+  * otevře soubor na další záložku a hned se na ní přepne
 
-- T
+* T
 
-  - otevře soubor tiše na další záložku (nepřepne se na ní)
+  * otevře soubor tiše na další záložku (nepřepne se na ní)
 
 Poslední čtyři písmenka lze uplatnit i na adresáře, pokud by to bylo někdy k
 zapotřebí.
@@ -1615,25 +1614,25 @@ zapotřebí.
 Platí úplně stejný princip jako u adresářů, tj. v okně stromu stisknout "m"
 pro zobrazení menu a v něm si vybrat, jakou akci chci provést.
 
-- m + a + název_souboru + ENTER
+* m + a + název_souboru + ENTER
 
-  - vytvoří soubor v daném adresáři (u jeho názvu nemusí být kurzor)
+  * vytvoří soubor v daném adresáři (u jeho názvu nemusí být kurzor)
 
-- m + m + nový_název_souboru + ENTER
+* m + m + nový_název_souboru + ENTER
 
-  - přejmenuje daný soubor
+  * přejmenuje daný soubor
 
-- m + m + upravená_cesta_do_adresáře + ENTER
+* m + m + upravená_cesta_do_adresáře + ENTER
 
-  - přesune soubor na jiné místo
+  * přesune soubor na jiné místo
 
-- m + c + cesta_pro_zkopírovaný_soubor + ENTER
+* m + c + cesta_pro_zkopírovaný_soubor + ENTER
 
-  - vytvoří kopii daného souboru a vloží na požadovaném místě
+  * vytvoří kopii daného souboru a vloží na požadovaném místě
 
-- m + d + potvrzení_či_odmínutí
+* m + d + potvrzení_či_odmínutí
 
-  - smaže daný soubor, pokud to potvrdím ještě stiskem písmenka "y"
+  * smaže daný soubor, pokud to potvrdím ještě stiskem písmenka "y"
 
 Konfigurace NERDTree
 """"""""""""""""""""
@@ -1647,27 +1646,25 @@ Já nicméně preferuji následující dvě varianty:
 
 1. ukaž strom, když není uveden soubor
 
-   - když v terminálu při otevření Vimu neuvedu žádný soubor::
+   * když v terminálu při otevření Vimu neuvedu žádný soubor::
 
-      $ vim
+        $ vim
 
-   - nastavení::
+   * nastavení::
 
-      autocmd StdinReadPre * let s:std_in=1
-      autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 2. ukaž strom, pokud otevírám adresář
 
-   - když v terminálu místo názvu souboru odkažu na název adresáře::
+   * když v terminálu místo názvu souboru odkažu na název adresáře::
 
-      $ vim název_adresáře/
+        $ vim název_adresáře/
 
-   - nastavení::
+   * nastavení::
 
-      autocmd StdinReadPre * let s:std_in=1
-      autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
-
-----
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
 
 .. _Vim: https://en.wikipedia.org/wiki/Vim_(text_editor)
 .. _Vi: https://en.wikipedia.org/wiki/Vi
