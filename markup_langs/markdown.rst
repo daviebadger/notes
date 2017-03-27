@@ -107,15 +107,15 @@ tučné písmo.
 
 1. kurzíva
 
-   - na kraj slova / textu je třeba vložit hvězdičky "*" nebo podtržítka "_"::
+   * na kraj slova / textu je třeba vložit hvězdičky "*" nebo podtržítka "_"::
 
-      *kurzíva* nebo _text kurzívou_
+        *kurzíva* nebo _text kurzívou_
 
 2. tučné písmo
 
-   - zde to budou už dvě hvězdičky nebo dvě podtržítka::
+   * zde to budou už dvě hvězdičky nebo dvě podtržítka::
 
-      **tučné** nebo **text tučným písmem**
+        **tučné** nebo **text tučným písmem**
 
 Pro kombinaci obou zvýraznění se nejdříve použije označení pro tučné písmo
 pomocí dvou hvězdiček a uvnitř jedno podtržítko pro kurzívu::
@@ -213,13 +213,13 @@ Existují dva způsoby značení:
 
 1. mít odkaz v textu::
 
-   Klikni na odkaz [ZDE](https://github.com).
+      Klikni na odkaz [ZDE](https://github.com).
 
 2. odkázat na odkaz na konci souboru::
 
-   Klikni na odkaz [ZDE][github]
+      Klikni na odkaz [ZDE][github]
 
-   [github]: https://github.com
+      [github]: https://github.com
 
 V obou variantách uživatel uvidí odkaz schovaný v textu "ZDE".
 
@@ -276,34 +276,32 @@ Zdrojové kódy
 
 1. jednořádkové
 
-   - kód je uvnitř textu a značí na se kraji zpětnou jednoduchou uvozovkou::
+   * kód je uvnitř textu a značí na se kraji zpětnou jednoduchou uvozovkou::
 
-      Stiskni klávesovou zkratku `CTRL + LSHIFT + V`.
+        Stiskni klávesovou zkratku `CTRL + LSHIFT + V`.
 
 2. víceřádkové
 
-   - jak už název napovídá, jedná o se kód přes několik řádků
-   - zde je na výběr se dvou značení:
+   * jak už název napovídá, jedná o se kód přes několik řádků
+   * zde je na výběr se dvou značení:
 
      a) bez zvýraznění syntaxe, pokud se jedná o programovací / značkovací
         jazyk::
 
-        ....Toto je zdrojový text, který musí být odsazen čtyřmi mezerami
-        ....(místo těch teček tady vlevo) nebo jedním tabulátorem.
+           ....Toto je zdrojový text, který musí být odsazen čtyřmi mezerami
+           ....(místo těch teček tady vlevo) nebo jedním tabulátorem.
 
      b) se zvýrazněním syntaxe::
 
-        ```python
-        import time
+           ```python
+           import time
 
-        print(time.time())
-        ```
+           print(time.time())
+           ```
 
 .. note::
 
    Uvnitř zdrojového textu budou jakékoliv Markdown značky nefunkční.
-
-----
 
 .. _Markdown: https://en.wikipedia.org/wiki/Markdown
 .. _GitHub: https://github.com/
