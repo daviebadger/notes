@@ -103,13 +103,13 @@ Zvýraznění textu
 
    - na kraj slova / textu se vloží jedna hvězdička "*"::
 
-      *kurzíva* nebo *text kurzívou*
+        *kurzíva* nebo *text kurzívou*
 
 2. tučné písmo
 
-   - na krajích jsou dvakrát hvězdičky::
+   * na krajích jsou dvakrát hvězdičky::
 
-      **tučné** nebo **text tučným písmem**
+        **tučné** nebo **text tučným písmem**
 
 Kurzívu a tučné písmo nejde spolu kombinovat, pokud si nevytvořím vlastní
 pravidlo a styl v CSS, které půjde vidět v HTML.
@@ -126,30 +126,30 @@ Seznamy
 
 1. neseřazené
 
-   - jako odrážky se považují znaky "-", "+" a "-", kde nejpoužívanějším znakem
+   * jako odrážky se považují znaky "-", "+" a "-", kde nejpoužívanějším znakem
      je hvězdička
 
 2. číselné
 
-   - jako číselné seznamy se považuji tyto sekvence:
+   * jako číselné seznamy se považuji tyto sekvence:
 
-     - arabská čísla: 1, 2, 3
-     - malá písmena: a, b, c
-     - malé římské číslice: i, ii, iii
-     - velká písmena: A, B, C
-     - velké římské číslice: I, II, III
+     * arabská čísla: 1, 2, 3
+     * malá písmena: a, b, c
+     * malé římské číslice: i, ii, iii
+     * velká písmena: A, B, C
+     * velké římské číslice: I, II, III
 
-   - tyto sekvence lze formátovat pomocí:
+   * tyto sekvence lze formátovat pomocí:
 
-     - tečky na konci: 1., 2., 3.
-     - závorkámi na obou stranách: (1), (2), (3)
-     - zavirájící závorkou na konci: 1), 2), 3)
+     * tečky na konci: 1., 2., 3.
+     * závorkámi na obou stranách: (1), (2), (3)
+     * zavirájící závorkou na konci: 1), 2), 3)
 
-   - nejčastějí použivánou variantou jsou arabská čísla s tečkou na konci::
+   * nejčastějí použivánou variantou jsou arabská čísla s tečkou na konci::
 
-      1. jedna
-      2. dva
-      3. tři
+        1. jedna
+        2. dva
+        3. tři
 
 Obě dvě varianty lze jakkoliv kombinovat. Důležitě je vědět, že vnořené seznamy
 se oddělují prázdnými řádky a delší text v nich se odsazuje na místě, kde
@@ -194,44 +194,44 @@ Odkazy
 
    a) bez popisku::
 
-      http://www.python.org
+         http://www.python.org
 
    b) s popiskem::
 
-      `Python <http://www.python.org>`_
+         `Python <http://www.python.org>`_
 
 2. odkaz odkazují na odkaz na konci souboru
 
    a) jednoslovný popisek::
 
-      Python_ je programovací jazyk.
+         Python_ je programovací jazyk.
 
-      .
-      .
-      .
+         .
+         .
+         .
 
-      .. _Python: http://www.python.org
+         .. _Python: http://www.python.org
 
    b) víceslovný popisek::
 
-      Python je můj neojblíbenější `programovací jazyk`_.
+         Python je můj neojblíbenější `programovací jazyk`_.
 
-      .
-      .
-      .
+         .
+         .
+         .
 
-      .. _programovací jazyk: http://www.python.org
+         .. _programovací jazyk: http://www.python.org
 
    c) odkaz odkazují na již existující odkaz::
 
-      Python_ je `programovací jazyk`_.
+         Python_ je `programovací jazyk`_.
 
-      .
-      .
-      .
+         .
+         .
+         .
 
-      .. _Python: http://www.python.org
-      .. _programovací jazyk: Python_
+         .. _Python: http://www.python.org
+         .. _programovací jazyk: Python_
 
 .. tip::
 
@@ -247,8 +247,6 @@ Alias indexy v textech s odkazy na konec souboru, kde jsou dodatečné
 vysvětlivky a odkazy (citace) na jiné stránky::
 
    Python [1]_ je programovací jazyk.
-
-   ----
 
    .. [1] Python (programming language).
       Wikipedia: the free encyclopedia. [online].
@@ -302,37 +300,37 @@ Zdrojové kódy
 
 1. jednořákové
 
-   - kód je uvnitř textu, značí se dvěmi zpětnými uvozovkami na obou stranách::
+   * kód je uvnitř textu, značí se dvěmi zpětnými uvozovkami na obou stranách::
 
-      Stiskni klávesovou zkratku ``CTRL + LSHIFT + V`.
+        Stiskni klávesovou zkratku ``CTRL + LSHIFT + V`.
 
 2. víceřádkové
 
-   - zde je mnoho variant, jak takový blok zapsat:
+   * zde je mnoho variant, jak takový blok zapsat:
 
      a) dvojtečky na začátku řádku (zmizí při konverzi na jiný formát)::
 
-        ::
+           ::
 
-           Toto je zdrojový kód zalomený
-           přes dva řádky
+              Toto je zdrojový kód zalomený
+              přes dva řádky
 
      b) dvojtečka za klasickou dvojtečkou (jedna zmizí)::
 
-        Toto je text s dvojtečkou na konci::
+           Toto je text s dvojtečkou na konci::
 
-           Toto je další zdrojový kód
+              Toto je další zdrojový kód
 
      c) dvojtečky s mezerou na konci (opět obě zmizí)::
 
-        Toto je obyčejný věta. ::
+           Toto je obyčejný věta. ::
 
-           Toto je opět zdrojový kód.
+              Toto je opět zdrojový kód.
 
      d) na styl Python interpretu::
 
-        >>> print(True)
-        True
+           >>> print(True)
+           True
 
 .. note::
 
@@ -343,44 +341,44 @@ Tabulky
 
 1) jednoduché
 
-   - bez nějakých složitých dat či spojených několika buňek v těle tabulky::
+   * bez nějakých složitých dat či spojených několika buňek v těle tabulky::
 
-      ===============  ===============
-      Název sloupce A  Název sloupce B
-      ===============  ===============
-      1                hodnota pro první řádek ve sloupci B
-      2                hodnota pro druhý řádek ve sloupci B
-      3                hodnota pro třetí řádek ve sloupci B
-      ===============  ===============
+        ===============  ===============
+        Název sloupce A  Název sloupce B
+        ===============  ===============
+        1                hodnota pro první řádek ve sloupci B
+        2                hodnota pro druhý řádek ve sloupci B
+        3                hodnota pro třetí řádek ve sloupci B
+        ===============  ===============
 
-   - pokud potřebuji sloučit buňky v záhlaví (jinak ne u této varianty)::
+   * pokud potřebuji sloučit buňky v záhlaví (jinak ne u této varianty)::
 
-      =====  =====  ========
-          Vstup     Výstup
-      ------------  --------
-        A      B    A nebo B
-      =====  =====  ========
-      False  False  False
-      True   False  True
-      False  True   True
-      True   True   true
-      =====  =====  ========
+        =====  =====  ========
+            Vstup     Výstup
+        ------------  --------
+          A      B    A nebo B
+        =====  =====  ========
+        False  False  False
+        True   False  True
+        False  True   True
+        True   True   true
+        =====  =====  ========
 
 2) komplexnější
 
-   - v buňkách moho různě formátovat text a též je mohu různě slučovat::
+   * v buňkách moho různě formátovat text a též je mohu různě slučovat::
 
-      +-----------+-----------+---------------+
-      | Sloupec A | Sloupec B | Sloupec C     |
-      +===========+-----------+---------------+
-      | blabla    | blabla    | blabla blabla |
-      +-----------+-----------+---------------+
-      | **blabla**            | - blabla      |
-      +-----------------------+ - blabla      |
-      | blabla    | blabla    | - blabla      |
-      +-----------+-----------+---------------+
+        +-----------+-----------+---------------+
+        | Sloupec A | Sloupec B | Sloupec C     |
+        +===========+-----------+---------------+
+        | blabla    | blabla    | blabla blabla |
+        +-----------+-----------+---------------+
+        | **blabla**            | - blabla      |
+        +-----------------------+ - blabla      |
+        | blabla    | blabla    | - blabla      |
+        +-----------+-----------+---------------+
 
-   - na rozdíl od jednodušší varianty je těžší na vytvoření, pokud se
+   * na rozdíl od jednodušší varianty je těžší na vytvoření, pokud se
      nepoužije nějaké chytré rozšíření do textových editorů
 
 Pokročilé formátování textu
@@ -458,21 +456,21 @@ Aneb nahrazení části textu nečím jiným:
 
 a) jiným textem::
 
-   |Python| je programovací jazyk.
+      |Python| je programovací jazyk.
 
-   .. |Python| replace:: C++
+      .. |Python| replace:: C++
 
 b) Unicode znakem::
 
-   |zavináč|
+      |zavináč|
 
-   .. |zavináč| unicode:: U+0040
+      .. |zavináč| unicode:: U+0040
 
 b) obrázkem do textu::
 
-   Toto je vnořený |obrázek|.
+      Toto je vnořený |obrázek|.
 
-   .. |obrázek| image:: example.png
+      .. |obrázek| image:: example.png
 
 Speciální seznam pro příkazy
 ----------------------------
@@ -493,30 +491,30 @@ Metadata
 Dodatkové informace k danému RST souboru jako např. číslo verze, datum vydání,
 jména autorů, kontakt na ně atd.::
 
-  =========
-   Titulek
-  =========
-  ------------
-   Podtitulek
-  ------------
+   =========
+    Titulek
+   =========
+   ------------
+    Podtitulek
+   ------------
 
-  :Autor: Daviebadger
-  :Kontakt: davie.badger@gmail.com
-  :Datum vydání: 26. února 2017
+   :Autor: Daviebadger
+   :Kontakt: davie.badger@gmail.com
+   :Datum vydání: 26. února 2017
 
 Buď mohu použít vlastní pojmenování polí nebo použít již předdefinované:
 
-- Author
-- Authors
-- Organization
-- Contact
-- Address
-- Version
-- Status
-- Date
-- Copyright
-- Dedication
-- Abstract
+* Author
+* Authors
+* Organization
+* Contact
+* Address
+* Version
+* Status
+* Date
+* Copyright
+* Dedication
+* Abstract
 
 .. tip::
 
@@ -564,22 +562,22 @@ Obecně direktivy mají následující syntaxi::
 
 U všech direktiv lze použít tyto obecné atributy:
 
-- class
+* class
 
-  - název "class" selektoru v CSS, pomocí kterého chci sám nastylovat
+  * název "class" selektoru v CSS, pomocí kterého chci sám nastylovat
     direktivu::
 
-     .. tip::
-        :class: název_třídy1 název_třídy2
+       .. tip::
+          :class: název_třídy1 název_třídy2
 
-        Text
+          Text
 
-- name
+* name
 
-  - dodatečný text pro direktivu, platné zejména u obrázku::
+  * dodatečný text pro direktivu, platné zejména u obrázku::
 
-     .. image:: pc.png
-        :name: Počítač
+       .. image:: pc.png
+          :name: Počítač
 
 Výčet všech zabudovaných direktiv lze najít na stránce
 http://docutils.sourceforge.net/docs/ref/rst/directives.html
@@ -614,6 +612,16 @@ Lze i nastavit, od kolika se ma začít počítat::
    .. sectnum::
       :start: 5
 
+Rubriky
+"""""""
+
+Nadpisek pro odstavce, pričemž tento nadpis nebude zobrazen v obsahu. Zpravidla
+se používá pro vytvoření patičky::
+
+   .. rubric:: Footnotes
+
+   .. [1] Bla bla bla.
+
 Speciální text
 """"""""""""""
 
@@ -626,15 +634,15 @@ podle svého významu. Totéž lze docílit i v RST::
 
 RST má tyto zabudované direktivy se speciálním textem:
 
-- attention
-- caution
-- danger
-- error
-- hint
-- important
-- note
-- tip
-- warning
+* attention
+* caution
+* danger
+* error
+* hint
+* important
+* note
+* tip
+* warning
 
 Vylepšený zdrojový kód
 """"""""""""""""""""""
@@ -643,7 +651,7 @@ Lze nastavit číslování řádku a zvýraznit syntaxi, pokud jde o kód z něj
 programovacího či značkovacího jazyka nebo konfiguračního souboru::
 
    .. code:: python
-      :numer-lines: 1
+      :number-lines: 1
 
       def my_function():
           pass
@@ -676,18 +684,18 @@ postupu:
 
 1. vytvořit novou roli před samotným použitím::
 
-   .. role:: název_role
+      .. role:: název_role
 
 2. využít ji v textu::
 
-   :název_role:`Text pro tuto roli.`
+      :název_role:`Text pro tuto roli.`
 
 3. nastylovat pomocí CSS danou roli, která bude mít stejnojmenný název "class"
    elementu
 
-   - vyrendrovaná role v HTML vypadá následovně::
+   * vyrendrovaná role v HTML vypadá následovně::
 
-      <p><span class="název_role">Text</p>
+        <p><span class="název_role">Text</p>
 
 .. note::
 
@@ -698,31 +706,39 @@ postupu:
 Zabudované textové role
 """""""""""""""""""""""
 
-- sup (superscript)
+* sup (superscript)
 
-  - text v horním indexu::
+  * text v horním indexu::
 
-     Tento :sup:`Text` je v hodním indexu.
+       Tento :sup:`Text` je v hodním indexu.
 
-- sub (subscript)
+* sub (subscript)
 
-  - text v dolním indexu::
+  * text v dolním indexu::
 
-     Tento :sub:`Text` je v dolním indexu.
+       Tento :sub:`Text` je v dolním indexu.
 
-- PEP
+* PEP
 
-  - pro hypertextový odkaz na nějaký PEP (Python Enhancement Proposal)::
+  * pro hypertextový odkaz na nějaký PEP (Python Enhancement Proposal)::
 
-     Viz :PEP:`8`.
+       Viz :PEP:`8`.
 
-- RFC
+* RFC
 
-  - dokumenty pro internetové protokoly RFC (Request For Comments)::
+  * dokumenty pro internetové protokoly RFC (Request For Comments)::
 
-     Viz :RFC:`2822`.
+       Viz :RFC:`2822`.
 
-----
+Načtení obsahu jiného souboru
+"""""""""""""""""""""""""""""
+
+Na dané označené místo se vložít obsah z jiného souboru, ke kterému musím uvést
+relativní cestu::
+
+   Za tento odstavec se načte obsah ze souboru "tutorial.rst".
+
+   .. include:: tutorial.rst
 
 .. _reStructuredText: Dostupné z: https://en.wikipedia.org/wiki/ReStructuredText
 .. _Docutils: http://docutils.sourceforge.net/
