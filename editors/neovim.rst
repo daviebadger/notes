@@ -33,21 +33,21 @@ Instalace
 
 1. přidat PPA repozitář:
 
-   - pro Ubuntu ve verzi 16.04::
+   * pro Ubuntu ve verzi 16.04::
 
-      $ sudo add-apt-repository ppa:neovim-ppa/stable
+        $ sudo add-apt-repository ppa:neovim-ppa/stable
 
-   - pro jiné verze Ubuntu::
+   * pro jiné verze Ubuntu::
 
-      $ sudo add-apt-repository ppa:neovim-ppa/unstable
+        $ sudo add-apt-repository ppa:neovim-ppa/unstable
 
 2. aktualizovat seznam balíčků::
 
-   $ sudo apt update
+      $ sudo apt update
 
 3. nainstalovat Neovim::
 
-   $ sudo apt install neovim
+      $ sudo apt install neovim
 
 Úspěšnou instalaci Neovimu ověřím příkazem::
 
@@ -110,8 +110,6 @@ Zpátky do Terminal módu se vrací klasicky přes písmenko "i".
       if exists(':tnoremap')
           :tnoremap <Esc> <C-\><C-n>
       endif
-
-----
 
 .. _Neovim: https://neovim.io
 .. _Online dokumentace: https://neovim.io/doc/user/
