@@ -31,7 +31,5 @@
 
 .. contents:: Obsah
 
-----
-
 .. _C: https://en.wikipedia.org/wiki/C_(programming_language)
 
