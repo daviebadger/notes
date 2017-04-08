@@ -238,6 +238,13 @@ Odkazovat na obsah jiné proměnné::
       >>> y
       0
 
+   Pozor, v souborech nelze takto lehce zobrazit obsah proměnné, pouze v
+   interpreteru, pokud napíšu název proměnné / konstanty. U skriptů musím
+   obsah zobrazovat pomocí funkce "print"::
+
+      x = 1
+      print(x)
+
 Pokud se hodnota nějaké proměnné nebude vůbec měnit, tak se nejedná již o
 proměnnou, ale o konstantu::
 
@@ -307,6 +314,7 @@ nejzákladnější jsou:
   * celá čísla::
 
        x = 123456789
+       y = -5
 
 * float
 
@@ -327,24 +335,72 @@ nejzákladnější jsou:
 
   * posloupnost znaků (písmena, čísla, symboly, interpunkční znaménka aj.)::
 
-       day_of_week = "Today is Monday."
-       punctuation_marks = ".,?!:;-()[]'/"
+       >>> day_of_week = "Today is Monday."
+       >>> print(day_of_week)
+       Today is Monday.
 
     .. note::
 
        Pokud potřebuji uvnitř řetězce použít dvojité uvozovky, tak musím
        řetězce na krajích označit jednoduchými uvozkami a naopak::
 
-          a = 'Někdo řekl: "Stůj!"'
-          b = "Někdo řekl: 'Stůj!'"
+          a = 'Někdo řekl: "Stůj!".'
+          b = "Někdo řekl: 'Stůj!'."
 
        Bez těchto opačných uvozovek v řetězci záhlasí syntaxtickou chybu::
 
-          >>> print("Někdo řekl: "Stůj!"")
+          >>> print("Někdo řekl: "Stůj!".")
             File "<stdin>", line 1
-              print("Někdo řekl: "Stůj!"")
-
+              print("Někdo řekl: "Stůj!".")
+                                     ^
           SyntaxError: invalid syntax
+
+       Další možnost využítí tzv. escapování, tedy použítí speciálních znaků,
+       které se ve finalé převedou na námi požadovaný znak. V rámci uvozovek
+       by to bylo::
+
+          >>> print("Někdo řekl: \"Stůj!\"")
+          Někdo řekl: "Stůj!".
+
+       Další základní escapovací znaky jsou:
+
+       * \\
+
+         * vložení zpětného lomítka do řetězce::
+
+              >>> print("\\")
+              \
+
+         * bez vložení druhého lomítka by si Python myslel, že chci použít
+           escapování pro dvojité uvozovky, avšak jednalo by se o neplatný
+           řetězec, nebo chybí uvozovka na konci::
+
+              >>> print("\")
+                File "<stdin>", line 1
+                  print("\")
+                           ^
+              SyntaxError: EOL while scanning string literal
+
+       * \n
+
+         * zalomení řádku::
+
+              >>> print("První řádek.\nDruhý řádek.")
+              První řádek.
+              Druhý řádek.
+
+       * \t
+
+         * vložení tabulátoru::
+
+              >>> print("1\t2")
+              1       2
+
+       Pro vypnutí chování těchto speciálních znaků je třeba před řetězec
+       napsat preffix "r"::
+
+          >>> print(r"První řádek.\nDruhý řádek")
+          První řádek.\nDruhý řádek.
 
 Sekvence:
 
@@ -401,6 +457,222 @@ Nezařaditelné:
 Operátory
 ---------
 
+Aritmetické
+^^^^^^^^^^^
+
+Z Python interpretu si lze také udělat kalkulačku, pokud použiju správné
+znaménka:
+
+* sčítání::
+
+     >>> 1 + 1
+     2
+     >>> x = 1
+     >>> y = 1
+     >>> x + y
+     2
+
+* odčítání::
+
+     >>> 10 - 5
+     5
+
+* násobení::
+
+     >>> 2 * 2
+     4
+     >>> print("2 x 2 je", 2 * 2)
+     2 x 2 je 4
+     >>> x = 2 * 2
+     >>> print("2 x 2 je", x)
+     2 x 2 je 4
+
+  .. note::
+
+     Do funkce "print" mohu zadat více hodnot (správně se říka argumenty),
+     pokud je oddělím čárkou. Python si sám doplní mezeru mezi nimi.
+
+     Taktéž lze zadat jen jedním argumentem, nicméně musím převést výsledek
+     převést na řetězec pomocí funkce "str" a tyto dva řetězce spojit::
+
+        >>> print("2 x 2 je " + str(2 * 2))
+        2 x 2 je 4
+        >>> str(2 * 2)
+        '4'
+
+     Pokud budu chtít sečíst dva různé datové typy, tak Python zahlásí typovou
+     chybu::
+
+        >>> 1 + "a"
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+        TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+     Něco jiného už ale bude, pokud budu chtít nějaký řetězec vynásobit celým
+     číslem::
+
+        >>> 3 * "bla"
+        blablabla
+
+* umocnění::
+
+     >>> 2 ** 3
+     8
+
+* dělení::
+
+     >>> 4 / 2
+     2.0
+
+  .. note::
+
+     Python po klasickém dělení vrátí vždy desetinné číslo, i kdyby se jednalo
+     o dvě celá čísla jako v předchozím případě.
+
+     Pro převední výsledku zpět na celé číslo se volá funkce "int"::
+
+        >>> int(4 / 2)
+        2
+        >>> x = 4 / 2
+        >>> int(x)
+        2
+
+     Zpět na desetinné číslo by to bylo přes funkci "float"::
+
+        >>> float(2)
+        2.0
+        >>> float(int(4 / 2))
+        2.0
+
+* celočíselné dělení::
+
+     >>> 4 // 3
+     1
+
+* zbytek po dělení::
+
+     >>> 4 // 3
+     0
+
+  .. note::
+
+     Pokud zbytek po dělení je nula, tak se jedná o sudé číslo, jinak o liché.
+
+U výpočtů mohu také použít klasické závorky pro dávání přednosti::
+
+   >>> (10 + 2) / 3 + 2
+   6.0
+
+Pořadí operací je vyhodnocováno stejně jako v matematice, tj.:
+
+1. závorky
+2. umocňování
+
+   * zde pozor na vícenásobné umocňování, kde postupuje obráceně zprava
+     doleva::
+
+        >>> 2 ** 3 ** 2
+        512
+        >>> 2 ** (3 ** 2)
+        512
+
+3. násobení a dělení
+4. sčítání a odčítání
+
+Relační
+^^^^^^^
+
+Pro zjišťování pravdivosti a nepravdivosti výrazů:
+
+* větší::
+
+     >>> 1 > 0
+     True
+     >>> 1 > 2
+     False
+
+* menší::
+
+     >>> 1.1 < 2
+     True
+     >>> 2.2 < 1
+     False
+
+* větší nebo rovno::
+
+     >>> (1 + 1) >= 1
+     True
+
+* menší nebo rovno::
+
+     >>> x = -5
+     >>> x < 0
+     True
+
+* rovná se::
+
+     >>> 1 == 1
+     True
+     >>> 1 == 1.0
+     True
+
+* nerovná se::
+
+     >>> x = "a"
+     >>> y = "b"
+     >>> x != y
+     True
+
+Logické
+^^^^^^^
+
+Pro spojování více výrazů s relačními operátory:
+
+* a
+
+  * oba výrazy musí být pravdivé (může jich být i více za sebou)::
+
+     >>> 1 == 1 and 2 == 2
+     True
+
+* nebo
+
+  * stačí, aby alespoň jeden výraz byl pravdivý::
+
+     >>> 0 != 0 and 1 > 0
+     True
+
+Množinové
+^^^^^^^^^
+
+* sjednocení
+
+  * spojení všech prvků v obou množinách::
+
+     >>> {1, 2} | {3}
+     {1, 2, 3}
+
+* průnik
+
+  * společné prvky v obou množinách::
+
+     >>> {1, 2} & {1}
+     {1}
+
+* rozdíl
+
+  * prvky, které se nenacházejí v druhé množině::
+
+     >>> {1, 2} - {1}
+     {2}
+
+* doplněk
+
+  * přebytečné prvky, které jsou jen v množině A a v B už ne::
+
+     >>> {1, 2, 3} ^ {1}
+     {2, 3}
+
 TODO
 ====
 
@@ -412,5 +684,15 @@ TODO
 
 * datové typy bytes, bytearray, memoryview, complex čísla, frozenset, tuple,
   mutable vs immutable
+* převody datových typů (zatím jen int, float, str)
+* zkrácené zápisy operátoru, např v rámci cyklů::
+
+     x = x + 1
+     x += 1
+
+* idiomatické relační operátory (in, is) ukázat u podmínek
+* víceřádkové řetězce
+* not u podmínek
+* zalomení řádku pří dlouhém kódu
 
 .. _Python: https://en.wikipedia.org/wiki/Python_(programming_language)
