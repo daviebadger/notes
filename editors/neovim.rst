@@ -5,10 +5,6 @@
  Zrefaktorovaný Vim editor s několika vylepšením
 -------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `Neovim` vznikl s cílem zejména zjednodušit zdrojóvý kód samotného Vimu,
@@ -27,6 +23,8 @@
    - simplifikováné API, které může použít jakýkoliv programovací jazyk
 
    `Online dokumentace`_ Neovimu je vesměs stejná jako u původního Vimu).
+
+.. contents:: Obsah
 
 Instalace
 =========

@@ -5,10 +5,6 @@
  Jednoduchý textový formát pro psání poznámek, článků, prezentací aj.
 ----------------------------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `Markdown`_ (zkráceně MD) vznikl v roce 2004 s cílem vytvořit takový

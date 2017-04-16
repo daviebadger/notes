@@ -5,10 +5,6 @@
  Pokročilý textový formát pro psaní technické dokumentace
 ----------------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `reStructuredText`_ (zkráceně RST, ReST či reST) vznikl v roce 2002 jako

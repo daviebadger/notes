@@ -5,10 +5,6 @@
  Jednoduchý programovací jazyk se všeobecným využítím
 ------------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `Python`_ je interpretovaný programovací jazyk, který se překládá až za běhu

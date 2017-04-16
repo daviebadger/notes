@@ -5,10 +5,6 @@
  Programovací jazyk postaven nad jazykem C
 -------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `C++`_ je multi-paradigmatický kompilovaný programovací jazyk, ve kterém lze

@@ -5,10 +5,6 @@
  Nástroj pro vytvaření dokumentací pro projekty psané v Pythonu
 ----------------------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `Sphinx`_ je dokumentační generátor, který vznikl pro interní potřebu

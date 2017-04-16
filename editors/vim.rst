@@ -5,10 +5,6 @@
  Textový editor zabudovaný v terminálu
 ---------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    Vi IMproved, zkráceně `Vim`_, vznikl v roce 1991 klonem původního `Vi`_

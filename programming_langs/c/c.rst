@@ -5,10 +5,6 @@
  Jeden z nejrychlejších programovací jazyků vůbec
 --------------------------------------------------
 
-:Author: Davie Badger
-:Contact: davie.badger@gmail.com
-:Licence: CC BY-SA 4.0
-
 :Abstract:
 
    `C`_ je imperativní, kompilovaný programovací jazyk, kdy se jednotlivé
