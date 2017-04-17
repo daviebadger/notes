@@ -5,7 +5,7 @@
  Unixový shell pro interpretaci příkazového řádku
 --------------------------------------------------
 
-.. contents::
+.. contents:: Obsah:
 
 Úvod
 ====
