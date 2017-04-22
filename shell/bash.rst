@@ -19,21 +19,16 @@ Popis příkazové řádku
 Po spuštení terminálového emulátoru vypadá defaultně první řádek následovně::
 
    davie@badger:~$ <příkaz>
-   ^       ^    ^^    ^
-   |       |    ||    |
-   ---> název přihlášeného uživatele
-           |    ||    |
-           |    ||    |
-           ---> název počítače
-                ||    |
-                ||    |
-                ---> aktuální poloha disku (~ je zkratka pro "/home/davie")
-                 |    |
-                 |    |
-                 ---> normální uživatel (# je superuživatel alias root)
-                      |
-                      |
-                      ---> prostor pro příkaz(y)
+   |     |      || |
+   > název přihlášeného uživatele
+         |      || |
+         > název počítače
+                || |
+                > aktuální poloha disku (~ je zkratka pro "/home/davie")
+                 | |
+                 > normální uživatel (# je superuživatel alias root)
+                   |
+                   > prostor pro příkaz(y)
 
 .. note::
 
@@ -91,7 +86,7 @@ ENTER, jak je známo, příkaz spustí.
    kopírování / vkládání textu, neboť slouží k jiným účelům.
 
    Pro samotné kopírování a vkládání textu jsou vyhrazeny klávesové zkratky
-   CTRL + SHIFT + C / CTRL + SHIFT + V (funguje v Konsoli).
+   CTRL + SHIFT + C / CTRL + SHIFT + V.
 
 Jakmile už příkazový řádek nepotřebuji, tak mohu terminálový emulátor zavřít.
 Mohu to udělat buď graficky (zpravidla klikem na křízek v rohu okna) nebo
