@@ -11,23 +11,33 @@
 ====
 
 Pro práci s příkazovým řádkem je třeba mít nějaký terminálový emulátor. V
-v Kubuntu se jedná o aplikaci "Konsole".
+Ubuntu a Ubuntu GNOME se jedná o aplikaci "Terminal", v Kubuntu "Konsole".
 
 Popis příkazové řádku
 ---------------------
 
-Po spuštení terminálového emulátoru vypadá defaultně první řádek následovně::
+Po spuštení terminálu vypadá zpravidla první řádek následovně::
 
    davie@badger:~$ <příkaz>
+
    |     |      || |
+
    > název přihlášeného uživatele
+
          |      || |
+
          > název počítače
+
                 || |
+
                 > aktuální poloha disku (~ je zkratka pro "/home/davie")
+
                  | |
+
                  > normální uživatel (# je superuživatel alias root)
+
                    |
+
                    > prostor pro příkaz(y)
 
 .. note::
