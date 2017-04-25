@@ -211,6 +211,33 @@ Ukaž aktuální pracovní prostředí, ve kterém se nacházím::
    $ pwd
    /home/davie
 
+ls
+^^
+
+Ukaž obsah adresáře, ve kterém se nacházím::
+
+   $ ls
+   Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+
+.. note::
+
+   Adresáře by měly být zpravidla barevně odlišeny a soubory mít nějakou
+   koncovku.
+
+Pro zobrazení obsahu obsah jiného adresáře musím uvést cestu do daného
+adresáře::
+
+   $ ls /home
+
+Samozřejme si lze zobrazit obsah vícero adresářů najednou::
+
+   $ ls /home /home/davie
+   /home:
+   davie
+
+   /home/davie:
+   Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+
 cd
 ^^
 
@@ -220,101 +247,58 @@ Změn aktuální pracovní prostředí na jiné::
    $ pwd
    /
 
-Cestu do jiného adresáře lze uvést dvěmi způsoby:
+Bez argumentů se změní pracovní prostředí zpátky na domovský adresář::
 
-1. absolutní cestou
-
-   * cesta se vypisuje od kořene (roota) do cílové destinace::
-
-        $ cd /home/davie
-
-2. relativní cestou
-
-   * cesta se vypisuje od aktuální adresáře do cílové destinace::
-
-        $ cd /
-        $ cd home/davie/
-
-   * cesta do podřazeného / vnořeného / dětského začíná vždy názvem adresáře,
-     který se nachází v aktuálním pracovním prostředí, viz předchozí příkaz
-   * cesta do nadřazeného / rodičovského adresáře se provadí pomocí dvou
-     teček::
-
-        $ cd
-        $ cd ..
-        $ pwd
-        /home
-        $ cd ..
-        $ pwd
-        /
-        $ cd
-        $ cd ../../home/davie
-
-     .. note::
-
-        Není problém se dostat pomocí teček do nadřazeného adresáře a z něho
-        do vedlejšího / sourozeneckého adresáře.
-
-     .. tip::
-
-        Další zkratkou vedle dvou teček je ~ (alias pro domovský adresář)::
-
-           $ cd ~/Downloads
-           $ pwd
-           /home/davie/Downloads
-
-Daná absolutní nebo relativní cesta musí existovat, jinak se vypíše chybová
-hláška::
-
-   $ cd /dneska/je/pondeli
-   bash: cd: /dneska/je/pondeli: No such file or directory
-
-Když nepoužiju žádnou cestou, tak se změní aktuální pracovní prostředí na
-místo s domovským adresářem, což je i výchozí stav po zapnutí terminálu::
-
-   $ pwd
-   /
    $ cd
+   $ pwd
+   /home/davie
+
+Do domovské adresáře se lze taky dostat pomocí vlnovky::
+
+   $ cd ~
    $ pwd
    /home/davie
 
 .. tip::
 
-   Pokud se potřebuji vrátit do předchozí adresáře, ve kterém jsem byl, tak
-   mohu napsat::
+   Pokud se potřebuji vrátit do adresáře, ve kterém jsem byl předtím, tak jako
+   argument použiju pomlčku::
 
       $ cd -
       $ pwd
-      /home/davie
+      /
 
-ls
-^^
+Odbočka k absolutním a relativním cestám
+""""""""""""""""""""""""""""""""""""""""
 
-Ukaž obsah adresáře::
+* absolutní cesta
 
-   $ ls
-   Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+   * cesta se vypisuje od kořene (/) do cílové destinace::
 
-Pokud není "ls" příkazu zadaný argument, tak zobrazí obsah adresáře, ve kterém
-se aktuálně nacházím. Avšak, jestliže uvedu nějakou platnou absolutní nebo
-relativní cestu, tak ukáže obsah daného cílového adresáře::
+        $ cd /home/davie
 
-   $ ls /home
-   davie
+* relativní cesta
 
-Tento příkaz umí taky zobrazit obsah vícero adresářů najednou, stačí mu jen
-zadat více argumentů::
+   * cesta se vypisuje od aktuální adresáře do cílové destinace
+   * cesta do podřazeného adresáře začíná vždy názvem adresáře, který se
+     nachází v aktuálním pracovním prostředí::
 
-   $ ls /home /home/davie
-   /home:
-   davie
+        $ cd Downloads
 
-   /home/davie:
-   Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+   * cesta do nadřazeného adresáře se provadí pomocí dvou teček (lze opakovat,
+     pokud jsou tečky od sebe odděleny lomítkem)::
 
-Také se může stát, že v daném adresáři nejsou žádné soubory a vnořené adresáře,
-tak příkaz "ls" nic nezobrazí. Nicméně existují ještě skryté soubory, které
-tento příkaz defaultně nezobrazí, pokud není k tomu vyzván.
+        $ cd ..
+
+.. tip::
+
+   Po vypsání nějaké částí cesty lze dvakrát stisknout TAB, který pak zobrazí
+   veškeré možnosti, kam mohu změnit adresář::
+
+      $ cd D
+      Desktop/ Documents/ Downloads/
+
+   Taktéž se může stát, že po prvním stisknutí TAB se automaticky doplní cesta.
 
 Průzkum adresáře
 ----------------
@@ -450,10 +434,6 @@ tečky, použiju místo malého písmenka "a" velké::
    .bash_history
    .bash_logout
    .bashrc
-
-Manipulace se soubory a adresáři
---------------------------------
-
 
 Klávesové zkratky
 =================
