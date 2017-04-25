@@ -7,11 +7,11 @@
 
 .. contents:: Obsah:
 
-Úvod
-====
+Příkazový řádek
+===============
 
-Pro práci s příkazovým řádkem je třeba mít nějaký terminálový emulátor. V
-Ubuntu a Ubuntu GNOME se jedná o aplikaci "Terminal", v Kubuntu "Konsole".
+Pro práci s příkazovým řádkem je třeba mít nějaký terminálový emulátor (dále
+jen terminál).
 
 Popis příkazové řádku
 ---------------------
@@ -42,72 +42,118 @@ Po spuštení terminálu vypadá zpravidla první řádek následovně::
 
 .. note::
 
-   Pro budoucí ukázku příkazů se bude používat standardní zkrácený zápis::
+   Pro budoucí ukázky příkazů se bude používat zkrácený zápis::
 
       $ <příkaz>
 
-První příkaz
-------------
+Popis syntaxe příkazu
+---------------------
 
-Zkusme::
+V prvé radě se musí jednat o příkaz, který existuje. Pokud tomu tak není,
+Bash vypíše chybovou hlášku::
 
    $ ahoj
-
-Tento příkaz by měl vrátit následující text::
-
    ahoj: command not found
 
-Jedná se o chybovou hlášku, která říká, že příkaz "ahoj" neexistuje. Bash umí
-vykonávat jen ty příkazy, které sám zná nebo které mu vytvoříme.
+V druhé řadě je třeba vědět, jak se daný příkaz používá a jaké jsou jeho
+možnosti použití. Pokud to nevím, mohu si zobrazit manuál k danému příkazu
+pomocí příkazu "man"::
 
-Něco jiného už bude v případě příkazu::
+   $ man man
 
-   $ whoami
+.. note::
 
-Příkaz "whoami" vrátí název příhlášeného uživatele, v mém případě text "davie".
+   Příkaz "man" zobrazil manuál pro příkaz "man", tedy sám sobě. V zobrazeném
+   manuálu lze stisknout písmenko "h" pro nápovědu, jak lze daný manuál
+   ovládat a písmenko "q" naopak manuál zavře.
+
+   Manuál má zpravidla každý Unixový příkaz. Nicméně v počítači mohou existovat
+   i příkazy, které jsem si sám vytvořil nebo nainstaloval. U těchto příkazu
+   nelze moc očekávat, že budou mít taktéž manuál, viz níže o nápovědě.
+
+Další variantou je zobrazení nápovědy pomocí volby / přepínače / parametru
+"--help"::
+
+   $ man --help
+
+Z nápovědy by mělo jít vyčíst, jaké jsou možnosti příkazu. Může se jednat o
+tyto podoby::
+
+1. příkaz samostatně::
+
+   $ pwd
+
+2. příkaz s argumentem::
+
+   $ cd /home/davie
+
+3. příkaz s vícero argumenty::
+
+   $ mkdir dir1 dir2 dir3
+
+4. příkaz s volbou::
+
+   $ cp --version
+
+5. příkaz s vícero volbami spolu s argumentem::
+
+   $ rmdir dir/dir --parents --verbose
+
+6. příkaz s vícero zkrácenými volbami::
+
+   $ ls -l -a
+
+Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy a že i
+volbám lze někdy dát argument.
+
+.. note::
+
+   Význam jednotlivých příkazů bude vysvětlen později.
+
+.. tip::
+
+   Více zkrácených voleb lze sloučit do jedné velké volby, např. u příkazu
+   "ls" to může být místo "ls -l -a":
+
+      $ ls -la
 
 Ovládání příkazového řádku
 --------------------------
 
-Klasickými šipkami nahoru a dolu lze procházet historii příkazů. Většina
-Linuxových distribucí si pamatuje posledních 1000 příkazů, pokud není nastaveno
-jinak.
+Šipkami vlevo a pravo lze pohybovat mezi napsanými znaky na řádku. Klávesa
+ENTER pak samotný příkaz spustí.
+
+Šipkami nahoru a dolu lze procházet historii použitých příkazů. Nahoru dále
+do minulosti a dolu zpátky do přítomnosti.
 
 .. tip::
 
-   Historii lze také zobrazit příkazem::
+   Historii lze také zobrazit příkazem "history"::
 
       $ history
           1  ahoj
-          2  whoami
+          2  man
+          3  man --help
 
-   Pokud chci zopakovat z historie nějaký příkaz, tak buď mohu mačkat šipky
-   nahoru, dokud se mi nezobrazí daný příkaz nebo ho spustít zkrácené pomocí
-   přirazeného čísla::
+   Příkazům je vždy přiřazeno číslo podle pořádí, ve kterém byly spušteny od
+   začátku používání příkazového řádku. Pokud chci spustit znovu nějaký příkaz
+   z historie, mohu napsat::
 
       $ !2
 
-Šipkami vlevo a pravo lze pak procházet na řádku mezi znaky příkazu. Klávesa
-ENTER, jak je známo, příkaz spustí.
-
-.. note::
-
-   V terminálu nejde jen tak použít klávesové zkratky CTRL + C / CTRL + V pro
-   kopírování / vkládání textu, neboť slouží k jiným účelům.
-
-   Pro samotné kopírování a vkládání textu jsou vyhrazeny klávesové zkratky
-   CTRL + SHIFT + C / CTRL + SHIFT + V.
-
-Jakmile už příkazový řádek nepotřebuji, tak mohu terminálový emulátor zavřít.
-Mohu to udělat buď graficky (zpravidla klikem na křízek v rohu okna) nebo
-pomocí příkazu::
+Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje příkaz
+"exit"::
 
    $ exit
 
 .. note::
 
-   Další vychytávky v ovládání příkazového řádku jsou zmíněny v sekci
+   Další možností ovládání příkazového řádku lze najít v sekci
    `Klávesové zkratky`_.
+
+   Pak ještě existují další klávesové zkratky, které používá samotný terminál.
+   Může se jednat o kopírování a vkládání textu (klasické CTRL + C / CTRL + V
+   nefunguje), zobrazení více oken terminálu najednou atd.
 
 Příkazy
 =======
@@ -119,7 +165,7 @@ Odbočka k souborovému systému
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pro práci se soubory a adresáři (složkami) je třeba vědět, kde na disku se
-nacházejí, abych na mě mohl zavolat nějaký příkaz pro práci s nimi.
+nacházejí, abych na mě mohl eventuálně zavolat nějaký příkaz.
 
 Operační systémy postavené na Unixu, jako je třeba Linux mají jeden velký
 souborý systém nezávisle na počtu disků či připojených zařízení (rozdíl oproti
@@ -129,7 +175,7 @@ Tento souborový systém je nějakým způsobem hierarchicky uspořádaný a ka�
 soubor či adresář mají své patřičné místo. Nejvýše položenému místu se říka
 kořen (root).
 
-Ukázková Linuxová struktura (Kubuntu)::
+Ukázková struktura souborového systému::
 
    /          Hlavní kořen (root).
     bin       Binárky a skripty pro nastartování (boot) a běh (run) systému.
