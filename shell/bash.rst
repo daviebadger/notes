@@ -20,25 +20,17 @@ Po spuštení terminálu vypadá zpravidla první řádek následovně::
 
    davie@badger:~$ <příkaz>
 
-   |     |      || |
+Legenda:
 
-   > název přihlášeného uživatele
-
-         |      || |
-
-         > název počítače
-
-                || |
-
-                > aktuální poloha disku (~ je zkratka pro "/home/davie")
-
-                 | |
-
-                 > normální uživatel (# je superuživatel alias root)
-
-                   |
-
-                   > prostor pro příkaz(y)
+========  ======
+Text      Význam
+========  ======
+davie     název přihlášeného uživatele
+badger    název počítače
+~         aktuální poloha disku (~ je zkratka pro "/home/davie")
+$         normální uživatel (# je superuživatel alias root)
+<příkaz>  prostor pro příkaz(y)
+========  ======
 
 .. note::
 
@@ -177,31 +169,31 @@ kořen (root).
 
 Ukázková struktura souborového systému::
 
-   /          Hlavní kořen (root).
-    bin       Binárky a skripty pro nastartování (boot) a běh (run) systému.
-    boot      Soubory a adresáře pro Linoxé jádro (spojka mezi HW a SW).
-    cdrom     Prostor pro připojení obsahu CD disku.
-    dev       Speciální místo, kde jádro spravuje zařízení (disk, USB aj.).
-    etc       Konfigurační soubory a skripty, které se pouštějí po bootování.
-    home/     Domovské adresáře jednotlivých uživatelů mimo superužiatele.
-      david   Můj domovský adresář.
-    lib       Dodatečné soubory (knihovny) pro běh systémových aplikací.
-    media     Prostor, kam se automaticky připojí externí CD / USB aj.
-    mnt       Prostor, kam lze manuálně připojit externí zařízení.
-    opt       Prostor pro volitelné systéové balíčky a komerční programy.
-    proc      Virtuální prostor, kam kernel ukládá info o systému (procesech).
-    root      Domovský adresář roota.
-    sbin      Systémové binárky pro roota (pro administrativní účely).
-    tmp       Dočasný uložitě pro soubory a adresáře, které se maže po bootu.
-    usr/      Místo pro programy nainstalované spolu s Linuxovou distribucí.
-      bin     Spustitelné soubory pro běh předinstalovaných programů.
-      lib     Dodatečné soubory (knihovny) pro běh předinstalovaných programů.
-      local   Prostor pro programy, které uživatelem nainstalované.
-      share   Dokumentace k předinstalovaných programům.
-    var/      Prostor pro aplikační data.
-      cache   Místo pro ukládání cache paměti.
-      lib     Prostor pro ukládání dynamických dat.
-      log     Místo pro ukládání logů.
+   /           hlavní kořen (root)
+     bin       binárky a skripty pro nastartování (boot) a běh (run) systému
+     boot      soubory a adresáře pro Linoxé jádro (spojka mezi HW a SW)
+     cdrom     prostor pro připojení obsahu CD disku
+     dev       speciální místo, kde jádro spravuje zařízení (disk, USB aj.)
+     etc       konfigurační soubory a skripty, které se pouštějí po bootování
+     home/     domovské adresáře jednotlivých uživatelů mimo superužiatele
+       david   můj domovský adresář
+     lib       dodatečné soubory (knihovny) pro běh systémových aplikací
+     media     prostor, kam se automaticky připojí externí CD / USB aj
+     mnt       prostor, kam lze manuálně připojit externí zařízení
+     opt       prostor pro volitelné systéové balíčky a komerční programy
+     proc      virtuální prostor, kam kernel ukládá info o systému (procesech)
+     root      domovský adresář roota
+     sbin      systémové binárky pro roota (pro administrativní účely)
+     tmp       dočasný uložitě pro soubory a adresáře, které se maže po bootu
+     usr/      místo pro programy nainstalované spolu s Linuxovou distribucí
+       bin     spustitelné soubory pro běh předinstalovaných programů
+       lib     dodatečné soubory (knihovny) pro běh předinstalovaných programů
+       local   prostor pro programy, které uživatelem nainstalované
+       share   dokumentace k předinstalovaných programům
+     var/      prostor pro aplikační data
+       cache   místo pro ukládání cache paměti
+       lib     prostor pro ukládání dynamických dat
+       log     místo pro ukládání logů
 
 pwd
 ^^^
@@ -237,6 +229,83 @@ Samozřejme si lze zobrazit obsah vícero adresářů najednou::
 
    /home/davie:
    Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+
+ls -a (ls --all)
+""""""""""""""""
+
+Ukaž obsah adresáře včetně skrytých souborů a adresářů (začínají na tečku)::
+
+   $ ls -a
+   .  ..  .bash_history
+
+.. note::
+
+   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresář (viz níže
+   v sekci `Odbočka k absolutním a relativním cestám`_.
+
+ls -l
+"""""
+
+Ukaž delší (podrobnejší) obsah adresáře::
+
+   $ ls -l
+   drwxr-xr-x 8 davie davie 4096 dub 15 22:58 Documents
+
+Legenda:
+
+=========  ======
+Text       Význam
+=========  ======
+d          zda se jedná o adresář (d), soubor (-) nebo symbolický odkaz (l)
+rwxr-xr-x  oprávnění pro vlastníka, skupinu, ostatní uživatele
+8          TODO
+davie      jméno uživatele, který vlastní daný objekt
+davie      jméno skupiny, která vlastní daný objekt
+4096       velikost objektu v bajtech
+dub 15     datum poslední změny
+22:58      čas poslední změny
+Documents  jméno objektu
+=========  ======
+
+ls -lh
+""""""
+
+Ukaž v podrobnější obsahu adresáře lidsky srozumitelné velikosti objektů
+(znatelné jen u souborů)::
+
+   $ ls -lh
+   -rw-r--r-- 1 davie davie 13K dub 27 21:39 bash.rst
+
+Legenda::
+
+* K == KB
+* M == MB
+* G == GB
+
+.. note::
+
+   Volbu "-h" nejde použít samostatně, musí být vždy užita s volbou "-l".
+
+ls -lhS
+"""""""
+
+Ukaž podrobnejší obsah adresáře spolu s lidsky srozumitelnými velikostmi a
+objekty seřaď od největší velikosti po nejmenší::
+
+   $ ls -lhS
+   -rw-r--r-- 1 davie davie  13K dub 27 21:39 bash.rst
+   -rw-rw-r-- 1 davie davie 2,2K dub 24 21:55 tilix.rst
+
+.. note::
+
+   Volbu "-S" lze použít samostatně.
+
+ls -lt
+""""""
+
+Ukaž podrobnější obsah adresáře a objekty seřaď podle poslední změny::
+
+   $ ls -lt
 
 cd
 ^^
@@ -300,140 +369,10 @@ Odbočka k absolutním a relativním cestám
 
    Taktéž se může stát, že po prvním stisknutí TAB se automaticky doplní cesta.
 
-Průzkum adresáře
-----------------
+TODO
+====
 
-ls (podrobněji)
-^^^^^^^^^^^^^^^
-
-Chování, respektive výstup "ls" příkazu lze ovlivnit pomocí přepínaču / voleb
-(option). Ty jsou buď ve zkracené (pomlčka a písmenko) nebo zdlouhavé variantě
-(dvě pomlčky a text)::
-
-   $ ls -l
-   total 36
-   drwxr-xr-x 2 davie davie 4096 dub 13 21:34 Desktop
-   drwxr-xr-x 8 davie davie 4096 dub 15 22:58 Documents
-   drwxr-xr-x 2 davie davie 4096 dub 16 16:02 Downloads
-   $ ls --help
-   Usage: ls [OPTION]... [FILE]...
-   List information about the FILEs (the current directory by default).
-   Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
-
-Více zkracených přepínačů lze spojit do jednoho velkého přepínače::
-
-   $ ls -l -a
-   total 2136
-   drwx------ 20 davie davie    4096 dub 17 13:35 .
-   drwxr-xr-x  4 root  root     4096 dub 13 20:40 ..
-   -rw-------  1 davie davie    7450 dub 16 22:51 .bash_history
-   -rw-r--r--  1 davie davie     220 dub 13 20:40 .bash_logout
-   -rw-r--r--  1 davie davie    3771 dub 13 20:40 .bashrc
-   $ ls -la
-   total 2136
-   drwx------ 20 davie davie    4096 dub 17 13:35 .
-   drwxr-xr-x  4 root  root     4096 dub 13 20:40 ..
-   -rw-------  1 davie davie    7450 dub 16 22:51 .bash_history
-   -rw-r--r--  1 davie davie     220 dub 13 20:40 .bash_logout
-   -rw-r--r--  1 davie davie    3771 dub 13 20:40 .bashrc
-
-Naopak zdlouhavé přepínače je třeba psát odděleně za sebou::
-
-   $ ls -l --all --reverse
-   total 2140
-   -rw-------  1 davie davie 1886357 dub 17 14:11 .xsession-errors
-   -rw-------  1 davie davie      51 dub 13 20:46 .Xauthority
-   -rw-------  1 davie davie    2141 dub 16 16:33 .viminfo
-
-.. note::
-
-   Zkrácená varianta může, ale i nemusí mít zdlouhavou variantu. To samé platí
-   i opačně. Seznam těchto možných přepínačů si lze zobrazit pomocí nápovědy
-   k danému příkazu:
-
-   * příkazem "man"::
-
-        $ man ls
-
-   * přepínačem "--help"::
-
-        $ ls --help
-
-.. note::
-
-   Zdlouhavým přepínačům lze i zadat argumenty, pokud je to povoleno. Např.
-   pro aktivaci / deaktivaci barevného rozlišení souborů, adresářů aj. by to
-   bylo::
-
-      $ ls -l --color=yes
-      $ ls -l --color=no
-
-   Pokud by se někdy v budoucnu stalo, že je třeba mít víceslovný argument
-   nebo v něm použít speciální znaky, aniž by nezmočnili funkčnost příkazu,
-   tak je vhodné argument (pokud se nejedná o číslo) zaobalit do složených
-   či jednoducých závorek::
-
-      $ ls -l --color="yes"
-
-   To samé platí i pro argumenty bez použití přepínače.
-
-ls -l
-"""""
-
-Zobrazí zdlouhavý výpis obsahu dané adresáře včetně dalších informací::
-
-   $ ls -l
-   drwxr-xr-x 8 davie davie 4096 dub 15 22:58 Documents
-   ^^  ^  ^   ^ ^     ^     ^    ^            ^
-   ||  |  |   | |     |     |    |            |
-   ---> Zda se jedná o složku (d) nebo soubor (-) nebo link (l).
-    |  |  |   | |     |     |    |            |
-    |  |  |   | |     |     |    |            |
-    ---> Oprávnění vlastníka objektu (rwx).
-       |  |   | |     |     |    |            |
-       |  |   | |     |     |    |            |
-       ---> Opravnění pro členy skupiny, která vlastní daný objekt (r-x).
-          |   | |     |     |    |            |
-          |   | |     |     |    |            |
-          ---> Opravnění ostatních uživatelů (r-x).
-              | |     |     |    |            |
-              | |     |     |    |            |
-              ---> TODO.
-                |     |     |    |            |
-                |     |     |    |            |
-                ---> Jméno vlastníka objektu (uživatele).
-                      |     |    |            |
-                      |     |    |            |
-                      ---> Jméno skupiny, které vlastní daný objekt.
-                            |    |            |
-                            |    |            |
-                            ---> Velikost objektu v bajtech.
-                                 |            |
-                                 |            |
-                                 ---> Datum a čas poslední změny objektu.
-                                              |
-                                              |
-                                              ---> Název objektu.
-
-ls -a
-"""""
-
-Zobrazí obsah dané adresáře včetně skrytých souborů a adresářů, které začínají
-tečkou::
-
-   $ ls -a
-   .
-   ..
-   .bash_history
-
-Samotná tečka značí aktuální adresář a dvě tečky nadřazený adresář (hodně se
-používá ve spojitosti s "cd" příkazem). Pokud nechci vidět tyto samostatné
-tečky, použiju místo malého písmenka "a" velké::
-
-   $ ls -A
-   .bash_history
-   .bash_logout
-   .bashrc
+* less
 
 Klávesové zkratky
 =================
