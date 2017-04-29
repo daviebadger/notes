@@ -10,8 +10,8 @@
 Příkazový řádek
 ===============
 
-Pro práci s příkazovým řádkem je třeba mít nějaký emulátor terminálu (dále
-jen terminál) spolu s Bashem (defaultně nainstalovaný a nastavený).
+Pro práci s příkazovým řádkem je třeba mít nějaký emulátor terminálu, kde je
+Bash nainstalovaný a nastavený jako výchozí shell.
 
 Popis příkazové řádku
 ---------------------
@@ -113,7 +113,7 @@ Ovládání příkazového řádku
 --------------------------
 
 Šipkami vlevo a pravo lze pohybovat mezi napsanými znaky na řádku. Klávesa
-ENTER pak samotný příkaz spustí.
+``ENTER`` pak samotný příkaz spustí.
 
 Šipkami nahoru a dolu lze procházet historii použitých příkazů. Nahoru dále
 do minulosti a dolu zpátky do přítomnosti.
@@ -144,8 +144,8 @@ Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje p
    `Klávesové zkratky`_.
 
    Pak ještě existují další klávesové zkratky, které používá samotný terminál.
-   Může se jednat o kopírování a vkládání textu (klasické CTRL + C / CTRL + V
-   nefunguje), zobrazení více oken terminálu najednou atd.
+   Může se jednat o kopírování a vkládání textu (klasické ``CTRL + C`` a
+   ``CTRL + V`` nefunguje), zobrazení více oken terminálu najednou atd.
 
 Příkazy
 =======
@@ -230,8 +230,8 @@ Samozřejme si lze zobrazit obsah vícero adresářů najednou::
    /home/davie:
    Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 
-ls -a (ls --all)
-""""""""""""""""
+ls -a
+"""""
 
 Ukaž obsah adresáře včetně skrytých souborů a adresářů (začínají na tečku)::
 
@@ -240,8 +240,8 @@ Ukaž obsah adresáře včetně skrytých souborů a adresářů (začínají na
 
 .. note::
 
-   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresář (viz níže
-   v sekci `Odbočka k absolutním a relativním cestám`_.
+   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresáři, viz
+   níže v sekci `Odbočka k absolutním a relativním cestám`_.
 
 ls -l
 """""
@@ -338,32 +338,34 @@ Odbočka k absolutním a relativním cestám
 
 * absolutní cesta
 
-   * cesta se vypisuje od kořene (/) do cílové destinace::
+  * cesta se vypisuje od kořene (/) do cílové destinace::
 
-        $ cd /home/davie
+       $ cd /home/davie
 
 * relativní cesta
 
-   * cesta se vypisuje od aktuální adresáře do cílové destinace
-   * cesta do podřazeného adresáře začíná vždy názvem adresáře, který se
-     nachází v aktuálním pracovním prostředí::
+  * cesta se vypisuje od aktuální adresáře do cílové destinace
+  * cesta do podřazeného adresáře začíná vždy názvem adresáře, který se
+    nachází v aktuálním pracovním prostředí::
 
-        $ cd Downloads
+       $ cd Downloads
 
-   * cesta do nadřazeného adresáře se provadí pomocí dvou teček (lze opakovat,
-     pokud jsou tečky od sebe odděleny lomítkem)::
+  * cesta do nadřazeného adresáře se provadí pomocí dvou teček (lze opakovat,
+    pokud jsou tečky od sebe odděleny lomítkem)::
 
-        $ cd ..
+       $ cd ..
 
 .. tip::
 
-   Po vypsání nějaké částí cesty lze dvakrát stisknout TAB, který pak zobrazí
-   veškeré možnosti, kam mohu změnit adresář::
+   Po vypsání nějaké částí cesty lze dvakrát stisknout ``TAB``, který pak
+   zobrazí veškeré možnosti, kam mohu změnit adresář::
 
       $ cd D
+            TAB TAB
       Desktop/ Documents/ Downloads/
 
-   Taktéž se může stát, že po prvním stisknutí TAB se automaticky doplní cesta.
+   Taktéž se může stát, že po prvním stisknutí ``TAB`` se automaticky doplní
+   cesta.
 
 TODO
 ====
