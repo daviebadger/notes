@@ -153,8 +153,16 @@ Příkazy
 Navigace
 --------
 
+pwd
+^^^
+
+Ukaž aktuální pracovní prostředí, ve kterém se nacházím::
+
+   $ pwd
+   /home/davie
+
 Odbočka k souborovému systému
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""
 
 Pro práci se soubory a adresáři (složkami) je třeba vědět, kde na disku se
 nacházejí, abych na mě mohl eventuálně zavolat nějaký příkaz.
@@ -176,7 +184,7 @@ Ukázková struktura souborového systému::
      dev       speciální místo, kde jádro spravuje zařízení (disk, USB aj.)
      etc       konfigurační soubory a skripty, které se pouštějí po bootování
      home/     domovské adresáře jednotlivých uživatelů mimo superužiatele
-       david   můj domovský adresář
+       davie   můj domovský adresář
      lib       dodatečné soubory (knihovny) pro běh systémových aplikací
      media     prostor, kam se automaticky připojí externí CD / USB aj
      mnt       prostor, kam lze manuálně připojit externí zařízení
@@ -194,14 +202,6 @@ Ukázková struktura souborového systému::
        cache   místo pro ukládání cache paměti
        lib     prostor pro ukládání dynamických dat
        log     místo pro ukládání logů
-
-pwd
-^^^
-
-Ukaž aktuální pracovní prostředí, ve kterém se nacházím::
-
-   $ pwd
-   /home/davie
 
 ls
 ^^
@@ -240,7 +240,7 @@ Ukaž obsah adresáře včetně skrytých souborů a adresářů (začínají na
 
 .. note::
 
-   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresáři, viz
+   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresář, viz
    níže v sekci `Odbočka k absolutním a relativním cestám`_.
 
 ls -l
@@ -266,6 +266,33 @@ dub 15     datum poslední změny
 22:58      čas poslední změny
 Documents  jméno objektu
 =========  ======
+
+Odbočka k odkazům
+"""""""""""""""""
+
+Existují dva typy odkazů:
+
+1. pevný odkaz (jen mezi soubory)
+
+   * soubor může odkazovat na jiný soubor v jiném adresáři, příčemž jakákoliv
+     změna obsahu v jednom z těchto souborů se projeví i v tom druhém
+   * pokud se jeden soubor smaže, obsah druhého souboru zůstane stále zachován
+
+2. symbolický odkaz (soubory i adresáře)
+
+   * soubor nebo adresář může odkazovat na jiný zdrojový soubor nebo adresář
+     na stejném či jiném místě na disku, což může vypadat při ``ls -l`` výpisu
+     následovně::
+
+        lrwxrwxrwx 1 davie davie 1 dub 29 20:22 Dokumenty -> /home/davie/Documents/
+
+   * tento symbolický odkaz (prakticky soubor) v sobě uchovává jenom cestu do
+     zdrojového souboru nebo adresáře
+   * napr. při použítí příkazu ``ls`` na odkaz ke zdrojovému adresáři bude
+     výstup úplně stejný, jako bych tento příkaz spustil v samotném zdrojovém
+     adresáři
+   * pokud se zdrojový soubor nebo adresář smaže, tak odkaz bude vést na
+     neexistující místo
 
 ls -lh
 """"""
@@ -367,11 +394,72 @@ Odbočka k absolutním a relativním cestám
    Taktéž se může stát, že po prvním stisknutí ``TAB`` se automaticky doplní
    cesta.
 
+Práce s adresáři a soubory
+--------------------------
+
+mkdir
+^^^^^
+
+Vytvoř adresář(e) v aktuálním pracovním prostředí či na jiném místě::
+
+   $ mkdir dir1
+   $ mkdir dir2 dir3
+   $ mkdir ~/dir4
+   $ ls
+   dir1 dir2 dir3 dir4
+
+.. note::
+
+   Vlastní adresáře a potažmo i soubory se zpravidla vytváří uvnitř domovského
+   adresáře, neboť v tomto prostoru má uživatel téměř veškerá oprávnění a
+   nepotřebují být rootem.
+
+mkdir -p
+""""""""
+
+Vytvoř zárověň i nadřazené adresáře, pokud neexistují::
+
+   $ mkdir -p ~/parent/child
+
+.. note::
+
+   Předchozí příkaz je zkrácený postup namísto těchto příkazů::
+
+      $ cd
+      $ mkdir parent
+      $ cd parent
+      $ mkdir child
+
+rmdir
+^^^^^
+
+Smaž prázdný adresář(e)::
+
+   $ rmdir dir1
+   $ rmdir dir2 dir3
+
+rmdir -p
+""""""""
+
+Smaž prázdný adresář(e) včetně nadřazených adresářů (ty zároveň nesmí obsahovat
+žádné další adresáře a soubory)::
+
+   $ rmdir -p parent/child
+
+touch
+^^^^^
+
+Odbočka k souborům
+""""""""""""""""""
+
 TODO
 ====
 
+* cp
 * file
 * less
+* ln
+* mv
 
 Klávesové zkratky
 =================
