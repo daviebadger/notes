@@ -10,8 +10,8 @@
 Příkazový řádek
 ===============
 
-Pro práci s příkazovým řádkem je třeba mít nějaký terminálový emulátor (dále
-jen terminál).
+Pro práci s příkazovým řádkem je třeba mít nějaký emulátor terminálu (dále
+jen terminál) spolu s Bashem (defaultně nainstalovaný a nastavený).
 
 Popis příkazové řádku
 ---------------------
@@ -27,8 +27,8 @@ Text      Význam
 ========  ======
 davie     název přihlášeného uživatele
 badger    název počítače
-~         aktuální poloha disku (~ je zkratka pro "/home/davie")
-$         normální uživatel (# je superuživatel alias root)
+~         aktuální poloha disku (``~`` je zkratka pro ``/home/davie``)
+$         normální uživatel (``#`` je superuživatel alias root)
 <příkaz>  prostor pro příkaz(y)
 ========  ======
 
@@ -41,30 +41,30 @@ $         normální uživatel (# je superuživatel alias root)
 Popis syntaxe příkazu
 ---------------------
 
-V prvé radě se musí jednat o příkaz, který existuje. Pokud tomu tak není,
-Bash vypíše chybovou hlášku::
+V prvé radě se musí jednat o příkaz, který existuje. Pokud tomu tak není, Bash
+vypíše chybovou hlášku::
 
    $ ahoj
    ahoj: command not found
 
 V druhé řadě je třeba vědět, jak se daný příkaz používá a jaké jsou jeho
 možnosti použití. Pokud to nevím, mohu si zobrazit manuál k danému příkazu
-pomocí příkazu "man"::
+pomocí příkazu ``man``::
 
    $ man man
 
 .. note::
 
-   Příkaz "man" zobrazil manuál pro příkaz "man", tedy sám sobě. V zobrazeném
-   manuálu lze stisknout písmenko "h" pro nápovědu, jak lze daný manuál
-   ovládat a písmenko "q" naopak manuál zavře.
+   Příkaz ``man`` zobrazil manuál pro příkaz ``man``, tedy sám sobě. V
+   zobrazeném manuálu lze stisknout písmenko ``h`` pro nápovědu, jak lze daný
+   manuál ovládat a písmenko ``q`` naopak manuál zavře.
 
    Manuál má zpravidla každý Unixový příkaz. Nicméně v počítači mohou existovat
    i příkazy, které jsem si sám vytvořil nebo nainstaloval. U těchto příkazu
    nelze moc očekávat, že budou mít taktéž manuál, viz níže o nápovědě.
 
 Další variantou je zobrazení nápovědy pomocí volby / přepínače / parametru
-"--help"::
+``--help``::
 
    $ man --help
 
@@ -95,8 +95,8 @@ tyto podoby::
 
    $ ls -l -a
 
-Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy a že i
-volbám lze někdy dát argument.
+Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy, a že i
+volbám lze někdy dát argument(y).
 
 .. note::
 
@@ -105,7 +105,7 @@ volbám lze někdy dát argument.
 .. tip::
 
    Více zkrácených voleb lze sloučit do jedné velké volby, např. u příkazu
-   "ls" to může být místo "ls -l -a":
+   ``ls`` to může být místo ``ls -l -a``::
 
       $ ls -la
 
@@ -120,7 +120,7 @@ do minulosti a dolu zpátky do přítomnosti.
 
 .. tip::
 
-   Historii lze také zobrazit příkazem "history"::
+   Historii lze také zobrazit příkazem ``history``::
 
       $ history
           1  ahoj
@@ -134,7 +134,7 @@ do minulosti a dolu zpátky do přítomnosti.
       $ !2
 
 Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje příkaz
-"exit"::
+``exit``::
 
    $ exit
 
@@ -188,7 +188,7 @@ Ukázková struktura souborového systému::
      usr/      místo pro programy nainstalované spolu s Linuxovou distribucí
        bin     spustitelné soubory pro běh předinstalovaných programů
        lib     dodatečné soubory (knihovny) pro běh předinstalovaných programů
-       local   prostor pro programy, které uživatelem nainstalované
+       local   prostor pro programy, které jsou uživatelem nainstalované
        share   dokumentace k předinstalovaných programům
      var/      prostor pro aplikační data
        cache   místo pro ukládání cache paměti
@@ -258,7 +258,7 @@ Text       Význam
 =========  ======
 d          zda se jedná o adresář (d), soubor (-) nebo symbolický odkaz (l)
 rwxr-xr-x  oprávnění pro vlastníka, skupinu, ostatní uživatele
-8          TODO
+8          počet pevných odkazů na soubor nebo počet vnořených adresářů
 davie      jméno uživatele, který vlastní daný objekt
 davie      jméno skupiny, která vlastní daný objekt
 4096       velikost objektu v bajtech
@@ -284,7 +284,7 @@ Legenda::
 
 .. note::
 
-   Volbu "-h" nejde použít samostatně, musí být vždy užita s volbou "-l".
+   Volbu ``-h`` nejde použít samostatně, musí být vždy užita s volbou ``-l``.
 
 ls -lhS
 """""""
@@ -295,10 +295,6 @@ objekty seřaď od největší velikosti po nejmenší::
    $ ls -lhS
    -rw-r--r-- 1 davie davie  13K dub 27 21:39 bash.rst
    -rw-rw-r-- 1 davie davie 2,2K dub 24 21:55 tilix.rst
-
-.. note::
-
-   Volbu "-S" lze použít samostatně.
 
 ls -lt
 """"""
@@ -372,6 +368,7 @@ Odbočka k absolutním a relativním cestám
 TODO
 ====
 
+* file
 * less
 
 Klávesové zkratky
@@ -380,21 +377,21 @@ Klávesové zkratky
 Kurzor
 ------
 
-* CTRL + a
+* ``CTRL + a``
 
   * skočí na začátek řádku::
 
        $ ls -l
          <-----
 
-* CTRL + e
+* ``CTRL + e``
 
   * skočí na konec řádku::
 
        $ ls -l
          ----->
 
-* ALT + f
+* ``ALT + f``
 
   * skočí doprava o jedno slovo::
 
@@ -402,7 +399,7 @@ Kurzor
          -->
            ------>
                  ---------->
-* ALT + b
+* ``ALT + b``
 
   * skočí doleva o jedno slovo::
 
@@ -417,101 +414,99 @@ Text
 Záměna textu
 ^^^^^^^^^^^^
 
-* CTRL + t
+* ``CTRL + t``
 
   * zamění písmenko v místě kurzoru s předchozím::
 
        $ ls
-           ^
+         <--
        $ sl
 
-* ALT + t
+* ``ALT + t``
 
   * zamění slovo v místě kurzoru s předchozím::
 
        $ ls -l
-              ^
+         <-----
        $ -l ls
 
-* ALT + l
+* ``ALT + l``
 
   * zamění znaky od kurzoru po konec slova na malá písmena::
 
        $ ls --REVERSE
-           ^
+           ---------->
        $ ls --reverse
 
-* ALT + u
+* ``ALT + u``
 
   * zamění znaky od kurzoru po konec slova na velká písmena::
 
        $ ls --all
-           ^
+           ------>
        $ ls --ALL
 
-* ALT + c
+* ``ALT + c``
 
   * kapitalizuj (udělej větším) první písmo ve slově::
 
-       $ ls --all --reverse
+       $ ls
          -->
-            ----->
-                 ---------->
-       $ Ls --All --Reverse
+       $ Ls
 
 Mazání textu
 ^^^^^^^^^^^^
 
-* CTRL + k
+* ``CTRL + k``
 
   * smaž text od kurzoru až na konec řádku::
 
-       $ ls --all --reverse
-                 ^
        $ ls --all
+           ------>
+       $ ls
 
-* CTRL + u
+* ``CTRL + u``
 
   * smaž text od kurzoru až na začátek řádku::
 
-       $ ls --all --reverse
-                           ^
+       $ ls --all
+         <--------
        $
 
-* ALT + d
+* ``ALT + d``
 
   * smaž text od kurzoru až po konec slova, případně další slovo::
 
        $ ls --all --reverse
-           ^
+           ----->
        $ ls --reverse
 
-* CTRL + w
+* ``CTRL + w``
 
   * smaž text od kurzoru po začátek slova, případně předchozí slovo::
 
        $ ls --all --reverse
-                 ^
+           <-----
        $ ls --reverse
 
 Vkládání textu
 ^^^^^^^^^^^^^^
 
-* CTRL + y
+* ``CTRL + y``
 
-  * vložení v místě kurzoru předchozí smazaný text::
+  * vložení v místě kurzoru předchozí smazaný text, např. pomocí ``CTRL + u``::
 
        $ ls -l
-              ^
+         <-----
        $
        $ ls -l
 
 Kontrola procesů
 ----------------
 
-* CTRL + c
+* ``CTRL + c``
 
-  * ukončí daný příkaz::
+  * ukončí daný proces::
 
        $ ping localhost
        PING localhost (127.0.0.1) 56(84) bytes of data.
@@ -521,37 +516,38 @@ Kontrola procesů
        1 packets transmitted, 1 received, 0% packet loss, time 0ms
        rtt min/avg/max/mdev = 0.075/0.075/0.075/0.000 ms
 
-* CTRL + d
+* ``CTRL + z``
 
-  * ukončí shell (zavře okno terminálu)
-  * to samé jako příkaz::
-
-       $ exit
-
-* CTRL + Z
-
-  * pozastaví běh příkazu::
+  * pozastaví běh procesu::
 
        $ python3 -q
        >>>
        ^Z
        [1]+  Stopped                 python3 -q
 
-  * seznam pozastavených příkazů lze zobrazit příkazem "jobs" a vrátit je do
-    běhu pomocí "fg"
+  * seznam pozastavených procesů lze zobrazit příkazem ``jobs`` a vrátit je do
+    běhu pomocí příkazu ``fg``
+
+* ``CTRL + d``
+
+  * ukončí shell, pokud je nějaký další otevřen (např. Python interpret) nebo
+    zavře samotný terminál
 
 Ostatní
 -------
 
-* TAB
+* ``TAB``
 
-  * dvě stisknutí tabulátoru zobrazí možnosti, které lze použít jako argument::
+  * dvě stisknutí tabulátoru zobrazí buď možnosti relativných cest, pokud je
+    za příkazem ještě mezera nebo mezery další možné příkazy::
 
        $ cd
             TAB TAB
-       .cache/
-       .config/
-       .dbus/
+       a/ b/ c/
+       $ cd
+           TAB TAB
+       cd                 cd-fix-profile     cd-it8
+       cd-create-profile  cd-iccdump
 
   * jedno stisknutí se pak pokusí dokončit název souboru či adresáře, pokud
     to bude možné::
@@ -560,9 +556,9 @@ Ostatní
               TAB
        $ cd Downloads
 
-* CTRL + L
+* ``CTRL + l``
 
   * vyčístí obrazovku od předchozích příkazů a jejich výstupů
-  * to samé jako příkaz::
+  * stejného výsledku lze docílit příkazem::
 
        $ clear
