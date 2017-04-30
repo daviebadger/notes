@@ -167,7 +167,7 @@ Odbočka k souborovému systému
 Pro práci se soubory a adresáři (složkami) je třeba vědět, kde na disku se
 nacházejí, abych na mě mohl eventuálně zavolat nějaký příkaz.
 
-Operační systémy postavené na Unixu, jako je třeba Linux mají jeden velký
+Operační systémy postavené na Unixu, jako je třeba Linux, mají jeden velký
 souborý systém nezávisle na počtu disků či připojených zařízení (rozdíl oproti
 diskům C, D aj. ve Windows).
 
@@ -240,7 +240,7 @@ Ukaž obsah adresáře včetně skrytých souborů a adresářů (začínají na
 
 .. note::
 
-   Samotná tečka znamená aktuální adresář a dvě tečky nadžený adresář, viz
+   Samotná tečka znamená aktuální adresář a dvě tečky nadřazený adresář, viz
    níže v sekci `Odbočka k absolutním a relativním cestám`_.
 
 ls -l
@@ -406,7 +406,7 @@ Vytvoř adresář(e) v aktuálním pracovním prostředí či na jiném místě:
    $ mkdir dir2 dir3
    $ mkdir ~/dir4
    $ ls
-   dir1 dir2 dir3 dir4
+   dir1  dir2  dir3  dir4
 
 .. note::
 
@@ -449,17 +449,161 @@ Smaž prázdný adresář(e) včetně nadřazených adresářů (ty zároveň ne
 touch
 ^^^^^
 
+Vytvoř prázdný soubor(y)::
+
+   $ touch a.txt
+   $ touch b.txt c.txt
+   $ ls
+   a.txt  b.txt  c.txt
+
 Odbočka k souborům
 """"""""""""""""""
+
+Soubory jsou citlivé na malá a velká písmena, tudíž soubor ``file.txt`` není
+to samé jako ``File.txt``, neboť se jedná o dva zcela odlišené soubory.
+
+Koncovky jako ``.pdf`` aj. nejsou nezbytně nutné k pojmenování souborů. systém
+si sám zjistí podle obsahu souboru, o jaký typ souboru se jedná. Nicméně
+standardem je používat koncovky pro odlišení od adresářů.
+
+V neposlední řádě je třeba vědět, že všechno v Unixu / Linuxu je soubor. I
+adresáře jsou speciálním typem souboru. Lze se o tom přesvědčit příkazem
+``file``::
+
+   $ file bash.rst . ..
+   bash.rst: UTF-8 Unicode text
+   .:        directory
+   ..:       directory
+
+rm
+^^
+
+Smaž navždy soubor(y)::
+
+   $ rm a.txt b.txt c.txt
+
+rm -r
+"""""
+
+Smaž navždy i adresář(e) včetně jeho obsahu::
+
+   $ rm -r dir1
+
+.. note::
+
+   Pokud vypisuji delší absolutní či relativní cestu, tak se smaže poslední
+   vnořený adresář::
+
+      $ rm -r ~/davie/parent/child/
+
+   Zde se smaže adresář ``child`` a předchozí cesta ``~/davie/parent/`` bude
+   stále existovat.
+
+rm -rf
+""""""
+
+Smaž navždy soubor(y) i adresář(e) a ignoruj neexistující soubor(y) a
+adresář(e)::
+
+   $ rm -r dir1
+   rm: cannot remove 'dir1': No such file or directory
+   $ rm -rf dir1
+   $
+
+mv
+^^
+
+Přejmenuj soubor nebo adresář::
+
+   $ mv bad.txt good.txt
+   $ ls
+   good.txt
+
+Přesuň soubor nebo adresář na jiné místo::
+
+   $ mv ~/good.txt .
+
+Přesuň soubor nebo adresář na jiné místo a zároveň ho přejmenuj::
+
+   $ mv dir/bad.txt good.txt
+
+.. note::
+
+   Bash umí sám vyhodnotit, zda došlo k přejmenování nebo přesunutí nebo k
+   obojím najednou.
+
+cp
+^^
+
+Zkopíruj soubor::
+
+   $ cp origin.txt copy.txt
+
+Zkopíruj soubor na jiné místo, a případně i přejmenuj, je-li to třeba::
+
+   $ cp origin.txt ~/dir/
+   $ cp origin.txt ~/dir/copy.txt
+
+Zkopíruj soubory na jiné misto::
+
+   $ cp a.txt b.txt c.txt dir/
+
+cp -r
+"""""
+
+Zkopíruj celý adresář včetně jeho obsahu::
+
+   $ cp -r dir1/ dir2/
+
+cp -ru
+""""""
+
+Zkopíruj jen ty soubory a adresáře, které v cílové destinaci ještě neexistují
+nebo naopak existují v zastaralé podobě::
+
+   $ cp -ru dir1/* dir2/
+
+O průběhu kopírování se moho přesvědčit pomocí volby ``-v``, která ukáže, jaké
+soubory a adresáře se skutečně zkopírovaly::
+
+   $ cp -ruv dir1/* dir2/
+   'dir1/b.txt' -> 'dir2/b.txt'
+   'dir1/dir3' -> 'dir2/dir3'
+
+.. note::
+
+   ``*`` je zástupný znak pro označení všech souborů a adresářů.
+
+ln
+^^
+
+Vytvoř pevný odkaz mezi soubory::
+
+   $ ln a.txt b.txt
+
+.. note::
+
+   Princip je stejný jako u kopírování.
+
+ln -f
+"""""
+
+Vytvoř pevný odkaz navzdory tomu, že cílové jméno objektu už existuje::
+
+   $ ln -f a.txt b.txt
+
+ln -s
+"""""
+
+Vytvoř symbolický odkaz mezi soubory či adresáři::
+
+   $ ln -s dir1/ ~/davie/Downloads
 
 TODO
 ====
 
-* cp
-* file
 * less
-* ln
-* mv
+* < > |
 
 Klávesové zkratky
 =================
