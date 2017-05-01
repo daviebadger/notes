@@ -7,6 +7,10 @@
 
 .. contents:: Obsah:
 
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Klávesové zkratky
 =================
 
