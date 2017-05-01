@@ -6,6 +6,7 @@
 --------------------------------------------------
 
 .. contents:: Obsah:
+.. sectnum::
 
 Příkazový řádek
 ===============
@@ -765,10 +766,10 @@ TODO
 * < > |
 * other:
 
-   * cal
-   * df
-   * diff
-   * which
+  * cal
+  * df
+  * diff
+  * which
 
 Klávesové zkratky
 =================
