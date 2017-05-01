@@ -8,7 +8,6 @@
 .. contents:: Obsah:
 
 .. sectnum::
-   :depth: 3
    :suffix: .
 
 Příkazový řádek
