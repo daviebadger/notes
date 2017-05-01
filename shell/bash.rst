@@ -599,11 +599,176 @@ Vytvoř symbolický odkaz mezi soubory či adresáři::
 
    $ ln -s dir1/ ~/davie/Downloads
 
+Čtení textových souborů
+-----------------------
+
+.. note::
+
+   Jiné zakódováné či zkompilované (binární) soubory půjdou stěží přečíst,
+   neboť budou absolutně nesrozumitelné.
+
+cat
+^^^
+
+Vypiš obsah souboru(ů)::
+
+   $ cat a.txt
+   Toto je obsah souboru a.txt.
+   $ cat b.txt
+   Toto je obsah souboru b.txt.
+   $ cat a.txt b.txt
+   Toto je obsah souboru a.txt.
+   Toto je obsah souboru b.txt.
+
+Nevýhodou příkazu ``cat`` je, že je třeba vždy scrollovat nahoru do historie,
+pokud je obsah souboru větší než samotná obrazovka terminálu.
+
+Větší problém pak nastává v případě, kdy je obsah souboru tak velký, že
+už se ani pomocí scrollování nedá dostat na jeho začátek, neboť brouzdání
+do historie má své limity.
+
+tac
+^^^
+
+Vypiš obráceně obsah souboru(ů)::
+
+   $ cat file.txt
+   První řádek.
+   Druhý řádek.
+   $ tac file.txt
+   Druhý řádek.
+   První řádel.
+
+more
+^^^^
+
+Taktéž vypiš obsah souboru, nicméně ho vystránkuj, pokud je obsah větší než
+velikost obrazovky::
+
+   $ more bash.rst
+
+Základní ovládání stránkovaného obsahu:
+
+* ``h``
+
+  * zobraz nápovědu k ovládání stránkovacího režimu
+
+* ``SPACE`` (mezerník)
+
+  * vypiš další stránku
+
+* ``q``
+
+  * ukonči stránkovací režim
+
+Nevýhodou příkazu ``more`` je, že se nedají zobrazit předchozí stránky, pokud
+není scrollováno nahoru do historie. U scrollování pak platí stejné limity jako
+u příkazu ``cat``.
+
+less
+^^^^
+
+Vystránkuj obsah souboru zvlášť ve čtecím režimu::
+
+   $ less bash.rst
+
+.. note::
+
+   Na rozdíl od chování příkazu ``more`` se nebude nic vypisovat v terminálu.
+
+Základní ovládání čtecího režimu:
+
+* ``h``
+
+  * zobraz nápovědu k ovládání čtecího režimu
+
+* ``SPACE`` (mezerník) nebo ``f``
+
+  * zobraz další stránku
+
+* ``b``
+
+  * zobraz předchozí stránku
+
+* ``q``
+
+  * ukonči čtecí režim
+
+.. note::
+
+   K ovládání lze použít i některé příkazy z textového editoru Vi(m), případně
+   rovnou použít textový editor pro čtení souborů místo příkazu ``less``.
+
+head
+^^^^
+
+Vypiš jen prvních deset řádků ze souboru::
+
+   $ head numbers.txt
+   1
+   2
+   3
+   4
+   5
+   6
+   7
+   8
+   9
+   10
+
+head -n
+"""""""
+
+Vypiš jen Ntý počet řádků ze souboru::
+
+   $ head -3 numbers.txt
+   1
+   2
+   3
+
+tail
+^^^^
+
+Vypiš posledních deset řádků ze souboru::
+
+   $ tail numbers.txt
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+
+tail -n
+"""""""
+
+Vypiše jen Ntý počet posledních řádků ze souboru::
+
+   $ tail -3 numbers.txt
+   18
+   19
+   20
+
 TODO
 ====
 
-* less
+* find
+* grep
+* kill
+* ps
+* tar
+* wc
 * < > |
+* other:
+
+   * cal
+   * df
+   * diff
+   * which
 
 Klávesové zkratky
 =================
