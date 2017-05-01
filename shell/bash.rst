@@ -757,16 +757,112 @@ Vypiše jen Ntý počet posledních řádků ze souboru::
    19
    20
 
+Přesměrování
+------------
+
+>
+^
+
+Přesměruj standardní výstup někam do souboru::
+
+   $ ls
+   a.txt  b.txt  c.txt
+   $ ls > file.txt
+   $ cat file.txt
+   a.txt
+   b.txt
+   c.txt
+
+.. note::
+
+   Pokud už soubor ``file.txt``, tak přesměrovaný výstup přepíše obsah tohoto
+   souboru.
+
+.. note::
+
+   `>` je zkrácený zápis pro `1>`
+
+Odbočka ke standardním vstupům, výstupům a errorům
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Standardním výstupem (stdout, 1) se rozumí nějaký výsledek, který se zobrazí
+uživateli v terminálu. Typickém příkladem je výstup z příkazu ``ls`` z nějakého
+existujícího adresáře::
+
+   $ ls
+   a.txt  b.txt  c.txt
+
+Standardním errorem (stderr, 2) se rozumí nějaká chybová hláška, která se
+taktéž zobrazí uživateli v terminálu. Typickým příkladem je použití neznámého
+příkazu::
+
+   $ blabla
+   blabla: command not found
+
+Standardním vstupem (stdin, 0) se pak rozumí nějaký text, který zadal uživatel
+z klávesnice po vyzvání nějaké programu.
+
+>>
+^^
+
+Přesměruj standardní výstup na konec souboru::
+
+   $ cat file.txt
+   Hello!
+   $ echo Hi! >> file.txt
+   $ cat file.txt
+   Hello!
+   Hi!
+
+2>
+^^
+
+Přesměruj standardní error někam do souboru::
+
+   $ cat blabla
+   cat: blabla: No such file or directory
+   $ cat blabla 2> /dev/null
+   $
+
+.. note::
+
+   ``/dev/null`` je taková červí díra, kam když se cokoliv přesměruje, tak se
+   nikdy neuloží::
+
+      $ cat /dev/null
+      $
+
+<
+^
+
+Přesměruj na standardní vstup obsah nějakého souboru::
+
+   $ cat number.txt
+   3
+   $ cat print_number.py
+   print(input("Number: "))
+   $ python3 print_number.py < number.txt
+   Number: 3
+
+<<
+^^
+
+
+
+Filtry
+------
+
+grep
+^^^^
+
 TODO
 ====
 
 * find
-* grep
 * kill
 * ps
 * tar
 * wc
-* < > |
 * other:
 
   * cal
