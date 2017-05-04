@@ -775,12 +775,18 @@ Přesměruj standardní výstup někam do souboru::
 
 .. note::
 
-   Pokud už soubor ``file.txt``, tak přesměrovaný výstup přepíše obsah tohoto
-   souboru.
+   Pokud už soubor ``file.txt`` existuje, tak přesměrovaný výstup přepíše obsah
+   tohoto souboru.
 
-.. note::
+   Pozor však na případ, kdy je přesměrován prázdný (žádný) vstup. V tomto
+   případě se smaže celý obsah souboru, ale samotný soubor bude dále
+   existovat::
 
-   `>` je zkrácený zápis pro `1>`
+      $ cat test.txt
+      Hello
+      $ > test.txt
+      $ cat test.txt
+      $
 
 Odbočka ke standardním vstupům, výstupům a errorům
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -832,6 +838,11 @@ Přesměruj standardní error někam do souboru::
       $ cat /dev/null
       $
 
+Toto chybové přesměrování se nejčastěji používá spolu s ``>`` či ``>>``
+přesměrováním::
+
+   $ cat /etc/passwd > ~/passwords.txt 2> /dev/null
+
 <
 ^
 
@@ -844,16 +855,43 @@ Přesměruj na standardní vstup obsah nějakého souboru::
    $ python3 print_number.py < number.txt
    Number: 3
 
+.. note::
+
+   Pro více vyzvání (inputů) je třeba mít taktéž připraveno více hodnot
+   v souboru (každá zvlášť na řádek).
+
 <<
 ^^
 
+Přesměruj na standardní vstup hodnotu(y), které sám manuálně napíšu::
 
+   $ cat print_date.py
+   print(input("Day: "))
+   print(input("Month: "))
+   print(input("Year: "))
+   $ python3 print_date.py << EOF
+   > 4
+   > 5
+   > 2017
+   > EOF
+   Day: 4
+   Month: 5
+   Year: 2017
+
+.. note::
+
+   Za ``>>`` je třeba napsat nějaký oddělovač, pomocí kterého půjde ukončit
+   psaní hodnot. V tomto případě se jedná o text ``EOF`` (end of file). Taktéž
+   lze použít klávesovou zkratku ``CTRL + d``.
 
 Filtry
 ------
 
 grep
 ^^^^
+
+Odbočka k rourám
+""""""""""""""""
 
 TODO
 ====
@@ -898,6 +936,7 @@ Kurzor
          -->
            ------>
                  ---------->
+
 * ``ALT + b``
 
   * skočí doleva o jedno slovo::
