@@ -820,6 +820,10 @@ Přesměruj standardní výstup na konec souboru::
    Hello!
    Hi!
 
+.. note::
+
+   Příkaz ``echo`` pošle na standardní výstup daný text.
+
 2>
 ^^
 
@@ -890,11 +894,124 @@ Filtry
 grep
 ^^^^
 
+Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
+
+   $ ls ~ | grep Doc
+   Documents
+
+.. note::
+
+   ``grep`` příkaz lze použít i samostatně, nicméně je třeba mít nějaký
+   soubor po ruce::
+
+      $ grep Bash bash.rst
+      Bash
+
+grep -i
+"""""""
+
+Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
+a velká písmena::
+
+   $ grep bAsH bash.rst
+   Bash
+   BASH
+
 Odbočka k rourám
 """"""""""""""""
 
+Roury ``|`` umí vzít standardní výstup nějakého příkazu a ten použít jako
+standardní vstup pro jiný příkaz, např.::
+
+   $ ls -l ~ | less
+
+Alternativní zápis místo roury by zřejmě vypadal následovně::
+
+   $ ls -l > output.txt
+   $ less output.txt
+   $ rm file.txt
+
+tee
+^^^
+
+Ulož standardní výstup z předchozí roury do souboru::
+
+   $ ls -l ~ | tee output.txt | cat
+
+S uloženými výstupy pak lze opětovně pracovat::
+
+   $ cat output.txt
+
+sort
+^^^^
+
+Seřaď abecedně řádky ze standardního vstupu či souboru::
+
+   $ cat alphabet.txt
+   c
+   b
+   a
+   $ cat alphabet.txt | sort
+   a
+   b
+   c
+   $ sort alphabet.txt
+
+uniq
+^^^^
+
+Odstraň duplicitu ze standardního vstupu či souboru::
+
+   $ cat duplicity.txt
+   car
+   car
+   $ cat duplicity.txt | uniq
+   car
+   $ uniq duplicity.txt
+
+wc
+^^
+
+Zobraz počet řádku, slov a znaků ze standardního vstupu či souboru::
+
+   $ cat file.txt | wc
+    1  5 20 file.txt
+   $ wc file.txt
+
+wc -l
+"""""
+
+Zobraz jen počet řádků::
+
+   $ wc -l file.txt
+   1 file.txt
+
+wc -w
+"""""
+
+Zobraz jen počet slov::
+
+   $ wc -w file.txt
+   5 file.txt
+
+wc -c
+"""""
+
+Zobraz jen počet znaků::
+
+   $ wc -c file.txt
+   20 file.txt
+
 TODO
 ====
+
+Odbočka k zástupným znakům
+
+*
+?
+[]
+[!]
+[a-zA-Z0-9]
 
 * find
 * kill
@@ -907,6 +1024,12 @@ TODO
   * df
   * diff
   * which
+
+  * \
+  * "a b c"
+  * &
+  * ;
+  * $PATH
 
 Klávesové zkratky
 =================
