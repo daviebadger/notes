@@ -1297,8 +1297,155 @@ Procesy
 ps
 ^^
 
+Zobraz seznam spuštěných procesů v daném terminálu::
+
+   $ ps
+     PID TTY          TIME CMD
+    4061 pts/1    00:00:00 ps
+   31540 pts/1    00:00:01 bash
+
+Legenda:
+
+=======  ======
+Sloupec  Význam
+=======  ======
+PID      ID procesu
+TTY      číslo terminálu (terminálů může být spuštěno více najednou)
+TIME     kolik času spotřeboval procesor pro vykonávání procesu
+CMD      příkaz, který spustil daný proces
+=======  ======
+
+ps -u
+"""""
+
+Zobraz seznam všech procesů, které uživatel sám spustil, s podrobnějšími
+informace::
+
+   $ ps -u
+   USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+   davie     4297  0.0  0.0  46992  3268 pts/1    R+   22:29   0:00 ps -u
+   davie    31500  0.0  0.0  30220  2992 pts/0    Ss   19:38   0:00 -/bin/bash
+   davie    31540  0.0  0.1  30356  4580 pts/1    Ss   19:38   0:01 -/bin/bash
+   davie    31573  0.3  0.2  65808 10964 pts/0    S+   19:38   0:35 vim bash.rst
+
+Legenda:
+
+=======  ======
+Sloupec  Význam
+=======  ======
+USER     pod kterým uživatelem běží daný proces
+%CPU     na kolik % vytežuje daný proces procesor
+%MEM     kolik % paměti spotřebovává proces
+VSZ      velikost virtuální paměti v KB
+RSS      reálná velikost použité paměti v KB
+STAT     status procesu
+START    od kdy proces běží
+=======  ======
+
+ps -ax
+""""""
+
+Zobraz seznam všech spuštěných procesů na počítači::
+
+   $ ps -ax
+
+jobs
+^^^^
+
+Zobraz procesy (joby) v rámci terminálu, které běží v popředí nebo pozadí
+či jsou pozastavené::
+
+   $ python3 -q
+   >>>
+   ^Z
+   $ jobs
+   [1]+  5914 Stopped                 python3 -q
+
+.. note::
+
+   Místo ``^Z`` je třeba zmáčknout klávesovou zkratku ``CTRL + z``, pomocí
+   které se pozastaví proces.
+
+fg
+^^
+
+Přesuň do popředí job na pozadí, případně obnov pozastavený job::
+
+   $ fg
+   x = 1
+   >>> x
+   1
+
+.. note::
+
+   Do popředí se přesune ten job, u kterého je znaménko ``+`` za ID jobu, např.
+   ``[1]+``.
+
+Pro ukončení Python konzole, což je další shell, je třeba stisknout klávesovou
+zkratku ``CTRL + d``.
+
+fg -n
+"""""
+
+Přesuň do popředí Ntý job::
+
+   $ fg 1
+   x = 1
+   >>> x
+   1
+
+bg
+^^
+
+Přesuň pozastavený job na pozadí, čímž se job obnoví::
+
+   $ ping localhost
+   PING localhost (127.0.0.1) 56(84) bytes of data.
+   64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.074 ms
+   ^Z
+   $ jobs
+   [1]+  Stopped                 ping localhost
+   $ bg
+   64 bytes from localhost (127.0.0.1): icmp_seq=11 ttl=64 time=0.071 ms
+
+Pokud job běží na pozadí, tak lze normálně psát příkazy jako obvykle, akorát
+výsledek příkazu může skončít v záplavě standardních výstupů z procesu
+běžícího na pozadí::
+
+   64 bytes from localhost (127.0.0.1): icmp_seq=11 ttl=64 time=0.071 ms
+   ls
+   a.txt b.txt c.txt
+   64 bytes from localhost (127.0.0.1): icmp_seq=11 ttl=64 time=0.071 ms
+
+Nejrychlejší postup pro ukončení procesu na pozadí je přesunout ho na popředí
+pomocí příkazu ``fg`` a následně použít klávesovou zkratku ``CTRL + c`` pro
+ukončení procesu.
+
+.. note::
+
+   Příkaz ``ping`` slouží pro ověřování, že počítač může komunikovat s jiným
+   počítačem. Počítač umí komunikovat i sám se sebou, pokud na místě IP adresy
+   či domény je použito slovo ``localhost`` nebo ``127.0.0.1``.
+
+bg -n
+"""""
+
+Přesuň na pozadí Ntý job::
+
+   $ bg 1
+
+
 kill
 ^^^^
+
+Ukonči daný proces::
+
+   $ ps
+     PID TTY          TIME CMD
+    5131 pts/1    00:00:00 python3
+    5142 pts/1    00:00:00 ps
+   31540 pts/1    00:00:02 bash
+   $ kill 5131
 
 TODO
 ====
