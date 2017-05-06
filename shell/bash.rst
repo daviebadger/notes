@@ -1088,7 +1088,7 @@ Vyhledávání
 find
 ^^^^
 
-Vyhledej všechny soubory v nějakém adresáři včetně jeho vnořených adresářů ::
+Vyhledej všechny soubory v nějakém adresáři včetně jeho vnořených adresářů::
 
    $ find ~
    $ find ~ | wc -l
@@ -1172,11 +1172,121 @@ Spusť nějaký příkaz pro každý nalezený soubor::
 
       $ find . -type f -delete
 
-Komprese
---------
+which
+^^^^^
+
+Najde spustitelný soubor, který je zodpovědný za daný příkaz::
+
+   $ which python3
+   /usr/bin/python3
+
+Komprese a archivace
+--------------------
+
+gzip
+^^^^
+
+Zkompresuj rychle a snadno velikost nějakého souboru::
+
+   $ ls -lh
+   -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
+   $ gzip bash.rst
+   $ ls -lh
+   -rw-r--r-- 1 davie davie 9,9K kvě  6 19:46 bash.rst.gz
+
+.. tip::
+
+   Obsah zkompresovaných ``*.gz`` souborů lze přečíst příkazy ``zcat``,
+   ``zmore`` nebo ``zless``.
+
+gunzip
+^^^^^^
+
+Dekompresuj zkompresovaný ``*.gz`` soubor::
+
+   $ ls -lh
+   -rw-r--r-- 1 davie davie 9,9K kvě  6 19:46 bash.rst.gz
+   $ gunzip bash.rst.gz
+   $ ls -lh
+   -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
+
+bzip2
+^^^^^
+
+Zkompresuj pomaleji, ale lépe velikost nějakého souboru::
+
+   $ ls -lh
+   -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
+   $ gzip bash.rst
+   $ ls -lh
+   -rw-r--r-- 1 davie davie 9,4K kvě  6 19:46 bash.rst.bz2
+
+.. tip::
+
+   Obsah zkompresovaných ``*.bz2`` souborů lze přečíst příkazy ``bzcat``,
+   ``bzmore`` nebo ``bzless``.
+
+bunzip2
+^^^^^^^
+
+Dekompresuj zkompresovaný ``*.bz2`` soubor::
+
+   $ ls -lh
+   -rw-r--r-- 1 davie davie 9,4K kvě  6 19:46 bash.rst.bz2
+   $ gunzip bash.rst.gz
+   $ ls -lh
+   -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
 
 tar
 ^^^
+
+Vytvoř archív s nebo bez komprese pro soubor(y) a adresář(e)::
+
+   $ ls
+   dir
+   $ tar -cf dir.tar dir
+   $ ls
+   dir  dir.tar
+
+Legenda:
+
+=====  ======
+Volba  Význam
+=====  ======
+c      vytvoří archív
+f      archív jako soubor
+j      bzip2 komprese / dekomprese
+t      zobrazí obsah archívu
+x      rozbalí archív
+z      gzip komprese / dekomprese
+=====  ======
+
+.. note::
+
+   Zkompresované archivý používají následující koncovky:
+
+   * ``.tar.gz`` nebo ``.tgz``
+   * ``.tar.bz2`` nebo ``.tbz``
+
+Možnosti použití:
+
+* vytváření archívů:
+
+  * ``tar -cf dir.tar dir``
+  * ``tar -czf dir.tgz dir``
+  * ``tar -cjf dir.tbz dir``
+
+* zobrazení obsahu archívů:
+
+  * ``tar -tf dir.tar``
+  * ``tar -tf dir.tgz``
+  * ``tar -tf dir.tbz``
+
+* rozbalení archívů:
+
+  * ``tar -xf dir.tar``
+  * ``tar -xzf dir.tgz``
+  * ``tar -xjf dir.tbz``
 
 Oprávnění k souborům
 --------------------
@@ -1201,6 +1311,14 @@ TODO
 * ;
 * $PATH
 * export
+
+* ostatní
+
+  * cal
+  * date
+  * df
+  * free
+  * time
 
 Klávesové zkratky
 =================
