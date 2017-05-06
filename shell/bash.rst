@@ -514,6 +514,78 @@ adresář(e)::
    $ rm -rf dir1
    $
 
+Odbočka k zástupným znakům
+""""""""""""""""""""""""""
+
+Při mazání lze vyfiltrovat, které soubory a adresáře se mají smazat. V rámci
+této filtrace se používají zástupné znaky:
+
+* ``*``
+
+  * shoda s jakoukoliv kombinací znaků, přičemž ``*`` užita samostatně vezme
+    všechny soubory a adresáře::
+
+       $ rm -rfv *
+       removed 'a'
+       removed 'b'
+       removed 'c'
+
+  * další varianty:
+
+    * ``d*``
+
+      * jen ty soubory a adresáře, které začínají na písmenko ``d``
+
+    * ``*d``
+
+      * jen ty soubory a adresáře, které končí na písmenko ``d``
+
+    * ``d*.txt``
+
+      * jen ty soubory a adresáře, které začínají na písmenko ``d`` a končí na
+        koncovku ``.txt``
+
+* ``?``
+
+  * zastoupí jakýkoliv znak, respektive znaky, pokud je použito více otazníků::
+
+       $ rm -rf file.tx?
+       removed 'file.txa'
+       removed 'file.txb'
+       removed 'file.txc'
+
+* ``[]``
+
+  * zastoupí jednou jen ty znaky, které jsou definované v hranatých závorkách::
+
+       $ rm -rfv file.[abc]
+       removed 'file.a'
+       removed 'file.b'
+       removed 'file.c'
+
+  * pokud je za otevřenou hranatou závorkou ``!``, tak se zastoupí jakékoliv
+    znaky vyjma znaků za ``!``::
+
+       $ rm -rfv file.[!a]
+       removed 'file.b'
+       removed 'file.c'
+
+  * ``[]`` lze několikrát opakovat za sebou::
+
+       $ rm -rfv file.[ab][ab]
+       removed 'file.aa'
+       removed 'file.ab'
+       removed 'file.ba'
+       removed 'file.bb'
+
+  * pro zastoupení abecedy se používá zkratka ``[a-z]``, respektive ``[A-Z]``
+    a pro čísla ``[0-9]``
+
+.. note::
+
+   Tuto filtraci pomocí zástupných znaků lze použít i u jinách příkazů, jako
+   je třeba ``ls``, ``mv`` či ``cp``.
+
 mv
 ^^
 
@@ -907,16 +979,6 @@ Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
       $ grep Bash bash.rst
       Bash
 
-grep -i
-"""""""
-
-Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
-a velká písmena::
-
-   $ grep bAsH bash.rst
-   Bash
-   BASH
-
 Odbočka k rourám
 """"""""""""""""
 
@@ -930,6 +992,24 @@ Alternativní zápis místo roury by zřejmě vypadal následovně::
    $ ls -l > output.txt
    $ less output.txt
    $ rm file.txt
+
+grep -n
+"""""""
+
+Zobraz jen ty řádky, na kterých se vyskytuje zadaný text spolu s čísly řádků::
+
+   $ grep Bash bash.rst
+   2: Bash
+
+grep -i
+"""""""
+
+Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
+a velká písmena::
+
+   $ grep bAsH bash.rst
+   Bash
+   BASH
 
 tee
 ^^^
@@ -1002,34 +1082,125 @@ Zobraz jen počet znaků::
    $ wc -c file.txt
    20 file.txt
 
+Vyhledávání
+-----------
+
+find
+^^^^
+
+Vyhledej všechny soubory v nějakém adresáři včetně jeho vnořených adresářů ::
+
+   $ find ~
+   $ find ~ | wc -l
+
+.. note::
+
+   Často se ve spojení s příkazem ``find`` používá přesměřování pro standardní
+   errory, aby se nenarušoval standardní výstup, pokud je někdě problém s
+   oprávněním::
+
+      $ find / 2> /dev/null | wc -l
+
+find -type
+""""""""""
+
+Vyhledej jen určité typy souborů v nějakém adresáři::
+
+   $ find ~ -type d
+
+Legenda:
+
+===========  ======
+Typ souboru  Význam
+===========  ======
+d            adresář
+f            soubor
+l            symbolický link
+===========  ======
+
+find -name
+""""""""""
+
+Vyhledej jen ty soubory, které odpovídájí danému jménu (patternu)::
+
+   $ find ~ -type f -name "*.rst"
+
+.. note::
+
+   Při používání zástupných znaků je vhodné vždy celý pattern zaobalit do
+   uvozovek, aby se příkaz ``find`` choval podle naše očekování.
+
+find -size
+""""""""""
+
+Vyhledej soubory podle velikosti (``+`` vetší než, ``-m`` menší než)::
+
+   $ find ~/Downloads -type f -size +1M
+
+.. note::
+
+   Pro vyhledání shodné velikosti se nepoužije žádný znak::
+
+      $ find ~/Downloads -type f -size 45M
+
+Legenda:
+
+========  ======
+Velikost  Význam
+========  ======
+k         KB
+M         MB
+G         GB
+========  ======
+
+find -exec
+""""""""""
+
+Spusť nějaký příkaz pro každý nalezený soubor::
+
+   $ find . -exec rm -rf {} \; 2> /dev/null
+
+.. note::
+
+   Na místo ``{}`` se automaticky vloží cesta nalezeného souboru a ``\;`` značí
+   konec řádku pro daný příkaz za ``-exec`` volbou.
+
+.. tip::
+
+   Pokud chci smazat jenom soubory jako takové, tak mohu použít zkratku a to
+   volbu ``-delete``::
+
+      $ find . -type f -delete
+
+Komprese
+--------
+
+tar
+^^^
+
+Oprávnění k souborům
+--------------------
+
+Procesy
+-------
+
+ps
+^^
+
+kill
+^^^^
+
 TODO
 ====
 
-Odbočka k zástupným znakům
+.bashrc
 
-*
-?
-[]
-[!]
-[a-zA-Z0-9]
-
-* find
-* kill
-* ps
-* tar
-* wc
-* other:
-
-  * cal
-  * df
-  * diff
-  * which
-
-  * \
-  * "a b c"
-  * &
-  * ;
-  * $PATH
+* \
+* "a b c"
+* &
+* ;
+* $PATH
+* export
 
 Klávesové zkratky
 =================
