@@ -1603,6 +1603,142 @@ Ukonči daný proces::
    31540 pts/1    00:00:02 bash
    $ kill 5131
 
+Správa balíčku
+--------------
+
+Balíčky jsou speciální soubory (archívy) s koncovkou ``.deb``, pomocí kterých
+lze nainstalovat nový software.
+
+.. note::
+
+   Následující příkazy platí jen pro Linuxové distribuce postavané nad
+   Debianem, což je i Ubuntu.
+
+apt
+^^^
+
+Příkaz do práci s balíčky v oficiálním repozitáři či uživatelsky spravovaným
+repozitářích.
+
+apt update
+""""""""""
+
+Vytáhní z repozitářů aktuální stav balíčků a případně informuj o možném
+upgradu::
+
+   $ sudo apt update
+
+apt search
+""""""""""
+
+Vyhledej v repozitáři balíček(y), který odpovídá danému názvu::
+
+   $ apt search vim
+
+apt show
+""""""""
+
+Zobraz informace o nějakém balíčku::
+
+   $ apt show vim
+
+apt install
+"""""""""""
+
+Nainstaluj nějaký baliček(y)::
+
+   $ sudo apt install vim
+
+apt upgrade
+"""""""""""
+
+Upgraduj nějaký balíček(y) na novou verzi::
+
+   $ sudo apt upgrade vim
+
+.. note::
+
+   Pokud neni zmíněn žádný balíček, tak se systém pokusí upgradovat všechny
+   balíčky, které je možné povýšit na vyšší verzi.
+
+.. tip::
+
+   Nejčastěji se upgrade používá v kombinaci s updatem::
+
+      $ sudo apt update; sudo apt upgrade
+      $ # nebo
+      $ sudo apt update && sudo apt upgrade
+
+   Pomocí středníku lze na jednom řádku spustit více příkazů za sebou, aniž by
+   záleželo, jak dopadl předchozí příkaz. Pokud se příkazy spojují pomocí
+   ``&&``, tak se další příkaz spustí jen tehdy, pokud předchozí proběhl v
+   pořádku.
+
+   ``#`` pak značí komentář, který Bash bude ignorovat. Pokud bude komentář či
+   jakýkoliv jiný příkaz začínat s jednou mezerou na začátku jako prefix, tak
+   se nebude ukládat do historie::
+
+      $ # test
+      $  # test
+      $ history
+
+apt remove
+""""""""""
+
+Odinstaluj nějaký balíček(y)::
+
+   $ sudo apt remove vim
+
+apt autoremove
+""""""""""""""
+
+Odinstaluj balíčky, které jsou nepotřebné::
+
+   $ sudo apt autoremove
+
+.. note::
+
+   Jako nepotřebné balíčky se považují ty, které žádný z jiných balíčků
+   nepotřebuje pro svůj běh (závislosti).
+
+dpkg
+^^^^
+
+Příkaz pro práci s balíčky, které jsou lokálně na disku.
+
+dpkg -i
+"""""""
+
+Nainstaluj lokální balíček::
+
+   $ sudo dpkg -i vivaldi-stable_1.8.770.56-1_amd64.deb
+
+.. note::
+
+   Jakmile je balíček nainstalovaný, lze ho odstranit pomocí ``apt`` příkazu.
+
+add-apt-repository
+^^^^^^^^^^^^^^^^^^
+
+Zaregistruj další repozitář s balíčky::
+
+   $ sudo apt-add-repository ppa:user/repository
+
+Místo ``user`` bude název uživatele či týmu, který spravuje svůj archív
+repozitářů a místo ``repository`` bude konkrétní název repozitáře.
+
+.. note::
+
+   Po přidání repozitáře (PPA) je třeba zavolat ``apt update`` pro zjištění
+   obsahu daného repozitáře.
+
+add-apt-repository -r
+"""""""""""""""""""""
+
+Odstraň přidaný repozitář::
+
+   $ sudo apt-add-repository -r ppa:user/repository
+
 Vzdálený přístup
 ----------------
 
@@ -1693,17 +1829,101 @@ Zobraz informaci, jak dlouho běží počítač::
    $ uptime
     18:26:02 up 2 days, 19:58,  1 user,  load average: 1,79, 1,45, 1,15
 
-TODO
-====
+Proměnné v shellu
+-----------------
 
-.bashrc
+V shellu jsou uložené proměnné, se kterými pracuji nějaké programy.
 
-* \
-* "a b c"
-* &
-* ;
-* $PATH
-* export
+Typický příklad z reálného světa může být, že se program podívá, zda existuje
+daná proměnná a zda ji je přirazena nějaká hodnota. Podle této hodnoty se pak
+rozhodne, co má udělat (např. načtení správného konfiguračního souboru).
+
+export
+^^^^^^
+
+Vypiš veškeré proměnné spolu s hodnotami::
+
+   $ export
+
+Taktéž vytvoř novou proměnnou s nebo bez hodnoty::
+
+   $ export test
+   $ export TEST="Hello world!"
+
+.. note::
+
+   Stejný postup bude použit i pro změnu hodnoty.
+
+Zobrazit hodnoty konkrétní proměnné lze pomocí příkazu ``echo``::
+
+   $ echo $TEST
+   Hello world!
+
+unset
+^^^^^
+
+Smaž konkrétní proměnnou::
+
+   $ unset test
+
+Konfigurační soubor
+===================
+
+Ještě předtím, než se přípraví příkazový řádek, tak Bash hledá konfigurační
+soubory, kde mohou být uložené různé nastavení, aliasy, proměnné, které
+jsou nezbytné pro práci s příkazovým řádkem.
+
+Jedním z konfiguračních souborů je ``~/.bashrc``::
+
+   $ less ~/.bashrc
+
+Jakmile se změní obsah tohoto souboru, je třeba ho znovu načíst pomocí příkazu
+``source``::
+
+   $ source ~/.bashrc
+
+Aliasy
+------
+
+Pokud je nějaký příkaz dlouhý nebo je těžký na zapamatování, tak si mohu
+vytvořit alias(y)::
+
+   $ which here             # zda příkaz existuje
+   $ alias here="pwd"
+   $ here
+   /home/davie/
+   $ unalias here
+   $ here
+   here: command not found
+
+.. note::
+
+   Do konfiguračního souboru ``.bashrc`` budu tedy psát::
+
+      alias here="pwd"
+
+Proměnné
+--------
+
+Proměnné, kterou jsou vlastnoručně definované pomocí příkazu ``export`` vždy
+zaniknou po odhlášení uživatele či vypnutí počítače. Aby tyto proměnné
+existovaly trvale, je třeba si je uložit do konfiguračního souboru::
+
+   export test=test
+
+Změna vzhledu příkazového řádku
+-------------------------------
+
+V proměnné ``PS1`` je uloženo nastavení, jak ma vypadat ve výchozím stavu
+příkazový řádek, viz::
+
+   davie@badger:~$ <příkaz>
+
+Pokud se mi tento prompt (PS1) nelíbí, tak si mohu nastavit jiné zobrazení,
+např. abych viděl i datum a příkazy psal na novém řádku. Na změnu promptu
+je napsán tutoriál na stránce:
+
+www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 
 Klávesové zkratky
 =================
