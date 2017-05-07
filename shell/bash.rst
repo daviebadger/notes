@@ -1603,6 +1603,18 @@ Ukonči daný proces::
    31540 pts/1    00:00:02 bash
    $ kill 5131
 
+kill -9
+"""""""
+
+Ukonči násilně daný proces::
+
+   $ kill -9 5131
+
+.. note::
+
+   V tomto případě program nebude mít šanci vykonát kód jako po běžném
+   ukončení programu, např. uložení nějaké stavu.
+
 Správa balíčku
 --------------
 
@@ -1742,11 +1754,130 @@ Odstraň přidaný repozitář::
 Vzdálený přístup
 ----------------
 
+Na dálku se mohu připojit k nějakému počítači a přihlásit se pod uživatelem,
+který v něm existuje. To vše za předpokladu, že vzdálený počítač má povolenou
+danou komunikaci.
+
 ftp
 ^^^
 
+Nešifrovaný protokol pro přenos souborů::
+
+   $ ftp ftp.ubuntu.com
+
+.. note::
+
+   Pro autentizaci uživatele se zpravidla používá jméno ``anonymous`` a
+   libovolné heslo.
+
+Na vzdáleném počítači se pro navigaci používájí klasické příkazy ``pwd``,
+``cd`` či ``ls``. Pro ukončení spojení pak ``exit``.
+
+.. note::
+
+   Seznam všech možných příkazů v rámci ftp lze zobrazit pomocí příkazu
+   ``help``::
+
+      ftp> help
+
+get
+"""
+
+Zkopíruj soubor ze vzdáleného počítače ke mě::
+
+   ftp> get file.txt
+
+.. note::
+
+   Soubor se zkopíruje na místo, kde jsem se nacházel před navázáním ftp
+   spojení. Pokud potřebuji zkopírovat jinam, tak změnim u sebe aktuální
+   pracovní prostředí pomocí ``lcd`` příkazu::
+
+      ftp> lcd ~
+
+mget
+""""
+
+Zkopíruj více souboru najednou ke mě::
+
+   ftp> mget a.txt b.txt c.txt
+
+put
+"""
+
+Zkopíruj soubor na vzdálený počítač::
+
+   ftp> put file.txt
+
+mput
+""""
+
+Zkopíruj více souborů na vzdálený počítač::
+
+   ftp> mput a.txt b.txt c.txt
+
+wget
+^^^^
+
+Stáhni soubor(y) odněkud::
+
+   $ wget ubuntu.com
+   $ ls
+   $ index.html
+
 ssh
 ^^^
+
+Šifrovaně se připoj na vzdálený počítač pod stejným jménem::
+
+   $ ssh x.x.x.x  # místo x.x.x.x bude platná IP adresa nebo název domény
+
+Připoj se šifrovaně pod jiným jménem::
+
+   $ ssh user@x.x.x.x
+
+Na vzdáleném počítači pak provádím příkazy, které potřebuji. Pokud chci
+vykonat jen jeden příkaz, tak ho mohu provést zkráceně::
+
+   $ ssh user@x.x.x.x <příkaz>
+
+Příkazem ``exit`` se pak odpojím.
+
+.. note::
+
+   Některé nakonfigurované SSH servery používájí místo hesel ssh klíče. Ty
+   se vytvoří následujícím příkazem (výzvy stačí ignorovat)::
+
+      $ ssh-keygen -t rsa
+      $ # nebo náročněji a bezpečněji, jak je tomu u GitLabu
+      $ ssh-keygen -t rsa -C "můj_email" -b 4096
+
+   Ve složce ``~/.ssh`` pak vzniknou dva nové klíče, soukromný ``id_rsa`` a
+   veřejný ``id_rsa.pub``. Obsah veřejného klíče se pak předá admiistrátorovi
+   ssh serveru nebo automaticky nahraje na ssh server příkazem::
+
+      $ ssh-copy-id x.x.x.x
+
+scp
+^^^
+
+Šifrované kopírování z nebo na ssh server::
+
+   $ scp user@x.x.x.x:~/file.txt .  # z ssh serveru k sobě
+   $ scp file.txt user@x.x.x.x:~    # od sebe na ssh server
+
+.. note::
+
+   ``scp`` se chová jako ``cp`` příkaz, tudíž pokud potřebuji kopírovat něco
+   rekurzivně, použiju opět volbu ``-r``::
+
+      $ scp -r dir user@x.x.x.x:/
+
+sftp
+^^^^
+
+Šifrované verze ftp protokolu, přičemž princip ovládání je obdobný (místo ftp
+bdue sftp).
 
 Ostatní příkazy
 ---------------
