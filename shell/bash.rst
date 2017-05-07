@@ -154,6 +154,16 @@ Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje p
 Příkazy
 =======
 
+.. note::
+
+   Některé příkazy níže jsou dostupné dostupné ve všech operačních systémech
+   vycházejích z Unixu, jiné jen v Linuxu a jiné jen v konkrétní Linuxové
+   větvi či distribuci (Ubuntu).
+
+   Samotné Bash příkazy lze zobrazit příkazem ``info``::
+
+      $ help
+
 Navigace
 --------
 
@@ -1288,8 +1298,148 @@ Možnosti použití:
   * ``tar -xzf dir.tgz``
   * ``tar -xjf dir.tbz``
 
-Oprávnění k souborům
---------------------
+Vlastnictví a oprávnění k souborům
+----------------------------------
+
+chmod
+^^^^^
+
+Zmeň práva k souboru či adresáři::
+
+   $ ls -l
+   -rw-rw-r-- 1 davie davie     0 kvě  7 14:28 file.txt
+   $ chmod 777 file.txt
+   $ ls -l
+   -rwxrwxrwx 1 davie davie     0 kvě  7 14:28 file.txt
+
+.. note::
+
+   ``777`` znamená, že majitel, skupina a ostatní uživatele (přesne v tomto
+   pořadí) mají veškeré prává k souboru, tj. součet vah pro čtení (r), zápis
+   (w) a průchod (x).
+
+Odbočka k právům
+""""""""""""""""
+
+Práva k souborům obecně jsou rozdělena postupně do tří skupin:
+
+1. oprávnění uživatele (vlastníka souboru)
+2. oprávnění skupiny (skupina vlastnící soubor)
+3. oprávnění ostatních uživatelů, kteří nejsou ve vlastnické skupině
+
+Každá tato skupinu může mít přidělena následující práva:
+
+* r (váha 4)
+
+  * možnost otevřít soubor a přecíst jeho obsah
+  * v případě adresáře možnost zobrazit obsah adresáře
+
+* w (váha 2)
+
+  * možnost provést změny v souboru
+  * v případě adresáře možnost vytvářet soubory, přejmenovávat je či mazat
+
+* x (váha 1)
+
+  * možnost spustit soubor jako program, pokud má požadovanou hlavičku
+    (shebang)::
+
+       $ cat hello.py
+       #!/usr/bin/env python3
+
+       print("Hello world!")
+       $ python3 hello.py
+       Hello world!
+       $ ./hello.py
+       Hello world!
+
+  * v případě adresáře možnost procházet adresáři
+
+Kromě vah lze práva měnit i slovním způsobem. U skupin se používá toto
+pojmenování:
+
+* u (uživatel)
+* g (skupina)
+* o (ostatní)
+* a (všichni)
+
+Ukázky:
+
+* ``$ chmod a+x file.txt``
+
+  * všichni budou mít právo pro průchod
+
+* ``$ chmod o-w file.txt``
+
+  * ostatní uživatelé nebudou mít právo pro zápis
+
+* ``$ chmod u=rwx,o= file.txt``
+
+  * uživatel (vlastník) bude mít maximální prává, ostatní žádné
+
+chmod -R
+""""""""
+
+Zmeň rekurzivně práva v daném adresáří včetně jeho souborů a vnořených
+adresářů::
+
+   $ chmod -R a+x dir
+
+chown
+^^^^^
+
+Změn vlastníka souboru::
+
+   $ sudo chown root file.txt
+
+Změn vlastnickou skupinu souboru::
+
+   $ sudo chown :root file.txt
+
+Změn uživatele i skupinu::
+
+   $ sudo chown davie:davie file.txt
+
+Odbočka k právům superuživatele
+"""""""""""""""""""""""""""""""
+
+Pro vykonání některých činností, např. změna vlastníka souboru nebo instalace
+nového softwaru, je třeba mít taková práva, které mají jen privilegování
+uživatele (root).
+
+V tomto případě je třeba se buď přihlásit na roota, pokud znám jeho heslo,
+vykonat danou činnost a pak se vrátit zpátky::
+
+   $ su -
+   Password:
+   # chown root:root file.txt
+   # exit
+   $
+
+Nebo použít dočasně prefix ``sudo`` před příkazem a dočasně si půjčit
+vyšší práva. Právo použít ``sudo`` mají jen ti uživatelé, kteřým bylo toto
+právo přiděleno rootem. U PC může ``sudo`` používat první vytvořený uživatel.
+
+.. note::
+
+   Příkaz ``su`` slouží k přihlášení na jiného uživatele, pokud znám jeho
+   heslo. Pokud není zmíněn žádný uživatel, tak se za uživatele považuje
+   automaticky root. Volba ``-`` zároveň přepne i shell.
+
+   Možnosti použití:
+
+   * ``su``
+   * ``su -``
+   * ``su davie``
+   * ``su - davie``
+
+chown -R
+""""""""
+
+Změn rekurzivně vlastníka či skupinu v daném adresáři, včetně jeho souborů
+a vnořených adresářů::
+
+   $ sudo chown -R root:root dir
 
 Procesy
 -------
@@ -1426,6 +1576,12 @@ ukončení procesu.
    Příkaz ``ping`` slouží pro ověřování, že počítač může komunikovat s jiným
    počítačem. Počítač umí komunikovat i sám se sebou, pokud na místě IP adresy
    či domény je použito slovo ``localhost`` nebo ``127.0.0.1``.
+
+.. tip::
+
+   Proces v pozadí lze také spustit pomocí ``&``::
+
+      $ ping localhost &
 
 bg -n
 """""
