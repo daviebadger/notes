@@ -1603,6 +1603,96 @@ Ukonči daný proces::
    31540 pts/1    00:00:02 bash
    $ kill 5131
 
+Vzdálený přístup
+----------------
+
+ftp
+^^^
+
+ssh
+^^^
+
+Ostatní příkazy
+---------------
+
+date
+^^^^
+
+Zobraz aktuální čas a datum v počítači::
+
+   $ date
+   Ne kvě  7 18:14:05 CEST 2017
+
+Zobraz jen čas::
+
+   $ date +"%T"
+   18:15:14
+
+Zobraz jen datum ve formátu ``DD-MM-YYYY``::
+
+   $ date +"%D"
+   07-05-17
+
+cal
+^^^
+
+Zobraz kalendář pro aktuální měsíc::
+
+   $ cal
+
+Zobraz kalendář pro jiný měsíc v tomto roce::
+
+   $ cal -m 4
+
+Zobraz kalendář pro konkrétní měsíc v konkrétním roce::
+
+   $ cal -m 4 1995
+
+Zobraz kalendář pro tento rok::
+
+   $ cal -y
+
+Zobraz kalendář pro konkrétní rok::
+
+   $ cal -y 1995
+
+df -h
+^^^^^
+
+Zobraz informaci o využití diskového prostoru::
+
+   $ df -h
+
+time
+^^^^
+
+Změř, jak dlouho trvalo vykonání příkazu::
+
+   $ time find ~ -type f -name "*.rst" 2> /dev/null
+
+   real  0m0,134s
+   user  0m0,024s
+   sys   0m0,048s
+
+Řádek s ``real`` časem uvádí celkovou dobu trvání příkazu.
+
+uname -a
+^^^^^^^^
+
+Zobraz informace o systému (operační systém, verze kernelu, architektura
+procesoru aj.)::
+
+   $ uname -a
+   Linux badger 4.10.0-20-generic #22-Ubuntu SMP Thu Apr 20 09:22:42 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+uptime
+^^^^^^
+
+Zobraz informaci, jak dlouho běží počítač::
+
+   $ uptime
+    18:26:02 up 2 days, 19:58,  1 user,  load average: 1,79, 1,45, 1,15
+
 TODO
 ====
 
@@ -1614,14 +1704,6 @@ TODO
 * ;
 * $PATH
 * export
-
-* ostatní
-
-  * cal
-  * date
-  * df
-  * free
-  * time
 
 Klávesové zkratky
 =================
