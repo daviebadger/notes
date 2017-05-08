@@ -132,9 +132,9 @@ Cvičný text::
 Základní pohyb po znacích a řádcích
 -----------------------------------
 
-Šipkami vlevo a vpravo, respektive písmenky ``h`` a ``l`` se posunuje kurzor
+Šipkami vlevo a vpravo, respektive písmenky ``h`` a ``l`` se posune kurzor
 o jeden znak do strany. Šipkami nahoru a dolu, respektive písmenky ``k`` a
-``h`` se posunuje kurzor o řádek v daném směru, viz schéma::
+``h`` se posunu kurzor o řádek v daném směru, viz schéma::
 
          ^
          k
@@ -143,7 +143,7 @@ o jeden znak do strany. Šipkami nahoru a dolu, respektive písmenky ``k`` a
          v
 
 Při podržení klávesy se kurzor začne automaticky pohybovat daným směrem až
-do jejího uvolnění. Taktéž lze pohnout kurzorem najednou o Ntý počet znaků do
+do uvolnění klávesy. Taktéž lze pohnout kurzorem najednou o Ntý počet znaků do
 stran či o Ntý počet řádků nahoru nebo dolu.
 
 Ukázky:
@@ -164,256 +164,190 @@ Ukázky:
 
   * o 10 znaků doleva na řádku
 
-Skákání na konkrétní znak na řádku
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Skoky
+-----
 
-Pokud chci skočit na konkrétní znak místo počítání počtu znaků doleva či
-doprava, stisknu následující písmenka:
+Skok po slovu
+^^^^^^^^^^^^^
 
-1. f + znak
+* ``w`` (``W``)
 
-   * hledá vpravo od kurzoru po konec řádku výskyt daného znaku
-   * příklad::
-
-        # Mějme následující řádek:
-
-        Lorem ipum dolor sit amet, eos eu aperiri moderatius. Eam
-
-        # Chci skočit na začátek další věty, tak stisknu
-
-        fE
-
-        # a kurzor skutečně skočí na onen začátek, neboť jinde velké písmeno E
-        # není.
-
-   * jestliže se daný znak vyskutuje vícekrát na řádku, tak mohu skočit až na
-     Ntý výskut pomocí::
-
-        2fe
-
-2. F + znak
-
-   * to samé jako malé "f", akorát hledá nalevo po začátek řádku
-
-Skákání na konkrétní sloupec
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Sloupcem se myslí pořadí (místo) znaků na řádku.
-
-* |
-
-  * skočí na první sloupec (znak) na řádku
-
-* 80|
-
-  * skočí na 80. sloupec (znak) na řádku
-  * platí jen pro takové řádky, které jsou takhle dlouhé. Když bude řádek
-    obsahovat méně znaků než 80, tak kurzor skočí na ten poslední znak
-
-Skákání po slovech
-^^^^^^^^^^^^^^^^^^
-
-Pohyb mezi slovy zajišťují tyto písmenka:
-
-* w
-
-  * skočí na začátek dalšího slova (může jej tvořit i číslo), ale i
-    interpunkčního znaménka
-  * příklad::
-
-       # Mějme následující větu:
+  * skoč na začátek dalšího slova (může být i interpunkční znaménko)::
 
        Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       ------>
 
-       # Pokud bychom skákali od začátku věty pomocí písmenka "w" a aktuálně
-       # by se kurzor nacházel na začátku slova "amet":
+  * pro ignorování interpunkčních znaků je třeba použít ``W``::
 
-       Lorem ipsum dolor sit |a|met, eos eu aperiri moderatius.
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+                             ------>
 
-       # Tak při dalším skoku kurzor neskočí na začátek slova "eos", ale na
-       # čárku:
+* ``e`` (``E``)
 
-       Lorem ipsum dolor sit amet|,| eos eu aperiri moderatius.
+  * skoč na konec aktuálního nebo dalšího slova::
 
-  * pro ignorování interpunkčních znamének je třeba stisknout velké "W"
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       ---->
+           ------>
 
-* e
+* ``b`` (``B``)
 
-  * skočí na konec aktuální slova (pokud se kurzor nachází kdekoliv od
-    prvního po předposlední znak slova) nebo konec dalšího slova
-  * taky respektuje interpunkční znaménka, pro jejich ignoraci je třeba
-    stisk "E"
+  * skoč na začátek aktuálního nebo předchozího slova::
 
-* ge
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       ---->
+           ------>
 
-  * skočí na začátek předchozí slova (opak "e")
-  * pro ignoraci interpunkčních znamének se stiskne "gE"
+Stejně jako u pohybu po znacích či řadcích, i zde lze posunout kurzor o Ntý
+počet slov, např. ``3w``, ``5e`` aj.
 
-* b
+.. tip::
 
-  * skočí na začátek aktuálního nebo předchozího slova (opak "w")
-  * pro ignoranci interpunkčních znamének se stiskne "B"
+   Pro posunutí kurzoru na konec předchozího slova se použije ``ge``,
+   respektive ``gE``::
 
-Stejně jako u znacích mohu skákat po více slovech, např. o tři slova dopředu::
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+           <------
 
-   3w
+Skok na konkrétní slovo
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Skákání na konkrétní slova
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+* ``/pattern`` + ``ENTER``
 
-Pokud je kurzor v místě nějakého slova a já hledám zrovna další / předchozí
-výskyt tohoto slova, tak mohu stisknout tyto znaky:
+  * najdi v textu napravo od kurzoru až po konec souboru výskyt daného patternu
+    a skoč na něj::
 
-* \*
+       /sit
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       ------------------>
 
-  * skočí dopředu na další výskyt slova (pokud je v souboru)
+  * pokud bylo nalezeno více výskytů odpovídajících danému patternu, tak se
+    na další výskyt skočí pomocí ``n`` a na předchozí ``N``::
 
-* #
+       /i
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       ------>
+             ------------->
+             <-------------
+       <------
 
-  * skočí dozadu na předchozí výskyt slova
+* ``?pattern`` + ``ENTER``
 
-Když nemám v daném slově kurzor, mohu si vypomoct příkazy (Command-line mód),
-které jsou spíše typické při vyhledávání slov(a) v textu:
+  * najdi v textu nalevo od kurzoru až po začátek souboru výskyt daného
+    patternu
+  * taktéž lze použít ``n`` a ``N``, avšak zde bude účinek opačný
 
-* /pattern
-
-  * hledá výskyt daného patternu napravo od kurzoru až po poslední řádek v
-    souboru
-  * pokud se pattern najde, tak je třeba stisknout ENTER, aby se na něho
-    přemístil kurzor
-  * kdyby se na stejném řádku vyskytoval daný vzor vícekrát, tak na další
-    pozici patternu skáče stisknutím písmene "n" po ESC
-  * na předchozí výskyt se místo malého "n" bude klikat velké "N"
-
-* ?pattern
-
-  * zde naopak se bude hledat pattern nalevo od kurzoru až po začátek
-    souboru
-  * lze taktéž použít "n" a "N" pro skákání na předchozí / další výskytu
-
-Oba způsoby jsou defaultně citlivé na rozdíl velkých a malých písmen. Pro
-dočasné vypnutí tohoto chování lze na konec napsat suffix "\c"::
+Oba dva způsoby jsou defaultně citlivé na rozdíl velkých a malých písmen. Pro
+vypnutí této citlivosti je třeba na konec patternu napsat suffix ``\c``::
 
    /pattern\c
    ?pattern\c
 
+.. note::
+
+   Tyto způsoby se spíše používájí na vyhledávání v textu, než na skákání jako
+   takové.
+
+Skok na kraj řádku
+^^^^^^^^^^^^^^^^^^
+
+* ``0``
+
+  * skoč na začátek řádku::
+
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       <--------------------------
+
+* ``$``
+
+  * skoč na konec řádku::
+
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+                                 --------------------------->
+
 .. tip::
 
-   Pro náročnější uživatele by se mohly hodit i regulární výrazy, více o nich
-   `ZDE <http://vimhelp.appspot.com/pattern.txt.html>` dole ve 4. sekci o
-   patternech.
+   Pokud řádek začíná odsazením, tak na začátek odsazeného textu se posune
+   kurzor pomocí ``^``::
 
-Skákání na kraje řádku
-^^^^^^^^^^^^^^^^^^^^^^
+         <-------------------------
+         Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+      nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+      gloriatur qui ut.
 
-* 0 (nula)
+Skok na konkrétní řádek
+^^^^^^^^^^^^^^^^^^^^^^^
 
-  * na začátek řádku
+* ``gg`` (``1G``)
 
-* $
+  * skoč na začátek souboru, tedy první řádek::
 
-  * na konec řádku
+       ^ Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+       | nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+         gloriatur qui ut.
 
-Jestliže řádek začíná odsazením a já nechci skočit do tohoto prázdného
-prostoru, ale na první slovo, tak zmáčknu "^".
+* ``2G``
 
-Skákání na konkrétní řádky
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+  * skoč na druhý řádek v souboru::
 
-* gg (nebo 1G)
+       | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+       v nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+         gloriatur qui ut.
 
-  * na začátek souboru (první řádek)
+* ``G``
 
-* 3G
+  * skoč na konec souboru, tedy poslední řádek::
 
-  * na 3. řádek v souboru
-
-* G
-
-  * na konec souboru (poslední řádek)
+       | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+       | nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+       v gloriatur qui ut.
 
 .. note::
 
-   Kurzor po skoku bude vždy na začátku řádku, i když jsem ho předtím měl
-   třeba někde uprostřed řádku.
+   Po tomhle pohybu bude vždy kurzor na začátku řádku, ačkoliv mohl být
+   předtím někde jinde na řádku.
 
-Skákání na začátky a konce závorek
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Skok na kraj okna
+^^^^^^^^^^^^^^^^^
 
-Pokud jsem uvnitř libovolné závorky (kulatá, složená, hranatá), tak znakem "%"
-mohu skočit na pozici otevřené / zavřené závorky. První skok je vždy na tu
-otevírající.
+* ``L``
 
-Skákání po větách a odstavcích
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  * skoč na poslední řádek v okně (spodní kraj)
 
-* )
+* ``H``
 
-  * na začátek další věty
-  * příklad::
+  * skoč na první řádek v okne (horní kraj)
 
-       # Mějme text:
+.. tip::
 
-       Toto je věta A. Toto je věta B.
+   Doprostřed obrazovky se skočí pomocí ``M``.
 
-       # a kurzor na začátku řádku. Stiskem ")" se kurzor přesune na znak "T"
-       # v druhé větě:
+Skok po oknu
+^^^^^^^^^^^^
 
-       Toto je věta A. |T|oto je věta B.
+* ``CTRL + f``
 
-* (
+  * skoč na další okno (přesne o tolik řádku, kolik se jich vleze do okna)
 
-  * na začátek předchozí věty
+* ``CTRL + b``
 
-* }
+  * skoč na předchozí okno
 
-  * na další odstavec (taktéž blok kódu)
+Pokud je třeba jen poloviční velikost, tak:
 
-* {
+* ``CTRL + d``
 
-  * na předchozí odstavec
+  * skoč o půlku okna dolu
 
-Skákání na kraje a doprostřed obrazovky
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* ``CTRL + u``
 
-* L
+  * skoč o půlku okna nahoru
 
-  * škočí na poslední řádek, který vidím v okně terminálu
+Ostatní skoky
+-------------
 
-* H
-
-  * skočí na první řádek, který vidím v okně
-
-* M
-
-  * škočí doprostřed obrazovky
-
-Skákání po stránkách
-^^^^^^^^^^^^^^^^^^^^
-
-Abych nemusel skákat po X řádcích, ale rovnou podle velikosti okna terminálu.
-
-* CTRL + f
-
-  * skočí na další "okno" (přesně o tolik řádků, kolik vidím celkem v
-    terminálu)
-
-* CTRL + b
-
-  * na předchozí okno
-
-Pro poloviční velikost to pak je:
-
-* CTRL + d
-
-  * o půlku okna dolu
-
-* CTRL + u
-
-  * o půlku okna nahoru
-
-Další vstupy do Insert módu
----------------------------
+Odbočka k dalším vstupům do Insert módu
+---------------------------------------
 
 Teď, když umíme se pohybovat v textu, je dobré vědět o dalších možnostech,
 jak si usnadnit vstup do Insert módu (kromě klasického "i"):
@@ -1322,3 +1256,11 @@ TODO
 * :n (editace dalšího souboru)
 * :N (editace předchozího souboru)
 * :buffer
+* |
+* {
+* }
+* %
+* (
+* )
+* \*
+* #
