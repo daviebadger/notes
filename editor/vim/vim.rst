@@ -26,11 +26,11 @@ Příkazem::
 
       $ vi
 
-Základní ovládání
-=================
+Základní ovládání editoru
+=========================
 
-Otevření a zavření editoru
---------------------------
+Otevření a zavření
+------------------
 
 Vim se spustí také stejnojmenným příkazem::
 
@@ -42,8 +42,9 @@ Pro zavření Vimu je třeba napsat na klávesnici::
 
 .. note::
 
-   Pokud se v editoru nedopatřením objevil nějaký napsaný text, tak je třeba
-   jej zavřít násilným způsobem (bez uložení)::
+   Pokud se v editoru nedopatřením objevil nějaký nový text, tak je třeba pro
+   jistotu stisknout klávesu ``ESC`` a poté jej zavřít násilným způsobem (bez
+   uložení)::
 
       :q!
 
@@ -52,8 +53,8 @@ nutně existovat)::
 
    $ vim ~/.bashrc
 
-Módy
-----
+Odbočka k módům
+^^^^^^^^^^^^^^^
 
 Ve Vimu jsou zavedené tzv. módy, pomocí kterých se editor patřičně ovládá. Ty
 nejzákladnější jsou:
@@ -61,12 +62,12 @@ nejzákladnější jsou:
 1. Normal
 
    * výchozí stav po spuštení Vimu
-   * slouží pro navigaci v textu nebo pro přepínání na jiný mód
-   * z jiného módu se zpátky na ``NORMAL`` mód přepne pomocí klávesy ``ESC``
+   * slouží pro navigaci v textu nebo pro přepínání na jiný mód, přičemž z
+     jiného módu se zpátky na ``NORMAL`` mód přepne pomocí klávesy ``ESC``
 
 2. Insert
 
-   * mód pro vkládání textu do souboru (navigace v textu nebude fungovat)
+   * mód pro vkládání textu do souboru
    * zapne se zpravidla stisknutím písmenka ``i``, po kterém lze začít
      psát či editovat text
 
@@ -79,7 +80,7 @@ nejzákladnější jsou:
 Ukládání změn do souboru
 ------------------------
 
-Pro uložení změn v souboru je třeba použít příkaz ``:w``:
+Pro uložení změn v souboru je třeba použít příkaz ``:w``::
 
    :w
 
@@ -90,50 +91,50 @@ Pro uložení změn v souboru je třeba použít příkaz ``:w``:
 
       :w ~/Documents/test.txt
 
-Pro uložení a zavření editoru v jednom kroku je třeba napsat::
+Jestliže je třeba existující soubor uložit pod jiným názvem, tak se použije
+příkaz ``:sav``::
 
-   :wq
+   :sav /cesta/k/souboru
 
 .. tip::
 
-   Pro uložení existující souboru pod jiným jménem (tzv. uložit jako) se
-   použije příkaz ``:sav``::
+   V jednom kroku lze najednou uložit změny a zavřít editor::
 
-      :sav /cesta/k/souboru
+      :wq
 
-Pohyb kurzoru
--------------
+Navigace v textu
+================
 
-Aby bylo na čem procvičovat, je dobré mít nějaký pracovní text.
+Cvičný text::
 
-1. zkopírujte text níže (tři odstavce latinského textu)
-2. otevřete si prázdný Vim
-3. změnte mód na Insert
-4. vložte do Vimu pomocí kombinace kláves CTRL + SHIFT + v
-5. vratťe se zpět do Normal módu
-6. v případě potřeby uložte pro budoucí použití
+   Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
+   quaeque eu, an his hendrerit prodesset, nonumes oportere gloriatur qui
+   ut. Cu malis summo saperet nec, eam ei purto fastidii sententiae. Graece
+   detracto reformidans ex mel. At oportere moderatius ius, sea at scripta
+   regione dissentiunt.
 
-Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
-quaeque eu, an his hendrerit prodesset, nonumes oportere gloriatur qui
-ut. Cu malis summo saperet nec, eam ei purto fastidii sententiae. Graece
-detracto reformidans ex mel. At oportere moderatius ius, sea at scripta
-regione dissentiunt.
+   Vel no ferri aeterno deleniti. Ne eam nisl dissentiunt comprehensam, ea
+   accusata vulputate mea. Ne duo assum meliore tincidunt, ius option
+   molestiae et. Magna porro lucilius ea mea. Tota malorum ut vis, vim id
+   posse civibus praesent.
 
-Vel no ferri aeterno deleniti. Ne eam nisl dissentiunt comprehensam, ea
-accusata vulputate mea. Ne duo assum meliore tincidunt, ius option
-molestiae et. Magna porro lucilius ea mea. Tota malorum ut vis, vim id
-posse civibus praesent.
+   Quot cibo eloquentiam eum id, tation mentitum consectetuer pri ad. Ei mel
+   exerci explicari, equidem aliquando nec et, an sed assum hendrerit. Id
+   vel modus philosophia. Ea quo dicant minimum, choro scaevola ex mel. Tale
+   vide nostrum ei usu, his illum scriptorem te. Ex legere cotidieque pro,
+   quo nisl dolor assentior an, et iriure scripta blandit per.
 
-Quot cibo eloquentiam eum id, tation mentitum consectetuer pri ad. Ei mel
-exerci explicari, equidem aliquando nec et, an sed assum hendrerit. Id
-vel modus philosophia. Ea quo dicant minimum, choro scaevola ex mel. Tale
-vide nostrum ei usu, his illum scriptorem te. Ex legere cotidieque pro,
-quo nisl dolor assentior an, et iriure scripta blandit per.
+.. note::
 
-Základní pohyb po znacích
-^^^^^^^^^^^^^^^^^^^^^^^^^
+   Tento text se vloží do Vimu uvnitř ``INSERT`` módu za použití klávesové
+   zkratky ``CTRL + SHIFT + v``.
 
-Klasický pohyb kurzoru doleva, dolu, nahoru, doprava tvoří písmenka::
+Základní pohyb po znacích a řádcích
+-----------------------------------
+
+Šipkami vlevo a vpravo, respektive písmenky ``h`` a ``l`` se posunuje kurzor
+o jeden znak do strany. Šipkami nahoru a dolu, respektive písmenky ``k`` a
+``h`` se posunuje kurzor o řádek v daném směru, viz schéma::
 
          ^
          k
@@ -141,17 +142,27 @@ Klasický pohyb kurzoru doleva, dolu, nahoru, doprava tvoří písmenka::
          j
          v
 
-.. note::
+Při podržení klávesy se kurzor začne automaticky pohybovat daným směrem až
+do jejího uvolnění. Taktéž lze pohnout kurzorem najednou o Ntý počet znaků do
+stran či o Ntý počet řádků nahoru nebo dolu.
 
-   Samozřejmě lze použít i šipky (pokud fungují), nicméně se tím ztrácí
-   výhoda mít umístěnou pravou ruku ve výchozi poloze pro psaní všemi deseti
-   (ukazováček je na pozici písmenka "j").
+Ukázky:
 
-Klávesy h / j / k / l jde samožejmě podržet, kdy dojde k opakování jejich
-stisku. Pokud však vím, o kolik se chci posunout na jiné misto, můžů před
-jejich stiskem uvést číslo. Např. pohyb o 10 řádku dolu::
+* ``3k``
 
-   10j
+  * o tři řádky nahoru
+
+* ``5j``
+
+  * o pět řádků dolu
+
+* ``10l``
+
+  * o 10 znaků doprava na řádku
+
+* ``10h``
+
+  * o 10 znaků doleva na řádku
 
 Skákání na konkrétní znak na řádku
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
