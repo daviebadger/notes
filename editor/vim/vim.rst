@@ -5,149 +5,101 @@
  Textový editor zabudovaný v terminálu
 ---------------------------------------
 
-:Abstract:
+.. contents:: Obsah:
 
-   Vi IMproved, zkráceně `Vim`_, vznikl v roce 1991 klonem původního `Vi`_
-   editoru určeného pro operační systém Unix. Vytvořil ho Bram Moonlenaar.
-
-   Vim je zdarma a lze ho spustit na jakémkoliv operačním systému (pokud je
-   nainstalovaný). Jeho zdrojové kódy lze najít na `GitHubu`_. Poslední
-   hlavní verze je č. 8 (od října 2016).
-
-   Oficiální dokumentaci lze najít:
-
-   1. uvnitř Vimu spuštěním příkazu pro nápovědu v normal módu::
-
-      :help
-
-   2. online na stránce http://vimhelp.appspot.com/
-
-   Kromě toho má Vim i oficiální interaktivní tutoriál v terminálu, ve kterém
-   se lze prakticky naučit ovládat základy Vimu během 25 - 30 minut. Tento
-   tutoriál se spouští pomocí::
-
-      $ vimtutor
-
-   Na závěr doporučuji i přehledný `Vim tahák`_ (v angličtině).
-
-.. contents:: Obsah
+.. sectnum::
+   :depth: 3
+   :suffix: .
 
 Instalace
 =========
 
-Defaultně v Ubuntu je už Vim nainstalovaný, avšak ve své omezené podobě kvůli
-kompatibilitě s původním Vi editorem. Spouští se příkazem::
-
-   $ vi
-
-Jestliže však chci používat Vim se všemi možnostmi, které nabízí, tak jej
-musím nainstalovat pomocí::
+Příkazem::
 
    $ sudo apt install vim
+
+.. note::
+
+   Defaultně v Ubuntu už je Vim nainstalovaný, nicméně se jedná o osekanější
+   verzi kvůli zpětně kompatibilitě s editorem ``vi``. Ten se pro zajímavost
+   spustí stejnojmenným příkazem::
+
+      $ vi
 
 Základní ovládání
 =================
 
-Spuštění a ukončení
--------------------
+Otevření a zavření editoru
+--------------------------
 
-Editor Vim se spuští svým stejnojmenným příkazem::
+Vim se spustí také stejnojmenným příkazem::
 
    $ vim
 
-Bez uvedení cesty k nějakému souboru se otevře prázdný editor s výchozím
-textem o Vimu (jeho aktuální verze, jméno autora atd.). Pro "zavření" Vimu
-(respektive okna, ve kterém se nacházím) se nápíše uvnitř editoru příkaz::
+Pro zavření Vimu je třeba napsat na klávesnici::
 
    :q
 
 .. note::
 
-   Jestliže jste nechtěně vstoupili do "Insert" módu (začali jste psát text),
-   tak je třeba zmáčknout klávescu ESC (vypne "Insert" mód) a příkaz pro
-   násilné ukončení Vimu bez uložení textu do souboru::
+   Pokud se v editoru nedopatřením objevil nějaký napsaný text, tak je třeba
+   jej zavřít násilným způsobem (bez uložení)::
 
       :q!
 
-Když pro příkaz "vim" uvedu ještě cestu k souboru, tak zde záleží, zdá se
-jedná o:
+Pomocí příkazu ``vim`` lze otevřít i nějaký konkrétní soubor (ten nemusí
+nutně existovat)::
 
-a) existující soubor
-
-   * zobrazí se jeho obsah
-   * např.::
-
-        $ vim ~/.profile
-
-b) neexistující soubor
-
-   * otevře se opět prázdný editor, ale pokud se změní jeho obsah (přibude
-     nějaký text) a ten se uloží, tak již není třeba uvádět jméno souboru.
-
-Soubor lze samozřejme ještě otevřít uvnitř Vimu a to příkazem::
-
-   :o název_souboru
-
-Tento postup platí jen pro lokální a vnořené soubory. Pro otevření souboru
-někde v jiném nadřazeném adresáři, kde je třeba použít absolutní cestu se
-použíje příkaz::
-
-   :e /cesta/k/souboru
+   $ vim ~/.bashrc
 
 Módy
 ----
 
-Aby Vim věděl, kdy chce uživatel editovat / navigovat se v textu, tak jsou
-zavedené tzv. módy. Pro začátek postačí znát tyto tři základní:
+Ve Vimu jsou zavedené tzv. módy, pomocí kterých se editor patřičně ovládá. Ty
+nejzákladnější jsou:
 
 1. Normal
 
-   * výchozí stav po spuštení Vimu, který slouží pro navigaci v textu a jeho
-     editaci pomoci
-   * některé písmenka (znaky) a klávesové zkratky jsou vyhrazena pro
-     jednotlivé úkony, např. pohyb kurzoru doprava o 1 znak
-   * při přepnutí z jiného módu na Normal se použije klávesa ESC
+   * výchozí stav po spuštení Vimu
+   * slouží pro navigaci v textu nebo pro přepínání na jiný mód
+   * z jiného módu se zpátky na ``NORMAL`` mód přepne pomocí klávesy ``ESC``
 
 2. Insert
 
-   * mód, ve kterém přestanou fungovat speciální písmena (znaky), ty se
-     budou nyní zapisovat do textu
-   * spustí se z Normal módu stisknutím písmenka "i" (v levém dolním rohu
-     bude vidět tučným písmem "-- INSERT --")
-   * do Insert módu lze vstupovat i jinými písmenkami, ale o tom až v
-     kapitole `Další vstupy do Insert módu`_
+   * mód pro vkládání textu do souboru (navigace v textu nebude fungovat)
+   * zapne se zpravidla stisknutím písmenka ``i``, po kterém lze začít
+     psát či editovat text
 
 3. Command-line
 
-   * pro ovládání Vimu jako takového pomocí příkazů jako je např. otevírání a
-     zavírání souborů nebo jeho nastavení (přízpůsobení)
-   * zapíná se převážně stiskem ":", za který následuje název daného příkazu
-   * tento mód se pozná tak, že se dole ve Vimu objeví příkazový řádek
-   * pokud si nejsem jistý, jestli píšu příkaz správně, mohu stisknout
-     klávesovou zkratku CTRL + d, která mi ukáže všechny možné možnosti
-   * klávesa TAB slouží klasicky pro automatické doplnění příkazů
+   * mód pro ovládání editoru jako takového pomocí příkazů
+   * editor se ovládá z příkazového řádku, který se objeví po stisknutí
+     dvojtečky ``:`` (viz zavření Vimu pomocí ``:q``)
 
-Ukládání do souboru
--------------------
+Ukládání změn do souboru
+------------------------
 
-Jestliže došlo k požadované změně obsahu a tu chci uložit, tak se přepnu z
-Insert do Normal a spustím::
+Pro uložení změn v souboru je třeba použít příkaz ``:w``:
 
    :w
 
-Pokud jsem otevřel prázdný Vim (bez uvedení cesty k souboru), tak musím uvést,
-kam chci obsah uložit::
+.. note::
 
-   :w ~/Documents/test.txt
+   Pokud jsem otevřel prázdný Vim nebo neexistující soubor, tak je třeba ještě
+   uvést název souboru, pod kterým se má uložit::
 
-Pro uložení obsahu existujícího souboru do jiného souboru (uložit jako) je
-příkaz::
+      :w ~/Documents/test.txt
 
-   :sav /cesta/k/souboru
-
-Když chci uložit a dál nepokračovat v práci (zavřít Vim)::
+Pro uložení a zavření editoru v jednom kroku je třeba napsat::
 
    :wq
+
+.. tip::
+
+   Pro uložení existující souboru pod jiným jménem (tzv. uložit jako) se
+   použije příkaz ``:sav``::
+
+      :sav /cesta/k/souboru
 
 Pohyb kurzoru
 -------------
@@ -1662,7 +1614,10 @@ Já nicméně preferuji následující dvě varianty:
         autocmd StdinReadPre * let s:std_in=1
         autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
 
-.. _Vim: https://en.wikipedia.org/wiki/Vim_(text_editor)
-.. _Vi: https://en.wikipedia.org/wiki/Vi
-.. _GitHubu: https://github.com/vim/vim
-.. _Vim tahák: https://vim.rtorr.com/
+TODO
+====
+
+* :o
+* :e
+* CTRL + d
+* TAB 
