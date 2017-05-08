@@ -19,7 +19,7 @@ Obecné
 
 * ``F11``
 
-  * zobrazí Tilix přes celou obrazovku
+  * zobrazí Tilix přes celou obrazovku nebo také zavře toto zobrazení
 
 * ``CTRL + SHIFT + n``
 
@@ -47,9 +47,9 @@ Zvětšování a zmenšování textu
 * ``CTRL + +``
 * ``CTRL + -``
 
-Pro návrat do původního stavu (platí pro českou klávesnici):
+Pro návrat do původního stavu:
 
-* ``CTRL + SHIFT + 0``
+* ``CTRL + 0``
 
 Terminál
 --------
@@ -105,7 +105,7 @@ Otevření nové session
 
 * ``CTRL + SHIFT + t``
 
-Pokud už nějaká session existuje a je uloženo její nastavení (JSON):
+Pokud už nějaká session existuje a je uloženo její nastavení (JSON soubor):
 
 * ``CTRL + SHIFT + o``
 
@@ -114,16 +114,16 @@ Uložení nové session
 
 * ``CTRL + SHIFT + s``
 
-Zobrazení session možností
+Zobrazení session přehledu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * ``F12``
 
-  * zobrazí vlevo přehled a náhled všech otevřených session
+  * zobrazí v bočním panelu přehled a náhled všech otevřených session
 
 * ``CTRL + ALT + p``
 
-  * zobrazí vyhledávač otevřených i zavřených (uložených) session
+  * zobrazí přepínač otevřených a zavřených (uložených) session
 
 Přepínání mezi session
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -134,10 +134,10 @@ Přepínání na konkrétní session:
 * ``CTRL + ALT + 2``
 * ``CTRL + ALT + 3``
 
-Přepínání podle pořádí oken:
+Přepínání podle pořádí session:
 
-* ``CTRL + FN + UP`` (PAGE UP)
-* ``CTRL + FN + DOWN`` (PAGE DOWN)
+* ``CTRL + PAGE UP``
+* ``CTRL + PAGE DOWN``
 
 Zavření session
 ^^^^^^^^^^^^^^^
