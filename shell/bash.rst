@@ -15,7 +15,8 @@ Příkazový řádek
 ===============
 
 Pro práci s příkazovým řádkem je třeba mít nějaký emulátor terminálu, kde je
-Bash nainstalovaný a nastavený jako výchozí shell.
+Bash nainstalovaný a nastavený jako výchozí shell (platí pro většinu OS
+postavených na Unixu).
 
 Popis příkazové řádku
 ---------------------
@@ -99,7 +100,7 @@ tyto podoby::
 
    $ ls -l -a
 
-Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy, a že i
+Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy a že i
 volbám lze někdy dát argument(y).
 
 .. note::
@@ -160,7 +161,7 @@ Příkazy
    vycházejích z Unixu, jiné jen v Linuxu a jiné jen v konkrétní Linuxové
    větvi či distribuci (Ubuntu).
 
-   Samotné Bash příkazy lze zobrazit příkazem ``info``::
+   Samotné Bash příkazy lze zobrazit příkazem ``help``::
 
       $ help
 
@@ -196,17 +197,17 @@ Ukázková struktura souborového systému::
      boot      soubory a adresáře pro Linoxé jádro (spojka mezi HW a SW)
      cdrom     prostor pro připojení obsahu CD disku
      dev       speciální místo, kde jádro spravuje zařízení (disk, USB aj.)
-     etc       konfigurační soubory a skripty, které se pouštějí po bootování
+     etc       konfigurační soubory a skripty, které se spouštějí po bootování
      home/     domovské adresáře jednotlivých uživatelů mimo superužiatele
        davie   můj domovský adresář
      lib       dodatečné soubory (knihovny) pro běh systémových aplikací
-     media     prostor, kam se automaticky připojí externí CD / USB aj
+     media     prostor, kam se automaticky připojí externí CD / USB aj.
      mnt       prostor, kam lze manuálně připojit externí zařízení
-     opt       prostor pro volitelné systéové balíčky a komerční programy
+     opt       prostor pro volitelné systémové balíčky a komerční programy
      proc      virtuální prostor, kam kernel ukládá info o systému (procesech)
      root      domovský adresář roota
      sbin      systémové binárky pro roota (pro administrativní účely)
-     tmp       dočasný uložitě pro soubory a adresáře, které se maže po bootu
+     tmp       dočasné uložiště pro soubory a adresáře, které se mažou po bootu
      usr/      místo pro programy nainstalované spolu s Linuxovou distribucí
        bin     spustitelné soubory pro běh předinstalovaných programů
        lib     dodatečné soubory (knihovny) pro běh předinstalovaných programů
@@ -216,6 +217,7 @@ Ukázková struktura souborového systému::
        cache   místo pro ukládání cache paměti
        lib     prostor pro ukládání dynamických dat
        log     místo pro ukládání logů
+       spool   místo pro ukládání front (tisk, emaily)
 
 ls
 ^^
@@ -228,7 +230,7 @@ Ukaž obsah adresáře, ve kterém se nacházím::
 .. note::
 
    Adresáře by měly být zpravidla barevně odlišeny a soubory mít nějakou
-   koncovku.
+   koncovku (ne vždy tomu tak musí být).
 
 Pro zobrazení obsahu obsah jiného adresáře musím uvést cestu do daného
 adresáře::
@@ -302,8 +304,8 @@ Existují dva typy odkazů:
 
    * tento symbolický odkaz (prakticky soubor) v sobě uchovává jenom cestu do
      zdrojového souboru nebo adresáře
-   * napr. při použítí příkazu ``ls`` na odkaz ke zdrojovému adresáři bude
-     výstup úplně stejný, jako bych tento příkaz spustil v samotném zdrojovém
+   * při použítí příkazu ``ls`` na odkaz ke zdrojovému adresáři bude výstup
+     úplně stejný, jako bych tento příkaz spustil v samotném zdrojovém
      adresáři
    * pokud se zdrojový soubor nebo adresář smaže, tak odkaz bude vést na
      neexistující místo
@@ -317,11 +319,11 @@ Ukaž v podrobnější obsahu adresáře lidsky srozumitelné velikosti objektů
    $ ls -lh
    -rw-r--r-- 1 davie davie 13K dub 27 21:39 bash.rst
 
-Legenda::
+Legenda:
 
-* K == KB
-* M == MB
-* G == GB
+* K (KB)
+* M (MB)
+* G (GB)
 
 .. note::
 
@@ -359,11 +361,13 @@ Bez argumentů se změní pracovní prostředí zpátky na domovský adresář::
    $ pwd
    /home/davie
 
-Do domovské adresáře se lze taky dostat pomocí vlnovky::
+.. note::
 
-   $ cd ~
-   $ pwd
-   /home/davie
+   Do domovské adresáře se lze taky dostat pomocí vlnovky::
+
+      $ cd ~
+      $ pwd
+      /home/davie
 
 .. tip::
 
@@ -385,7 +389,8 @@ Odbočka k absolutním a relativním cestám
 
 * relativní cesta
 
-  * cesta se vypisuje od aktuální adresáře do cílové destinace
+  * cesta se vypisuje od aktuální adresáře do cílové destinace bez ``/`` na
+    začátku
   * cesta do podřazeného adresáře začíná vždy názvem adresáře, který se
     nachází v aktuálním pracovním prostředí::
 
@@ -406,7 +411,7 @@ Odbočka k absolutním a relativním cestám
       Desktop/ Documents/ Downloads/
 
    Taktéž se může stát, že po prvním stisknutí ``TAB`` se automaticky doplní
-   cesta.
+   cesta, neboť žádná jiná alternativa neexistuje.
 
 Práce s adresáři a soubory
 --------------------------
@@ -476,8 +481,8 @@ Odbočka k souborům
 Soubory jsou citlivé na malá a velká písmena, tudíž soubor ``file.txt`` není
 to samé jako ``File.txt``, neboť se jedná o dva zcela odlišené soubory.
 
-Koncovky jako ``.pdf`` aj. nejsou nezbytně nutné k pojmenování souborů. systém
-si sám zjistí podle obsahu souboru, o jaký typ souboru se jedná. Nicméně
+Koncovky jako ``.pdf`` aj. nejsou nezbytně nutné k pojmenování souborů. Systém
+si sám zjistí podle obsahu souboru, o jaký typ souboru se jedná, nicméně
 standardem je používat koncovky pro odlišení od adresářů.
 
 V neposlední řádě je třeba vědět, že všechno v Unixu / Linuxu je soubor. I
@@ -589,11 +594,12 @@ této filtrace se používají zástupné znaky:
        removed 'file.bb'
 
   * pro zastoupení abecedy se používá zkratka ``[a-z]``, respektive ``[A-Z]``
-    a pro čísla ``[0-9]``
+    a pro čísla ``[0-9]`` (lze je všechny kombinovat uvnitř jedných hranatých
+    závorek, např. ``[a-zA-Z0-9]``)
 
 .. note::
 
-   Tuto filtraci pomocí zástupných znaků lze použít i u jinách příkazů, jako
+   Tato filtrace pomocí zástupných znaků lze použít i u jiných příkazů, jako
    je třeba ``ls``, ``mv`` či ``cp``.
 
 mv
@@ -601,17 +607,17 @@ mv
 
 Přejmenuj soubor nebo adresář::
 
-   $ mv bad.txt good.txt
+   $ mv old.txt new.txt
    $ ls
-   good.txt
+   new.txt
 
 Přesuň soubor nebo adresář na jiné místo::
 
-   $ mv ~/good.txt .
+   $ mv ~/new.txt .
 
 Přesuň soubor nebo adresář na jiné místo a zároveň ho přejmenuj::
 
-   $ mv dir/bad.txt good.txt
+   $ mv dir/old.txt new.txt
 
 .. note::
 
@@ -655,10 +661,6 @@ soubory a adresáře se skutečně zkopírovaly::
    $ cp -ruv dir1/* dir2/
    'dir1/b.txt' -> 'dir2/b.txt'
    'dir1/dir3' -> 'dir2/dir3'
-
-.. note::
-
-   ``*`` je zástupný znak pro označení všech souborů a adresářů.
 
 ln
 ^^
@@ -729,7 +731,7 @@ more
 ^^^^
 
 Taktéž vypiš obsah souboru, nicméně ho vystránkuj, pokud je obsah větší než
-velikost obrazovky::
+výška terminálu::
 
    $ more bash.rst
 
@@ -783,7 +785,8 @@ Základní ovládání čtecího režimu:
 .. note::
 
    K ovládání lze použít i některé příkazy z textového editoru Vi(m), případně
-   rovnou použít textový editor pro čtení souborů místo příkazu ``less``.
+   rovnou použít nějaký textový editor pro čtení souborů místo příkazu
+   ``less``.
 
 head
 ^^^^
@@ -860,7 +863,7 @@ Přesměruj standardní výstup někam do souboru::
    Pokud už soubor ``file.txt`` existuje, tak přesměrovaný výstup přepíše obsah
    tohoto souboru.
 
-   Pozor však na případ, kdy je přesměrován prázdný (žádný) vstup. V tomto
+   Pozor však na případ, kdy je přesměrován prázdný (žádný) výstup. V tomto
    případě se smaže celý obsah souboru, ale samotný soubor bude dále
    existovat::
 
@@ -944,7 +947,7 @@ Přesměruj na standardní vstup obsah nějakého souboru::
 .. note::
 
    Pro více vyzvání (inputů) je třeba mít taktéž připraveno více hodnot
-   v souboru (každá zvlášť na řádek).
+   v souboru (každá hodnota zvlášť na řádek).
 
 <<
 ^^
@@ -1196,7 +1199,7 @@ Komprese a archivace
 gzip
 ^^^^
 
-Zkompresuj rychle a snadno velikost nějakého souboru::
+Zkompresuj rychle a snadno nějaký soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
@@ -1212,7 +1215,7 @@ Zkompresuj rychle a snadno velikost nějakého souboru::
 gunzip
 ^^^^^^
 
-Dekompresuj zkompresovaný ``*.gz`` soubor::
+Dekompresuj zkompresovaný ``.gz`` soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie 9,9K kvě  6 19:46 bash.rst.gz
@@ -1223,7 +1226,7 @@ Dekompresuj zkompresovaný ``*.gz`` soubor::
 bzip2
 ^^^^^
 
-Zkompresuj pomaleji, ale lépe velikost nějakého souboru::
+Zkompresuj pomaleji, ale lépe nějaký soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
@@ -1239,7 +1242,7 @@ Zkompresuj pomaleji, ale lépe velikost nějakého souboru::
 bunzip2
 ^^^^^^^
 
-Dekompresuj zkompresovaný ``*.bz2`` soubor::
+Dekompresuj zkompresovaný ``.bz2`` soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie 9,4K kvě  6 19:46 bash.rst.bz2
@@ -1273,7 +1276,7 @@ z      gzip komprese / dekomprese
 
 .. note::
 
-   Zkompresované archivý používají následující koncovky:
+   Zkompresované archívy používají následující koncovky:
 
    * ``.tar.gz`` nebo ``.tgz``
    * ``.tar.bz2`` nebo ``.tbz``
@@ -1286,7 +1289,7 @@ Možnosti použití:
   * ``tar -czf dir.tgz dir``
   * ``tar -cjf dir.tbz dir``
 
-* zobrazení obsahu archívů:
+* zobrazení obsahu archívů (soubory a adresáře):
 
   * ``tar -tf dir.tar``
   * ``tar -tf dir.tgz``
@@ -1314,7 +1317,7 @@ Zmeň práva k souboru či adresáři::
 
 .. note::
 
-   ``777`` znamená, že majitel, skupina a ostatní uživatele (přesne v tomto
+   ``777`` znamená, že vlastník, skupina a ostatní uživatelé (přesně v tomto
    pořadí) mají veškeré prává k souboru, tj. součet vah pro čtení (r), zápis
    (w) a průchod (x).
 
@@ -1323,7 +1326,7 @@ Odbočka k právům
 
 Práva k souborům obecně jsou rozdělena postupně do tří skupin:
 
-1. oprávnění uživatele (vlastníka souboru)
+1. oprávnění uživatele (vlastník souboru)
 2. oprávnění skupiny (skupina vlastnící soubor)
 3. oprávnění ostatních uživatelů, kteří nejsou ve vlastnické skupině
 
@@ -1346,7 +1349,6 @@ Každá tato skupinu může mít přidělena následující práva:
 
        $ cat hello.py
        #!/usr/bin/env python3
-
        print("Hello world!")
        $ python3 hello.py
        Hello world!
@@ -1375,7 +1377,7 @@ Ukázky:
 
 * ``$ chmod u=rwx,o= file.txt``
 
-  * uživatel (vlastník) bude mít maximální prává, ostatní žádné
+  * uživatel (vlastník) bude mít maximální práva, ostatní žádné
 
 chmod -R
 """"""""
@@ -1416,9 +1418,9 @@ vykonat danou činnost a pak se vrátit zpátky::
    # exit
    $
 
-Nebo použít dočasně prefix ``sudo`` před příkazem a dočasně si půjčit
-vyšší práva. Právo použít ``sudo`` mají jen ti uživatelé, kteřým bylo toto
-právo přiděleno rootem. U PC může ``sudo`` používat první vytvořený uživatel.
+Nebo použít prefix ``sudo`` před příkazem a dočasně si půjčit vyšší práva.
+Právo použít ``sudo`` mají jen ti uživatelé, kteřým bylo toto právo přiděleno
+rootem. U běžného PC může ``sudo`` používat první vytvořený uživatel.
 
 .. note::
 
@@ -1461,7 +1463,7 @@ Sloupec  Význam
 =======  ======
 PID      ID procesu
 TTY      číslo terminálu (terminálů může být spuštěno více najednou)
-TIME     kolik času spotřeboval procesor pro vykonávání procesu
+TIME     kolik času potřeboval procesor pro vykonávání procesu
 CMD      příkaz, který spustil daný proces
 =======  ======
 
@@ -1469,7 +1471,7 @@ ps -u
 """""
 
 Zobraz seznam všech procesů, které uživatel sám spustil, s podrobnějšími
-informace::
+informaci::
 
    $ ps -u
    USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
@@ -1509,7 +1511,7 @@ Zobraz procesy (joby) v rámci terminálu, které běží v popředí nebo pozad
    >>>
    ^Z
    $ jobs
-   [1]+  5914 Stopped                 python3 -q
+   [1]+  Stopped                 python3
 
 .. note::
 
@@ -1534,8 +1536,8 @@ Přesuň do popředí job na pozadí, případně obnov pozastavený job::
 Pro ukončení Python konzole, což je další shell, je třeba stisknout klávesovou
 zkratku ``CTRL + d``.
 
-fg -n
-"""""
+fg n
+""""
 
 Přesuň do popředí Ntý job::
 
@@ -1575,16 +1577,16 @@ ukončení procesu.
 
    Příkaz ``ping`` slouží pro ověřování, že počítač může komunikovat s jiným
    počítačem. Počítač umí komunikovat i sám se sebou, pokud na místě IP adresy
-   či domény je použito slovo ``localhost`` nebo ``127.0.0.1``.
+   či domény je použito slovo ``localhost`` nebo IP ``127.0.0.1``.
 
 .. tip::
 
-   Proces v pozadí lze také spustit pomocí ``&``::
+   Proces v pozadí lze také spustit pomocí ``&`` na koncí řádku::
 
       $ ping localhost &
 
-bg -n
-"""""
+bg n
+""""
 
 Přesuň na pozadí Ntý job::
 
@@ -1618,19 +1620,15 @@ Ukonči násilně daný proces::
 Správa balíčku
 --------------
 
-Balíčky jsou speciální soubory (archívy) s koncovkou ``.deb``, pomocí kterých
+Balíčky jsou speciální soubory (archívy) s koncovkou ``.deb`` (platí
+pro Linuxové distribuce odvozené z Debianu), pomocí kterých
 lze nainstalovat nový software.
-
-.. note::
-
-   Následující příkazy platí jen pro Linuxové distribuce postavané nad
-   Debianem, což je i Ubuntu.
 
 apt
 ^^^
 
 Příkaz do práci s balíčky v oficiálním repozitáři či uživatelsky spravovaným
-repozitářích.
+repozitářích někde na internetu.
 
 apt update
 """"""""""
@@ -1643,7 +1641,7 @@ upgradu::
 apt search
 """"""""""
 
-Vyhledej v repozitáři balíček(y), který odpovídá danému názvu::
+Vyhledej v repozitáři balíček(y), které odpovídájí danému názvu::
 
    $ apt search vim
 
@@ -1683,8 +1681,8 @@ Upgraduj nějaký balíček(y) na novou verzi::
 
    Pomocí středníku lze na jednom řádku spustit více příkazů za sebou, aniž by
    záleželo, jak dopadl předchozí příkaz. Pokud se příkazy spojují pomocí
-   ``&&``, tak se další příkaz spustí jen tehdy, pokud předchozí proběhl v
-   pořádku.
+   ``&&``, tak se další příkaz spustí jen tehdy, pokud příkaz předchozí proběhl
+   v pořádku.
 
    ``#`` pak značí komentář, který Bash bude ignorovat. Pokud bude komentář či
    jakýkoliv jiný příkaz začínat s jednou mezerou na začátku jako prefix, tak
@@ -1711,7 +1709,7 @@ Odinstaluj balíčky, které jsou nepotřebné::
 .. note::
 
    Jako nepotřebné balíčky se považují ty, které žádný z jiných balíčků
-   nepotřebuje pro svůj běh (závislosti).
+   nepotřebuje pro svůj běh.
 
 dpkg
 ^^^^
@@ -1721,13 +1719,14 @@ Příkaz pro práci s balíčky, které jsou lokálně na disku.
 dpkg -i
 """""""
 
-Nainstaluj lokální balíček::
+Nainstaluj lokální balíček(y)::
 
    $ sudo dpkg -i vivaldi-stable_1.8.770.56-1_amd64.deb
 
 .. note::
 
-   Jakmile je balíček nainstalovaný, lze ho odstranit pomocí ``apt`` příkazu.
+   Jakmile je balíček nainstalovaný, lze ho odstranit pomocí ``apt`` příkazu,
+   je-li to třeba.
 
 add-apt-repository
 ^^^^^^^^^^^^^^^^^^
@@ -1768,7 +1767,7 @@ Nešifrovaný protokol pro přenos souborů::
 .. note::
 
    Pro autentizaci uživatele se zpravidla používá jméno ``anonymous`` a
-   libovolné heslo.
+   libovolné heslo, jestli je vyžadováno.
 
 Na vzdáleném počítači se pro navigaci používájí klasické příkazy ``pwd``,
 ``cd`` či ``ls``. Pro ukončení spojení pak ``exit``.
@@ -1805,14 +1804,14 @@ Zkopíruj více souboru najednou ke mě::
 put
 """
 
-Zkopíruj soubor na vzdálený počítač::
+Zkopíruj soubor ode mě na vzdálený počítač::
 
    ftp> put file.txt
 
 mput
 """"
 
-Zkopíruj více souborů na vzdálený počítač::
+Zkopíruj více souborů ode mě na vzdálený počítač::
 
    ftp> mput a.txt b.txt c.txt
 
@@ -1853,7 +1852,7 @@ Příkazem ``exit`` se pak odpojím.
       $ ssh-keygen -t rsa -C "můj_email" -b 4096
 
    Ve složce ``~/.ssh`` pak vzniknou dva nové klíče, soukromný ``id_rsa`` a
-   veřejný ``id_rsa.pub``. Obsah veřejného klíče se pak předá admiistrátorovi
+   veřejný ``id_rsa.pub``. Obsah veřejného klíče se pak předá admistrátorovi
    ssh serveru nebo automaticky nahraje na ssh server příkazem::
 
       $ ssh-copy-id x.x.x.x
@@ -1876,8 +1875,8 @@ scp
 sftp
 ^^^^
 
-Šifrované verze ftp protokolu, přičemž princip ovládání je obdobný (místo ftp
-bdue sftp).
+Šifrované verze ftp protokolu, přičemž princip ovládání je obdobný (místo
+``ftp`` bude ``sftp``).
 
 Ostatní příkazy
 ---------------
@@ -1897,7 +1896,7 @@ Zobraz jen čas::
 
 Zobraz jen datum ve formátu ``DD-MM-YYYY``::
 
-   $ date +"%D"
+   $ date +"%d-%m-%y"
    07-05-17
 
 cal
@@ -2051,10 +2050,9 @@ příkazový řádek, viz::
    davie@badger:~$ <příkaz>
 
 Pokud se mi tento prompt (PS1) nelíbí, tak si mohu nastavit jiné zobrazení,
-např. abych viděl i datum a příkazy psal na novém řádku. Na změnu promptu
-je napsán tutoriál na stránce:
+např. abych viděl i datum. Na změnu promptu je napsán tutoriál na stránce:
 
-www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
+https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 
 Klávesové zkratky
 =================
@@ -2211,9 +2209,6 @@ Kontrola procesů
        ^Z
        [1]+  Stopped                 python3 -q
 
-  * seznam pozastavených procesů lze zobrazit příkazem ``jobs`` a vrátit je do
-    běhu pomocí příkazu ``fg``
-
 * ``CTRL + d``
 
   * ukončí shell, pokud je nějaký další otevřen (např. Python interpret) nebo
@@ -2225,7 +2220,7 @@ Ostatní
 * ``TAB``
 
   * dvě stisknutí tabulátoru zobrazí buď možnosti relativných cest, pokud je
-    za příkazem ještě mezera nebo mezery další možné příkazy::
+    za příkazem ještě mezera nebo bez mezery další možné příkazy::
 
        $ cd
             TAB TAB
