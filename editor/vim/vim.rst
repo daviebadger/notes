@@ -26,11 +26,11 @@ Příkazem::
 
       $ vi
 
-Základní ovládání editoru
-=========================
+Základní ovládání
+=================
 
-Otevření a zavření
-------------------
+Otevření a zavření editoru
+--------------------------
 
 Vim se spustí také stejnojmenným příkazem::
 
@@ -1280,7 +1280,7 @@ Lze ho stáhnout příkazem::
    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-DÁle není třeba nic instalovat. Stačí jen ve Vimu vyjmenovat moduly (externí),
+Dále není třeba nic instalovat. Stačí jen ve Vimu vyjmenovat moduly (externí),
 které chci použivat::
 
    call plug#begin('~/.vim/plugged')
@@ -1307,328 +1307,18 @@ odintaluji pomocí::
 
    :PlugClean!
 
-Colorschemes
-^^^^^^^^^^^^
-
-https://github.com/flazz/vim-colorschemes
-
-Kompletní balík s několika barevnými schématy pro vzhled Vimu včetně
-zvýrazňování syntaxe::
-
-   Plug 'flazz/vim-colorschemes'
-
-   colorscheme název_schématu " např. colorscheme badwolf
-
-Seznam všech schémat lze najít ve složce "colors", viz odkaz nahoře na
-GitHub repozitář. Ve Vimu si je lze všechy po jednom dočasně prohlížet
-pomocí příkazu::
-
-   :colorscheme název_schématu
-
-Polyglot
-^^^^^^^^
-
-https://github.com/sheerun/vim-polyglot
-
-Kompletní balík s podporou pro několik programovacích jazyků a speciálních
-typů souborů, který vylepší zvýraznění (zbarvení) syntaxe (pro komentáře,
-funkce aj. budou použity barvy z námi vybraného barevného schématu)::
-
-   Plug 'vim-polyglot'
-
-Airline
-^^^^^^^
-
-https://github.com/vim-airline/vim-airline
-
-Barevná a přehledná statusová lišta, která je přilepena na konci editoru.
-Ukazuje informace o aktuálním módu, čísla řádku / sloupečku aj.
-
-Instalace a nastavení::
-
-   Plug 'vim-airline/vim-airline'
-
-   set laststatus=2                           " vždy zobraz Airline lištu
-   let g:airline_powerline_fonts=1            " včetně ikonek
-   let g:airline#extensions#tabline#enabled=1 " nastyluj i záložky nahoře
-
-Aby Airline správně fungoval (správné zobrazení šipek a ikonek), tak je třeba
-použít takový font, který obsahuje speciální znaky. Pro Ubuntu existuje
-stejnojmenný rozšiřující font. Stačí je stáhnout následujícími příkazy::
-
-   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf
-   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold.ttf
-   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Italic.ttf
-   wget -P ~/.local/share/fonts/ https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline%20Bold%20Italic.ttf
-
-Posléze je načíst pomocí::
-
-   fc-cache -vf ~/.local/share/fonts/
-
-a v neposlední řádě změnit font pro terminál v grafickém rozhraní na::
-
-   Ubuntu Mono derivative Powerline Regular
-
-Pro Airline taky existují barevná schémeta, mě nicméně vyhovuje výchozí
-vzhled.
-
-NERDTree
-^^^^^^^^
-
-https://github.com/scrooloose/nerdtree
-
-Zobrazovač stromu se souborami a adresářemi (složkami) uvnitř Vimu, díky
-kterému lze klasicky procházet adresářovou strukturou a otevírat soubory.
-
-Instalace::
-
-   Plug 'scrooloose/nerdtree'
-
-Defaultně není strom po spuštění Vimu vidět, tak si ho musím otevřít
-příkazem::
-
-   :NERDTree
-
-   # nebo stačí jen ":N", stisknout tabulátor pro automatické dokončení a
-   # ENTER.
-
-Strom se různými písmenky a klávesovými zkratkami. Jejich přehled lze najít
-v nápovědě. Je nutné být kurzorem v okně stromu a stisknout "?". Po zavření
-nápovedy se taktéž stiskne otázník.
-
-Popis stromu
-""""""""""""
-
-Ukázkový strom::
-
-   " Press ? for help
-
-   .. (up a dir)
-   /home/jméno_uživatele/
-   > název_složky/
-     název_souboru
-
-Význam posledních dvou řádku je více než zřejmý, nicméně pro jistotu
-vysvětlím i dva nadřazenější:
-
-* .. (up a dir)
-
-  * pro vstupování do nadřazeného adresáře
-
-* /home/jméno_uživatele/
-
-  * cesta (místo na disku), kde se nacházejí adresáře a složky, které vidím
-    ve stromu pod tímto řádkem
-
-Navigace ve stromu
-""""""""""""""""""
-
-Abych nemusel zdlouhavě jezdit / skákat klasickými kurzorovými pohyby, tak
-mohu použít i speciální pro navigaci ve stromu.
-
-* P
-
-  * skočí kurzorem pod řádek ".. (up a dir)", kde vidím cestu na místo, kde
-    se nacházejí adresáře a soubory, které právě vidím
-
-* p
-
-  * pokud mám rozbalené vnořené adresáře, tak kurzor skočí na řádek s
-    nadřazeným adresářem
-
-* J
-
-  * skočí na poslední řádek obsahu daného adresáře
-
-* K
-
-  * skočí na první řádek obsahu daného adresáře
-
-* CTRL + J
-
-  * skočí na vedlejší adresář dolu, pokud je kurzor u nějakého adresáře
-
-* CTRL + K
-
-  * to samé, akorát na vedlejší adresář nahoru
-
-Práce s adresářemí
-""""""""""""""""""
-
-**Rozbalování a zabalování adresářů:**
-
-* o
-
-  * rozbalí / zabalí obsah daného adresáře
-
-* x
-
-  * zabalí adresář, ve kterém se nachází kurzor (ten může být klidně u
-    souboru) a ten se posune na nadřazený adresář
-
-**Vstupování do adresářů a vystupování z nich:**
-
-Je nutné rozlišit, zda vstupuji / vystupuji jen vizuálně nebo i reálně. U
-vizuální varianta uvidím jiný obsah adresáře, kdežto u reálně se virtuálně
-nastaví cesta na daný adresář (vhodné pro exekuci externích příkazů odsud).
-
-* C
-
-  * vstoupí dovnitř daného adresáře a zobrazí jeho obsah
-  * pozor, může nastat i menší prodleva, neboť NERDTree musí rozhodnout, zda
-    jsem zmáčknul jen "C" nebo "CD" (viz níže)
-
-* u
-
-  * vstoupí do nadřazeného adresáře
-
-* U
-
-  * taktéž vstoupí do nadřazeného adresáře, ale nechá rozbalený adresář, ve
-    kterém jsem byl předtím
-
-* cd
-
-  * nastaví reálnou cestu na daný adresář
-
-* CD
-
-  * vrátí se zpátky do adresáře, na kterou mám nastavenou cestu přes "cd" a
-    zobrazí jeho obsah
-
-**Aktualizace obsahu adresáře:**
-
-Pokud vznikne v daném adresáři nová adresář / soubor, tak ho ve stromu
-neuvidím, dokud se neaktualizuje.
-
-* r
-
-  * aktualizuje obsah daného adresáře
-
-* R
-
-  * aktualizuje obsah ve všech adresářích, které právě vidím ve stromu
-
-**Tvoření / přejmenování / přesouvání / kopírování / mazání adresářů:**
-
-Tyto akce se provádí až v menu, které je třeba otevřít v okně stromu pomocí
-písmenka::
-
-   m
-
-Dole v příkazovém řádku pak uvidím, jaké akce mám na výběr a pomocí jakých
-písmenek je vyvolám. Pro zavření menu bez žádné akce se stiskne ESC.
-
-* m + a + název_podadresáře/ + ENTER
-
-  * přidá jeden nebo více vnořených podadresářů najednou
-    (nezapomenout na lomítko na konci, jinak se vytvoří soubor)
-
-* m + m + nový_název_adresáře + ENTER
-
-  * přejmenuje daný adresář (netřeba lomítko na konci)
-
-* m + m + upravená_cesta_do_adresáře + ENTER
-
-  * přesune daný adresář na jiné místo
-
-* m + c + cesta_pro_vložení_zkopírovaného_adresáře + ENTER
-
-  * zkopíruje daný adresář a jeho kopii vloží na vybrané místo
-
-* m + d + potvrzení_či_odmínutí
-
-  * smaže daný adresář, pokud ho potvrdím ještě stiskem "y"
-
-Práce se soubory
-""""""""""""""""
-
-**Otevírání souborů:**
-
-* o
-
-  * otevře daný sobor na další okno (při opětovném stisku se nic nebude dít)
-
-* s
-
-  * otevře soubor do dalšího okna vedle sebe (lze opakovat)
-
-* i
-
-  * otevře soubor do dalšího okna pod sebe (lze opakovat)
-
-* t
-
-  * otevře soubor na další záložku a hned se na ní přepne
-
-* T
-
-  * otevře soubor tiše na další záložku (nepřepne se na ní)
-
-Poslední čtyři písmenka lze uplatnit i na adresáře, pokud by to bylo někdy k
-zapotřebí.
-
-**Tvoření / přejmenování / přesouvání / kopírování / mazání souborů:**
-
-Platí úplně stejný princip jako u adresářů, tj. v okně stromu stisknout "m"
-pro zobrazení menu a v něm si vybrat, jakou akci chci provést.
-
-* m + a + název_souboru + ENTER
-
-  * vytvoří soubor v daném adresáři (u jeho názvu nemusí být kurzor)
-
-* m + m + nový_název_souboru + ENTER
-
-  * přejmenuje daný soubor
-
-* m + m + upravená_cesta_do_adresáře + ENTER
-
-  * přesune soubor na jiné místo
-
-* m + c + cesta_pro_zkopírovaný_soubor + ENTER
-
-  * vytvoří kopii daného souboru a vloží na požadovaném místě
-
-* m + d + potvrzení_či_odmínutí
-
-  * smaže daný soubor, pokud to potvrdím ještě stiskem písmenka "y"
-
-Konfigurace NERDTree
-""""""""""""""""""""
-
-Pokud někdo chce, aby pokaždé při startu viděl NERDTree strom, tak nechť
-napíše do konfiguračního souboru následující řádek::
-
-   autocmd vimenter * NERDTree
-
-Já nicméně preferuji následující dvě varianty:
-
-1. ukaž strom, když není uveden soubor
-
-   * když v terminálu při otevření Vimu neuvedu žádný soubor::
-
-        $ vim
-
-   * nastavení::
-
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-2. ukaž strom, pokud otevírám adresář
-
-   * když v terminálu místo názvu souboru odkažu na název adresáře::
-
-        $ vim název_adresáře/
-
-   * nastavení::
-
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
-
 TODO
 ====
 
 * :o
 * :e
 * CTRL + d
-* TAB 
+* TAB
+* X (x před kurzorem)
+* xp (přehoď dva znaky)
+* . (zopakuj)
+* text buffery
+* :args (zobraz soubory, když jich bylo otevřeno více najednou)
+* :n (editace dalšího souboru)
+* :N (editace předchozího souboru)
+* :buffer
