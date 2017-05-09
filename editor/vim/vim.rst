@@ -48,11 +48,6 @@ Pro zavření Vimu je třeba napsat na klávesnici::
 
       :q!
 
-Pomocí příkazu ``vim`` lze otevřít i nějaký konkrétní soubor (ten nemusí
-nutně existovat)::
-
-   $ vim ~/.bashrc
-
 Odbočka k módům
 ^^^^^^^^^^^^^^^
 
@@ -77,10 +72,39 @@ nejzákladnější jsou:
    * editor se ovládá z příkazového řádku, který se objeví po stisknutí
      dvojtečky ``:`` (viz zavření Vimu pomocí ``:q``)
 
-Ukládání změn do souboru
-------------------------
+Otevření souboru
+----------------
 
-Pro uložení změn v souboru je třeba použít příkaz ``:w``::
+Příkazem ``vim`` lze i otevřít nějaký existující nebo neexistující soubor:: 
+
+   $ vim test.txt
+
+Soubor jde také otevřit až uvnitř Vimu pomocí příkazu ``:e`` a uvedení cesty k
+souboru::
+
+   $ :e ~/Documents/test.txt
+
+Pro začátek psaní do souboru je třeba přejít do ``INSERT`` módu pomocí písmenka
+``i`` a začít psát či editovat text. Po skončení editace je vhodné se vrátit
+zpět do ``NORMAL`` módu pomocí ``ESC``.
+
+.. tip::
+
+   Pomocí klávesové zkratky ``CTRL + d`` se ukážou veškeré možné cesty, které
+   jdou použít pro dostání se k souboru::
+
+      :e ~/Do
+           CTRL + d
+      Documents/  Downloads/
+   
+   Klávesa ``TAB`` pak automaticky dokončí cestu, je-li to možné. Pokud se
+   doplnila špatná cesta, tak opětovným stiskem ``TAB`` klávesy se vybere
+   další možná cesta v pořádí. Zpětně se vybírá cesta pomocí ``SHIFT + TAB``.
+
+Uložení změn do souboru
+-----------------------
+
+Pro uložení změn je třeba použít příkaz ``:w`` v ``NORMAL`` módu::
 
    :w
 
@@ -195,8 +219,8 @@ Skok po slovu
   * skoč na začátek aktuálního nebo předchozího slova::
 
        Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-       ---->
-           ------>
+             <----
+       <------
 
 Stejně jako u pohybu po znacích či řadcích, i zde lze posunout kurzor o Ntý
 počet slov, např. ``3w``, ``5e`` aj.
@@ -1244,10 +1268,6 @@ odintaluji pomocí::
 TODO
 ====
 
-* :o
-* :e
-* CTRL + d
-* TAB
 * X (x před kurzorem)
 * xp (přehoď dva znaky)
 * . (zopakuj)
@@ -1264,3 +1284,39 @@ TODO
 * )
 * \*
 * #
+* .
+* 10itext
+* 3.
+* (CTRL + v) + I + "# " (rychlé zakomentování)
+* qa, @a, @@ (makra)
+* v + "w" (automatické odsazení)
+* r / R
+* s / S
+* ma ('a)
+* CTRL + i / CTRL + i
+* visual + u (malé)
+* visual + U (velké)
+* mksession
+
+::
+
+   " To save, ctrl-s.
+   nmap <c-s> :w<CR>
+
+::
+
+   set incsearch
+   imap <c-s> <Esc>:w<CR>a
+
+::
+
+   :set paste
+   :set nopaste
+
+::
+
+   :set textwidth=80
+
+* šablony (skeletony souborů) a snippety
+* tagy
+* vimgrep hledání napříč soubory
