@@ -349,15 +349,15 @@ Skok na vertikální hranu okna
    Pokud chci aktuální řádek posunout na hranu okna, tak mohu použít tyto 
    klávesy:
 
-   * zt
+   * ``zt``
 
      * posuň aktuální řádek na horní hranu okna
 
-   * zz
+   * ``zz``
 
      * posuň aktuální řádek doprostřed okna
 
-   * zb
+   * ``zb``
 
      * posuň aktuální řádek na spodní hranu okna
 
@@ -390,17 +390,17 @@ Skok na konkrétní znak na řádku
 
 * ``f`` + znak
 
-  * skočí dopředu na první výskyt daného znaku::
+  * skoč dopředu na první výskyt daného znaku::
 
-    Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-    -------->
-       fu
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       -------->
+          fu
 
   * na druhý a další vyskýt se skočí pomocí ``;``, zpátky přes ``,``
 
 * ``F`` + znak
 
-  * skočí dozadu na první výskyt daného znaku
+  * skoč dozadu na první výskyt daného znaku
   * taktéž lze použít ``;`` a ``,``, akorát chování je obráceně
 
 Skok na další výskyt slova v souboru
@@ -408,11 +408,13 @@ Skok na další výskyt slova v souboru
 
 * ``*``
 
-  * skoč na další výskyt slova v souboru
+  * skoč na další výskyt slova v souboru, pokud se kurzor právě nachází
+    v daném slově
 
 * ``#``
 
-  * skoč na předchozí výskyt slova v souboru
+  * skoč na předchozí výskyt slova v souboru, pokud se kurzor právě nachází
+    v daném slově
 
 Skok na kraj závorky
 ^^^^^^^^^^^^^^^^^^^^
@@ -437,15 +439,15 @@ Skok na další větu
 
   * skoč na začátek další věty::
 
-    Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
-          ------------------------------------------------->
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
+             ------------------------------------------------->
 
 * ``(``
 
   * skoč na začátek předchozí věty::
 
-    Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
-    <-----------------------------------------------------------
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
+       <-----------------------------------------------------------
 
 Skok na další odstavec
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -528,83 +530,58 @@ Je-li třeba zároveň i odřádkovat:
 Editace textu
 =============
 
-Občas se může stát, že provedete nějakou akci, které lituje a chtěli byste se
-vrátít v čase zpátky nebo naopak vrátit z minulosti dopředu:
-
-* u
-
-  * odstraní poslední akci (může se jednat o příkaz či vložený text)
-  * lze několikrát stisknout za sebou (přesne o tolik stisknutí se vrátí
-    do minulosti)
-
-* CTRL + r
-
-  * vrátí se o jednu akci z minulosti dopředu (taktéž lze opakovat)
-
-Co se týče jednotlivých editačních akcí (mazání, kopírování aj.) uvedených
-níže v textu, tak ve většině případů lze skloubit speciální znaky pro danou
-akci spolu s čísly a pohybovými znaky.
-
-Syntaxe tedy bude vypadat následovně:
-
-1. speciální_znak
-2. číslo + speciální_znak
-3. speciální_znak + pohybový_znak
-4. speciální_znak + číslo + pohybový_znak
-
-.. tip::
-
-   Kdyby se náhodou stálo, že potřebuji několikrát zopakovat předchozí
-   událost, tak stačí tolikrát stisknout ".". Např. místo trojíte stisku
-   "u" mohu taktéž třikrát stisknout tečku.
-
 Mazání textu
 ------------
 
-Lze samozřejmě použít klasické klávesy pro mazání (backspace a delete), ale
-je to zdlouhavý proces, pokud potřebuji mazat např. více znaků / slov / řádku
-najednou.
+Mazání po znaku
+^^^^^^^^^^^^^^^
 
-Při použítí následujícíh způsobu mazání je třeba být klasicky v Normal módu.
+* ``x``
 
-Mazání po znacích
-^^^^^^^^^^^^^^^^^
+  * smaž znak pod kurzorem::
 
-* x
+* ``X``
 
-  * smaže znak, který se nachází v místě kurzoru
-  * když uvedu i číslo, tak smažu X znaků doprava::
+  * smaž znak před kurzorem
 
-       5x
+.. note::
 
-* X
+   Je-li třeba tuto akci zopakovat, stačí před stisknutím ``x`` / ``X``
+   stisknout číslo, kolik se má smazání znaku provést, např. ``3x``.
 
-Pro mazání více znaků doleva mimo klasické způsoby lze následovně::
+Odbočka k zahození a obnovení změn v souboru
+""""""""""""""""""""""""""""""""""""""""""""
 
-   3dj
+* ``u``
 
-Toto smaže od aktuálního kurzoru 3 znaky nalevo. Pro smazání všech znaků až
-na začátek / konec řádku to bude::
+  * zahoď poslední změnu v souboru, např. smázání znaku
 
-   d0
-   d$
+* ``CTRL + r``
 
-.. tip::
+  * vrať poslední změnu v souboru (po stisknutí ``u``)
 
-   Bylo by dobré vědět do budoucna, že písmenko "d" nejenom, že maže určitý
-   úsek textu, ale taky tuto smaznou část si ještě zapamatuje. Toto se bude
-   hodit do situaci, kdy je třeba vystřihnout text a přemístit ho jinam.
+.. note::
 
-Mazání po slovech
-^^^^^^^^^^^^^^^^^
+   ``u`` a ``CTRL + r`` lze několikrát opakovat.
 
-Kombinace písmenka "d" spolu s písmenky "w" / "e" / "b" a případně i čísly
-uprostřed mezi nimi.
+Mazání po slovu
+^^^^^^^^^^^^^^^
 
-Co se týče mazání slova, tak lze použít zkratku namísto skoku na nějaký kraj
-a až pak smazat znaky na druhý kraj. Jde o::
+* ``dw``
 
-   daw
+  * smaž znaky až do začátku dalšího slova
+
+* ``de``
+
+  * smaž znaky až do konce slova
+
+* ``db``
+
+  * smaž znaky až do začátku slova
+
+* ``daw``
+
+  * smaž celé slovo, pokud se v něm nachází kurzor
 
 .. tip::
 
@@ -616,8 +593,23 @@ a až pak smazat znaky na druhý kraj. Jde o::
 
    Tyto zkratky se budou hodit i v kapitolce `Přepisování textu`_-
 
-Mazání po řádcích
-^^^^^^^^^^^^^^^^^
+Mazání na kraj řádku
+^^^^^^^^^^^^^^^^^^^^
+
+* ``d0``
+
+  * smaž text až na začátek řádku
+
+* ``d$``
+
+  * smaž text až po konec řádku
+
+* ``d^``
+
+  * smaž text až do začátku odsazení řádku
+
+Mazání po řádku
+^^^^^^^^^^^^^^^
 
 a) aktuální řádek
 
