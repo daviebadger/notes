@@ -160,11 +160,13 @@ Základní pohyb po znacích a řádcích
 o jeden znak do strany. Šipkami nahoru a dolu, respektive písmenky ``k`` a
 ``h`` se posunu kurzor o řádek v daném směru, viz schéma::
 
-         ^
          k
-   < h       l >
-         j
+         ^
+         |
+   h <--- ---> l 
+         |
          v
+         j
 
 Při podržení klávesy se kurzor začne automaticky pohybovat daným směrem až
 do uvolnění klávesy. Taktéž lze pohnout kurzorem najednou o Ntý počet znaků do
@@ -211,16 +213,14 @@ Skok po slovu
   * skoč na konec aktuálního nebo dalšího slova::
 
        Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-       ---->
-           ------>
+       ---->----->
 
 * ``b`` (``B``)
 
   * skoč na začátek aktuálního nebo předchozího slova::
 
        Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-             <----
-       <------
+       <-----<----
 
 Stejně jako u pohybu po znacích či řadcích, i zde lze posunout kurzor o Ntý
 počet slov, např. ``3w``, ``5e`` aj.
@@ -250,10 +250,8 @@ Skok na konkrétní slovo
 
        /i
        Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-       ------>
-             ------------->
-             <-------------
-       <------
+       ------>------------>
+       <-----<-------------
 
 * ``?pattern`` + ``ENTER``
 
@@ -331,20 +329,37 @@ Skok na konkrétní řádek
    Po tomhle pohybu bude vždy kurzor na začátku řádku, ačkoliv mohl být
    předtím někde jinde na řádku.
 
-Skok na kraj okna
-^^^^^^^^^^^^^^^^^
-
-* ``L``
-
-  * skoč na poslední řádek v okně (spodní kraj)
+Skok na vertikální hranu okna
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * ``H``
 
-  * skoč na první řádek v okne (horní kraj)
+  * skoč na první řádek v okne (horní hrana)
+
+* ``M``
+
+  * skoč doprostřed okna
+
+* ``L``
+
+  * skoč na poslední řádek v okně (spodní hrana)
 
 .. tip::
 
-   Doprostřed obrazovky se skočí pomocí ``M``.
+   Pokud chci aktuální řádek posunout na hranu okna, tak mohu použít tyto 
+   klávesy:
+
+   * zt
+
+     * posuň aktuální řádek na horní hranu okna
+
+   * zz
+
+     * posuň aktuální řádek doprostřed okna
+
+   * zb
+
+     * posuň aktuální řádek na spodní hranu okna
 
 Skok po oknu
 ^^^^^^^^^^^^
@@ -370,76 +385,145 @@ Pokud je třeba jen poloviční velikost, tak:
 Ostatní skoky
 -------------
 
-Odbočka k dalším vstupům do Insert módu
----------------------------------------
+Skok na konkrétní znak na řádku
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Teď, když umíme se pohybovat v textu, je dobré vědět o dalších možnostech,
-jak si usnadnit vstup do Insert módu (kromě klasického "i"):
+* ``f`` + znak
 
-* a
+  * skočí dopředu na první výskyt daného znaku::
 
-  * na rozdíl od "i" nezačně Insert mód v místě, kde je kurzor, ale o
-    jeden znak napravo
-  * rozdíl bude patrný z následujícího příkladu::
+    Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+    -------->
+       fu
 
-       # Mějme v editoru pouze text "Vim", ke kterému chci dopsat text
-       # " je super."
+  * na druhý a další vyskýt se skočí pomocí ``;``, zpátky přes ``,``
 
-       Vim
+* ``F`` + znak
 
-       # Navigujeme kurzorem na konec řádku. Pokud bychom do Insert módu
-       # vstoupili pomocí "i" a začali psát dovětek, vypadalo by to takhle:
+  * skočí dozadu na první výskyt daného znaku
+  * taktéž lze použít ``;`` a ``,``, akorát chování je obráceně
 
-       Vi je super.m
+Skok na další výskyt slova v souboru
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-       # Naopak při stisku "a" se kurzor posune o jeden znak doprava za
-       # písmenko "m" (vznikne mezera, která zanikne po stisku ESC,
-       # jestliže nic nenapíšeme), pak lze v pořádku dopsat zbytek:
+* ``*``
 
-       Vim je super.
+  * skoč na další výskyt slova v souboru
 
-* A
+* ``#``
 
-  * kurzor skočí na konec řádku a interně stiskne "a", abychom mohli
-    pokračovat v psaní nové věty či odentrovat na jiný řádek
+  * skoč na předchozí výskyt slova v souboru
 
-* I
+Skok na kraj závorky
+^^^^^^^^^^^^^^^^^^^^
 
-  * relativně opak stisku "A", kdy se kurzor přemístí na úplný začátek
-    souboru
+- ``%``
+
+  * skoč na kraj závorky (platí pro všechny tvary závorek)::
+
+       2 * (a + b)
+           <----->
+              %
+
+.. note::
+
+   Pokud se kurzor nachází někde uvnitř závorek, tak první skok pomocí ``%``
+   bude na otevírající závorku.
+
+Skok na další větu
+^^^^^^^^^^^^^^^^^^
+
+* ``)``
+
+  * skoč na začátek další věty::
+
+    Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
+          ------------------------------------------------->
+
+* ``(``
+
+  * skoč na začátek předchozí věty::
+
+    Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur...
+    <-----------------------------------------------------------
+
+Skok na další odstavec
+^^^^^^^^^^^^^^^^^^^^^^
+
+* ``}``
+
+  * skoč na další odstavec (za blok textu)::
+   
+       | * one
+       | * two
+       | * three
+       v
+         Lorem ipsum dolor sit amet, eos eu aperirir moderatius.
+
+* ``{``
+
+  * skoč na předchozí odstavec (před blok textu)
+
+Skok na předchozí místo před skokem
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``\```` (bez zpětného lomítka)
+
+  * skoč na pozici před skokem 
 
 .. tip::
 
-   Když před zmáčknutím "a" / "A" / "i" / "I" stisknu ještě nějaké číslo,
-   tak to, co napíšu v Insert módu se tolikrát vloží do textu, když se vrátím
-   zpět do Normal módu.
+   Dále do minulých pozic se skočí pomocí ``CTRL + o`` a zpět do budoucnosti 
+   přes ``CTRL + i``.
 
-   Např. chci třikrát vložit písmenko "X"::
+Odbočka k dalším vstupům do Insert módu
+---------------------------------------
 
-      3iX + ESC
+* ``a``
 
-Pokud chci při vstupu rovnou vložit i prázdný řádek, tak mám na výběr, zda
-ho chci vložit:
+  * ``INSERT`` mód začne za kurzorem (opak ``i``)
 
-a) o řádek výše, než je kurzor
+* ``A``
 
-   * stisknu "O" (velké o)
-   * příklad::
+  * ``INSERT`` mód začne na konci řádku za posledním znakem
 
-        # Mám kurzor na prvním řádku souboru, který obsahuje větu:
+* ``I``
 
-        |U|čím se Vim.
+  * ``INSERT`` mód začne od začátku řádku, případne od začátku odsazeného
+    textu
 
-        # Pokud stisknu "O", tak se celá věta posune na druhý řádek a první
-        # řádek bude prázdný, kam se přesune i kurzor a mód bude klasiky
-        # Insert.
+Je-li třeba zároveň i odřádkovat:
 
-        | |
-        Učím se Vim.
+* ``o``
 
-b) o řádek níž
+  * ``INSERT`` mód začne na dalším novém řádku::
 
-   * stisknu "o" (malé o), opak k předchozí variantě
+       | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+       v
+         nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+         gloriatur qui ut.
+
+* ``O``
+
+  * ``INSERT`` mód začne na předchozím novém řádku::
+
+       ^
+       | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+         nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+         gloriatur qui ut.
+
+.. tip::
+
+   Je-li třeba vložit opakovaně stejný text, lze místo kopírování a vkládání
+   použít zkratku přes opakovaný vstup do ``INSERT`` módu. Např. pro vložení
+   ``xxxxxxxxxx`` do textu stačí napsat ``9ix`` a ``ESC``::
+
+      9ix + ESC
+      xxxxxxxxx
+
+   Stejného postupu lze docílit pomocí jednoho vložení písmenka ``x`` a pak
+   v ``NORMAL`` módu napst ``8.``, kdy se ještě 8x vloží písmenko ``x``. Tečka
+   ``.`` zopakuje předchozí akci.
 
 Editace textu
 =============
@@ -492,6 +576,8 @@ Mazání po znacích
   * když uvedu i číslo, tak smažu X znaků doprava::
 
        5x
+
+* X
 
 Pro mazání více znaků doleva mimo klasické způsoby lze následovně::
 
@@ -1268,35 +1354,27 @@ odintaluji pomocí::
 TODO
 ====
 
-* X (x před kurzorem)
-* xp (přehoď dva znaky)
-* . (zopakuj)
 * text buffery
-* :args (zobraz soubory, když jich bylo otevřeno více najednou)
 * :n (editace dalšího souboru)
 * :N (editace předchozího souboru)
 * :buffer
-* |
-* {
-* }
-* %
-* (
-* )
-* \*
-* #
-* .
-* 10itext
-* 3.
-* (CTRL + v) + I + "# " (rychlé zakomentování)
 * qa, @a, @@ (makra)
 * v + "w" (automatické odsazení)
 * r / R
 * s / S
-* ma ('a)
-* CTRL + i / CTRL + i
+* ma ('a) (registry i pro kopírování, mazání, vkládání)
 * visual + u (malé)
 * visual + U (velké)
 * mksession
+* `` (na posledni místo editace), CTRL + o (dál dozadu) CTRL + i (dopředu)
+* C ((CTRL + V) + c)
+* CTRL + W + o (zavři ostatní okna krom aktuálního)
+* gv (znovu označ předchozí oblast)
+* !10Gsort
+* !!date
+* gJ (spoj řádky bez mezery)
+* :wa
+* (CTRL + v) + !sort
 
 ::
 
@@ -1317,6 +1395,28 @@ TODO
 
    :set textwidth=80
 
+::
+
+   :set nowrap
+
+::
+
+   :so ~/.vimrc
+
+::
+
+   :set incsearch
+
 * šablony (skeletony souborů) a snippety
 * tagy
 * vimgrep hledání napříč soubory
+* adresář pro swapy
+* kopírování z Vimu ven
+* ukládání session
+
+  ::
+
+     :set directory=/tmp
+     :set directory=.,/tmp
+
+* no hls after ESC
