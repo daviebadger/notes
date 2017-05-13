@@ -585,13 +585,7 @@ Mazání po slovu
 
 .. tip::
 
-   Kromě mazání slova (aw = a word) lze mazat i věty (as = a sentence) nebo
-   celé odstavce (ap = a paragraph)::
-
-      das
-      dap
-
-   Tyto zkratky se budou hodit i v kapitolce `Přepisování textu`_-
+   Pro smazání věty se použije ``das`` a pro smazání odstavce ``dap``.
 
 Mazání na kraj řádku
 ^^^^^^^^^^^^^^^^^^^^
@@ -611,45 +605,29 @@ Mazání na kraj řádku
 Mazání po řádku
 ^^^^^^^^^^^^^^^
 
-a) aktuální řádek
+* ``dd``
 
-   * dd
+  * smaž aktuální řádek
 
-     * smaže řádek, na kterém se nachází kurzor
+* ``dj``
 
-b) od aktuálního řádku dolu
+  * smaž aktuální řádek a řádek pod ním
 
-   * dj
+* ``dk``
 
-     * smaže aktuální řádek a řádek pod ním
+  * smaž aktuální řádek a řádek nad ním
 
-   * 3dd
+* ``dG``
 
-     * smaže aktuální řádek a dva řádky pod ním
+  * smaž aktuální řádek až po poslední řádek v souboru včetně
 
-   * d + číslo_řádku + G
+* ``dgg`` 
 
-     * pokud je číslo_řádku větší než číslo řádku, na kterém se nacházím,
-       tak maže řádky až po dané číslo_řádku
+  * smaž aktuální řádek až po první řádek v souboru včetně
 
-   * dG
+* ``d`` + číslo + ``G``
 
-     * až na konec souboru
-
-c) od aktuálního řádku nahoru
-
-   * dk
-
-     * smaže aktuální řádek a řádek nad ním
-
-   * d + číslo_řádku + G
-
-     * pokud je číslo_řádku menší, než číslo aktuálního řádku, tak se maže
-       až po daný řádek nahoru
-
-   * dgg
-
-     * až na začátek souboru
+  * smaž aktuální řádek až po daný řádek včetně
 
 .. tip::
 
@@ -667,112 +645,67 @@ c) od aktuálního řádku nahoru
 Mazání vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Zde bude k zapotřebí si představit další mód a to Visual. Ten slouží pro
-označení textu, se kterým chci dál pracovat. Mám na výběr ze dvou znaků:
+Stiskem ``x`` nebo ``d`` při označeném textu ve ``VISUAL`` módu, viz níže.
 
-* v
+Odbočka k Visual módu
+"""""""""""""""""""""
 
-  * chci označovat po znacích
-  * lze opět kombinovat s pohybovými znaky "h", "e", "$" atd.
+Mód pro označení nějaké části textu. Text se označuje následujícími způsoby:
 
-* V
+* ``v``
 
-  * chci označovat po celých řadcích
+  * označování textu po znacích, slovech aj. v kombinaci s navigačními znaky
+  * písmenkem ``o`` mohu skočit na opačnou stranu označeného textu a případně
+    rozšířit nebo zmenšit označený text
 
-Pokud potřebuji upravit začátek výběru textu a naopak konec, tak můžu mezi
-těmito dvěmi místy skákat pomocí "o" (malé o).
+* ``V``
+
+  * označování textu po řádcích
+
+* ``CTRL + v``
+
+  * označování textu po sloupcích
+  * písmenkem ``O`` mohu skočit na opačný kraj sloupově označeného textu
 
 .. note::
 
-   Ve Visual módu má "o" jiný význam, než v Normal módu (jeden ze vstupů
-   do Insert módu).
+   Zpátky na ``NORMAL`` mód se přepne klasicky pomocí ``ESC``.
 
-Dále ještě existuje speciální varianta označení textu a to pomocí CTRL + v,
-kde se jedná o takový sloupcový výběr. Příklad::
+V rámci označeného textu jdou použít i tyto speciální znaky:
 
-   # Mějme následující text, ve kterém chci změnit najednou mezery na
-   # dvojtečky.
+* ``>``
 
-   01 45
-   05 00
-   08 24
+   * posuň (odsaď) text doprava o jeden tabulátor
 
-   # Kurzorem najedu na místo první mezery, stisknu CTRL + v a dvojitým
-   # kliknutím "j" označím i dva řádky pod tím.
+* ``<``
 
-   01| |45
-   05| |00
-   08| |24
+   * posuň text doleva o jeden tabulátor
 
-   # Stisknu "r" pro náhrazení znaku (bude probráno za chvíli) a zmáčknu ":".
-   # Text nyní bude vypadát následovně:
+* ``u``
 
-   01:45
-   05:00
-   08:24
+   * zmenši text na malé písmena
 
-Nyní zpět k mazání. Pro smazání označeného textu stisknu klasicky "d" nebo i
-"x".
+* ``U``
+
+   * zvětši text na velké písmena
+
+* ``~``
+
+   * prohoď velikost malých a velkých písmen
 
 .. tip::
 
-   Pro práci s označeným textem se může hodit do budoucnosti vědět i o
-   dalších speciálních znacích, které jdou stisknout ve Visual módu:
-
-   * >
-
-     * posune (odsadí) text doprava o jeden tabulátor.
-
-   * <
-
-     * posune text doleva o jeden tabulátor
-
-   * ~
-
-     * změní označení text na opačnou velikost písma. např. pokud nějaké
-       písmenko  bylo malé, tak se změní na velké a naopak
+   Pomocí ``gv`` lze opětovně označich předchozí označený text.
 
 Přepisování textu
 -----------------
 
-Zkrácená varianta, která kombinuje najednou mazání nevhodného textu a
-okamžitý vstup do Insert módu.
-
-.. note::
-
-   Existuje ještě Replace mód, do kterého se vstoupuje velkým písmenem "R",
-   který začne jakoby přepisovat vše, co mu stojí v cestě.
-
-   Příklad::
-
-      # Mějme klasickou větu:
-
-      Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-
-      # Pokud bych vstoupil do Replace módu na začátku řádku a začal psát,
-      # tak tento nový text překryje ten starý:
-
-      Přepisuji tuto větu.t amet, eos eu aperiri moderatius.
-
-      # Kdybych ještě zůstal v Replace módu, neodcházel do Normalu a začal
-      # mazat to, co jsem nově napsal, tak uvidím zpět původní text, který
-      # byl překryt:
-
-      Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
-
-Přepisování po znacích
+Přepisování po znaku
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* r
+* ``r`` + znak
 
-  * hned po stisknutí písmenka "r" stisknu nový znak, který nahradí ten
-    starý
-  * při použití této varianty není žádný vstup do Insert módu, vše probíhá
-    v Normal módu
-
-* s
-
-  * smaže daný znak a stále zůstává v Insert módu pro přepisování
+  * přepiš znak v místě kurzoru na jiný
 
 Přepisování po slovech
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -1352,16 +1285,10 @@ TODO
 * :buffer
 * qa, @a, @@ (makra)
 * v + "w" (automatické odsazení)
-* r / R
-* s / S
 * ma ('a) (registry i pro kopírování, mazání, vkládání)
-* visual + u (malé)
-* visual + U (velké)
 * mksession
-* `` (na posledni místo editace), CTRL + o (dál dozadu) CTRL + i (dopředu)
 * C ((CTRL + V) + c)
 * CTRL + W + o (zavři ostatní okna krom aktuálního)
-* gv (znovu označ předchozí oblast)
 * !10Gsort
 * !!date
 * gJ (spoj řádky bez mezery)
