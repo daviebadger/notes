@@ -58,7 +58,7 @@ nejzákladnější jsou:
 
    * výchozí stav po spuštení Vimu
    * slouží pro navigaci v textu nebo pro přepínání na jiný mód, přičemž z
-     jiného módu se zpátky na ``NORMAL`` mód přepne pomocí klávesy ``ESC``
+     jiného módu se zpátky na Normal mód přepne pomocí klávesy ``ESC``
 
 2. Insert
 
@@ -72,6 +72,10 @@ nejzákladnější jsou:
    * editor se ovládá z příkazového řádku, který se objeví po stisknutí
      dvojtečky ``:`` (viz zavření Vimu pomocí ``:q``)
 
+.. note::
+
+   Pomocí šipky nahoru lze v Command-line módu zobrazit předchozí příkaz.
+
 Otevření souboru
 ----------------
 
@@ -84,9 +88,9 @@ souboru::
 
    $ :e ~/Documents/test.txt
 
-Pro začátek psaní do souboru je třeba přejít do ``INSERT`` módu pomocí písmenka
+Pro začátek psaní do souboru je třeba přejít do Insert módu pomocí písmenka
 ``i`` a začít psát či editovat text. Po skončení editace je vhodné se vrátit
-zpět do ``NORMAL`` módu pomocí ``ESC``.
+zpět do Normal módu pomocí ``ESC``.
 
 .. tip::
 
@@ -104,7 +108,7 @@ zpět do ``NORMAL`` módu pomocí ``ESC``.
 Uložení změn do souboru
 -----------------------
 
-Pro uložení změn je třeba použít příkaz ``:w`` v ``NORMAL`` módu::
+Pro uložení změn je třeba použít příkaz ``:w`` v Normal módu::
 
    :w
 
@@ -150,7 +154,7 @@ Cvičný text::
 
 .. note::
 
-   Tento text se vloží do Vimu uvnitř ``INSERT`` módu za použití klávesové
+   Tento text se vloží do Vimu uvnitř Insert módu za použití klávesové
    zkratky ``CTRL + SHIFT + v``.
 
 Základní pohyb po znacích a řádcích
@@ -267,7 +271,7 @@ vypnutí této citlivosti je třeba na konec patternu napsat suffix ``\c``::
 
 .. note::
 
-   Tyto způsoby se spíše používájí na vyhledávání v textu, než na skákání jako
+   Tyto způsoby se spíše používájí pro vyhledávání v textu, než na skákání jako
    takové.
 
 Skok na kraj řádku
@@ -483,22 +487,22 @@ Odbočka k dalším vstupům do Insert módu
 
 * ``a``
 
-  * ``INSERT`` mód začne za kurzorem (opak ``i``)
+  * Insert mód začne za kurzorem (opak ``i``)
 
 * ``A``
 
-  * ``INSERT`` mód začne na konci řádku za posledním znakem
+  * Insert mód začne na konci řádku za posledním znakem
 
 * ``I``
 
-  * ``INSERT`` mód začne od začátku řádku, případne od začátku odsazeného
+  * Insert mód začne od začátku řádku, případne od začátku odsazeného
     textu
 
 Je-li třeba zároveň i odřádkovat:
 
 * ``o``
 
-  * ``INSERT`` mód začne na dalším novém řádku::
+  * Insert mód začne na dalším novém řádku::
 
        | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
        v
@@ -507,7 +511,7 @@ Je-li třeba zároveň i odřádkovat:
 
 * ``O``
 
-  * ``INSERT`` mód začne na předchozím novém řádku::
+  * Insert mód začne na předchozím novém řádku::
 
        ^
        | Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
@@ -517,14 +521,14 @@ Je-li třeba zároveň i odřádkovat:
 .. tip::
 
    Je-li třeba vložit opakovaně stejný text, lze místo kopírování a vkládání
-   použít zkratku přes opakovaný vstup do ``INSERT`` módu. Např. pro vložení
+   použít zkratku přes opakovaný vstup do Insert módu. Např. pro vložení
    ``xxxxxxxxxx`` do textu stačí napsat ``9ix`` a ``ESC``::
 
       9ix + ESC
       xxxxxxxxx
 
    Stejného postupu lze docílit pomocí jednoho vložení písmenka ``x`` a pak
-   v ``NORMAL`` módu napst ``8.``, kdy se ještě 8x vloží písmenko ``x``. Tečka
+   v Normal módu napst ``8.``, kdy se ještě 8x vloží písmenko ``x``. Tečka
    ``.`` zopakuje předchozí akci.
 
 Editace textu
@@ -538,7 +542,7 @@ Mazání po znaku
 
 * ``x``
 
-  * smaž znak pod kurzorem::
+  * smaž znak pod kurzorem
 
 * ``X``
 
@@ -619,11 +623,11 @@ Mazání po řádku
 
 * ``dG``
 
-  * smaž aktuální řádek až po poslední řádek v souboru včetně
+  * smaž aktuální řádek až po poslední řádek včetně
 
 * ``dgg`` 
 
-  * smaž aktuální řádek až po první řádek v souboru včetně
+  * smaž aktuální řádek až po první řádek včetně
 
 * ``d`` + číslo + ``G``
 
@@ -645,7 +649,7 @@ Mazání po řádku
 Mazání vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Stiskem ``x`` nebo ``d`` při označeném textu ve ``VISUAL`` módu, viz níže.
+Stiskem ``x`` nebo ``d`` při označeném textu ve Visual módu, viz níže.
 
 Odbočka k Visual módu
 """""""""""""""""""""
@@ -669,25 +673,25 @@ Mód pro označení nějaké části textu. Text se označuje následujícími z
 
 .. note::
 
-   Zpátky na ``NORMAL`` mód se přepne klasicky pomocí ``ESC``.
+   Zpátky na Normal mód se přepne klasicky pomocí ``ESC``.
 
 V rámci označeného textu jdou použít i tyto speciální znaky:
 
 * ``>``
 
-   * posuň (odsaď) text doprava o jeden tabulátor
+  * posuň (odsaď) text doprava o jeden tabulátor
 
 * ``<``
 
-   * posuň text doleva o jeden tabulátor
+  * posuň text doleva o jeden tabulátor
 
 * ``u``
 
-   * zmenši text na malé písmena
+  * zmenši text na malé písmena
 
 * ``U``
 
-   * zvětši text na velké písmena
+  * zvětši text na velké písmena
 
 * ``~``
 
@@ -695,132 +699,173 @@ V rámci označeného textu jdou použít i tyto speciální znaky:
 
 .. tip::
 
-   Pomocí ``gv`` lze opětovně označich předchozí označený text.
+   Pomocí ``gv`` lze opětovně označit předchozí označený text.
 
 Přepisování textu
 -----------------
 
 Přepisování po znaku
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 * ``r`` + znak
 
   * přepiš znak v místě kurzoru na jiný
 
-Přepisování po slovech
-^^^^^^^^^^^^^^^^^^^^^^
+Přepisování po slovu
+^^^^^^^^^^^^^^^^^^^^
 
-* c
+* ``cw``
 
-  * kombinace písmena "c" s "w" / "e" / "b" a potažmo i čísly (počtem)
+  * přepiš znaky až do začátku dalšího slova na jiný text napsaný v Insert
+    módu (platí pro každý přepis níže)
 
-Co se týče kombinace "c" s objekty pro slova (aw) / věty (as) / odstavce (ap),
-tak zde je naopak nevýhoda, že zmizí i mezery za / před daný objekt, viz
-následující příklad::
+* ``ce``
 
-   # Mějme větu:
+  * přepiš znaky až do konce slova
 
-   Dnes je pondělí.
+* ``cb``
 
-   # ve které chci změnit "pondělí" na "úterý". Pokud použiju kombinaci
-   # "caw", tak vstup do Insert módu bude vypadat následovně:
+  * přepiš znaky až do začátku slova 
 
-   Dnes je|.|
+* ``ciw``
 
-   # tzn. že první musím vložit mezeru a až pak slovo "úterý". Proto, abych
-   # si ušetřil čas, tak budu chtít zanechat při přepisování mezeru (v tomto
-   # případě před slovem) pomocí "ciw":
+  * přepiš celé slovo, pokud se v něm nachází kurzor
 
-   Dnes je |.|
+.. tip::
 
-   # Pro větu to bude "cis" a odstavec "cip".
+   Pro přepsání věty se použije ``cis`` a pro přepsání odstavce ``cip``.
 
-Přepisování po řádcích
-^^^^^^^^^^^^^^^^^^^^^^
+Přepisování na kraj řádku
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* cc (nebo i přes "S")
+* ``c0``
 
-  * smaže celý řádek, kde je kurzor a přepnutí na Insert mód
+  * přepiš text až na začátek řádku
 
-Pro více řádku pak platí stejné kombinace, jako jsou uvedené v sekcí "Mazání
-po řádcích", kde akorát místo písmenka "d" se bude použít "c".
+* ``d$``
+
+  * přepiš text až po konec řádku
+
+* ``d^``
+
+  * přepiš text až do začátku odsazení řádku
+
+Přepisování po řádku
+^^^^^^^^^^^^^^^^^^^^
+
+* ``cc``
+
+  * přepiš aktuální řádek
+
+* ``cj``
+
+  * přepiš aktuální řádek a řádek pod ním
+
+* ``ck``
+
+  * přepiš aktuální řádek a řádek nad ním
+
+* ``cG``
+
+  * přepiš aktuální řádek až po poslední řádek včetně
+
+* ``cgg``
+
+  * přepiš aktuální řádek až po první řádek včetně
+
+* ``c`` + číslo + ``G``
+
+  * přepiš aktuální řádek až po daný řádek včetně
 
 Přepisování ve vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Opět přes označení textu a pak stisknutím "c". Pokud by se stisklo "r", tak se
-na daném řádku bude tolikrát opakovat nový znak, kolik bylo předtím znaků na
-něm.
+Stiskem ``c`` při označeném textu ve Visual módu.
 
-Nahrazování textu
------------------
+.. note::
 
-Alias přepisování na několika místech najednou.
+   Při stisku ``r`` ve Visual módu a následného stisknutí libovolného znaku
+   se celý text přepíše na tento libovolný znak.
 
-Nahrazování na řádku
-^^^^^^^^^^^^^^^^^^^
+Nahrazení textu
+---------------
 
-* :s/starý_text/nový_text + ENTER
+Nahrazení na řádku
+^^^^^^^^^^^^^^^^^^
 
-  * pokud se na daném řadku, kde je kurzor, nachází "starý_text" vícekrát,
-    tak bude nahrazen novým textem jen jednou
+* ``:s/`` + starý text + ``/`` + nový text + ``ENTER``
 
-* :s/starý_text/nový_text/g + ENTER
+  * nahraď jednou starý text za nový text na daném řádku::
 
-  * nahradí všechen "starý_text" na řádku
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius.
+       :s/Lorem/Merol
+       Merol ipsum dolor sit amet, eos eu aperiri moderatius.
 
-Nahrazování na více řádcích
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* ``:s/`` + starý text + ``/`` + nový text + ``/g`` + ``ENTER``
 
-* :%s/starý_text/nový_text + ENTER
+  * nahraď všechen starý text za nový text na daném řádku
 
-  * nahradí "starý_text" jen jednou na každém řádku v souboru
+Nahrazení v konkrétních řádcích
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* :%s/starý_text/nový_text/g + ENTER
+* ``:`` + začátek + ``,`` + konec + ``s/starý_text/nový_text`` + ``ENTER``
 
-  * nahradí "starý_text" všude v celém souboru
+  * nahraď jednou starý text za nový text v daných řádcích::
 
-Pokud chci nahrazovat jen ve vymezeném území, např. jen od prvního po pátý
-řádek včetně, tak použiju::
+       Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
+       nostrud quaeque eu, an his hendrerit prodesset, nonumes oportere
+       gloriatur qui ut.
+       :1,3s/eu/ue
 
-   :1,5s/starý_text/nový_text + ENTER
+* ``:začátek,konecs/starý_text/nový_text`` + ``/g`` + ``ENTER``
 
-   # nebo
+  * nahraď všechen starý text za nový text v daných řádcích
 
-   :1,5s/starý_text/nový_text/g + ENTER
+Nahrazení v celé souboru
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``:%s/starý_text/nový_text`` + ``ENTER``
+
+  * nahraď jednou starý text za nový text v celém souboru
+
+* ``:%s/starý_text/nový_text/g`` + ``ENTER``
+
+  * nahraď všechen starý text za nový text v celém souboru
 
 Přesouvání textu
 ----------------
 
-Alias vyjmutí (smazání) části textu a jeho přesunutí na jiné místo.
+.. note::
 
-Při mazání (přes "d", případně i "x") se obsah smazaného textu ještě ukládá do
-paměti. Jednak je to kvůli historii (procházení zpět a vpřed) a druhak pro
-opětovné vkládání na stejném / jiném místě, což je nyní náš případ.
+   Nejprve je nutné smazat nějaký text, aby bylo možné tento smazaný text
+   přesunout na jiné místo v souboru.
 
-* p
+* ``p``
 
-  * vloží smazaný text za kurzorem (napravo)
+  * vlož smazaný text za kurzorem
 
-* P
+* ``P``
 
-  * vloží smazný text před kurzorem (nalevo)
+  * vlož smazaný text před kurzorem
 
-Kopirování textu
-----------------
+.. note::
 
-* y
+   ``p`` lze použít i v rámci Visual módu, např. když je třeba vložit
+   smazaný řádek na místo s prázdným řádkem
 
-  * hlavní písmenko pro kopírování, které lze použít samostatně jen ve
-    Visual módu
+Kopírování a vkládání textu
+---------------------------
 
-* yy
+* ``y``
 
-  * zkopíruje celý řádek, na kterém se nacházím
+  * zkopíruj označený text ve Visual módu
 
-Pří použití "y" s jakýmkoliv dalším pohybovým znakem lze kopírovat ještě v
-Normal módu (netřeba přepínat na Visual). Pro vkládání tohoto zkopírovaného
-textu se používají opět písmenka "p" / "P".
+* ``yy``
+
+  * zkopíruj akutální řádek bez nutnosti použít Visual mód
+
+Tento zkopírovaný text se vloží na jiném místě v souboru pomocí ``p`` nebo
+``P``, viz přesouvání textu.
 
 Pokročilé ovládání
 ==================
@@ -1284,10 +1329,8 @@ TODO
 * :N (editace předchozího souboru)
 * :buffer
 * qa, @a, @@ (makra)
-* v + "w" (automatické odsazení)
 * ma ('a) (registry i pro kopírování, mazání, vkládání)
 * mksession
-* C ((CTRL + V) + c)
 * CTRL + W + o (zavři ostatní okna krom aktuálního)
 * !10Gsort
 * !!date
