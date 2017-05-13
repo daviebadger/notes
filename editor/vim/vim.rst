@@ -79,7 +79,7 @@ nejzákladnější jsou:
 Otevření souboru
 ----------------
 
-Příkazem ``vim`` lze i otevřít nějaký existující nebo neexistující soubor:: 
+Příkazem ``vim`` lze i otevřít nějaký existující nebo neexistující soubor::
 
    $ vim test.txt
 
@@ -100,7 +100,7 @@ zpět do Normal módu pomocí ``ESC``.
       :e ~/Do
            CTRL + d
       Documents/  Downloads/
-   
+
    Klávesa ``TAB`` pak automaticky dokončí cestu, je-li to možné. Pokud se
    doplnila špatná cesta, tak opětovným stiskem ``TAB`` klávesy se vybere
    další možná cesta v pořádí. Zpětně se vybírá cesta pomocí ``SHIFT + TAB``.
@@ -167,7 +167,7 @@ o jeden znak do strany. Šipkami nahoru a dolu, respektive písmenky ``k`` a
          k
          ^
          |
-   h <--- ---> l 
+   h <--- ---> l
          |
          v
          j
@@ -350,7 +350,7 @@ Skok na vertikální hranu okna
 
 .. tip::
 
-   Pokud chci aktuální řádek posunout na hranu okna, tak mohu použít tyto 
+   Pokud chci aktuální řádek posunout na hranu okna, tak mohu použít tyto
    klávesy:
 
    * ``zt``
@@ -459,7 +459,7 @@ Skok na další odstavec
 * ``}``
 
   * skoč na další odstavec (za blok textu)::
-   
+
        | * one
        | * two
        | * three
@@ -475,11 +475,11 @@ Skok na předchozí místo před skokem
 
 * ``\```` (bez zpětného lomítka)
 
-  * skoč na pozici před skokem 
+  * skoč na pozici před skokem
 
 .. tip::
 
-   Dále do minulých pozic se skočí pomocí ``CTRL + o`` a zpět do budoucnosti 
+   Dále do minulých pozic se skočí pomocí ``CTRL + o`` a zpět do budoucnosti
    přes ``CTRL + i``.
 
 Odbočka k dalším vstupům do Insert módu
@@ -625,7 +625,7 @@ Mazání po řádku
 
   * smaž aktuální řádek až po poslední řádek včetně
 
-* ``dgg`` 
+* ``dgg``
 
   * smaž aktuální řádek až po první řádek včetně
 
@@ -725,7 +725,7 @@ Přepisování po slovu
 
 * ``cb``
 
-  * přepiš znaky až do začátku slova 
+  * přepiš znaky až do začátku slova
 
 * ``ciw``
 
@@ -899,7 +899,7 @@ Otevírání a zavírání souborů
 
 .. note::
 
-   Pokud se zavře poslední soubor z bufferu, tak na rozdíl od ``q`` se Vim
+   Pokud se zavře poslední soubor z bufferu, tak na rozdíl od ``:q`` se Vim
    nezavře, ale zůstane stále otevřený s prázdnou obrazovkou.
 
 Zobrazení přehledu souborů v bufferu
@@ -962,7 +962,8 @@ Vytvoření a zavření oken
 
 .. tip::
 
-   Pomocí ``:wa`` lze uložit změny ve všech oknech.
+   Pomocí ``:wa`` lze uložit změny ve všech oknech a přes ``:wqa`` zavřít
+   všechny okna i celý Vim
 
 Přepínání mezi okny
 """""""""""""""""""
@@ -998,37 +999,37 @@ Na výšku:
 
 * ``CTRL + w + +``
 
-   * zvětši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
-     zkratkou i číslo
+  * zvětši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
+    zkratkou i číslo
 
 * ``CTRL + w + -``
 
-   * zmenši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
-     zkratkou i číslo
+  * zmenši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
+    zkratkou i číslo
 
 * ``:res`` + číslo
 
-   * nastav fixní výšku okna na daný počet řádků::
+  * nastav fixní výšku okna na daný počet řádků::
 
-        :res 30
+       :res 30
 
 Na šírku:
 
 * ``CTRL + w + >``
 
-   * zvětší okno o jeden sloupec nebo více sloupců, je-li stisknuto před
-     klávesovou kratkou i číslo
+  * zvětší okno o jeden sloupec nebo více sloupců, je-li stisknuto před
+    klávesovou kratkou i číslo
 
 * ``CTRL + w + <``
 
-   * zmenši okno o jeden sloupec nebo více slopců, je-li stisknuto před
-     klávesovou zkratkou i číslo
+  * zmenši okno o jeden sloupec nebo více slopců, je-li stisknuto před
+    klávesovou zkratkou i číslo
 
 * ``:vert res`` + číslo
 
-   * nastaví fixní šířku okna na daný počet sloupců::
+  * nastaví fixní šířku okna na daný počet sloupců::
 
-        :vert res 80
+       :vert res 80
 
 .. tip::
 
@@ -1039,99 +1040,57 @@ Na šírku:
 Se záložkami
 ^^^^^^^^^^^^
 
-Na rozdíl od varianty bez záložek jednak uvidím ve výchozím stavu nahoře ve
-Vimu přehledně záložky se jmény souborů, které v nich mám otevřeny a druhak
-mohu mít v nich jinak rozvrstevny okna, což by ve variantě bez záložek nešlo.
+Záložky jsou na rozdíl od bufferu přehledně zobrazeny v horní části Vimu. Navíc
+každá záložka může mít jinak uspořádána okna.
 
 Otevírání a zavírání záložek
 """"""""""""""""""""""""""""
 
-Novou záložku mohu otevřít jak prázdnou, tak i načtenou s obsahem nějakého
-souboru:
+* ``:tabnew``
 
-a) prázná záložka
+  * otevři novou prázdnou záložku a přepni se na ni
 
-   * :tabnew
+* ``:tabnew`` + cesta k souboru
 
-     * otevře prázdnou záložku (nahoře v terminálu bych měl vidět
-       rozdělení na záložky)
-     * aktuální záložku poznám jednak podle tučného písmena a druhak podle
-       barvy pozadí (je stejné, jako u řádků pod záložkami)
-     * pokud bych načíst do této prázdné záložky obsah nějakého souboru,
-       tak použiju syntaxi::
+  * otevři v nové záložce obsah daného souboru a přepni se na ni
 
-          :o cesta_k_souboru
+* ``:tabc`` (``:tabc!``)
 
-b) záložka se souborem
+  * zavři aktuální záložku (obsah souboru může ještě zůstat v bufferu)
 
-   * :tabnew cesta_k_souboru
+* ``:tabo`` (``:tabo!``)
 
-     * načte do záložky rovnou obsah daného souboru
-
-Zavřít záložku/y mohu několika způsoby:
-
-1. :tabc
-
-   * zavře záložku, na které se nacházím, nicméne soubor bude stále otevřený
-     v paměti
-   * jestliže jsou v daném souboru na dané záložce nějaké změny, které nejsou
-     uložené, tak Vim odmítne exekuci tohoto příkazu
-   * pro zavření záložky bez uložení je třeba používat ještě vykričník::
-
-        :tabc!
-
-   * pro zavření záložky s uložením změn se použije standardně::
-
-        :wq
-
-   * pro za
-
-2. :tabo (:tabo!)
-
-   * zavře všechny ostatní záložky, ale aktuální ne
-   * taktéž Vim zařve, pokud nějaká změna v nějaké záložce není uložena
-
-3. :qa (:qa!)
-
-   * zavření všech záložek a ukončení Vimu
+  * zavři všechny záložky krom aktuálně otvřené záložky
 
 Přecházení mezi záložkami
 """""""""""""""""""""""""
 
-* qt (:tabn)
+* ``qt``
 
-  * přepne se na další záložku (vpravo)
+  * přepni se na další záložku
 
-* qT (:tabp)
+* ``qT``
 
-  * přepne se na předchozí záložku (vlevo)
+  * přepni se na předchozí záložku
 
-* 3gt
+* číslo + ``gt``
 
-  * přene se na třetí záložku v pořadí (počítá se od jedničky)
+  * přeni se na danou záložku (čísluje se od jedničky)
 
-.. tip::
+* ``:tabfir``
 
-   Pokud bych chtěl najednou ve všech záložkách spustit stejný příkaz,
-   použiju následující syntaxi::
+  * přepni se na první záložku v pořádí
 
-      :tabd příkaz
+* ``:tabl``
 
-   U příkazu není třeba na začátku používat dvojtečku.
+  * přepni se na poslední záložku v pořádí
 
 Přesouvání záložek
 """"""""""""""""""
 
-Jestli se mi nelíbí pořádí záložek, tak si ho můžu upravit pomocí syntaxe::
+* ``tabm`` + číslo
 
-   :tabm nová_pozice_záložky
-
-.. note::
-
-   Zde se naopak čísluje od nuly. Tudíž, pokud chci přesunout aktuální
-   záložku na úplný začátek, použiju právě nulu::
-
-      :tabm 0
+  * přesuň aktuální záložku na jiné pořadí (jde použít nulu)
 
 Exekuce externích příkazů
 -------------------------
