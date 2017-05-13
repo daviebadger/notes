@@ -695,7 +695,7 @@ V rámci označeného textu jdou použít i tyto speciální znaky:
 
 * ``~``
 
-   * prohoď velikost malých a velkých písmen
+  * prohoď velikost malých a velkých písmen
 
 .. tip::
 
@@ -876,174 +876,163 @@ Práce s více soubory
 Bez záložek
 ^^^^^^^^^^^
 
-Soubor, se kterým chci aktuálně pracovat, tak ho uvidím na popředí a ostatní
-budou čekat na pozadí, dokud se na ně nepřepnu. Nevýhodou je, že nemám
-přehled, jaké soubory jsou otevřené v pozadí, pokud nepoužiju příkaz / plugin.
+Soubory jsou načteny do paměti a seřazeny v tzv. zásobníku (buffer), kdy na
+popředí jde vidět obsah jen jednoho souboru a další čekají na editaci v pozadí.
 
-Otevírání souborů nad sebe a jejich zavírání
-""""""""""""""""""""""""""""""""""""""""""""
+Otevírání a zavírání souborů
+""""""""""""""""""""""""""""
 
-* :e cesta_k_souboru
+* ``:e`` + cesta k souboru
 
-  * otevře daný soubor a ostatní otevřené soubory schová
+  * otevři v popředí daný soubor a aktuální schovej na pozadí::
 
-* :bd (:bd!)
+       :e ~/.vimrc
 
-  * zavře daný soubor
-  * pokud je to jediný soubor, který mám otevřevený, tak na rozdíl od ":q"
-    se Vim nezavře, jen zůstané prázdný
+  * alternativě lze otevřít více souborů najednou i z příkazového řádku::
 
-Zobrazení přehledu otevřených souborů
-"""""""""""""""""""""""""""""""""""""
+       $ vim a.txt b.txt c.txt
 
-* :ls
+* ``:bd``
 
-  * zobrazení všech souborů, které jsou otevřeny a pod jakým pořadovým
-    číslem (bude se hodit pro přepínání)
-  * číslování je od jedničky
+  * zavři daný soubor, respektive zavři násilně bez uložení změn pomocí
+    ``:bd!``
+
+.. note::
+
+   Pokud se zavře poslední soubor z bufferu, tak na rozdíl od ``q`` se Vim
+   nezavře, ale zůstane stále otevřený s prázdnou obrazovkou.
+
+Zobrazení přehledu souborů v bufferu
+""""""""""""""""""""""""""""""""""""
+
+* ``:ls``
+
+  * zobraz pořadí otevřených souborů a polohu kurzoru v každém souboru
 
 Přepínání mezi soubory
 """"""""""""""""""""""
 
-* :bn
+* ``:bn``
 
-  * přepne se další soubor v pořadí
+  * přepni se na další soubor v pořadí
 
-* :bp
+* ``:bp``
 
-  * přepne se na předchozí soubor v pořadí
+  * přepni se na předchozí soubor v pořadí
 
-* :b2
+* ``:b2``
 
-  * přepne se na soubor s pořadovým číslem 2
+  * přepni se na soubor s pořadovým číslem 2
 
 V oknech
 ^^^^^^^^
 
-Alias zobrazení několika souborů (stejných či různých) do oken tak, abych je
-všechny viděl najednou a v případě potřeby mohl mezi nimi přepínat. Okna mohou
-být jak vedle sebe (vertikálně), tak i nad / pod sebou (horizontálně).
-
-.. note::
-
-   V každé záložce mohou být jinak rozvrstveny okna.
-
 Vytvoření a zavření oken
 """"""""""""""""""""""""
 
-a) stejný soubor ve více oknech
+* ``:sp``
 
-   * CTRL + ws (:sp)
+  * otevři kopii aktuálně otevřeného souboru nad aktuálním oknem
 
-     * vytvořii kopii aktuálního souboru včetně změn a otevře jej v dalším
-       okně horizontálním způsobem (pod aktuálním oknem)
+* ``:sp`` + cesta k souboru
 
-   * CTRL + wv (:vsp)
+  * otevři nad aktuálním oknem daný soubor::
 
-     * to samé, ale nové okno vznikne vpravo vedle aktuálního okna
-       (vertikální způsob)
+       :sp ~/.vimrc
 
-b) různé soubory v oknech
+* ``:vs``
 
-   * :sp cesta_k_souboru
+  * otevři kopii aktuálně otevřeného souboru vlevo od aktuálního okna
 
-     * načte obsah daného souboru a zobrazí ho v okně pod aktuálním oknem
+* ``:vs`` + cesta k souboru
 
-   * :vsp cesta_k_souboru
+  * otevři vlevo od aktuálního okna daný soubor
 
-     * to samé, ale zobrazí ho ve vedlejším okne napravo
+* ``:q`` (``:q!``)
 
-Okno, ve kterém je kurzor se zavírá pomocí::
+  * zavři okno, ve kterém se nachází kurzor
 
-   CTRL + wq
+* ``:qa`` (``:qa!``)
 
-   # nebo taktéž klasicky
+  * zavři všechna okna najednou
 
-   :q
-   :q!
-   :qa
-   :qa!
-   :wq
+* ``:on`` (``:on!``)
 
-Zavření všechn ostatních oken kromě aktuálního okna::
+  * zavři všechna okna kromě okna, ve kterém se nachází kurzor
 
-   :on
+.. tip::
+
+   Pomocí ``:wa`` lze uložit změny ve všech oknech.
 
 Přepínání mezi okny
 """""""""""""""""""
 
-* CTRL + w + pohybový_směrový_znak
+* ``CTRL + w`` + směrový pohyb (``h``, ``j``, ``k`` a ``l``)
 
-  * tím pohybovým směrovým znakem mám na mysli klasické "h" / "j" / "k" a
-    "l", pomocí kterých se lze přepínat mezi okny
+  * přepni se na dané okno
 
 Přesouvání oken
 """""""""""""""
 
-* CTRL + w + r
+* ``CTRL + w + x``
 
-  * přesune okno dolů / doprava, avšak zaleží na typech oknech (nelze
-    kombinovat horizontální okno s vertikálním)
+  * prohoď dva stejné typy oken vedle sebe nebo nad sebou
 
-* CTRL + w + R
+* ``CTRL + w + r``
 
-  * přesune okno nahoru / doleva (platá stejná podmína, jako před chvíli)
+  * posuň okno dolu u horizontálních oken nebo doprava u vertikálních oken
 
-* CTRL + w + H / J / K / L
+* ``CTRL + w + R``
 
-  * přesune dané okno na úplně vlevo / dolu / nahoru / doprava, přičemž se
-    může změnit i typ okna, např. z vertikálního na horizontálního
+  * posuň okno nahoru u horizontálních oken nebo doleva u vertikálních oken
+
+* ``CTRL + w`` + ``H`` nebo ``J`` nebo ``K`` nebo ``L``
+
+  * přesuň okno úplně vlevo / dolu / nahoru / doprava (může se změnit typ okna
+    z vertikálního na horizontální a naopak)
 
 Úprava velikosti oken
 """""""""""""""""""""
 
-a) na výšku
+Na výšku:
 
-   * CTRL + w + +
+* ``CTRL + w + +``
 
-     * zvětší okno na výšku o jeden řádek
+   * zvětši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
+     zkratkou i číslo
 
-   * 5 + CTRL + w + +
+* ``CTRL + w + -``
 
-     * zvětší okno o 5 řádků
+   * zmenši okno o jeden řádek nebo více řádků, je-li stisknuto před klávesovou
+     zkratkou i číslo
 
-   * CTRL + w + -
+* ``:res`` + číslo
 
-     * zmenší okno o jeden řádek
+   * nastav fixní výšku okna na daný počet řádků::
 
-   * 5 + CTRL + w + -
+        :res 30
 
-     * zmenší okno o 5 řádků
+Na šírku:
 
-   * :res 20
+* ``CTRL + w + >``
 
-     * nastaví fixní výšku na 20 řádků
+   * zvětší okno o jeden sloupec nebo více sloupců, je-li stisknuto před
+     klávesovou kratkou i číslo
 
-b) na šířku
+* ``CTRL + w + <``
 
-   * CTRL + w + >
+   * zmenši okno o jeden sloupec nebo více slopců, je-li stisknuto před
+     klávesovou zkratkou i číslo
 
-     * zvětší okno na šířku o jeden sloupec
+* ``:vert res`` + číslo
 
-   * 5 + CTRL + w + >
+   * nastaví fixní šířku okna na daný počet sloupců::
 
-     * zvětší okno o 5 sloupců
-
-   * CTRL + w + <
-
-     * zmenší okno o jeden sloupec
-
-   * 5 + CTRL + w + -
-
-     * zmenší okno o 5 sloupců
-
-   * :vert res 80
-
-     * nastaví fixní šířku na 80 znaků
+        :vert res 80
 
 .. tip::
 
-   Pokud bych chtěl mít 2 okna vedle / pod sebe stejně velká, stisknu::
+   Pokud bych chtěl mít dvě rozdělená okna stejně velká::
 
       CTRL + w + =
 
@@ -1335,7 +1324,6 @@ TODO
 * !10Gsort
 * !!date
 * gJ (spoj řádky bez mezery)
-* :wa
 * (CTRL + v) + !sort
 
 ::
