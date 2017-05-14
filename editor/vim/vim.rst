@@ -635,16 +635,9 @@ Mazání po řádku
 
 .. tip::
 
-   Pokud bych měl nějaký zalomený text, např::
-
-      Dnes je
-      pondělí.
-
-   a chtěl tuto větu spojit na jeden řádek spolu s přidáním mezery za slovo
-   "je", tak mohu stisknout "J" kdekoliv na prvním řádku pro sjednocení
-   s následujícím řádkem. Výsledek pak bude::
-
-      Dnes je pondělí.
+   Pomocí ``J`` lze spojit aktuální a spodní řádek do jednoho řádku, pričemž
+   mezi ně se automaticky vloží mezera. Přes ``gJ`` se tyto řádky spojí bez
+   mezery.
 
 Mazání vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1098,105 +1091,118 @@ Exekuce externích příkazů
 S dočasným opuštěním Vimu
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Externí terminálové příkazy se z Vimu spouštějí pomocí vykřičníku za klasickou
-dvoutečkou a názvem daného příkazu::
+* ``:!`` + příkaz
 
-   :!ls -l
+  * spusť daný příkaz a dočasně opusť Vim (zpět se vrátí pomocí ``ENTER``)::
 
-Vim bude dočasně schovaný, neboť se zobrazí klasický terminál s výsledkem
-příkazu. Pro návrat do editoru se pak stiskne ENTER.
+       :!ls -l
 
-Další možností je:
+Další možnost je použití pozastavení procesu přes ``CTRL + z`` a navrácení
+do popředí zpravidla přes ``fg`` příkaz v Bashi.
 
-1. přesunout editor na pozadí klávesovou zkratkou::
+.. tip::
 
-      CTRL + z
+   Externí příkazy jdou volat i v rámci Visual módu, např. je-li třeba
+   seřadít několik označných řádků podle abecedy::
 
-2. spustit příkaz a do editoru se vrátit příkazem::
-
-      fg
+      !sort
 
 Bez opuštění Vimu
 ^^^^^^^^^^^^^^^^^
 
-* :w !příkaz
+* ``:w !`` + příkaz
 
-  * výstup příkazu se zobrazí v přikazovém řádku dole
+  * spusť daný příkaz a jeho výstup zobraz ve Vimovském příkazovém řádku
 
-* :r !příkaz
+* ``:r !`` + příkaz
 
-  * výstup se zapíše na aktuální místo kurzoru v souboru
-  * pro jiné místo v souboru je nutné uvést i číslo řádku (počítá se od
-    nuly, takže vždy 1 dílek ubrat), např. pro 5 řádek v souboru to bude::
+  * spusť daný příkaz a jeho výstup vlož na další řádek za aktuální
+    polohou kurzoru
 
-       :4r !ls
+* ``:`` + číslo + ``r !`` + příkaz
+
+  * spusť daný příkaz a jeho výstup vlož na daný řádek v souboru (čísluje se
+    od nuly)::
+
+       :0r !ls -l
 
 .. tip::
 
-   Pro vložení obsahu je jiného souboru lze zkratka:
+   Pro vložení obsahu nějakého souboru lze použít zkratku::
 
-      :r cesta/k/souboru
+      :r cesta_k_souboru
 
-Pracovní prostředí
-------------------
+Session
+-------
 
-Rozvržení oken a záložek si mohu uložit a zpětně zobrazit při dalším spuštění
-Vimu. Stačí aktuální nastavení uložit pomocí příkazu::
+Aktuální rozvření oken či záložek lze uložit do souboru a v budoucnu tuto
+session obnovit bez nutnosti znovu nastavovat okna se záložkami.
 
-   :mks cesta/pro/uložení/souboru.vim
+* ``:mks`` + cesta pro uložení session souboru
 
-   # Doporučuji vytvořit adresář "~/.vim/sessions/" a ukládat tam
+  * ulož aktuální session do daného souboru::
 
-   :mks ~/.vim/sessions/název_uloženého_pracovního_prostředí.vim
+       :mks ~/.vim/sessions/my_session.vim
 
-Poté stačí při dalším otevření editoru použít příkaz::
+  * pokud už session soubor existuje, lze jej přepsat pomocí ``:mks!`` +
+    název souboru
 
-   $ vim ~/.vim/sessions/název_pracovního_prostředí.vim
+* ``:so`` + cesta k uloženému session souboru
 
-   # nebo taktéž uvnitř Vimu pomocí:
+  * obnov rozvření Vimu na základě daného session souboru::
 
-   :source ~/.vim/sessions/název_pracovního_prostředí.vim
+       :so ~/.vim/sessions/my_session.vim
 
 .. note::
 
-   Pokud budete používat plugin NERDTree, tak při otevření pracovního
-   prostředí nebude strom vidět (BUG). Stačí si otevřít další a hned ho opět
-   zavřít (budou vidět dva najednou).
+   Adresář ``~/.vim/sessions`` je třeba nejprve manuálně vytvořit::
+
+      $ mkdir ~/.vim/sessions
 
 Obnovení souborů
 ----------------
 
-Vim defaultně nedělá zálohy souborů (soubory s koncovkou "~"). Nicméně i
-přesto si uchavává dost informací o poslední editaci souboru pro případ
-obnovení (např. se vypnul z ničeho nic počítač).
+Vim defaultně vytvaří skryté swap soubory, do kterých si ukládá poslední
+změny v souboru pro případ náhleho vypnutí editoru, např. pří spadnutí systému.
 
-Při editaci souborů se v daném adresáři objeví skrytý soubor se stejným
-názvem editovaného souboru a koncovkou ".swp". Soubor ze zálohy se spustí
-pomocí příkazu::
+.. note::
 
-   $ vim -r název_souboru
+   Swap soubory zároveň brání i tomu, aby nemohlo více lidí najednou editovat
+   tentýž soubor.
 
-Objeví se hláška o obnově a doporučení uložit obnovený soubor pod jiným
-názvem. Hláška se vypne stisknutím ENTER klávesy. Po editaci v obnoveném
-souboru je pak potřeba smazat již starý ".swp" soubor.
+Tyto swap soubory automaticky zanikaji po správném zavření souboru (odstranění
+z bufferu). Pokud swap soubor existuje při opětovném otevření souboru, tak si
+mohu z voleb vybrat, jakou možnost chci provést::
 
-Seznam souboru k obnově lze zobrazit příkazem::
+   Swap file ".vim.rst.swp" already exists!
+   [O]pen Read-Only, (E)dit anyway, (R)ecover, (D)elete it, (Q)uit, (A)bort:
+
+Při zvolení volby ``R`` pro obnovu souboru je pak třeba smazat starý swap
+soubor, a to pomocí příkazu ``:e`` a vybráním ``D`` volby pro smazání swapu.
+
+Seznam všech souborů k obnově lze zobrazit příkazem::
 
    $ vim -r
 
 Přízpůsobení Vimu
 =================
 
-Aneb nastavení vlastního vzhledu, zvýrazňování syntaxe, zobrazení řádku s
-čísly atd.
+Ve Vimu lze upravit vzhled editoru, zvýraznění syntaxe pro programovací jazyky,
+použít externí pluginy atd.
 
 Konfigurační soubor
 -------------------
 
-Slouží pro ukládání nastavení pro každé budoucí spuštení Vimu. Je třeba jej
-vytvořit v domovském adresáři se jménem::
+Soubor pro uložení nastavení editoru, který defaultně neexistuje. Je třeba
+jej vytvořit v domovském adresáři pod názvem::
 
    .vimrc
+
+Obsah toho konfiguračního souboru bude Vim respektovat až při dalším spuštení
+editoru. Pokud chci změny aplikovat na aktuálně spuštený Vim, je třeba použít
+příkaz::
+
+   :so ~/.vimrc
 
 Rovnou si můžeme napsat i nějaké to základní nastavení::
 
@@ -1221,79 +1227,54 @@ Rovnou si můžeme napsat i nějaké to základní nastavení::
 
 .. note::
 
-   Dvojitá otevírací uvozovka slouží pro komentáře (nutno bez zavírací).
+   Text za ``"`` je považován za komentář.
 
 Pluginy
 -------
 
-Aneb zásuvné moduly, které rozšířují funkčnost Vimu. Mohu si je vytvořit sám
-nebo použít už nějaký hotový od někoho.
-
-Plug
-^^^^
+Pluginy rozšířují Vim o další funkcionalitu a vychytávky. Pro správu pluginů
+je třeba použít nějaký manažer, např. Vim Plug:
 
 https://github.com/junegunn/vim-plug
 
-Vim Plug je z mnoha nástrojů pro správu modulů. Umí klasicky stáhnout
-externí moduly, nainstalovat je a aktivovat je pro každou instanci Vimu.
-
-Lze ho stáhnout příkazem::
+Tento manažer se stáhne příkazem::
 
    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-Dále není třeba nic instalovat. Stačí jen ve Vimu vyjmenovat moduly (externí),
-které chci použivat::
+Na začátek ``~/.vimrc`` souboru se nadefinují pluginy, které chci použít::
 
    call plug#begin('~/.vim/plugged')
 
    Plug 'název_uživatele/název_repozitáře_na_githubu'
-   Plug 'https://adresa.doména/cesta/k/git/repozitáři.git'
 
    call plug#end()
 
-Nyní je třeba znovu načíst konfigurační soubor (lze rovnou z Vimu)::
+Poté je třeba znovu načíst obsah konfiguračního souboru. S danými pluginy lze
+pracovat následujícimi způsoby:
 
-   :source ~/.vimrc
+* ``:PlugInstall``
 
-Pak stačí spustit příkaz pro instalaci vyjmenovaných modulů::
+  * nainstaluj pluginy, které ješte nainstalované nejsou
 
-   :PlugInstall
+* ``:PlugUpdate``
 
-Kdybych přestal nějaký plugin používat, tak jej odstraním z konfiguráku a
-odintaluji pomocí::
+  * aktualizuj pluginy na novou verzi, je-li to možné
 
-   :PlugClean
+* ``:PlugUpgrade``
 
-   # nebo bez potvrzení
+  * aktualizuj samotný Vim Plug manažer, je-li to možné
 
-   :PlugClean!
+* ``:PlugClean``
+
+  * odstraň zdrojové soubory pro smazené pluginy z konfiguračního souboru
 
 TODO
 ====
 
-* text buffery
-* :n (editace dalšího souboru)
-* :N (editace předchozího souboru)
-* :buffer
-* qa, @a, @@ (makra)
-* ma ('a) (registry i pro kopírování, mazání, vkládání)
-* mksession
-* CTRL + W + o (zavři ostatní okna krom aktuálního)
-* !10Gsort
-* !!date
-* gJ (spoj řádky bez mezery)
-* (CTRL + v) + !sort
-
-::
-
-   " To save, ctrl-s.
-   nmap <c-s> :w<CR>
-
 ::
 
    set incsearch
-   imap <c-s> <Esc>:w<CR>a
 
 ::
 
@@ -1310,22 +1291,16 @@ TODO
 
 ::
 
-   :so ~/.vimrc
-
-::
-
    :set incsearch
 
 * šablony (skeletony souborů) a snippety
-* tagy
-* vimgrep hledání napříč soubory
 * adresář pro swapy
 * kopírování z Vimu ven
-* ukládání session
 
   ::
 
      :set directory=/tmp
      :set directory=.,/tmp
+     :set directory^=$HOME/.vim/tmp//
 
 * no hls after ESC
