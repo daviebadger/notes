@@ -14,17 +14,16 @@
 Instalace
 =========
 
-Příkazem::
+V Ubuntu už je Vim nainstalovaný, nicméně se jedná o jeho osekanější verzi
+kvůli zpětně kompatibilitě s editorem ``vi``. Plná verze Vimu se nainstaluje
+příkazem::
 
-   $ sudo apt install vim
+   $ sudo apt install vim-gnome
 
 .. note::
 
-   Defaultně v Ubuntu už je Vim nainstalovaný, nicméně se jedná o osekanější
-   verzi kvůli zpětně kompatibilitě s editorem ``vi``. Ten se pro zajímavost
-   spustí stejnojmenným příkazem::
-
-      $ vi
+   Existuje i balíček pojmenovaný jako ``vim``, nicméně ten nemá potřebné
+   závislosti pro kopírování a vkládání textu z nebo do Vimu.
 
 Základní ovládání
 =================
@@ -32,7 +31,7 @@ Základní ovládání
 Otevření a zavření editoru
 --------------------------
 
-Vim se spustí také stejnojmenným příkazem::
+Vim se spustí stejnojmenným příkazem::
 
    $ vim
 
@@ -1204,26 +1203,64 @@ příkaz::
 
    :so ~/.vimrc
 
-Rovnou si můžeme napsat i nějaké to základní nastavení::
+Základní možnosti nastavení:
 
-   set number          " zobraz čísla řádků
-   set colorcolumn=80  " ukáž vodorovnou čáru na 80. znaku (lze překročit)
+* číslování::
 
-   " Globální nastavení tabulátorů
+     set number          " číslování řádků
+     set colorcolumn=80  " vizuální pravítko pro šířku řádku
 
-   set tabstop=4       " velikost tabulátoru podle znaků
-   set softtabstop=4  " v souboru nechá původní velikost tabu, ale já
-                       " uvidím ve Vimu jen 4 mezery
-   set shiftwidth=4    " velikost odsazení (např. ve Visual módu přes ">")
-   set expandtab       " zkonvertuje tabulátory na mezery
-   set smarttab        " pokud mám nastavený expandtab, tak při mazání se
-                       " smažou 4 mezery najednou a ne jen po jedné
+* okna::
 
-   " Nastavení pro jednotlivé soubory
+     set splitbelow  " horizontální okno pod aktuální okno
+     set splitright  " vertikální okno vpravo od aktuálního okna
 
-   autocmd Filetype html setlocal ts=2 sw=2 sts=2
-   autocmd Filetype css setlocal ts=2 sw=2 sts=2
-   autocmd Filetype js setlocal ts=2 sw=2 sts=2
+* tabulátory::
+
+     " Globální nastavení
+
+     set expandtab  " tabulátory převeď na mezery
+     set smarttab   " mezery jako jeden tabulátor (vhodné pro smazání)
+
+     set tabstop=4      " velikost tabulátoru
+     set shiftwidth=4   " velikost odsazení
+     set softtabstop=4  " ponechej výchozí velikosti tabulátoru v souboru,
+                        " ale vizuálně respektuj mojí velikost tabulátoru
+
+     " Lokální nastavení pro každý soubor zvlášť
+
+     autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+* vyhledávání::
+
+     set incsearch  " okamžité skoč na daný text, zatímco píšu
+
+     nnoremap <esc> :noh<return><esc>  " odstraň zvýraznění najitých slov po
+                                       " stisnutí ESC
+
+* zalomení řádku::
+
+     set textwidth=79  " zalom řádek po překročení této hranice v počtu znaků
+     set nowrap        " nezalomuj řádky, pokud je malá šířka okna
+
+* ostatní::
+
+     " Umožní kopírování a vkládání z / do Vimu
+
+     set clipboard=unnamedplus
+
+     " Ukládej swapy na jiné místo v absolutní podobě (nehrozí kolize)
+
+     set directory=~/.vim/swaps//
+
+     " Zobraz zbytečné mezery na konci řádku
+
+     highlight ExtraWhitespace ctermbg=red guibg=red
+     match ExtraWhitespace /\s\+$/
+     autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+     autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+     autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+     autocmd BufWinLeave * call clearmatches()
 
 .. note::
 
@@ -1233,7 +1270,7 @@ Pluginy
 -------
 
 Pluginy rozšířují Vim o další funkcionalitu a vychytávky. Pro správu pluginů
-je třeba použít nějaký manažer, např. Vim Plug:
+je vhodné použít nějaký manažer, např. Vim Plug:
 
 https://github.com/junegunn/vim-plug
 
@@ -1268,39 +1305,3 @@ pracovat následujícimi způsoby:
 * ``:PlugClean``
 
   * odstraň zdrojové soubory pro smazené pluginy z konfiguračního souboru
-
-TODO
-====
-
-::
-
-   set incsearch
-
-::
-
-   :set paste
-   :set nopaste
-
-::
-
-   :set textwidth=80
-
-::
-
-   :set nowrap
-
-::
-
-   :set incsearch
-
-* šablony (skeletony souborů) a snippety
-* adresář pro swapy
-* kopírování z Vimu ven
-
-  ::
-
-     :set directory=/tmp
-     :set directory=.,/tmp
-     :set directory^=$HOME/.vim/tmp//
-
-* no hls after ESC
