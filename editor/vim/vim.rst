@@ -1251,7 +1251,7 @@ Základní možnosti nastavení:
 
      " Ukládej swapy na jiné místo v absolutní podobě (nehrozí kolize)
 
-     set directory=~/.vim/swaps//
+     set directory=~/.vim/swaps//  " nutno vytvořit tento adresář
 
      " Zobraz zbytečné mezery na konci řádku
 
@@ -1304,4 +1304,4 @@ pracovat následujícimi způsoby:
 
 * ``:PlugClean``
 
-  * odstraň zdrojové soubory pro smazené pluginy z konfiguračního souboru
+  * odstraň zdrojové soubory pro smazané pluginy z konfiguračního souboru
