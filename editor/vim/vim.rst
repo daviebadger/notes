@@ -1233,10 +1233,13 @@ Základní možnosti nastavení:
 
 * vyhledávání::
 
-     set incsearch  " okamžité skoč na daný text, zatímco píšu
+     set hlsearch   " zvýrazní najité výsledky při vyhledávání
+     set incsearch  " okamžité skoč na první najitý text, zatímco píšu
 
-     nnoremap <esc> :noh<return><esc>  " odstraň zvýraznění najitých slov po
-                                       " stisnutí ESC
+     " odstraň zvýraznění najitých slov po stisknutí ESC
+
+     nnoremap <esc> :noh<return><esc>
+     nnoremap <esc>^[ <esc>^[
 
 * zalomení řádku::
 
