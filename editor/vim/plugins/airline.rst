@@ -5,15 +5,6 @@
  Přehledný status řádek
 ------------------------
 
-.. contents:: Obsah:
-
-.. sectnum::
-   :depth: 3
-   :suffix: .
-
-Zdroj
-=====
-
 https://github.com/vim-airline/vim-airline
 
 Konfigurace
@@ -27,7 +18,7 @@ Konfigurace
    set laststatus=2                            " vždy zobraz Airline řádek
 
 Pokud font v terminálu neobsahuje powerline ikonky, je třeba nainstalovat
-font, které je v sobě má, viz::
+font, který je v sobě má, viz::
 
    https://github.com/powerline/fonts
 
