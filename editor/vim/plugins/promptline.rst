@@ -6,3 +6,28 @@
 ---------------------------------------------
 
 https://github.com/edkolev/promptline.vim
+
+Konfigurace
+===========
+
+::
+
+   let g:promptline_preset = {
+       \'a' : [ promptline#slices#user() ],
+       \'b' : [ '\w' ],
+       \'c' : [ promptline#slices#vcs_branch() ],
+       \'y' : [ promptline#slices#python_virtualenv() ]}
+
+Poté je třeba ještě vykonat následující příkazy pro změnu PS1 promptu v Bashi:
+
+1. načíst opětovně konfigurační soubor pro Vim::
+
+      so ~/.vimrc
+
+2. vygenerovat shellový skript z Vimu::
+
+      :PromptlineSnapshot ~/.shell_prompt.sh airline
+
+3. přidat následující řádek do ``~/.bashrc``::
+
+      source ~/.shell_prompt.sh
