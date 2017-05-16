@@ -12,6 +12,10 @@ Konfigurace
 
 ::
 
+   " Zobraz prompt ve tvaru:
+   "
+   " jméno uživatele > cesta do adresáře > git větev > Python virtualenv $
+
    let g:promptline_preset = {
        \'a' : [ promptline#slices#user() ],
        \'b' : [ '\w' ],
