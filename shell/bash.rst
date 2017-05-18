@@ -1659,6 +1659,16 @@ Nainstaluj nějaký baliček(y)::
 
    $ sudo apt install vim
 
+.. tip::
+
+   Balíček ``tree`` umí přehledněji zobrazit adresářovou strukturu::
+
+      $ tree shell/
+      shell/
+      └── bash.rst
+
+      0 directories, 1 file
+
 apt upgrade
 """""""""""
 
