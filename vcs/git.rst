@@ -354,6 +354,69 @@ teprve pak vytvoř commit::
    [master 65a55c2] Clear content of file.txt
     1 file changed, 1 deletion(-)
 
+commit --amend
+""""""""""""""
+
+Zahrň do posledního commitu aktuální soubory ve stavu ``Staged``::
+
+   $ touch another_file.txt
+   $ git add another_file.txt
+   $ git commit --amend
+
+Pokud není žádný soubor ve ``Staged`` módu, tak lze upravit zprávu posledního
+commitu.
+
+.. note::
+
+   Pří zahrnutí souborů do předchozí commitu se znovu otevře editor pro
+   editaci zprávy. Pokud nechci editovat zprávu, tak lze použít ještě volbu
+   ``--no-edit``::
+
+      $ git commit --amend --no-edit
+
+reset
+^^^^^
+
+Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive ``Untracked`` u
+nových souborů::
+
+   $ touch new.txt
+   $ git add new.txt
+   $ git status
+   On branch master
+   Changes to be committed:
+     (use "git reset HEAD <file>..." to unstage)
+
+           new file:   new.txt
+
+   $ git reset HEAD new.txt
+   $ git status
+   On branch master
+   Untracked files:
+     (use "git add <file>..." to include in what will be committed)
+
+           new.txt
+
+   nothing added to commit but untracked files present (use "git add" to track)
+
+.. note::
+
+   Pro změnu stavu z ``Modified`` na ``Unmodified`` (dojde k trvalému zahození
+   změn) je třeba použít jiný příkaz a to::
+
+      $ cat new.txt
+      $ git add new.txt
+      $ git commit -m "Add new.txt"
+      $ echo new > new.txt
+      $ cat new.txt
+      new
+      $ git checkout -- new.txt
+      $ cat new.txt
+      $
+
+reset --hard
+""""""""""""
+
 rm
 ^^
 
@@ -497,7 +560,7 @@ log --stat
 
 Zobraz u historie commitů i přehled souborů, které se změnily::
 
-   $ git log --stat
+   $ git log --stat -1
    commit 239e88de07b21c1be080cc36be8a71ab6264b29f
    Author: Davie Badger <davie.badger@gmail.com>
    Date:   Sun May 21 19:56:34 2017 +0200
@@ -625,3 +688,4 @@ TODO
 * git clean
 * git log --graph u větví a merge requestů
 * git diff HEAD
+* git reset HEAD~
