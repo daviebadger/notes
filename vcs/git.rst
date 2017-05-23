@@ -679,13 +679,152 @@ Ukaž konkrétní commit spolu s rozdíly::
    @@ -0,0 +1 @@
    +Hello World!
 
+Verzování
+---------
+
+Commity lze dále zaobalit do verze (tagu), která vytvoří další opěrný bod v
+historii repozitáře.
+
+tag
+^^^
+
+Zobraz všechny tagy, pokud nějaké existují::
+
+   $ git tag
+   v0.1.0
+
+tag -a
+""""""
+
+Vytvoř nový tag::
+
+   $ git tag -a v0.2.0
+
+.. note::
+
+   Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoří
+   zprávy popisující tag. Otevření editoru lze taktéž přeskočit přes volbu
+   ``-m``::
+
+      $ git tag -a v0.2.0 -m "verze v0.2.0"
+
+.. tip::
+
+   Pomocí ``git show`` lze zobrazit detail tagu::
+
+      $ git show v0.2.0
+      tag v0.2.0
+      Tagger: Davie Badger <davie.badger@gmail.com>
+      Date:   Tue May 23 21:30:05 2017 +0200
+
+      verze v0.2.0
+
+      commit 3cdddbbaf75befae94ea03ef25c304a00a258ebe
+      Author: Davie Badger <davie.badger@gmail.com>
+      Date:   Mon May 22 20:54:39 2017 +0200
+
+          Add new.txt
+
+      diff --git a/new.txt b/new.txt
+      new file mode 100644
+      index 0000000..1385f26
+      --- /dev/null
+      +++ b/new.txt
+      @@ -0,0 +1 @@
+      +hey
+
+
+Odbočka ke způsobu verzování
+""""""""""""""""""""""""""""
+
+Standardizovaným formátem verzování je sémantické verzování, které má
+následující tvar::
+
+   MAJOR.MINOR.PATCH
+
+* MAJOR
+
+  * číslo hlavní verze, kde změny nejsou zpětně kompatibilní z předešlou
+    hlavní verzí
+
+* MINOR
+
+  * číslo vedlejší verze, kde při zachování zpětné kompatibility došlo k
+    přídání další funkcionality
+
+* PATCH
+
+  * číslo aktualizační (záplatové) verze, kde došlo zejména k opravám chyb nebo
+    taky k vylepšení (zefektivnění) algoritmů při zachování zpětné
+    kompatibility
+
+V případě potřeby lze vydat ještě předbězné verze, vyžaduje-li to situace,
+např. maximální otestování softwaru. Tyto předběžné verze používájí následující
+tvar::
+
+   MAJOR.MINOR.PATCH-alpha|beta|rc.číslo
+
+* alpha
+
+  * zmražení vývoje nových funkcionalit, začátek testování softwaru od
+    samotných vývojářů::
+
+       0.3.0-alpha.1
+       0.3.0-alpha.2
+
+* beta
+
+  * začátek testování softwaru ze strany uživatelů::
+
+       0.3.0-beta.1
+       0.3.0-beta.2
+
+* rc
+
+  * konec testování a opravování kódu, pokud se nevyskytne nějaká závažnější
+    chyba::
+
+       0.3.0-rc.1
+       0.3.1-rc.2
+
+  * příprava na vydání finální verze (X.Y.Z)
+
+.. note::
+
+   Zpravidla první tag začína na verzi ``0.1.0``, přičemž v rámci této nulové
+   hlavní verze může dojít k nekompatibilitám mezi vedlejší verzemi, dokud
+   se vývoj nedostatne do stabilní verze ``1.0.0``.
+
+tag -l
+""""""
+
+Zobraz všechny tagy nebo zobraz jen ty tagy, které vyhovují dané masce::
+
+   $ git tag -l "v0.1.*"
+   v0.1.0
+
+tag -d
+""""""
+
+Smaž daný tag::
+
+   $ git tag -d v0.2.0
+   Deleted tag 'v0.2.0' (was a8519ff)
+
+Pokročilé ovládání
+==================
+
 TODO
 ====
 
 * git remote add origin + git pull origin master (existující repozitář)
 * git difftool
-* tvar commit zprávy
+* tvar commit a tag zprávy
 * git clean
 * git log --graph u větví a merge requestů
 * git diff HEAD
 * git reset HEAD~
+* smazání remote tagu
+* lw tagy
+* push tagů
+* checkout tagů
