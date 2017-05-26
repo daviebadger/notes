@@ -377,8 +377,8 @@ commitu.
 reset
 ^^^^^
 
-Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive ``Untracked`` u
-nových souborů::
+Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive na
+``Untracked`` u nových souborů::
 
    $ touch new.txt
    $ git add new.txt
@@ -402,7 +402,7 @@ nových souborů::
 .. note::
 
    Pro změnu stavu z ``Modified`` na ``Unmodified`` (dojde k trvalému zahození
-   změn) je třeba použít jiný příkaz a to::
+   změn) je třeba použít jiný příkaz a to ``git checkout --``::
 
       $ cat new.txt
       $ git add new.txt
@@ -570,10 +570,22 @@ Zobraz u historie commitů i přehled souborů, které se změnily::
     file.txt | 0
     1 file changed, 0 insertions(+), 0 deletions(-)
 
+log --oneline
+"""""""""""""
+
+Zobraz jednořádkově historii commitů, kde jen zkrácený hash commitů a zkrácené
+commit zprávy (předmět)::
+
+   $ git log --oneline
+   3cdddbb Add new.txt
+   239e88d Remove file.txt from Git
+   65a55c2 Clear content of file.txt
+   cb95d79 Add file.txt
+
 log --pretty
 """"""""""""
 
-Uprav výstup historie commitů::
+Uprav výstup historie commitů podle vlastního formátu::
 
    $ git log --pretty=format:"%h - %s (%an, %cr)"
    239e88d - Remove file.txt from Git (Davie Badger, 3 hours ago)
@@ -586,7 +598,7 @@ Legenda voleb ve formátování:
 Volba  Význam
 =====  ======
 %h     zkrácený hash commitu (ID)
-%s     předmět commitu (stručný titulek ze zprávy)
+%s     předmět commitu
 %an    jméno autora
 %cr    čas vytvoření commitu v lidsky čitelné podobě
 =====  ======
@@ -814,6 +826,97 @@ Smaž daný tag::
 Pokročilé ovládání
 ==================
 
+remote
+^^^^^^
+
+Zobraz seznam vzdálených repozitářů::
+
+   $ git remote
+   origin
+
+Odbočka ke vzdáleným repozitářům
+""""""""""""""""""""""""""""""""
+
+origin
+
+remote -v
+^^^^^^^^^
+
+Zobraz podrobně seznam vzdálených repozitářů::
+
+   $ git remote -v
+   origin   https://daviebadger@gitlab.com/daviebadger/notes.git (fetch)
+   origin   https://daviebadger@gitlab.com/daviebadger/notes.git (push)
+
+remote add
+""""""""""
+
+Přidej vzdálený repozitář do Gitu::
+
+   $ git remote add origin https://daviebadger@gitlab.com/daviebadger/notes.git
+
+.. note::
+
+   Příkaz se dá použít v situaci, kdy se nejprve vytvořil lokální repozitář
+   bez klonování pomocí ``git init``. V tomto repozitáři už jsou nějaké soubory
+   a je třeba mít vzdálený repozitář, kam se budou nahrávat změny.
+
+remote show
+"""""""""""
+
+Zobraz informace o daném vzdáleném repozitáři::
+
+   $ git remote show origin
+   * remote origin
+   Fetch URL: https://daviebadger@gitlab.com/daviebadger/configs.git
+   Push  URL: https://daviebadger@gitlab.com/daviebadger/configs.git
+   HEAD branch: master
+   Remote branch:
+     master tracked
+   Local branch configured for 'git pull':
+     master merges with remote master
+   Local ref configured for 'git push':
+     master pushes to master (up to date)
+
+remote rename
+"""""""""""""
+
+remote remove
+"""""""""""""
+
+fetch
+^^^^^
+
+pull
+^^^^
+
+Stáhní ze vzdáleného repozitáře obsah dané větve a tu sluč s aktuální větví,
+ve které se nacházím::
+
+   $ git pull origin master
+
+push
+^^^^
+
+Nahrej na vzdálený repozitář nějakou větev::
+
+   $ git push origin master
+
+Nahrej na vzdálený repozitář nějaký tag::
+
+   $ git push origin v0.1.0
+
+.. tip::
+
+   Nahrávání master větve lze zkrátit příkazem ``git push -u origin master``,
+   pomocí kterého půjde nahrávat master větev zkráceným způsobem::
+
+      $ git push
+
+   Ostatní větve bude třeba nahrávat standardním způsobem::
+
+      $ git push origin <název_větve>
+
 TODO
 ====
 
@@ -828,3 +931,5 @@ TODO
 * lw tagy
 * push tagů
 * checkout tagů
+* git reflog
+* git branch --set-upstream master origin/master
