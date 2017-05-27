@@ -39,10 +39,6 @@ Nastav globálně identitu uživatele (povinné)::
    $ git config --global user.name "Davie Badger"
    $ git config --global user.email "davie.badger@gmail.com"
 
-Nastav globálně editor pro práci s Gitem (nepovinné)::
-
-   $ git config --global code.editor vim
-
 .. note::
 
    Bez použítí volby ``--global`` bude nastavení platné jenom v daném
@@ -51,15 +47,28 @@ Nastav globálně editor pro práci s Gitem (nepovinné)::
 config --list
 """""""""""""
 
-Zobraz veškerá nastavení Gitu::
+Zobraz lokální nastavení Gitu::
 
    $ git config --list
    user.name=Davie Badger
    user.email=davie.badger@gmail.com
-   core.editor=vim
+   core.repositoryformatversion=0
+   core.filemode=true
+   core.bare=false
+   core.logallrefupdates=true
 
-Globální nastavení se ukládá do souboru ``~/.gitignore`` a lokální v repozitáři
-v ``.git/config``.
+.. note::
+
+   Lokální nastavení se zobrazí jen v případě, kdy se aktuální pracovní
+   adresář nachází uvnitř repozitáře. Mimo repozitář se zobrazí globální
+   nastavení. To lze také zobrazit příkazem::
+
+      $ git config --global --list
+      user.name=Davie Badger
+      user.email=davie.badger@gmail.com
+
+Globální nastavení se ukládá do souboru ``~/.gitignore`` a lokální v rootu
+repozitáře v ``.git/config``.
 
 .. tip::
 
@@ -76,7 +85,7 @@ init
 
 Vytvoř Git repozitář v nějakém adresáři::
 
-   $ cd project/
+   $ cd dir/
    $ git init
 
 .. note::
@@ -89,10 +98,10 @@ clone
 
 Zkopíruj odněkud již existující repozitář::
 
-   $ ls
    $ git https://daviebadger@gitlab.com/daviebadger/notes.git
    $ ls
    notes
+   $ cd notes
 
 .. tip::
 
@@ -101,6 +110,13 @@ Zkopíruj odněkud již existující repozitář::
       $ git clone https://daviebadger@gitlab.com/daviebadger/notes.git poznamky
       $ ls
       poznamky
+
+.. tip::
+
+   Zkopíruj existující repozitář do aktuálního pracovní adresáře bez vytvoření
+   stejnojmenné složky::
+
+      $ git clone https://daviebadger@gitlab.com/daviebadger/notes.git .
 
 Zaznamenávání změn v repozitáři
 -------------------------------
@@ -118,12 +134,11 @@ Zobraz aktuální stav repozitáře::
    nothing to commit (create/copy files and use "git add" to track)
 
 Pokud není žádná zmíňka o souborech v adresáři, tak se aktuální obsah
-repozitáře nijak neliší od předchozího uloženého stavu, respektive snímku
-(commit).
+repozitáře nijak neliší od předchozího uloženého stavu, respektive snímku.
 
 .. note::
 
-   V případě zkopírovaného adresáře by byl stav následující::
+   V případě naklonovaného adresáře by byl stav následující::
 
       $ git status
       On branch master
@@ -137,7 +152,7 @@ Soubory v repozitářích se mohou nacházet v následujících stavech:
 
 * Untracked
 
-  * nový soubor, který není v předchozí snímku repozitáře a v aktuální stavu
+  * nový soubor, který není v předchozím snímku repozitáře a v aktuální stavu
     repozitáře není ještě sledován Gitem::
 
        $ ls
@@ -164,13 +179,13 @@ Soubory v repozitářích se mohou nacházet v následujících stavech:
   * soubor se nachází v předchozím snímku, ale v aktuálním stavu repozitáře
     došlo k jeho modifikaci (změna obsahu souboru, přejmenování, smazání atd.),
     přičemž tato modifikace není zaznamenána
-  * taktéž se jedna o soubor, kde byla zaznamenána modifikace, ale v daném
+  * taktéž se jedná o soubor, kde byla zaznamenána modifikace, ale v daném
     souboru došlo ještě k další modifikaci, která už není zaznamenána
 
 * Staged
 
   * soubor, který je zaznamenán včetně jeho modifikace a je připraven pro
-    uložení aktuálního stavu repozitáře (vytvoření snímku)::
+    uložení stavu (vytvoření snímku)::
 
        $ git status
        On branch master
@@ -211,8 +226,8 @@ Odbočka k ignorování některých souborů
 """"""""""""""""""""""""""""""""""""""
 
 Defaultně se v ``Untracked`` stavu objeví všechny nové soubory v repozitáři
-kromě prázdných adresářů. Tomuto chování lze pomocí souboru ``.gitignore``
-v kořenu repozitáře, kde lze nadefinovat masky::
+kromě prázdných adresářů. Tomuto chování lze zabránit pomocí souboru
+``.gitignore`` v kořenu repozitáře, kde lze nadefinovat masky::
 
    # ignoruj všechny soubor s koncovkou .txt
 
@@ -226,7 +241,7 @@ v kořenu repozitáře, kde lze nadefinovat masky::
 
    __pycache__/
 
-   # ignoruj všechny soubor v kořenovém adresáři
+   # ignoruj všechny soubory v kořenovém adresáři
 
    /*
 
@@ -242,7 +257,7 @@ v kořenu repozitáře, kde lze nadefinovat masky::
 
    Pokud někdo používá editor X a ten vytváří v repozitáři soubory, které se
    u jiných uživatelů netvoří, tak je vhodné mít globální ``.gitignore``,
-   např. ``~/.gitignore``::
+   např. v ``~/.gitignore``::
 
       $ git config --global core.excludesfile ~/.gitignore
       $ echo "*.txt" > ~/.gitignore
@@ -250,9 +265,7 @@ v kořenu repozitáře, kde lze nadefinovat masky::
 diff
 ^^^^
 
-Zobraz rozdíl mezi předchozím snímkem souboru (stav ``Unmodified``) nebo mezi
-poslední zaznamenanou změnou (stav ``Staged``) a aktuálním stavem souboru
-(stav ``Modified``)::
+Zobraz rozdíly v souborech::
 
    $ touch file.txt
    $ git add file.txt
@@ -265,21 +278,25 @@ poslední zaznamenanou změnou (stav ``Staged``) a aktuálním stavem souboru
    @@ -0,0 +1 @@
    +Hello World!
 
-Zobraz tyto rozdíly u všech souborů z daného adresáře::
+.. note::
+
+   Rozdíly se zobrazí jen u těch souborů, které nejsou ve ``Staged`` módu a
+   zároveň u nich existuje poslední zaznamenána změna nebo snímek, aby vůbec
+   bylo možné nějaké rozdíly zobrazit.
+
+Zobraz rozdíl jen u konkrétních složek::
 
    $ git diff dir/
 
-Zobraz tyto rozdíly u všech souborů v daném repozitáři::
+Zobraz rozdíly jen u konkrétních souborů::
 
-   $ git diff
+   $ git diff file.txt
 
 diff --staged
 """""""""""""
 
-Zobraz rozdíl mezi předchozím stavem souboru a aktuálním stavem souboru ve
-``Staged`` stavu::
+Zobraz rozdíly u těch souborů, které jsou ve ``Staged`` módu::
 
-   $ rm file.txt
    $ echo Hello World! > file.txt
    $ git add file.txt
    $ git diff
@@ -297,6 +314,36 @@ Zobraz rozdíl mezi předchozím stavem souboru a aktuálním stavem souboru ve
    Pomocí ``--staged`` volby lze zjistit, jaké změny v souboru se uloží do
    snímku.
 
+diff HEAD
+"""""""""
+
+Zobraz rozdíly nezáležijích na stavu souborů::
+
+   $ git diff HEAD
+
+.. note::
+
+   ``HEAD`` v Gitu odkazuje na poslední snímek ve větvi, kde se právě nacházím.
+
+   Jinými slovy pomocí ``HEAD`` reference pro ``git diff`` příkaz půjdou vidět
+   veškeré změny od posledního snímku, ať už se soubor nachází v jakémkoliv
+   stavu.
+
+.. tip::
+
+   Rozdíly v souborech lze zobrazovat i pomocí nástrojů k tomu určených,
+   které umí vedle sebe zobrazit obsah původního a změněného souboru. V případě
+   editoru Vim lze použít následující konfiguraci::
+
+      $ git config --global diff.tool vimdiff
+      $ git config --global difftool.prompt false
+
+   Poté je třeba místo ``git diff`` příkazu psát ``git difftool``::
+
+      $ git difftool file.txt
+
+   V případě vícero souborů se pro každý soubor pustí nová instance Vimdiffu.
+
 commit
 ^^^^^^
 
@@ -305,8 +352,8 @@ které jsou ve stavu ``Staged``::
 
    $ git commit
 
-Vykonáním tohoto příkazu se otevře editor, kde je třeba napsat stručně zprávu,
-která popisuje změny v repozitáři::
+Vykonáním tohoto příkazu se otevře výchozi editor, kde je třeba napsat stručně
+zprávu, která popisuje změny v repozitáři::
 
    Add file.txt
 
@@ -322,7 +369,47 @@ která popisuje změny v repozitáři::
 
 Po uložení této zprávy a zavření editoru se vytvoří snímek (commit) repozitáře
 jako opěrný bod v historii repozitáře, ke kterému se lze kdykoliv vrátit a
-obnovit obsah adresáře zpětně do tohoto stavu.
+obnovit obsah repozitáře zpětně do tohoto stavu.
+
+.. tip::
+
+   Nastavení konkrétního editoru pro Git::
+
+      $ git config --global code.editor vim
+
+Odbočka ke commit zprávám
+"""""""""""""""""""""""""
+
+Dobře formovaná commit zpráva se drží následující standardizované struktury::
+
+   Předmět zprávy do 50 znaků (povinné)
+
+   Předmět zprávy je jako předmět u emailu. Měl by stručně vyjádřit, k
+   jaké změně v commitu došlo. Vyjadření by mělo být ve tvaru rozkazovacího
+   způsobu, např. "Update API documentation".
+
+   Předmět zprávy začíná velkým písmem a nekončí tečkou na konci. Na konci
+   předmětu zprávy lze vložit odkaz na číslo issue na GitHubu / GitLabu, např.
+   "Update API documentation (#123)".
+
+   U rozsáhlejších projektů lze ještě použít prefixy, které vystihují oblast,
+   které se týka commit, např. "doc: Update API documentation".
+
+   Zkráceně:
+
+   * předmět zprávy do 50 znaků s velkým prvním písmenem a bez tečky na konci,
+     ve kterém je stručný popis změny v repozitáři v rozkazovacím způsobu
+   * předmět je povinný, za kterým může následovat tělo zprávý, avšak mezi nimi
+     musí být jedna prázdná mezera
+   * v nepovinném tělu lze podrobně popsat, proč došlo k dané změně
+   * vysvětlení lze strukturovat do odstavců a případně i použít nečíslované
+     seznamy pomocí hvězdiček "*" a nebo pomlček "-"
+   * délka řádku v těle by neměla překročit hranici 72 znaků
+
+.. note::
+
+   Předmět zprávy je velmi důležitý, neboť se s ním bude pracovat i v jiných
+   příkazech.
 
 commit -m
 """""""""
@@ -335,12 +422,15 @@ argument pro volbu ``-m``::
     1 file changed, 1 insertion(+)
     create mode 100644 file.txt
 
+.. note::
+
+   Volba ``-m`` je vhodná jen pro případy, kdy stačí jen předmět zprávy.
 
 commit -a
 """""""""
 
-Přidej do ``Staged`` stavu i ty soubory, které jsou ve stavu ``Modified`` a
-teprve pak vytvoř commit::
+Přidej do ``Staged`` stavu soubory, které jsou ve stavu ``Modified`` a vytvoř
+commit::
 
    $ > file.txt
    $ git diff
@@ -354,6 +444,10 @@ teprve pak vytvoř commit::
    [master 65a55c2] Clear content of file.txt
     1 file changed, 1 deletion(-)
 
+.. note::
+
+   Platí jen pro soubory, které byly před změnou ve stavu ``Unmodified``.
+
 commit --amend
 """"""""""""""
 
@@ -363,10 +457,12 @@ Zahrň do posledního commitu aktuální soubory ve stavu ``Staged``::
    $ git add another_file.txt
    $ git commit --amend
 
-Pokud není žádný soubor ve ``Staged`` módu, tak lze upravit zprávu posledního
-commitu.
-
 .. note::
+
+   Pokud není žádný soubor ve ``Staged`` módu, tak lze upravit zprávu posledního
+   commitu.
+
+.. tip::
 
    Pří zahrnutí souborů do předchozí commitu se znovu otevře editor pro
    editaci zprávy. Pokud nechci editovat zprávu, tak lze použít ještě volbu
@@ -452,7 +548,7 @@ Odstraň z Gitu daný soubor(y) a taktéž jej trvale smaž::
 .. tip::
 
    U tohoto příkazu jdou použít známé volby ``-f`` nebo ``-r``, jako u
-   klasíckého ``rm`` příkazu.
+   klasíckého Unixového``rm`` příkazu.
 
 rm --cached
 """""""""""
@@ -498,9 +594,8 @@ věděl Git::
       $ git rm file.txt
       $ git add f.txt
 
-
-Historie snímků
----------------
+Historie commitů
+----------------
 
 log
 ^^^
@@ -525,6 +620,10 @@ Zobraz historii všech commitů::
    Date:   Sun May 21 15:14:51 2017 +0200
 
        Add file.txt
+
+.. note::
+
+   Z commitů jsou vytažený jenom předměty zpráv.
 
 log -N
 """"""
@@ -573,8 +672,8 @@ Zobraz u historie commitů i přehled souborů, které se změnily::
 log --oneline
 """""""""""""
 
-Zobraz jednořádkově historii commitů, kde jen zkrácený hash commitů a zkrácené
-commit zprávy (předmět)::
+Zobraz jednořádkově historii commitů, kde jsou jen hashe commitů (ID) a
+předměty commitů::
 
    $ git log --oneline
    3cdddbb Add new.txt
@@ -597,10 +696,10 @@ Legenda voleb ve formátování:
 =====  ======
 Volba  Význam
 =====  ======
-%h     zkrácený hash commitu (ID)
+%h     zkrácený hash commitu
 %s     předmět commitu
 %an    jméno autora
-%cr    čas vytvoření commitu v lidsky čitelné podobě
+%cr    relativní čas vytvoření commitu
 =====  ======
 
 .. note::
@@ -628,7 +727,9 @@ Zobraz jen ty commity, které mají ve zprávě daný text::
    nicméně Git defaultně tyto podmínky nesčítá do jedné velké. Jinými slovy
    stačí, aby jedna z těchto podmínek byla platná.
 
-   Pro sečtení těchto podmínek je třeba ještě použít volbu ``--all-match``.
+   Pro sečtení těchto podmínek je třeba ještě použít volbu ``--all-match``::
+
+      $ git log --grep=file.txt --author="Davie Badger" --all-match
 
 .. tip::
 
@@ -712,13 +813,15 @@ Vytvoř nový tag::
 
    $ git tag -a v0.2.0
 
+Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoří
+zprávy popisující tag. Otevření editoru lze taktéž přeskočit přes volbu
+``-m``::
+
+   $ git tag -a v0.2.0 -m "v0.2.0"
+
 .. note::
 
-   Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoří
-   zprávy popisující tag. Otevření editoru lze taktéž přeskočit přes volbu
-   ``-m``::
-
-      $ git tag -a v0.2.0 -m "verze v0.2.0"
+   U tagových zpráv lze aplikovat stejný formát jako u commit zpráv.
 
 .. tip::
 
@@ -745,7 +848,6 @@ Vytvoř nový tag::
       @@ -0,0 +1 @@
       +hey
 
-
 Odbočka ke způsobu verzování
 """"""""""""""""""""""""""""
 
@@ -767,20 +869,27 @@ následující tvar::
 * PATCH
 
   * číslo aktualizační (záplatové) verze, kde došlo zejména k opravám chyb nebo
-    taky k vylepšení (zefektivnění) algoritmů při zachování zpětné
+    taky k vylepšení algoritmů (zrychlení běhu programu) při zachování zpětné
     kompatibility
+
+.. note::
+
+   Zpravidla první tag začína na verzi ``0.1.0``, přičemž v rámci této nulové
+   hlavní verze může dojít k nekompatibilitám mezi vedlejší verzemi, dokud
+   se vývoj nedostatne do stabilní verze ``1.0.0``.
 
 V případě potřeby lze vydat ještě předbězné verze, vyžaduje-li to situace,
 např. maximální otestování softwaru. Tyto předběžné verze používájí následující
 tvar::
 
-   MAJOR.MINOR.PATCH-alpha|beta|rc.číslo
+   MAJOR.MINOR.PATCH-alpha|beta|rc[.číslo]
 
 * alpha
 
   * zmražení vývoje nových funkcionalit, začátek testování softwaru od
     samotných vývojářů::
 
+       0.3.0-alpha
        0.3.0-alpha.1
        0.3.0-alpha.2
 
@@ -788,6 +897,7 @@ tvar::
 
   * začátek testování softwaru ze strany uživatelů::
 
+       0.3.0-beta
        0.3.0-beta.1
        0.3.0-beta.2
 
@@ -796,23 +906,18 @@ tvar::
   * konec testování a opravování kódu, pokud se nevyskytne nějaká závažnější
     chyba::
 
+       0.3.0-rc
        0.3.0-rc.1
        0.3.1-rc.2
 
   * příprava na vydání finální verze (X.Y.Z)
-
-.. note::
-
-   Zpravidla první tag začína na verzi ``0.1.0``, přičemž v rámci této nulové
-   hlavní verze může dojít k nekompatibilitám mezi vedlejší verzemi, dokud
-   se vývoj nedostatne do stabilní verze ``1.0.0``.
 
 tag -l
 """"""
 
 Zobraz všechny tagy nebo zobraz jen ty tagy, které vyhovují dané masce::
 
-   $ git tag -l "v0.1.*"
+   $ git tag -l v0.1.*
    v0.1.0
 
 tag -d
@@ -825,6 +930,12 @@ Smaž daný tag::
 
 Pokročilé ovládání
 ==================
+
+Větvení
+-------
+
+Vzdálené repozitáře
+-------------------
 
 remote
 ^^^^^^
@@ -917,19 +1028,121 @@ Nahrej na vzdálený repozitář nějaký tag::
 
       $ git push origin <název_větve>
 
+branch
+^^^^^^
+
+Zobraz seznam lokálních větví::
+
+   $ git branch
+   * master
+
+.. note::
+
+   ``*`` u větve znamená, že se v ní právě teď nacházím.
+
+Taktéž vytvoř novou větev::
+
+   $ git branch <jméno_větve>
+
+Odbočka k větvím
+""""""""""""""""
+
+branch -r
+"""""""""
+
+Zobraz seznam větví ve vzdáleném repozitáři::
+
+   $ git branch -r
+     origin/HEAD -> origin/master
+     origin/master
+
+branch --merged
+"""""""""""""""
+
+Zobraz seznam větví, které už jsou mergnuté::
+
+   $ git branch --merged
+
+branch --no-merged
+""""""""""""""""""
+
+Zobraz seznam větví, které ještě nejsou mergnuté::
+
+   $ git branch --no-merged
+
+branch -m
+"""""""""
+
+Přejmenuj aktuální větev na jiné jméno::
+
+   $ git branch -m <nové_jméno_větve>
+
+Přejmenuj nějakou větev na jiné jméno::
+
+   $ git branch -m <staré_jméno_vetvě> <nové_jméno_větve>
+
+branch -d
+"""""""""
+
+Smaž danou větev::
+
+   $ git branch -d <jméno_větve>
+
+.. note::
+
+   Git může odmítnout smazání dané větve, neboť ještě nebyla mergnuta do jiné
+   větve. Pro násilné smázání této větve je třeba použít ``-D`` volbu::
+
+      $ git branch -D <jméno_větve>
+
+checkout
+^^^^^^^^
+
+Přepni se na jinou větev::
+
+   $ git checkout <název_větve>
+
+checkout -b
+^^^^^^^^^^^
+
+Vytvoř novou větev a hned se na ni přepni::
+
+   $ git checkout -b <název_větve>
+
+Vytvoř novou větev z nějakého opěrného bodu a hned se na ni přepni::
+
+   $ git checkout -b <název_větve> origin/master
+   $ git checkout -b <název_větve> 509677f
+   $ git checkout -b <název_větve> v0.1.0
+
+merge
+^^^^^
+
+Spoj obsah aktuální větve s nějakou jinou větví::
+
+   $ git merge <název_větve>
+
+Odbočka ke konfliktům
+"""""""""""""""""""""
+
+git mergetool vimdiff
+
+git config --global merge.tool vimdiff
+
+stash
+^^^^^
+
 TODO
 ====
 
-* git remote add origin + git pull origin master (existující repozitář)
-* git difftool
-* tvar commit a tag zprávy
 * git clean
 * git log --graph u větví a merge requestů
-* git diff HEAD
 * git reset HEAD~
 * smazání remote tagu
-* lw tagy
-* push tagů
 * checkout tagů
 * git reflog
 * git branch --set-upstream master origin/master
+* git rebase
+* workflow
+* blame
+* změna zprávy u commitu a tagu
