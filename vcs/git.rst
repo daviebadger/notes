@@ -934,6 +934,187 @@ Pokročilé ovládání
 Větvení
 -------
 
+branch
+^^^^^^
+
+Zobraz seznam lokálních větví::
+
+   $ git branch
+   * master
+
+Vytvoř novou lokální větev::
+
+   $ git branch devel
+   $ git branch
+     devel
+   * master
+
+.. note::
+
+   ``*`` indikuje aktuální větev, ve které se právě teď nacházím.
+
+Odbočka k větvím
+""""""""""""""""
+
+Pomocí větví lze separovat kód pro vývoj nových funkcionalit nebo pro opravu
+chyb, aniž by se nějak narušoval funkční kód. Větve umí automaticky vytvořit
+kopii kódu, tudíž není třeba spravovat archívy nebo opouštět pracovní adresář.
+
+Každý repozitář vždy začíná na větví zvane ``master``, od které lze odbočit
+do jiné větve něco vyvinout nebo opravit a pak se vrátit zprátky. Tuto
+odbočenou větev lze pak sloučit do ``master`` větve, aby se sjednotil kód.
+
+::
+
+   fix:           commit
+                 /      \
+   master: commit ------ commit ------------------------ commit
+                               \                        /
+   feature:                     commit - commit - commit
+
+Taktéž větve slouží k tomu, aby mnoho lidí najednou neměnilo obsah repozitáře,
+ale každý si vytvořil svoji vlastní kopii. V ní provedl svůj umýsl, nechal
+otestovat a zkontrolovat kód, než se větev sloučí s ``master`` větví.
+
+.. note::
+
+   Větve se nemusí nutně slučovat, pokud je nutné udržovat různé verze
+   projektu.
+
+Zpravidla v ``master`` větvi se nachází kód pro vývoj. U uzavřených projektů je
+větev ``stable``, která je nasazená v ostrém provozu (produkci). V případě
+otevřených projektů mohou být větve podle vedlejšich verzí projektu, např.
+``v2.1`` nebo ``v2.1.x``.
+
+Ostatní větve lze pak různě pojmenovat a záleží jen na domluvě v týmu, jaký
+standard se bude dodržovat.
+
+Ukázky možných pojménování větví::
+
+   bug-fix-imports
+   bug/fix-imports
+   bug-123-fix-imports
+   bug/123/fix-imports
+
+   feature-async-requests
+   feature-123-async-requests
+   feature/async-requests
+
+   hotfix-memory-leak
+   hotfix/memory-leak
+
+   async-requests
+   123-async-requests
+   123/async-requests
+
+   daviebadger-async-requests
+   daviebadger/async-requests
+
+.. note::
+
+   ID čísla zpravidla výchazejí z nějakého trackovacího nástroje.
+
+branch -r
+"""""""""
+
+Zobraz seznam větví ve vzdáleném repozitáři::
+
+   $ git branch -r
+     origin/HEAD -> origin/master
+     origin/master
+
+.. note::
+
+   Je třeba mít zpravidla naklonovaný repozitář.
+
+branch --merged
+"""""""""""""""
+
+Zobraz seznam větví, které už jsou sloučené do nějaké jiné větve::
+
+   $ git branch --merged
+
+.. note::
+
+   Mergnuté větve je třeba pravidelně mazat, neboť už nemají žádný další užitek
+   a svůj účel už naplnily, aby nedošlo k nepořádkům v repozitáři.
+
+branch --no-merged
+""""""""""""""""""
+
+Zobraz seznam větví, které ještě nejsou mergnuté::
+
+   $ git branch --no-merged
+
+branch -m
+"""""""""
+
+Přejmenuj aktuální větev na jiné jméno::
+
+   $ git status
+   On branch devel
+   nothing to commit, working tree clean
+   $ git branch -m develop
+   $ git status
+   On branch develop
+   nothing to commit, working tree clean
+
+Přejmenuj nějakou větev na jiné jméno::
+
+   $ git branch -m <staré_jméno_větve> <nové_jméno_větve>
+
+branch -d
+"""""""""
+
+Smaž danou větev::
+
+   $ git branch -d <jméno_větve>
+
+.. note::
+
+   Git může odmítnout smazání dané větve, neboť ještě nebyla mergnuta do jiné
+   větve. Pro násilné smázání této větve je třeba použít ``-D`` volbu::
+
+      $ git branch -D <jméno_větve>
+
+checkout
+^^^^^^^^
+
+Přepni se na jinou větev::
+
+   $ git checkout <název_větve>
+
+checkout -b
+^^^^^^^^^^^
+
+Vytvoř novou větev a hned se na ni přepni::
+
+   $ git checkout -b <název_větve>
+
+Vytvoř novou větev z nějakého opěrného bodu a hned se na ni přepni::
+
+   $ git checkout -b <název_větve> origin/master
+   $ git checkout -b <název_větve> 509677f
+   $ git checkout -b <název_větve> v0.1.0
+
+merge
+^^^^^
+
+Spoj obsah aktuální větve s nějakou jinou větví::
+
+   $ git merge <název_větve>
+
+Odbočka ke konfliktům
+"""""""""""""""""""""
+
+git mergetool vimdiff
+
+git config --global merge.tool vimdiff
+
+stash
+^^^^^
+
+
 Vzdálené repozitáře
 -------------------
 
@@ -1027,110 +1208,6 @@ Nahrej na vzdálený repozitář nějaký tag::
    Ostatní větve bude třeba nahrávat standardním způsobem::
 
       $ git push origin <název_větve>
-
-branch
-^^^^^^
-
-Zobraz seznam lokálních větví::
-
-   $ git branch
-   * master
-
-.. note::
-
-   ``*`` u větve znamená, že se v ní právě teď nacházím.
-
-Taktéž vytvoř novou větev::
-
-   $ git branch <jméno_větve>
-
-Odbočka k větvím
-""""""""""""""""
-
-branch -r
-"""""""""
-
-Zobraz seznam větví ve vzdáleném repozitáři::
-
-   $ git branch -r
-     origin/HEAD -> origin/master
-     origin/master
-
-branch --merged
-"""""""""""""""
-
-Zobraz seznam větví, které už jsou mergnuté::
-
-   $ git branch --merged
-
-branch --no-merged
-""""""""""""""""""
-
-Zobraz seznam větví, které ještě nejsou mergnuté::
-
-   $ git branch --no-merged
-
-branch -m
-"""""""""
-
-Přejmenuj aktuální větev na jiné jméno::
-
-   $ git branch -m <nové_jméno_větve>
-
-Přejmenuj nějakou větev na jiné jméno::
-
-   $ git branch -m <staré_jméno_vetvě> <nové_jméno_větve>
-
-branch -d
-"""""""""
-
-Smaž danou větev::
-
-   $ git branch -d <jméno_větve>
-
-.. note::
-
-   Git může odmítnout smazání dané větve, neboť ještě nebyla mergnuta do jiné
-   větve. Pro násilné smázání této větve je třeba použít ``-D`` volbu::
-
-      $ git branch -D <jméno_větve>
-
-checkout
-^^^^^^^^
-
-Přepni se na jinou větev::
-
-   $ git checkout <název_větve>
-
-checkout -b
-^^^^^^^^^^^
-
-Vytvoř novou větev a hned se na ni přepni::
-
-   $ git checkout -b <název_větve>
-
-Vytvoř novou větev z nějakého opěrného bodu a hned se na ni přepni::
-
-   $ git checkout -b <název_větve> origin/master
-   $ git checkout -b <název_větve> 509677f
-   $ git checkout -b <název_větve> v0.1.0
-
-merge
-^^^^^
-
-Spoj obsah aktuální větve s nějakou jinou větví::
-
-   $ git merge <název_větve>
-
-Odbočka ke konfliktům
-"""""""""""""""""""""
-
-git mergetool vimdiff
-
-git config --global merge.tool vimdiff
-
-stash
-^^^^^
 
 TODO
 ====
