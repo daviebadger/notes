@@ -1084,6 +1084,21 @@ Přepni se na jinou větev::
 
    $ git checkout <název_větve>
 
+.. note::
+
+   Git může odmítnout přepnutí na jinou větev, pokud v aktuální větví došlo
+   ke změně nějakého ``Unmodified`` souboru (změna není commitnuta), přičemž v
+   jiné větvi by byl soubor bez dané změny (kolize).
+
+      error: Your local changes to the following files would be overwritten by
+      checkout:
+              file.txt
+      Please commit your changes or stash them before you switch branches.
+      Aborting
+
+   Pokud se v aktuální větvi nacházejí nové soubory, u kterých ještě neexistuje
+   historie, tak se automaticky přenáší do dané větve.
+
 checkout -b
 ^^^^^^^^^^^
 
@@ -1096,6 +1111,96 @@ Vytvoř novou větev z nějakého opěrného bodu a hned se na ni přepni::
    $ git checkout -b <název_větve> origin/master
    $ git checkout -b <název_větve> 509677f
    $ git checkout -b <název_větve> v0.1.0
+
+stash
+^^^^^
+
+Ulož bokem aktuální stav větve bez ohledu na stav souborů::
+
+   $ git status
+   On branch master
+   Changes to be committed:
+     (use "git reset HEAD <file>..." to unstage)
+     
+           modified:   file.txt
+
+   $ git stash
+   $ git status
+   On branch master
+   nothing to commit, working tree clean
+
+.. note::
+
+   Při takovémto vyčištění aktuální větve se lze bez problému přepnout na
+   jinou větev, aniž by došlo k nějaké kolizi.
+
+.. tip::
+
+   Při uložení stavu větve defaultně Git neumí schovat i ``Untracked`` soubory.
+   Pro zamezení tohoto chování je třeba použít volbu ``-u``:
+
+      $ git stash -u
+
+stash list
+""""""""""
+
+Zobraz seznam uložených stavů::
+
+   $ git stash list
+   stash@{0}: WIP on master: 9172924 Add file.txt
+
+stash pop
+"""""""""
+
+Vrať konkrétní uložený stav větve a zároveň smaž daný stash::
+
+   $ git stash pop stash@{0}
+   On branch master
+   Changes not staged for commit:
+     (use "git add <file>..." to update what will be committed)
+     (use "git checkout -- <file>..." to discard changes in working directory)
+
+      modified:   file.txt
+
+   no changes added to commit (use "git add" and/or "git commit -a")
+   Dropped refs/stash@{0} (a0eaf5fd566b8093738316de94eaa43381a02e0d)
+
+.. note::
+
+   Při navrácení stavu větve defaultně Git neumí ponechat soubory i ve stavu
+   ``Tracked``, neboť je vždy vrátí o úroveň níž. Pro zamezení tohoto chování
+   je třeba použít volbu ``--index``::
+
+      $ git stash pop stash@{0} --index
+      On branch master
+      Changes to be committed:
+        (use "git reset HEAD <file>..." to unstage)
+
+              modified:   file.txt
+
+      Dropped refs/stash@{0} (dab54976af669f4933e4d5ac5441b5faed27d923)
+
+.. tip::
+
+   Bez uvedení reference na konkrétní stash se vrátí naposled uložený stav::
+
+      $ git stash pop
+
+stash drop
+""""""""""
+
+Odstraň konkrétní uložený stash::
+
+   $ git stash drop stash@{0}
+
+stash clear
+"""""""""""
+
+Odstraň všechny uložené stashe::
+
+   $ git stash clear
+   $ git stash list
+   $
 
 merge
 ^^^^^
@@ -1110,10 +1215,6 @@ Odbočka ke konfliktům
 git mergetool vimdiff
 
 git config --global merge.tool vimdiff
-
-stash
-^^^^^
-
 
 Vzdálené repozitáře
 -------------------
