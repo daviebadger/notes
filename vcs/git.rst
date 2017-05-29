@@ -1258,9 +1258,66 @@ Sluč obsah aktuální větve s nějakou jinou větví::
 Odbočka ke konfliktům
 """""""""""""""""""""
 
-git mergetool vimdiff
+Při slučování větví může dojít ke konfliktu, neboť se obou větví změnil
+soubor(y) a Git neví, které verza je ta správná::
 
-git config --global merge.tool vimdiff
+   $ git init
+   $ echo hello > hello.txt
+   $ git add hello.txt && git commit -m "Add hello.txt"
+   $ git checkout -b update-hello
+   $ echo davie >> hello.txt
+   $ git add hello.txt && git commit -m "Update hello.txt"
+   $ git checkout master
+   $ echo world >> hello.txt
+   $ git add hello.txt && git commit -m "Update hello.txt"
+   $ git merge update-hello
+   Auto-merging hello.txt
+   CONFLICT (content): Merge conflict in hello.txt
+   Automatic merge failed; fix conflicts and then commit the result.
+
+Každý konfliktní soubor bude mít v sobě následující značky::
+
+   hello
+   <<<<<<< HEAD
+   world
+   =======
+   davie
+   >>>>>>> update-hello
+
+Mezi značkou ``<<<<<<< HEAD`` a ``=======`` se nachází verze souboru v aktální
+větvi. Mezi ``=======`` a ``>>>>>>> update-hello`` pak verze z dané větve. Z
+těchto dvou variant je třeba vybrat tu, které má zůstat a zbytek smazat včetně
+značek.
+
+.. note::
+
+   Vyřešené konfliktní soubory je třeba přidat do ``Staged`` módu a vytvořit
+   merge commit::
+
+      $ git add hello.txt
+      $ git commit
+
+.. tip::
+
+   Konflikty v souborech lze řešit i pomocí nástrojů k tomu určených, které umí
+   zobrazit verzi souboru před konfliktem, verzi ve větvi A a větvi B a obsah
+   souboru po konfliktu. V případě editoru Vim lze použít následující
+   konfiguraci::
+
+      git config --global merge.tool vimdiff
+      git config --global mergetool.prompt false
+
+   Poté je třeba použít příkaz ``git mergetool``::
+
+      $ git mergetool
+      $ git mergetool hello.txt
+
+   Po zavření editoru je třeba odpověd, zda došlo k vyřešení konflitku v
+   souboru (``y``) nebo ne (``n``)::
+
+      Was the merge successful [y/n]?
+
+   Při úšpěšném vyřešení konfliktu se soubor přidá do ``Staged`` stavu.
 
 merge --no-ff
 """""""""""""
@@ -1295,7 +1352,19 @@ Zobraz seznam vzdálených repozitářů::
 Odbočka ke vzdáleným repozitářům
 """"""""""""""""""""""""""""""""
 
-origin
+Repozitáře nemusí existovat jen lokálně, ale mohou být taky na nějakém Git
+serveru, kam můžou mít uživatelé přístup. 
+
+Vzdálené repozitáře slouží jako centrální místo, odkud si uživatele tahají
+veškeré změny nebo naopak je tam nahrávájí. Vedle toho jsou vhodné i pro
+zálohování kódu.
+
+Každý vzdálený repozitář je zpravidla pojmenován jako ``origin``.
+
+.. note::
+
+   Při práci se vzdálenými repozitáři nejčastěji vznikají konflikty při
+   mergování.
 
 remote -v
 ^^^^^^^^^
@@ -1305,6 +1374,13 @@ Zobraz podrobně seznam vzdálených repozitářů::
    $ git remote -v
    origin   https://daviebadger@gitlab.com/daviebadger/notes.git (fetch)
    origin   https://daviebadger@gitlab.com/daviebadger/notes.git (push)
+
+.. tip::
+
+   Pokud došlo k přesunutí vzdáleného repozitáře na jiné místo nebo ke změně
+   přístupu, tak pomocí ``git remote set-url`` lze nastavit změnu::
+
+      $ git remote set-url origin git@gitlab.com:daviebadger/notes.git
 
 remote add
 """"""""""
@@ -1336,14 +1412,17 @@ Zobraz informace o daném vzdáleném repozitáři::
    Local ref configured for 'git push':
      master pushes to master (up to date)
 
-remote rename
-"""""""""""""
-
 remote remove
 """""""""""""
 
+Odstraň spojení se vzdáleným repozitářem::
+
+   $ git remote remove origin
+
 fetch
 ^^^^^
+
+
 
 pull
 ^^^^
@@ -1367,7 +1446,7 @@ Nahrej na vzdálený repozitář nějaký tag::
 .. tip::
 
    Nahrávání master větve lze zkrátit příkazem ``git push -u origin master``,
-   pomocí kterého půjde nahrávat master větev zkráceným způsobem::
+   pomocí kterého půjde nahrávat ``master`` větev zkráceným způsobem::
 
       $ git push
 
@@ -1379,12 +1458,11 @@ TODO
 ====
 
 * git clean
-* git log --graph u větví a merge requestů
 * git reset HEAD~
 * smazání remote tagu
 * git reflog
 * git branch --set-upstream master origin/master
 * git rebase
 * workflow
-* blame
-* změna zprávy u commitu a tagu
+* git blame
+* změna zprávy u tagu
