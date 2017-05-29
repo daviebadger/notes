@@ -91,7 +91,8 @@ Vytvoř Git repozitář v nějakém adresáři::
 .. note::
 
    Při vytvoření repozitáře vznikne skrytý ``.git/`` adresář, kam se ukládájí
-   informace o repozitáři.
+   informace o repozitáři. Při smazání tohoto adresáře dojde k zániku Gitu,
+   avšak soubory a adresáři zůstanou.
 
 clone
 ^^^^^
@@ -1099,6 +1100,25 @@ Přepni se na jinou větev::
    Pokud se v aktuální větvi nacházejí nové soubory, u kterých ještě neexistuje
    historie, tak se automaticky přenáší do dané větve.
 
+.. tip::
+
+   Daná větev při vytvoření vždy zdědi commity z větve, ze které byla
+   vytvořena, což je zpravidla ``master`` větev. Pokud chci vidět jenom nové
+   commity, mohu použít volbu ``--not`` u ``git log`` příkazu::
+
+      $ git log devel --not master
+
+   Je-li třeba vidět rozdíl mezi větvemi pro každý soubor, lze použít
+   ``git diff``, respektive ``git difftool``::
+
+      $ git diff master devel 
+      $ git diff master devel file.txt
+
+   Je-li třeba vidět rozdíl jen u těch souborů, které jsou v obou větví
+   společné::
+
+      $ git diff master...devel
+
 checkout -b
 ^^^^^^^^^^^
 
@@ -1205,9 +1225,35 @@ Odstraň všechny uložené stashe::
 merge
 ^^^^^
 
-Spoj obsah aktuální větve s nějakou jinou větví::
+Sluč obsah aktuální větve s nějakou jinou větví::
 
-   $ git merge <název_větve>
+   $ git checkout -b devel
+   $ echo hello > hello.txt
+   $ git add hello.txt
+   $ git commit
+   $ git checkout master
+   $ git merge devel
+   Updating 35f651f..73f2d69
+   Fast-forward
+    hello.txt | 1 +
+    1 file changed, 1 insertion(+)
+    create mode 100644 hello.txt
+
+.. note::
+
+   Při sloučení se přidají commity z dané větve do aktuální větve.
+
+.. tip::
+
+   Pomocí volby ``--graph`` u ``git log`` příkazu lze vidět vizuálně rozdělení
+   a sloučení větví::
+
+      $ git log --oneline --graph
+      *   5a8353b Merge branch 'devel'
+      |\  
+      | * d59037d Add hello.txt
+      |/  
+      * bab91cb Add file.txt
 
 Odbočka ke konfliktům
 """""""""""""""""""""
@@ -1215,6 +1261,25 @@ Odbočka ke konfliktům
 git mergetool vimdiff
 
 git config --global merge.tool vimdiff
+
+merge --no-ff
+"""""""""""""
+
+Při sloučení větví vytvoř ještě merge commit s informací, jaké větev byla
+sloučena::
+
+   $ git merge --no-ff devel
+   Merge made by the 'recursive' strategy.
+    hello.txt | 1 +
+    1 file changed, 1 insertion(+)
+    create mode 100644 hello.txt
+
+.. tip::
+
+   Pomocí volby ``--no-edit`` lze přeskočit otevření editoru pro vytvoření
+   merge zprávy. Ta bude defaultně ve tvaru ``Merge branch 'devel'``::
+
+      $ git merge --no-ff devel --no-edit
 
 Vzdálené repozitáře
 -------------------
@@ -1317,7 +1382,6 @@ TODO
 * git log --graph u větví a merge requestů
 * git reset HEAD~
 * smazání remote tagu
-* checkout tagů
 * git reflog
 * git branch --set-upstream master origin/master
 * git rebase
