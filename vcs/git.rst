@@ -982,10 +982,10 @@ otestovat a zkontrolovat kód, než se větev sloučí s ``master`` větví.
    Větve se nemusí nutně slučovat, pokud je nutné udržovat různé verze
    projektu.
 
-Zpravidla v ``master`` větvi se nachází kód pro vývoj. U uzavřených projektů je
-větev ``stable``, která je nasazená v ostrém provozu (produkci). V případě
-otevřených projektů mohou být větve podle vedlejšich verzí projektu, např.
-``v2.1`` nebo ``v2.1.x``.
+Zpravidla se v ``master`` větvi nachází kód pro vývoj. Další větev ``stable``
+pak obsahuje kód běžící v ostrém provozu, zejména pokud je o webovou applikaci.
+U grafických aplikací nebo open source projektů mohou být větve podle tagů,
+je-li třeba udržovat více verzí.
 
 Ostatní větve lze pak různě pojmenovat a záleží jen na domluvě v týmu, jaký
 standard se bude dodržovat.
@@ -1422,15 +1422,40 @@ Odstraň spojení se vzdáleným repozitářem::
 fetch
 ^^^^^
 
+Stáhni nové informace ze vzdáleného repozitáře, pokud došlo ke změně od
+posledního fetchnutí nebo klonování::
 
+   $ git fetch origin
+
+.. note::
+
+   Při stáhnutí nových větví a tagů nedojde k narušení lokálního repozitáře.
+
+.. tip::
+
+   Prohlížet si nové větve ve vzdáleném repozitáře lze příkazem::
+
+      $ git checkout -b hello origin/hello
 
 pull
 ^^^^
 
-Stáhní ze vzdáleného repozitáře obsah dané větve a tu sluč s aktuální větví,
-ve které se nacházím::
+Stáhní ze vzdáleného repozitáře obsah dané větve a mergni ji s aktuální větví::
 
    $ git pull origin master
+
+.. note::
+
+   Při pullování může dojít ke konfliktům. Taktéž může dojít k odmínutí pullu,
+   pokud se změnil obsah nějakého souboru, který ještě nemá commit, neboť by
+   došlo při pullu k přepsání obsahu tohoto souboru.
+
+.. tip::
+
+   Pokud větev vychází z nějaké vzdálené větve, lze použít ``git pull``
+   zkráceně:
+
+      $ git pull
 
 push
 ^^^^
@@ -1459,10 +1484,7 @@ TODO
 
 * git clean
 * git reset HEAD~
-* smazání remote tagu
 * git reflog
-* git branch --set-upstream master origin/master
-* git rebase
+* git rebase --interactive ...
 * workflow
 * git blame
-* změna zprávy u tagu
