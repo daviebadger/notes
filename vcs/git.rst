@@ -88,6 +88,10 @@ Vytvoř Git repozitář v nějakém adresáři::
    $ cd dir/
    $ git init
 
+Vytvoř Git repozitář v novém adresáři::
+
+   $ git init dir
+
 .. note::
 
    Při vytvoření repozitáře vznikne skrytý ``.git/`` adresář, kam se ukládájí
@@ -511,8 +515,40 @@ Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive na
       $ cat new.txt
       $
 
+reset --soft
+""""""""""""
+
+Odstraň poslední commit a soubory v daném commitu ponechej v repozitáři ve
+stavu ``Staged``::
+
+   $ git reset --soft HEAD~
+
+Odstraň Ntý počet commitů::
+
+   $ git reset --soft HEAD~2
+
+Odstraň všechny commity až po nějaký commit::
+
+   $ git reset --soft 768f53e
+
+.. note::
+
+   Bez volby ``--soft`` budou soubory ve stavu ``Modified`` a ``Untracked``.
+
 reset --hard
 """"""""""""
+
+Odstraň poslední commit a trvale smaž soubory v daném commitu::
+
+   $ git reset --hard HEAD~
+
+Odstrań Ntý počet commitů::
+
+   $ git reset --hard HEAD~2
+
+Odstraň všechny commity až po nějaký commit::
+
+   $ git reset --hard 768f53e
 
 rm
 ^^
@@ -707,6 +743,13 @@ Volba  Význam
 
    Se zkráceným hashi commitů lze dále pracovat v ostatních Git příkazech, kde
    je třeba znát odkaz na konkrétní commit (jeho ID).
+
+log --folow
+"""""""""""
+
+Zobraz jen ty commity, které se týkají daného souboru::
+
+   $ git log --follow file.txt
 
 log --author
 """"""""""""
@@ -1111,7 +1154,7 @@ Přepni se na jinou větev::
    Je-li třeba vidět rozdíl mezi větvemi pro každý soubor, lze použít
    ``git diff``, respektive ``git difftool``::
 
-      $ git diff master devel 
+      $ git diff master devel
       $ git diff master devel file.txt
 
    Je-li třeba vidět rozdíl jen u těch souborů, které jsou v obou větví
@@ -1141,7 +1184,7 @@ Ulož bokem aktuální stav větve bez ohledu na stav souborů::
    On branch master
    Changes to be committed:
      (use "git reset HEAD <file>..." to unstage)
-     
+
            modified:   file.txt
 
    $ git stash
@@ -1250,9 +1293,9 @@ Sluč obsah aktuální větve s nějakou jinou větví::
 
       $ git log --oneline --graph
       *   5a8353b Merge branch 'devel'
-      |\  
+      |\
       | * d59037d Add hello.txt
-      |/  
+      |/
       * bab91cb Add file.txt
 
 Odbočka ke konfliktům
@@ -1353,7 +1396,7 @@ Odbočka ke vzdáleným repozitářům
 """"""""""""""""""""""""""""""""
 
 Repozitáře nemusí existovat jen lokálně, ale mohou být taky na nějakém Git
-serveru, kam můžou mít uživatelé přístup. 
+serveru, kam můžou mít uživatelé přístup.
 
 Vzdálené repozitáře slouží jako centrální místo, odkud si uživatele tahají
 veškeré změny nebo naopak je tam nahrávájí. Vedle toho jsou vhodné i pro
@@ -1468,6 +1511,14 @@ Nahrej na vzdálený repozitář nějaký tag::
 
    $ git push origin v0.1.0
 
+.. note::
+
+   Pushnutí může být odmítnuto, pokud se rozchází historie mezi vzdálenou
+   větví a lokální větví, např. došlo lokálně k umazání některých commitů.
+   Pro násilné nahrání je třeba použít volbu ``-f``::
+
+      $ git push -f origin master
+
 .. tip::
 
    Nahrávání master větve lze zkrátit příkazem ``git push -u origin master``,
@@ -1479,12 +1530,23 @@ Nahrej na vzdálený repozitář nějaký tag::
 
       $ git push origin <název_větve>
 
+Aliasy
+------
+
+git config --global alias.s status
+git config --global alias.  '...'
+
 TODO
 ====
 
-* git clean
-* git reset HEAD~
 * git reflog
 * git rebase --interactive ...
+* git rebase --continue
 * workflow
-* git blame
+* git blame file.txt
+* git whatchanged file.txt (jake commity s danym souborem)
+* git cherry-pick
+* git biset (kdo vlozil dany kod)
+* aliasy + shell aliasy? (alias gs='git status ')
+* git merge --abort
+* git revert
