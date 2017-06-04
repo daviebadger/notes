@@ -2042,6 +2042,13 @@ vytvořit alias(y)::
 
       alias here="pwd"
 
+   Aliasy lze psát separátně do souboru ``.bash_aliases``. pokud se v
+   konfiguračním souboru se nachází následující podmínka::
+
+      if [ -f ~/.bash_aliases ]; then
+          . ~/.bash_aliases
+      fi
+
 Proměnné
 --------
 
