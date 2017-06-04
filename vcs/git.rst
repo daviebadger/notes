@@ -77,6 +77,19 @@ repozitáře v ``.git/config``.
    $ git config user.name
    Davie Badger
 
+config --unset
+""""""""""""""
+
+Zruš dané nastavení::
+
+   $ git config --global --unset user.name
+   $ git config --global user.name
+   $
+
+.. note::
+
+   Stejného výsledku lze docílit smazáním příslušného řádku v ``~/.gitconfig``.
+
 Vytvoření repozitáře
 --------------------
 
@@ -972,6 +985,29 @@ Smaž daný tag::
    $ git tag -d v0.2.0
    Deleted tag 'v0.2.0' (was a8519ff)
 
+Aliasy
+------
+
+Nastav alias na nějaký příkaz::
+
+   $ git config --global alias.s status
+   $ git s
+   On branch master
+   Your branch is up-to-date with 'origin/master'.
+   nothing to commit, working tree clean
+
+Nastav alias na nějaký příkaz s volbami::
+
+   $ git config --global alias.h 'log --pretty=format:"%h - %s (%an, %cr)" --graph'
+
+.. tip::
+
+   Aliasy jdou nastavit i na úrovni shellu (Bash), pokud nedojde ke kolizi s
+   jinými příkazy::
+
+      $ alias g="git"
+      $ g status
+
 Pokročilé ovládání
 ==================
 
@@ -1381,6 +1417,19 @@ sloučena::
 
       $ git merge --no-ff devel --no-edit
 
+merge --abort
+"""""""""""""
+
+Zvrať poslední merge s konflikty (návrat do předchozího stavu před mergem)::
+
+   $ git merge --abort
+
+.. note::
+
+   Stejného postupu lze docílit příkazem ``git reset --merge``::
+
+      $ git reset --merge
+
 Vzdálené repozitáře
 -------------------
 
@@ -1470,6 +1519,10 @@ posledního fetchnutí nebo klonování::
 
    $ git fetch origin
 
+Pokud existuje jen jeden vzdálený repozitář, lze použít příkaz zkráceně::
+
+   $ git fetch
+
 .. note::
 
    Při stáhnutí nových větví a tagů nedojde k narušení lokálního repozitáře.
@@ -1511,6 +1564,10 @@ Nahrej na vzdálený repozitář nějaký tag::
 
    $ git push origin v0.1.0
 
+Nahrej na vzdálený repozitář všechny tagy::
+
+   $ git push origin --tags
+
 .. note::
 
    Pushnutí může být odmítnuto, pokud se rozchází historie mezi vzdálenou
@@ -1530,23 +1587,87 @@ Nahrej na vzdálený repozitář nějaký tag::
 
       $ git push origin <název_větve>
 
-Aliasy
-------
+Ostatní příkazy
+===============
 
-git config --global alias.s status
-git config --global alias.  '...'
+Vyhledávání
+-----------
+
+grep
+^^^^
+
+Najdi v repozitáři určitý výraz napříč adresáři a soubory::
+
+   $ git grep git
+   vimrc:Plug 'tpope/vim-fugitive'
+
+.. note::
+
+   U grepu lze použít stejné volby ``-i`` a ``-n`` jako u Unixového ``grep``
+   příkazu.
+
+blame
+^^^^^
+
+Zobraz podrobně informace o souboru, kdo, kdy a v jakém commitu učinil danou
+změnu::
+
+   $ git blame vimrc
+   51edaaff vim/.vimrc (Davie Badger 2017-04-22 22:26:33 +0200   1) " *********
+   51edaaff vim/.vimrc (Davie Badger 2017-04-22 22:26:33 +0200   2) " Structure
+   51edaaff vim/.vimrc (Davie Badger 2017-04-22 22:26:33 +0200   3) " *********
+
+.. tip::
+
+   Datum a čas lze formátovat pomocí volby ``--date``::
+
+      $ git blame --date="relative" vimrc
+      51edaaff vim/.vimrc (Davie Badger 6 weeks ago            1) " *********
+      $ git blame --date="local" vimrc
+      51edaaff vim/.vimrc (Davie Badger Sat Apr 22 22:26:33 2017       1) " *********
+
+blame -L
+""""""""
+
+Zobraz podrobně informace jen v určitém rozpětí::
+
+   $ git blame -L 1 vimrc    # od 1. řádku
+   $ git blame -L 1,1 vimrc  # jen 1. řádek
+   $ git blame -L 1,5 vimrc  # od 1. řádku po 5. řádek
+   $ git blame -L ,5 vimrc   # po 5. řádek
+
+bisect
+^^^^^^
+
+Historie
+--------
+
+reflog
+^^^^^^
+
+Zobraz ``HEAD`` historii, respektive jak se repozitář vyvíjel v čase i mimo
+commity::
+
+   $ git reflog -5
+   74f2fa8 HEAD@{0}: commit: Add file.txt
+   a406dac HEAD@{1}: reset: moving to a406dac
+   f1a73eb HEAD@{2}: reset: moving to HEAD@{0}
+   f1a73eb HEAD@{3}: commit (merge): Merge branch 'hm'
+   a406dac HEAD@{4}: reset: moving to HEAD
+
+.. note::
+
+   Pomocí ``git reset`` se lze vrátit zpátky v čase na konkrétní ``HEAD``::
+
+      $ git reset HEAD@{3}
 
 TODO
 ====
 
-* git reflog
 * git rebase --interactive ...
 * git rebase --continue
-* workflow
-* git blame file.txt
-* git whatchanged file.txt (jake commity s danym souborem)
 * git cherry-pick
 * git biset (kdo vlozil dany kod)
-* aliasy + shell aliasy? (alias gs='git status ')
-* git merge --abort
 * git revert
+
+https://git-scm.com/book/cs/v2/V%C4%9Btve-v-syst%C3%A9mu-Git-P%C5%99eskl%C3%A1d%C3%A1n%C3%AD
