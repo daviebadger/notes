@@ -1168,7 +1168,7 @@ Přepni se na jinou větev::
 
    Git může odmítnout přepnutí na jinou větev, pokud v aktuální větví došlo
    ke změně nějakého ``Unmodified`` souboru (změna není commitnuta), přičemž v
-   jiné větvi by byl soubor bez dané změny (kolize).
+   jiné větvi by byl soubor bez dané změny (kolize)::
 
       error: Your local changes to the following files would be overwritten by
       checkout:
@@ -1420,7 +1420,8 @@ sloučena::
 merge --abort
 """""""""""""
 
-Zvrať poslední merge s konflikty (návrat do předchozího stavu před mergem)::
+Zruš poslední merge, neboť došlo ke konfliktu (návrat do předchozího stavu před
+mergem)::
 
    $ git merge --abort
 
@@ -1549,7 +1550,7 @@ Stáhní ze vzdáleného repozitáře obsah dané větve a mergni ji s aktuáln�
 .. tip::
 
    Pokud větev vychází z nějaké vzdálené větve, lze použít ``git pull``
-   zkráceně:
+   zkráceně::
 
       $ git pull
 
@@ -1571,10 +1572,17 @@ Nahrej na vzdálený repozitář všechny tagy::
 .. note::
 
    Pushnutí může být odmítnuto, pokud se rozchází historie mezi vzdálenou
-   větví a lokální větví, např. došlo lokálně k umazání některých commitů.
-   Pro násilné nahrání je třeba použít volbu ``-f``::
+   větví a lokální větví:
 
-      $ git push -f origin master
+   1) vzdálená větev se posunula v čase dopředu
+
+      * dané změny je třeba nejdříve stáhnout a sloučit do lokální větve
+
+   2) lokální větev se posunula v čase dozadu (smazání commitů)
+
+      * je třeba násilně nahrát změnu a přepsat historii ve vzdálené větvi::
+
+           $ git push -f origin master
 
 .. tip::
 
@@ -1589,6 +1597,40 @@ Nahrej na vzdálený repozitář všechny tagy::
 
 Ostatní příkazy
 ===============
+
+Záplatování
+-----------
+
+rebase
+^^^^^^
+
+revert
+^^^^^^
+
+Zvrať změny v daném commitu::
+
+   $ git revert 74f2fa8
+
+Zvrať změny v daném rozsahu commitů::
+
+   $ git revert HEAD~2
+   $ git revert master~5..master~2
+
+.. note::
+
+   Dojde k opaku provedené změny v daném commitu, např. smazaný soubor se opět
+   navrátí do repozitáře a naopak.
+
+revert --abort
+""""""""""""""
+
+Zruš poslední revert, neboť došlo ke konfliktuy (návrat do předchozího stavu
+před revertem)::
+
+   $ git revert --abort
+
+cherry-pick
+^^^^^^^^^^^
 
 Vyhledávání
 -----------
@@ -1636,9 +1678,6 @@ Zobraz podrobně informace jen v určitém rozpětí::
    $ git blame -L 1,5 vimrc  # od 1. řádku po 5. řádek
    $ git blame -L ,5 vimrc   # po 5. řádek
 
-bisect
-^^^^^^
-
 Historie
 --------
 
@@ -1661,13 +1700,28 @@ commity::
 
       $ git reset HEAD@{3}
 
-TODO
-====
+Statistika
+----------
 
-* git rebase --interactive ...
-* git rebase --continue
-* git cherry-pick
-* git biset (kdo vlozil dany kod)
-* git revert
+shortlog
+^^^^^^^^
 
-https://git-scm.com/book/cs/v2/V%C4%9Btve-v-syst%C3%A9mu-Git-P%C5%99eskl%C3%A1d%C3%A1n%C3%AD
+Zobraz statistiku commitů podle počtu a autora od počátku repozitáře::
+
+   $ git shortlog
+   Davie Badger (3):
+         Delete file.txt
+         Update file.txt
+         Add file.txt
+
+Zobraz statistiku jen v určitém rozsahu historie::
+
+   $ git shortlog v0.1.0..HEAD
+
+shortlog -s
+"""""""""""
+
+Zobraz stručne statistiku commitů::
+
+   $ git shortlog -s
+        3  Davie Badger
