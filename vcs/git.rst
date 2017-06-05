@@ -1164,6 +1164,10 @@ Přepni se na jinou větev::
 
    $ git checkout <název_větve>
 
+Přepni se předchozí větev::
+
+   $ git checkout -
+
 .. note::
 
    Git může odmítnout přepnutí na jinou větev, pokud v aktuální větví došlo
@@ -1604,6 +1608,50 @@ Záplatování
 rebase
 ^^^^^^
 
+Přeskládej commity z jedné větve do druhé tak, aby mohla vzniknout lineární
+historie po sloučení::
+
+   $ git checkout -b devel
+   $ echo hello > hello.txt
+   $ git add .
+   $ git commit -m "Add hello.txt"
+   $ git rebase master
+   First, rewinding head to replay your work on top of it...
+   Applying: Add hm.txt
+   $ git checkout master
+   $ git merge devel
+   $ git log --oneline --graph
+   * 7abc381 Add hello.txt
+   * f1946e1 Update file.txt
+   * 82ee4f6 Add file.txt
+
+.. note::
+
+   Při rebasování dojde k přepisování historie, což nemusí být žádoucí v rámci
+   spolupráce v týmu. Taktéž může dojít ke konfliktu.
+
+rebase --abort
+""""""""""""""
+
+Zruš poslední rebase, neboť došlo ke konfliktu (návrat do předchozí stavu před
+rebasem)::
+
+   $ git rebase --abort
+
+rebase -i
+"""""""""
+
+Přepiš interaktivně historii commitů (editace předmětu commitu, jeho obsahu,
+sloučení či smazání)::
+
+   $ git rebase -i HEAD~     # poslední commit
+   $ git rebase -i 7abc381^  # commit 7abc381 a commit po něm
+
+V interaktivní menu si lze vybrat, k jaké akci může dojít. Poté stačí přepsat
+slovo ``pick`` u každého commitu na danou požadovanou akci::
+
+   reword b0b7065 Add file.txt
+
 revert
 ^^^^^^
 
@@ -1618,19 +1666,18 @@ Zvrať změny v daném rozsahu commitů::
 
 .. note::
 
-   Dojde k opaku provedené změny v daném commitu, např. smazaný soubor se opět
-   navrátí do repozitáře a naopak.
+   Při revertování může dojít ke konfliktu. Pro úspěšné comminutí revertu po
+   konfliktu je třeba použít volbu ``--allow-empty`` u commitu::
+
+      $ git commit --allow-empty
 
 revert --abort
 """"""""""""""
 
-Zruš poslední revert, neboť došlo ke konfliktuy (návrat do předchozího stavu
+Zruš poslední revert, neboť došlo ke konfliktu (návrat do předchozího stavu
 před revertem)::
 
    $ git revert --abort
-
-cherry-pick
-^^^^^^^^^^^
 
 Vyhledávání
 -----------
