@@ -33,8 +33,6 @@ Zobraz v novém okně status repozitáře::
 
    :Gstatus
 
-   ...
-
    # On branch master
    #
    # Initial commit
@@ -74,8 +72,43 @@ cA     zahrň soubor do předchozího commitu a neměn zprávu commitu
 Gwrite
 ^^^^^^
 
+Ulož změny v souboru a zároveň změn jeho stav (add)::
+
+   :Gwrite
+   :Gwrite [path]
+
+.. tip::
+
+   Je-li třeba zároveň i zavřít okno::
+
+      :Gwq
+
 Gread
 ^^^^^
+
+Zahoď změny v souboru (checkout)::
+
+   :Gread
+
+Gvdiff
+^^^^^^
+
+Zobraz vertikálně diff u aktuálního souboru::
+
+   :Gvdiff
+   :Gvdiff --staged
+
+.. note::
+
+   Pokud je soubor v konfliktu, tak zobraz vlevo verzi v aktuální větvi,
+   uprostřed aktuální obsah souboru a vpravo verzi z mergované větve.
+
+.. tip::
+
+   Pomocí ``^`` lze zobrazit rozdíl oproti poslednímu commitu, pokud v
+   aktuálním souboru nejsou žádné změny::
+
+      :Gvdiff ^
 
 Gcommit
 ^^^^^^^
@@ -84,17 +117,100 @@ Vytvoř commit::
 
    :Gcommit [args]
 
+Gremove
+^^^^^^^
+
+Smaž navždy daný soubor (rm)::
+
+   :Gremove
+
+Gmove
+^^^^^
+
+Přesuň nebo přejmenuj aktuální soubor::
+
+   :Gmove {destination}
+
 Glog
 ^^^^
+
+Zobraz historii commitů týkajících se aktuálního souboru::
+
+   :Glog [args]
+
+Zobraz veškerou historii commitů::
+
+   :Glog [args] --
 
 Gmerge
 ^^^^^^
 
+Vykonej merge::
+
+   :Gmerge [args]
+
+.. note::
+
+   Při konfliktu se vytvoří nové horizontální okno s přehledem konfliktních
+   souborů::
+
+      || Auto-merging file.txt
+      file.txt|^<<<<<<<| content
+      || Automatic merge failed; fix conflicts and then commit the result.
+
+.. tip::
+
+   Při změně obsahu souboru kvůli mergi je dobré znovunačíst soubor pomocí
+   ``L`` volby při výzvě::
+
+      W11: Warning: File "file.txt" has changed since editing started
+      See ":help W11" for more info.
+      [O]K, (L)oad File:
+
 Gfetch
 ^^^^^^
+
+Vykonej fetch::
+
+   :Gfetch [args]
 
 Gpull
 ^^^^^
 
+Vykonej pull::
+
+   :Gpull [args]
+
 Gpush
 ^^^^^
+
+Vykonej push::
+
+   :Gpush [args]
+
+Ggrep
+^^^^^
+
+Vykonej grep::
+
+   :Ggrep [args]
+
+Gblame
+^^^^^^
+
+Vykonej blame a výsledek zobraz vlevo ve vertikálním okně::
+
+   :Gblame
+
+Ovládání blame okna:
+
+====  ======
+Znak  Význam
+====  ======
+q     zavři okno
+A     zobraz jen commity a autory
+C     zobraz jen commity
+D     zobraz commity, autory a datum s časem
+o     zobraz detail commitu v novém horizontálním okně dole
+O     zobraz detail commitu v nové záložce
+====  ======
