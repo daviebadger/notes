@@ -93,7 +93,7 @@ Zahoď změny v souboru (checkout)::
 Gvdiff
 ^^^^^^
 
-Zobraz vertikálně diff u aktuálního souboru::
+Zobraz vertikálně diff u aktuálního souboru pomocí vimdiffu::
 
    :Gvdiff
    :Gvdiff --staged
