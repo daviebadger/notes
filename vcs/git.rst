@@ -389,6 +389,11 @@ Po uložení této zprávy a zavření editoru se vytvoří snímek (commit) rep
 jako opěrný bod v historii repozitáře, ke kterému se lze kdykoliv vrátit a
 obnovit obsah repozitáře zpětně do tohoto stavu.
 
+.. note::
+
+   Smaže-li se veškerý text v commitu, tak se žádný commit nevytvoří po zavření
+   editoru.
+
 .. tip::
 
    Nastavení konkrétního editoru pro Git::
