@@ -1643,14 +1643,14 @@ rebasem)::
 
    $ git rebase --abort
 
-rebase -i
-"""""""""
+rebase --interactive
+""""""""""""""""""""
 
 Přepiš interaktivně historii commitů (editace předmětu commitu, jeho obsahu,
 sloučení či smazání)::
 
-   $ git rebase -i HEAD~     # poslední commit
-   $ git rebase -i 7abc381^  # commit 7abc381 a commit po něm
+   $ git rebase --interactive HEAD~     # poslední commit
+   $ git rebase --interactive 7abc381^  # commit 7abc381 a commit po něm
 
 V interaktivní menu si lze vybrat, k jaké akci může dojít. Poté stačí přepsat
 slovo ``pick`` u každého commitu na danou požadovanou akci::
@@ -1729,6 +1729,48 @@ Zobraz podrobně informace jen v určitém rozpětí::
    $ git blame -L 1,1 vimrc  # jen 1. řádek
    $ git blame -L 1,5 vimrc  # od 1. řádku po 5. řádek
    $ git blame -L ,5 vimrc   # po 5. řádek
+
+Mazání nesledovaných souborů
+----------------------------
+
+clean
+^^^^^
+
+clean -n
+--------
+
+Zobraz, které soubory se smažou::
+
+   $ git clean -n
+   Would remove file.txt
+   $ git clean -n dir/
+   Would remove dir/
+   Would remove file.txt
+   $ git clean -n *
+   Would remove dir/
+   Would remove file.txt
+
+clean -f
+--------
+
+Smaž nesledované soubory::
+
+   $ git clean -f
+   $ git clean -f dir/
+
+.. note::
+
+   Smažou se jen ty soubory, které jsou zobrazené ve statusu. Soubory v
+   adresářích se nesmažou, není-li uvedena cesta nebo volba ``-d``::
+
+      $ git clean -fd
+      $ git clean -f *
+
+.. tip::
+
+   Pomocí volby ``-x`` se smažou i ty soubory, které jsou Gitem ignorovány::
+
+      $ git clean -fx
 
 Historie
 --------
