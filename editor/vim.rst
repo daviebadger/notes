@@ -1131,6 +1131,84 @@ Bez opuštění Vimu
 
       :r cesta_k_souboru
 
+Makra
+-----
+
+Nahrávání příkazů a jejich opětovné vykonání na jiném místě v souboru pro
+ušetření lidské práce, např. při refaktoringu textu či kódu.
+
+Vytvoření a ukončení makra
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``q`` + písmeno
+
+  * začni nahrávat příkazy do daného písmena, respektive registru::
+
+       qa
+
+* ``q``
+
+  * ukonči nahrávání příkazů do daného registru
+
+.. note::
+
+   Pokud se stikne ``q`` hned po začátku nahrávání příkazů, tak se daný registr
+   vyprázdní.
+
+.. tip::
+
+   Pokud se před ukončení nahrávání příkazu stiskne ještě ``@`` + písmeno, tak
+   se po exekuci makra opět zavolá rekurzivně exekuce daného makra.
+
+Exekuce makra
+^^^^^^^^^^^^^
+
+* ``@`` + písmeno
+
+  * spusť dané makro::
+
+       @a
+
+* ``@@``
+
+  * spusť znovu předchozí makro
+
+* číslo + ``@`` + písmeno
+
+  * spusť makro Nkrát::
+
+       3@a
+
+* ``:`` + číslo + ``,`` + číslo + ``norm! @`` + písmeno
+
+  * spusť makro jen v daných řádcích::
+
+       :10,$norm! @a
+
+* Visual mód + ``:norm! @`` + písmeno
+
+  * spusť makro jen ve vyznačené oblasti
+
+.. tip::
+
+   Spuštění makra pro každý řádek v souboru::
+
+      :%norm! @a
+
+Seznam maker
+^^^^^^^^^^^^
+
+* ``:reg``
+
+  * zobraz obsah všech registrů
+
+* ``:reg`` + písmeno
+
+  * zobraz obsah jen daného registru::
+
+       :registers a
+       "a   I* ^[
+
 Session
 -------
 
