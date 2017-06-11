@@ -1684,6 +1684,26 @@ před revertem)::
 
    $ git revert --abort
 
+cherry-pick
+^^^^^^^^^^^
+
+Zkopíruj do aktuální větve commity z jiné větve včetně jejich změn v
+repozitáři::
+
+   $ git cherry-pick 517ca0f 2cb133c
+
+.. note::
+
+   Při zkopírování se vytvoří v aktuální větvi nové commity.
+
+cherry-pick
+"""""""""""
+
+Zruš poslední cherry-pick, neboť došlo ke konfliktu (návrat do předchozího
+stavu před cherry-pickem)::
+
+   $ git cherry-pick --abort
+
 Vyhledávání
 -----------
 
