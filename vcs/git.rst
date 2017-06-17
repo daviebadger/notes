@@ -1595,14 +1595,11 @@ Nahrej na vzdálený repozitář všechny tagy::
 
 .. tip::
 
-   Nahrávání master větve lze zkrátit příkazem ``git push -u origin master``,
-   pomocí kterého půjde nahrávat ``master`` větev zkráceným způsobem::
+   Pomocí volby ``-u`` si lze zkrátit nahrávání větve na vzdálený repozitář,
+   docházi-li k této činnosti opakovaně::
 
+      $ git push -u origin master
       $ git push
-
-   Ostatní větve bude třeba nahrávat standardním způsobem::
-
-      $ git push origin <název_větve>
 
 Ostatní příkazy
 ===============
