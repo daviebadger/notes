@@ -47,7 +47,7 @@ Vlož odstavce::
 
 .. tip::
 
-   Je-li třeba zalomit text, použije se na konci řádku ``\``::
+   Je-li třeba zalomit text, použije se na konci řádku ``\`` nebo dvě mezery::
 
       První řádek \
       Druhý řádek \
@@ -133,7 +133,7 @@ Vlož hypertextový odkaz::
 
 .. tip::
 
-   Je-li stejný odkaz použít vícekrát v dokumentu, lze z něj vytvořit
+   Je-li stejný odkaz použit vícekrát v dokumentu, lze z něj vytvořit
    referenci::
 
       [Google][google]
@@ -177,7 +177,7 @@ Odděl text dělící horizontální čarou::
 
 .. note::
 
-   Jako dělící čáru lze použít i ``***`` nebo ``___``.
+   Jako dělící čáru lze použít i ``***``.
 
 Zdrojové kódy
 -------------
