@@ -5,8 +5,6 @@
  Obklopovač uvozovek, závorek a tagů
 -------------------------------------
 
-https://github.com/tpope/vim-surround
-
 .. contents:: Obsah:
 
 .. sectnum::

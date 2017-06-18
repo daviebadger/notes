@@ -5,8 +5,6 @@
  Přehledný status řádek
 ------------------------
 
-https://github.com/vim-airline/vim-airline
-
 .. contents:: Obsah:
 
 .. sectnum::

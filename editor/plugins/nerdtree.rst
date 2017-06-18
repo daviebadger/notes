@@ -5,8 +5,6 @@
  Zobrazení adresářové struktury
 --------------------------------
 
-https://github.com/scrooloose/nerdtree
-
 .. contents:: Obsah:
 
 .. sectnum::

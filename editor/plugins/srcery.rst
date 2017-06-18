@@ -5,8 +5,6 @@
  Vzhled Vimu
 -------------
 
-https://github.com/roosta/vim-srcery
-
 .. contents:: Obsah:
 
 .. sectnum::

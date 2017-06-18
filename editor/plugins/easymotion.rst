@@ -5,8 +5,6 @@
  Snadnější pohyhování v textu
 ------------------------------
 
-https://github.com/easymotion/vim-easymotion
-
 .. contents:: Obsah:
 
 .. sectnum::
