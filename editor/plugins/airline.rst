@@ -7,6 +7,12 @@
 
 https://github.com/vim-airline/vim-airline
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Konfigurace
 ===========
 
@@ -17,9 +23,11 @@ Konfigurace
 
    set laststatus=2                            " vždy zobraz Airline řádek
 
-Pokud font v terminálu neobsahuje powerline ikonky, je třeba nainstalovat
-font, který je v sobě má, viz::
+.. note::
 
-   https://github.com/powerline/fonts
+   Pokud font v terminálu neobsahuje powerline ikonky, je třeba nainstalovat
+   font, který je v sobě má, viz::
 
-Poté je třeba daný font nastavit v nastavení terminálu.
+      https://github.com/powerline/fonts
+
+   Poté je třeba daný font nastavit v nastavení terminálu.
