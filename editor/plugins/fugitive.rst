@@ -7,6 +7,12 @@
 
 https://github.com/tpope/vim-fugitive
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Ovládání
 ========
 
@@ -56,7 +62,7 @@ ENTER  otevři soubor v novém bufferu
 o      otevři soubor v novém horizontálním okně
 S      otevři soubor v novém vertikálním okně
 O      otevři soubor v nové záložce
--      přesuň soubor do jiného stavu nebo vrať do předchozího stavu
+\-      přesuň soubor do jiného stavu nebo vrať do předchozího stavu
 dv     zobraz vertikálně diff
 U      zahoď změny v souboru nebo jej smaž
 cc     vytvoř commit
