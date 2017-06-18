@@ -1,6 +1,6 @@
-============
+===========
  AutoPairs
-============
+===========
 -----------------------------------------
  Automatické zavirání závorek a uvozovek
 -----------------------------------------
@@ -10,6 +10,13 @@
 .. sectnum::
    :depth: 3
    :suffix: .
+
+Instalace
+=========
+
+::
+
+   Plug 'jiangmiao/auto-pairs'
 
 Konfigurace
 ===========

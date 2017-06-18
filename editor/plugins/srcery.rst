@@ -11,6 +11,13 @@
    :depth: 3
    :suffix: .
 
+Instalace
+=========
+
+::
+
+   Plug 'roosta/vim-srcery'
+
 Konfigurace
 ===========
 

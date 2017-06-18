@@ -11,6 +11,13 @@
    :depth: 3
    :suffix: .
 
+Instalace
+=========
+
+::
+
+   Plug 'tpope/vim-surround'
+
 Ovládání
 ========
 
