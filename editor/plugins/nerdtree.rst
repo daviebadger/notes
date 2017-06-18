@@ -7,6 +7,12 @@
 
 https://github.com/scrooloose/nerdtree
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Ovládání
 ========
 
