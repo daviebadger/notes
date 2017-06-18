@@ -7,6 +7,12 @@
 
 https://github.com/roosta/vim-srcery
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Konfigurace
 ===========
 
