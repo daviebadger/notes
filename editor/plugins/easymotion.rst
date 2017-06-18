@@ -7,6 +7,12 @@
 
 https://github.com/easymotion/vim-easymotion
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Ovládání
 ========
 
