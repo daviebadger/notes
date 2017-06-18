@@ -74,7 +74,7 @@ Další variantou je zobrazení nápovědy pomocí volby / přepínače / parame
    $ man --help
 
 Z nápovědy by mělo jít vyčíst, jaké jsou možnosti příkazu. Může se jednat o
-tyto podoby::
+tyto podoby:
 
 1. příkaz samostatně::
 
