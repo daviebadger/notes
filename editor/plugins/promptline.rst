@@ -7,6 +7,12 @@
 
 https://github.com/edkolev/promptline.vim
 
+.. contents:: Obsah:
+
+.. sectnum::
+   :depth: 3
+   :suffix: .
+
 Konfigurace
 ===========
 
@@ -22,16 +28,19 @@ Konfigurace
        \'c' : [ promptline#slices#vcs_branch() ],
        \'y' : [ promptline#slices#python_virtualenv() ]}
 
-Poté je třeba ještě vykonat následující příkazy pro změnu PS1 promptu v Bashi:
+.. note::
 
-1. načíst opětovně konfigurační soubor pro Vim::
+   Poté je třeba ještě vykonat následující příkazy pro změnu PS1 promptu
+   v Bashi:
 
-      so ~/.vimrc
+   1. načíst opětovně konfigurační soubor pro Vim::
 
-2. vygenerovat shellový skript z Vimu::
+         so ~/.vimrc
 
-      :PromptlineSnapshot ~/.shell_prompt.sh airline
+   2. vygenerovat shellový skript z Vimu::
 
-3. přidat následující řádek do ``~/.bashrc``::
+         :PromptlineSnapshot ~/.shell_prompt.sh airline
 
-      source ~/.shell_prompt.sh
+   3. přidat následující řádek do ``~/.bashrc``::
+
+         source ~/.shell_prompt.sh
