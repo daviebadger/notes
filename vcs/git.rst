@@ -74,8 +74,8 @@ repozitáře v ``.git/config``.
 
    Zobraz jen konkrétní nastavení::
 
-   $ git config user.name
-   Davie Badger
+      $ git config user.name
+      Davie Badger
 
 config --unset
 """"""""""""""
