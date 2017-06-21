@@ -97,24 +97,24 @@ Změna obklopení
 
 Klasický Vim:
 
-   * ``ci`` + uvozovka nebo závorka
+* ``ci`` + uvozovka nebo závorka
 
-     * přepiš text uvnitř uvozovek nebo závorek::
+  * přepiš text uvnitř uvozovek nebo závorek::
 
-          (Hello world!)
+       (Hello world!)
 
-          ci)
+       ci)
 
-          ()
+       ()
 
-   * ``ca`` + uvozovka nebo závorka
+* ``ca`` + uvozovka nebo závorka
 
-     * přepiš text uvnitř uvozovek nebo závorek a i samotné uvozovky nebo
-       závroky::
+  * přepiš text uvnitř uvozovek nebo závorek a i samotné uvozovky nebo
+    závroky::
 
-          (Hello world!)
+       (Hello world!)
 
-          ca)
+       ca)
 
 Odstranění obklopení
 --------------------
@@ -151,21 +151,21 @@ Odstranění obklopení
 
 Klasický Vim:
 
-   * ``di`` + uvozovka nebo závorka
+* ``di`` + uvozovka nebo závorka
 
-     * smaž text uvnitř uvozovek nebo závorek::
+  * smaž text uvnitř uvozovek nebo závorek::
 
-          (Hello world!)
+       (Hello world!)
 
-          di)
+       di)
 
-          ()
+       ()
 
-   * ``da`` + uvozovka nebo závorka
+* ``da`` + uvozovka nebo závorka
 
-     * smaž text uvnitř uvozovek nebo závorek a i samotné uvozovky nebo
-       závorky::
+  * smaž text uvnitř uvozovek nebo závorek a i samotné uvozovky nebo
+    závorky::
 
-          (Hello world!)
+       (Hello world!)
 
-          da)
+       da)
