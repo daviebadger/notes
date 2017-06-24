@@ -693,6 +693,12 @@ V rámci označeného textu jdou použít i tyto speciální znaky:
 
   * prohoď velikost malých a velkých písmen
 
+.. note::
+
+   Správné odsazení pomocí ``=`` lze použít i mimo Visual mód, např.::
+
+      gg=G
+
 .. tip::
 
    Pomocí ``gv`` lze opětovně označit předchozí označený text.
