@@ -669,6 +669,10 @@ Mód pro označení nějaké části textu. Text se označuje následujícími z
 
 V rámci označeného textu jdou použít i tyto speciální znaky:
 
+* ``=``
+
+  * správně odsaď text podle velikosti tabulátoru
+
 * ``>``
 
   * posuň (odsaď) text doprava o jeden tabulátor
@@ -1346,6 +1350,12 @@ Základní možnosti nastavení:
 .. note::
 
    Text za ``"`` je považován za komentář.
+
+.. tip::
+
+   Oprav odsazení (tabulátory a mezery) v soubor podle nastavení tabulátorů::
+
+      :retab
 
 Pluginy
 -------
