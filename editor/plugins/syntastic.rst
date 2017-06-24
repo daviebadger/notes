@@ -14,17 +14,22 @@ Instalace
 
 Systémové instalace jednotlivých kontrolovačů:
 
+* HTML::
+
+     $ sudo apt install tidy
+
 * Markdown::
 
      $ gem install --user-install mdl
+
+* Python::
+
+     $ pip3 install --user flake8 pylint
 
 * reStructuredText::
 
      $ pip3 install --user docutils
 
-* Python::
-
-     $ pip3 install --user flake8 pylint
 
 .. note::
 
@@ -100,6 +105,7 @@ Konfigurace
 
    " Enable specific checkers
 
+   let g:syntastic_html_checkers = ['tidy']
    let g:syntastic_markdown_checkers = ['mdl']
    let g:syntastic_python_checkers = ['flake8', 'pylint']
    let g:syntastic_rst_checkers = ['rst2pseudoxml']
