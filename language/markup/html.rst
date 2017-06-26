@@ -154,12 +154,37 @@ Vlož hypertextový odkaz::
 
    <a href="https://google.com">Google</a>
 
+.. note::
+
+   Defaultně se odkaz (stránka) otevře v aktuální záložce. Je-li třeba otevřít
+   odkaz v jiné záložce, použije se ``target`` atribut s hodnotou ``_blank``::
+
+      <a href="https://google/.com" target="_blank">Google</a>
+
+.. tip::
+
+   #
+
 Obrázky
 -------
 
 Vlož obrázek::
 
    <img src="tux.png" alt="Tux logo" width="100" height="100">
+
+.. note::
+
+   Není-li uvedena výška a šířka, obrázek bude mít velikost jako v daném
+   souboru.
+
+.. tip::
+
+   Obrázek s viditelným popiskem pod obrázkem::
+
+      <figure>
+        <img src="tux.png" alt="Tux logo" width="100" height="100">
+        <figcaption>Tux logo</figcatpion>
+      </figure>
 
 Citace
 ------
@@ -189,7 +214,7 @@ Vlož zdrojový kód::
 .. note::
 
    V případě víceřádkové kódu je nutné vynechat odsazení uvnitř tagu, pokud
-   osazení od začátku řádku není žádané::
+   odsazení od začátku řádku není žádané::
 
       <pre>
       import this
@@ -214,6 +239,26 @@ Vlož komentář::
       <!-- Do not display this paragraph
       <p>Schovaný text.</p>
       -->
+
+Sémantické značky
+-----------------
+
+Metadata
+--------
+
+Styly
+-----
+
+<style>
+
+<link rel="stylesheet" href="styles.css">
+
+Skripty
+-------
+
+<script src="script.js"></script>
+
+<noscript></noscript>
 
 TODO
 ====
