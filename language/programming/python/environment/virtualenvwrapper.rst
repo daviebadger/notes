@@ -48,6 +48,13 @@ Instalace
 Virtuální prostředí
 ===================
 
+.. note::
+
+   Příkazem ``virtualenvwrapper`` lze zobrazit všechny možné příkazy pro
+   práci s virtualenvy pomocí virtualenvwrapperu::
+
+      $ virtualenvwrapper
+
 Vytvoření virtualenvu
 ---------------------
 
@@ -188,12 +195,36 @@ Aktivuj virtualenv a zároveň zmeň aktuální pracovní adresář na projektov
    $ pwd
    /home/davie/gitlab/project
 
+.. note::
+
+   Do projektového adresáře se lze kdykoliv vrátít příkazem ``cdproject``::
+
+      $ pwd
+      /
+      $ cdproject
+      $ pwd
+      /home/davie/gitlab/project
+
 .. tip::
 
-   Změn aktuální pracovní adresář na projektový, je-li aktivován virtualenv a
-   zároveň se dočasně nacházím na jiném mistě na disku::
+   Virtualenv lze aktivovat i pomocí skriptu v ``.bashrc``, je-li v kořenu
+   projektového adresáře skrytý soubor ``.venv`` s názvem virtualenvu uvnitř::
 
-      $ cdproject
+      # aktivuj virtualenv po inicializaci terminálu, je-li to možné
+
+      if [ -e ".venv" ]; then
+          workon `cat .venv`
+      fi
+
+      # aktivuj virtualenv při zmeně adresáře, je-li to možné
+
+      function cd {
+          builtin cd "$@"
+
+          if [ -e ".venv" ]; then
+              workon `cat .venv`
+          fi
+      }
 
 Smazání projektu s virtualenvem
 -------------------------------
@@ -203,10 +234,3 @@ Smaž projekt spolu s virtualenvem::
    $ deactivate
    $ rmvirtualenv project
    $ rm -r ~/gitlab/project
-
-TODO
-====
-
-* automatická aktivace virtualenvu (.venv s názvem virtualenvu), např.
-  rozdělení oken v terminálu
-* šablony
