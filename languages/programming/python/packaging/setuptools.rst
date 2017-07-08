@@ -202,3 +202,47 @@ Volitelná metadata pro snažší filtrování balíčků na PyPI::
 
    Seznam klasifikátorů lze nalézt na
    https://pypi.python.org/pypi?%3Aaction=list_classifiers.
+
+Balení a nahrávání
+==================
+
+Balení balíčku
+--------------
+
+Vytvoř nezdbuildovaný balíček (archív)::
+
+   $ python setup.py sdist
+
+Vytvoř zbuildovaný balíček (wheel)::
+
+   $ python setup.py bdist_wheel
+
+.. note::
+
+   V ``dist/`` adresáři vzniknou nové soubory::
+
+      $ ls
+      foo-0.1.0-py3-none-any.whl  foo-0.1.0.tar.gz
+
+Nahrání balíčku na PyPI
+-----------------------
+
+Nahrej balíčky na PyPI::
+
+   $ twine upload dist/foo-0.1.0-py3-none-any.whl dist/foo-0.1.0.tar.gz
+
+.. note::
+
+   Twine je Python balíček určený pro bezpečné nahrávání balíčků na PyPI.
+   Instaluje se příkazem::
+
+      $ pip install twine
+
+Odbočka k PyPI
+^^^^^^^^^^^^^^
+
+Pro nahrávání balíčků do centrálního PyPI repozitáře je třeba mít vytvořený
+účet a konfigurační soubor ``~/.pypirc``::
+
+   [pypi]
+   username = john-doe
