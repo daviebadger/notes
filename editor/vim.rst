@@ -1322,7 +1322,9 @@ Základní možnosti nastavení:
 * vyhledávání::
 
      set hlsearch   " zvýrazní najité výsledky při vyhledávání
+     set ignorecase " defaultně necilitvé na velké / malé písmo
      set incsearch  " okamžité skoč na první najitý text, zatímco píšu
+     set smartcase  " citlivé na velké / malé písmo, pokud kapitálka použita
 
      " odstraň zvýraznění najitých slov po stisknutí ESC
 
