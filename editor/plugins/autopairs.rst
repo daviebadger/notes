@@ -16,11 +16,15 @@ Instalace
 
 ::
 
-   Plug 'jiangmiao/auto-pairs'
+   Plug 'jiangmiao/auto-pairs', {'commit': '3bd07a4'}
+
+.. note::
+
+   Commit ``3bd07a4`` nerozbije chování klávesnice, např. při znaku ``ý``.
 
 Konfigurace
 ===========
 
 ::
 
-   let g:AutoPairsShortcutToggle='<F4>'
+   let g:AutoPairsShortcutToggle = '<F4>'  " zapni / vypni autozavírání
