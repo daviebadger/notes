@@ -157,16 +157,21 @@ Konfigurace
 
 ::
 
-   " open NERDTree if no file specified
+   " nezobrazuj některé soubory a adresáře
 
-   autocmd StdinReadPre * let s:std_in=1
-   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+   let NERDTreeIgnore = [
+       \ '^build$',
+       \ '^dist$',
+       \ '^\.git$',
+       \ 'egg-info$',
+       \ '^\.mypy_cache$',
+       \ '^__pycache__$']
 
-   " open NERDTree if directory specified
+   " zobraz skryté soubory a adresáře
+
+   let NERDTreeShowHidden = 1
+
+   " otevři NERDTree, pokud argument pro Vim je adresář
 
    autocmd StdinReadPre * let s:std_in=1
    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene |
-
-   " close Vim if last open window would be NERDTree
-
-   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
