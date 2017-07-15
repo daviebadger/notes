@@ -72,12 +72,3 @@ Ovládání
 .. note::
 
    Označená oblast závísí na velikosti (výšce) okna.
-
-Konfigurace
-===========
-
-::
-
-   " aktivuj Easy Motion pří stisknutí \ namísto \\
-
-   map <Leader> <Plug>(easymotion-prefix)
