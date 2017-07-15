@@ -92,29 +92,28 @@ Konfigurace
 
 ::
 
-   " Show error in statusline if cursor is on the line with the error
+   " zobraz error v příkazovém řádku, jeli u něho kurzor
 
    set statusline+=%#warningmsg#
    set statusline+=%{SyntasticStatuslineFlag()}
    set statusline+=%*
 
-   " Automatically open and close quick window with errors
+   " zobraz automaticky errory v okně
 
    let g:syntastic_always_populate_loc_list = 1
    let g:syntastic_auto_loc_list = 1
 
-   " Check syntax errors when buffer opened and each time when write action
-   " is called except for quit action
-
    let g:syntastic_check_on_open = 1
    let g:syntastic_check_on_wq = 0
-
-   " Enable specific checkers
 
    let g:syntastic_html_checkers = ['tidy']
    let g:syntastic_markdown_checkers = ['mdl']
    let g:syntastic_python_checkers = ['flake8', 'pylint']
    let g:syntastic_rst_checkers = ['rst2pseudoxml']
+
+   " zavří okno s errory, pokud se zavřel buffer souboru
+
+   cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 .. note::
 
