@@ -23,4 +23,8 @@ Konfigurace
 
 ::
 
-   let g:srcery_underline=0
+   set termguicolors
+
+   let g:srcery_underline = 0
+
+   colorscheme srcery
