@@ -21,8 +21,12 @@ Konfigurace
 
    " přepni se na NERDTree pomocí klávesové zkratky
 
-   map <C-m> :NERDTreeFocusToggle<CR>
+   nnoremap <C-m> :NERDTreeFocusToggle<CR>
 
    " otevři / zavři NERDTree pomocí klávesové zkratky
 
-   map <C-n> :NERDTreeMirrorToggle<CR>
+   nnoremap <C-n> :NERDTreeMirrorToggle<CR>
+
+.. note::
+
+   Klávesové zkratky pomocí ``nnoremap`` budou fungovat jen v Normal módu.
