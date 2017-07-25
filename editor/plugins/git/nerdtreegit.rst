@@ -5,6 +5,10 @@
  Integrace Git statusu s NERDTree
 ----------------------------------
 
+:Author: Davie Badger
+:Contact: davie.badger@gmail.com
+:License: CC BY-SA 4.0
+
 .. contents:: Obsah:
 
 .. sectnum::
