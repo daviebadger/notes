@@ -5,6 +5,10 @@
  Podpora pro Python soubory
 ----------------------------
 
+:Author: Davie Badger
+:Contact: davie.badger@gmail.com
+:License: CC BY-SA 4.0
+
 .. contents:: Obsah:
 
 .. sectnum::
@@ -138,4 +142,3 @@ Konfigurace
    " deaktivuj automatickou aktivaci virtualenvu
 
    let g:pymode_virtualenv = 0
-
