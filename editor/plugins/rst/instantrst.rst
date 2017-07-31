@@ -35,9 +35,10 @@ Ovládání
 
   * zobraz v prohlížečí aktuální buffer
 
-* ``StopInstantRst``
+* ``StopInstantRst[!]``
 
-  * přestaň zobrazovat v prohlížeči aktuální buffer
+  * přestaň zobrazovat v prohlížeči aktuální buffer, respektive všechny RST
+    buffery, je-li použit vykričník
 
 .. note::
 
