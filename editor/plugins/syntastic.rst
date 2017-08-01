@@ -115,6 +115,9 @@ Konfigurace
    let g:syntastic_python_checkers = ['flake8', 'pylint']
    let g:syntastic_rst_checkers = ['rst2pseudoxml']
 
+   nnoremap <F3> :SyntasticCheck<CR>
+   nnoremap <C-X> :SyntasticReset<CR>
+
    " zavří okno s errory, pokud se zavřel buffer souboru
 
    cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
