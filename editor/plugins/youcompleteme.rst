@@ -36,10 +36,6 @@ Konfigurace
 
    let g:ycm_autoclose_preview_window_after_insertion = 1
 
-   " deaktivuj YCM ve stringu
-
-   let g:ycm_complete_in_strings = 0
-
    " aktivuj YCM jen pro Python
 
    let g:ycm_filetype_whitelist = {'python': 1}
