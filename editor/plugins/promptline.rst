@@ -37,6 +37,8 @@ Konfigurace
        \'c' : [ promptline#slices#vcs_branch() ],
        \'y' : [ promptline#slices#python_virtualenv() ]}
 
+   let g:promptline_powerline_symbols = 0
+
 .. note::
 
    Poté je třeba ještě vykonat následující příkazy pro změnu PS1 promptu
