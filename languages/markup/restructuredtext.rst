@@ -15,8 +15,8 @@
    :depth: 3
    :suffix: .
 
-Základní formátování textu
-==========================
+Základní značky
+===============
 
 Nadpisy
 -------
@@ -333,8 +333,8 @@ Vytvoř poznámku pod čarou::
 
       .. [#] Python (programming language)
 
-Pokročilé formátování textu
-===========================
+Pokročilé značky
+================
 
 Komentáře
 ---------
