@@ -15,8 +15,8 @@
    :depth: 3
    :suffix: .
 
-Formátování textu
-=================
+Značky
+======
 
 Nadpisy
 -------
