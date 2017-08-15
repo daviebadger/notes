@@ -259,7 +259,7 @@ Označení tagů
 
 * ``<C-Y>d``
 
-  *
+  * označ daný tag v mistě v kurzoru včetně jeho obsahu
 
 Odstranění tagů
 ---------------
