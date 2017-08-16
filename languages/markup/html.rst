@@ -54,6 +54,13 @@ HTML dokument se člení do následujících částí:
      </body>
    </html>
 
+.. note::
+
+   Pomocí ``lang`` atributu v ``html`` tagu se definuje jazyk webu. Taktéž lze
+   uvést dialekt jazyka::
+
+      <html lang="en-US"></html>
+
 Odstavce
 --------
 
@@ -167,7 +174,14 @@ Vlož hypertextový odkaz::
 
 .. tip::
 
-   #
+   Pomocí ``#`` lze odkazovat na tag na stránce, který má v sobě atribut id::
+
+      <p id="test"></p>
+
+      <a href="#test">TEST</a>
+
+   Po kliknutí na tento odkaz prohlížeč automaticky scrolluje stránku tak, aby
+   byl první vidět daný tag s id.
 
 Obrázky
 -------
@@ -176,10 +190,17 @@ Vlož obrázek::
 
    <img src="tux.png" alt="Tux logo" width="100" height="100">
 
+Vlož hypertextový obrázek::
+
+   <a href="/image">
+     <img src="tux.png" alt="Tux logo" width="100" height="100">
+   </a>
+
 .. note::
 
    Není-li uvedena výška a šířka, obrázek bude mít velikost jako v daném
-   souboru.
+   souboru. Velikost obrázku lze dodatečně nastavit (přepsat) pomocí
+   kaskádových stylů (CSS).
 
 .. tip::
 
@@ -226,6 +247,37 @@ Vlož zdrojový kód::
       print(this)
       </pre>
 
+Tabulky
+-------
+
+Vytvoř klasickou tabulku, kde první řádek je popis sloupců::
+
+   <table>
+      <tr>
+         <th>Jméno</th>
+         <th>Příjmení</th>
+         <th>Věk</th>
+      </tr>
+      <tr>
+         <td>Davie</td>
+         <td>Badger</td>
+         <td>22</td>
+      </tr>
+   </table>
+
+Slovník pojmů
+-------------
+
+Vytvoř slovník pojmů::
+
+   <dl>
+      <dt>HTML</dt>
+      <dd>Značkový jazyk pro tvorbu webových stránek</dd>
+
+      <dt>Python</dt>
+      <dd>Skriptovací programovací jazyk</dd>
+   </dl>
+
 Pokročilé značky
 ================
 
@@ -244,14 +296,37 @@ Vlož komentář::
       <p>Schovaný text.</p>
       -->
 
-Sémantické značky
------------------
+Pomocné tagy
+------------
+
+div
+span
+
+Sémantické tagy
+---------------
+
+section
+article
+aside
+nav
+
+header
+footer
+
+Formuláře
+---------
+
+https://www.w3schools.com/html/html_forms.asp
 
 Metadata
 --------
 
+https://www.w3schools.com/html/html_head.asp
+
 Styly
 -----
+
+* id + class selektory
 
 <style>
 
@@ -267,4 +342,5 @@ Skripty
 TODO
 ====
 
-* id + class selektory
+* entity (&lt) -> https://www.w3schools.com/html/html_entities.asp
+* symboly (&copy;) -> https://www.w3schools.com/html/html_symbols.asp
