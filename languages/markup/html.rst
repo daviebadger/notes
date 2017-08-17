@@ -208,7 +208,7 @@ Vlož hypertextový obrázek::
 
       <figure>
         <img src="tux.png" alt="Tux logo" width="100" height="100">
-        <figcaption>Tux logo</figcatpion>
+        <figcaption>Tux logo</figcaption>
       </figure>
 
 Citace
@@ -253,17 +253,64 @@ Tabulky
 Vytvoř klasickou tabulku, kde první řádek je popis sloupců::
 
    <table>
-      <tr>
-         <th>Jméno</th>
-         <th>Příjmení</th>
-         <th>Věk</th>
-      </tr>
-      <tr>
-         <td>Davie</td>
-         <td>Badger</td>
-         <td>22</td>
-      </tr>
+     <tr>
+       <th>Jméno</th>
+       <th>Příjmení</th>
+       <th>Věk</th>
+     </tr>
+     <tr>
+       <td>Davie</td>
+       <td>Badger</td>
+       <td>22</td>
+     </tr>
    </table>
+
+.. note::
+
+   Buňky v tabulce jdou spojit:
+
+   * horizontálně pomocí ``colspan`` atributu::
+
+        <table>
+          <tr>
+            <th colspan="2">Jméno</th>
+          </tr>
+          <tr>
+            <td>Davie</td>
+            <td>Badger</td>
+          </tr>
+        </table>
+
+   * vertikálně pomocí ``rowspan`` atributu::
+
+        <table>
+          <tr>
+            <th rowspan="2">Jméno</th>
+            <td>Davie</td>
+          </tr>
+          <tr>
+            <td>Badger</td>
+          </tr>
+        </table>
+
+.. tip::
+
+   Tabulka s viditelným popiskem nad tabulkou::
+
+      <table>
+        <caption>Tabulka</caption>
+
+        <tr>
+          <th>Jméno</th>
+          <th>Příjmení</th>
+          <th>Věk</th>
+        </tr>
+        <tr>
+          <td>Davie</td>
+          <td>Badger</td>
+          <td>22</td>
+        </tr>
+      </table>
 
 Slovník pojmů
 -------------
@@ -271,11 +318,11 @@ Slovník pojmů
 Vytvoř slovník pojmů::
 
    <dl>
-      <dt>HTML</dt>
-      <dd>Značkový jazyk pro tvorbu webových stránek</dd>
+     <dt>HTML</dt>
+     <dd>Značkový jazyk pro tvorbu webových stránek</dd>
 
-      <dt>Python</dt>
-      <dd>Skriptovací programovací jazyk</dd>
+     <dt>Python</dt>
+     <dd>Skriptovací programovací jazyk</dd>
    </dl>
 
 Pokročilé značky
@@ -321,23 +368,129 @@ https://www.w3schools.com/html/html_forms.asp
 Metadata
 --------
 
-https://www.w3schools.com/html/html_head.asp
+Data v HTML hlavičce, které se nezobrazí uživateli, ale jsou vhodná pro
+prohlížeče a vyhledávače:
+
+* kódování stránky::
+
+     <meta charset="UTF-8">
+
+* název stránky v záložce prohlížeče::
+
+     <title>Test</title>
+
+* popisek stránky ve vyhledávači::
+
+     <meta name="description" content="Bla bla bla">
+
+* ikonka webu v záložce prohlížeče (favicon)::
+
+     <link rel="shortcut icon" href="favicon.ico">
+
+.. note::
+
+   Favicon je zpravidla obrázek s přejmenovanou koncovkou na ``.ico``.
+
+.. tip::
+
+   V hlavičce lze také nastavit přízpůsobení stránky pro mobilní zařízení::
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
 Styly
 -----
 
-* id + class selektory
+Pomocí kaskádových stylů (CSS) jde upravit vzhled tagů::
 
-<style>
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Styly</title>
 
-<link rel="stylesheet" href="styles.css">
+     <style>
+     p {
+       color: green;
+     }
+     </style>
+   </head>
+   <body>
+     <p>Test stylu</p>
+   </body>
+   </html>
+
+Kromě nanesení stylů na tagy jako takové lze uplatnit pomocné identifikátory:
+
+* id
+
+  * aplikuj styl jen na ten tag, který obsahuje ``id`` atribut::
+
+      <style>
+      #test-me {
+        color: green;
+      }
+      </style>
+
+      <p id="test-me">Test stylu<p>
+
+* class
+
+  * aplikuj styl na všechny tagy, které obsahují ``class`` atribut::
+
+      <style>
+      .background {
+        background: black;
+      }
+      .color {
+        color: white;
+      }
+      </style>
+
+      <h1 class="background color">Nadpis</p>
+      <p class="background color">Odstavec</p>
+
+.. note::
+
+   Styly se zpravidla nacházejí zvlášť v css souborech, na které jsou posléze
+   vedeny odkazy v hlavičce::
+
+      <head>
+        <link rel="stylesheet" href="styles.css">
+      </head>
 
 Skripty
 -------
 
-<script src="script.js"></script>
+Pomocí Javascriptu jde nastavit chování webu::
 
-<noscript></noscript>
+   <script>
+   console.log("Hello World!");
+   </script>
+
+.. note::
+
+   Javascriptový kód se taktéž může nacházet zvlášť v js souborech, na
+   které lze odkazovat::
+
+      <script src="index.js"></script>
+
+.. tip::
+
+   Skripty se zpravidla umísťují na konec HTML dokumentu pro urychlení
+   zobrazení (vyrendrování) stránky::
+
+      <body>
+        <h1>Nadpis</h1>
+
+        <script src="index.js"></script>
+      </body>
+
+   Pokud Javascriptový kód nezbytný pro správné zobrazení stránky, lze jej
+   umístit i do hlavičky::
+
+      <head>
+        <script src="index.js"></script>
+      </head>
 
 TODO
 ====
