@@ -196,6 +196,13 @@ Vlož hypertextový obrázek::
      <img src="tux.png" alt="Tux logo" width="100" height="100">
    </a>
 
+Vlož SVG obrázek::
+
+   <svg height="100" width="100">
+     <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+     Sorry, your browser does not support inline SVG.
+   </svg>
+
 .. note::
 
    Není-li uvedena výška a šířka, obrázek bude mít velikost jako v daném
@@ -343,22 +350,93 @@ Vlož komentář::
       <p>Schovaný text.</p>
       -->
 
-Pomocné tagy
-------------
-
-div
-span
-
 Sémantické tagy
 ---------------
 
-section
-article
-aside
-nav
+Tagy pro lepší rozvržení webu do logických celků:
 
-header
-footer
+* header
+
+  * hlavička webu, zpravidla s navigací::
+
+       <header>
+         <nav>
+           <ul>
+             <li><a href="#1">jedna</a></li>
+             <li><a href="#2">dva</a></li>
+             <li><a href="#3">tři</a></li>
+           </ul>
+         </nav>
+       </header>
+
+* nav
+
+  * navigace webu
+
+* section
+
+  * označení části webu, zpravidla lišta s informacemi::
+
+      <section>
+        <h2>info</h2>
+        <p>info o infu</p>
+        <img src="image.jpg" alt="image">
+      </section>
+
+* article
+
+  * označení článku::
+
+       <article>
+         <p>článek</p>
+       </article>
+
+* aside
+
+  * postranní panel, zpravidla navigace vedle článku (nutno nastylovat pomocí
+    CSS, aby se skutečně šel vidět panel vlevo / vpravo od článku)
+
+* footer
+
+  * patička webu::
+
+       <footer>
+         <p>&copy; Davie Badger</p>
+       </footer>
+
+.. note::
+
+   Znaky mimo klávesnici je třeba zakódovat::
+
+      &copy; (ikonka copyrightu)
+      &reg; (ikonka registrované značky)
+
+   To samé platí i pro rezervované znaky v HTML::
+
+      > -> &gt; nebo &#62;
+      < -> &lt; nebo &#60;
+
+.. tip::
+
+   Nesémantické pomocné tagy:
+
+   * div
+
+     * pro zaobalení tagů, na které lze aplikovat pomocí CSS další styly::
+
+          <style>
+          div {
+            border: 3px solid black;
+            font-size: 22px;
+          }
+          </style>
+
+          <div>
+            <h1>nadpis</h1>
+            <p>test</p>
+          </div>
+
+   * span
 
 Formuláře
 ---------
@@ -491,9 +569,3 @@ Pomocí Javascriptu jde nastavit chování webu::
       <head>
         <script src="index.js"></script>
       </head>
-
-TODO
-====
-
-* entity (&lt) -> https://www.w3schools.com/html/html_entities.asp
-* symboly (&copy;) -> https://www.w3schools.com/html/html_symbols.asp
