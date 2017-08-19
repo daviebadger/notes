@@ -1,9 +1,9 @@
 ==================
  reStructuredText
 ==================
-------------------------------------------------
- Značkový jazyk pro psání technické dokumentace
-------------------------------------------------
+-------------------------------------------------------
+ Značkový jazyk pro psání technické dokumentace (.rst)
+-------------------------------------------------------
 
 :Author: Davie Badger
 :Contact: davie.badger@gmail.com
