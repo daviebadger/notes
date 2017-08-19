@@ -759,7 +759,7 @@ Pomocí kaskádových stylů (CSS) jde upravit vzhled tagů::
 
 Kromě nanesení stylů na tagy jako takové lze uplatnit pomocné identifikátory:
 
-* id
+* ``id``
 
   * aplikuj styl jen na ten tag, který obsahuje ``id`` atribut::
 
@@ -771,7 +771,7 @@ Kromě nanesení stylů na tagy jako takové lze uplatnit pomocné identifikáto
 
       <p id="test-me">Test stylu<p>
 
-* class
+* ``class``
 
   * aplikuj styl na všechny tagy, které obsahují ``class`` atribut::
 
@@ -795,6 +795,13 @@ Kromě nanesení stylů na tagy jako takové lze uplatnit pomocné identifikáto
       <head>
         <link rel="stylesheet" href="styles.css">
       </head>
+
+.. tip::
+
+   Atributy ``id`` a ``class`` se zpravidla nacházejí mezi prvnímu atributy
+   v tagu, za které pak následují ostatní::
+
+      <input id="email" class="input-email" type="email" placeholder="email">
 
 Skripty
 -------
