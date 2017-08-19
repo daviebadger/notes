@@ -560,6 +560,10 @@ Typy formulářových polí:
 
            <input type="email" name="email" maxlength="50">
 
+      * emailová adresa bez možnosti úpravy::
+
+           <input type="email" name="email" value="john@doe.com" disabled>
+
     * ``search``
 
       * text k vyhledání (na mobilu se přejmenuje Enter klávesa na Search)
