@@ -1,9 +1,9 @@
 ======
  HTML
 ======
---------------------------------------------
- Značkový jazyk pro tvorbu webových stránek
---------------------------------------------
+----------------------------------------------------
+ Značkový jazyk pro tvorbu webových stránek (.html)
+----------------------------------------------------
 
 :Author: Davie Badger
 :Contact: davie.badger@gmail.com
