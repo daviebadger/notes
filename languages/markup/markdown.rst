@@ -1,9 +1,9 @@
 ==========
  Markdown
 ==========
--------------------------------------------
- Značkový jazyk pro editaci prostého textu
--------------------------------------------
+-------------------------------------------------
+ Značkový jazyk pro editaci prostého textu (.md)
+-------------------------------------------------
 
 :Author: Davie Badger
 :Contact: davie.badger@gmail.com
