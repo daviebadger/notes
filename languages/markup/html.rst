@@ -614,6 +614,15 @@ Typy formulářových polí:
     * ``time``
     * ``week``
     * ``month``
+    * ``file``
+
+      * nahrání souboru::
+
+           <input type="file" name="cv">
+
+      * nahrání více souborů najednou::
+
+           <input type="file" name="receipts" multiple>
 
   * speciální inputy (tlačítka):
 
