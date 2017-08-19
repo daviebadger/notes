@@ -373,6 +373,10 @@ Tagy pro lepší rozvržení webu do logických celků:
 
   * navigace webu
 
+* main
+
+  * hlavní část webu mezi hlavičkou (header) a zápatím (footer)
+
 * section
 
   * označení části webu, zpravidla lišta s informacemi::
@@ -438,10 +442,257 @@ Tagy pro lepší rozvržení webu do logických celků:
 
    * span
 
+     * pro zaobalení části textu v odstacích, na které lze taktéž aplikovat
+       styly::
+
+          <style>
+          p {
+            color: black;
+          }
+
+          #first-name {
+            color: red;
+          }
+          </style>
+
+          <p>
+            <span id="first-name">Davie</span>
+            Badger
+          </p>
+
 Formuláře
 ---------
 
-https://www.w3schools.com/html/html_forms.asp
+Vytvoř přihlašovací formulář::
+
+   <form action="/user/login" method="POST">
+     <label for="email">Email:</label>
+     <input type="email" id="email" name="email">
+
+     <label for="password">Password:</label>
+     <input type="password" id="password" name="password" >
+
+     <input type="submit" value="Přihlásit se">
+   </form>
+
+Legenda:
+
+==============  ======
+Syntaxe         Význam
+==============  ======
+action=""       URL adresa, který se má zavolat po stisknutí na submit tlačítko
+method=""       HTTP metoda pro odeslání formulářových dat (GET nebo POST)
+label for=""    spárování labelu (popisku) pro konkrétní input s ID atributem
+input type=""   typ formulářového pole
+input name=""   pojménování formulářového pole (povinné pro odesílání dat)
+input value=""  hodnota v input poli
+==============  ======
+
+.. note::
+
+   Některé inputy, např. pro email, mají defaultně vlastní validaci a styly,
+   pokud je hodnota v inputu neplatná. Toto chování lze zamezit pomocí
+   ``novalidate`` atributu v ``form`` tagu::
+
+      <form novalidate></form>
+
+.. tip::
+
+   Zpravidla se labely a inputy dohromady zaobaolují do ``div`` či ``li``
+   tagu pro lepší nastylování::
+
+      <form action="/user/login" method="POST">
+        <ul>
+          <li>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+          </li>
+          <li>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" >
+          </li>
+        </ul>
+
+        <input type="submit" value="Přihlásit se">
+      </form>
+
+Formulářové pole
+^^^^^^^^^^^^^^^^
+
+Typy formulářových polí:
+
+* ``input``
+
+  * pole pro vstup dat od uživatelovy klávesnice
+  * typy vstupů:
+
+    * ``text``
+
+      * jednořádkový text::
+
+           <input type="text" name="text">
+
+      * jednořádkový text s výchozí hodnotou::
+
+           <input type="text" name="name" value="Davie">
+
+      * jednořákový text s popiskem uvnitř pole, který po kliknutí zmizí::
+
+           <input type="text" name="name" placeholder="First name">
+
+    * ``password``
+
+      * schované heslo pomocí hvězdiček::
+
+           <input type="password" name="password">
+
+      * schované heslo jako povinná hodnota (uživatel musí vyplnit)::
+
+           <input type="password" name="password" required>
+
+    * ``email``
+
+      * emailová adresa (na mobilu se zobrazí klávesnice se zavináčem)::
+
+           <input type="email" name="email">
+
+      * emailová adresa s maximálním počtem znaků::
+
+           <input type="email" name="email" maxlength="50">
+
+    * ``search``
+
+      * text k vyhledání (na mobilu se přejmenuje Enter klávesa na Search)
+
+    * ``number``
+
+      * číslo (na mobilu se nezobrazí číselná klávesnice)::
+
+           <input type="number" name="number">
+
+      * číslo s minimální hodnotou::
+
+           <input type="number" name="number" min="1">
+
+      * číslo s maximální hodnotou::
+
+           <input type="number" name="number" max="3">
+
+    * ``tel``
+
+      * telefonní číslo (na mobilu se zobrazí číselná klávesnice)
+
+    * ``range``
+
+      * posuvník pro čísla v rozmezí od - do::
+
+           <input type="range" name="range" min="0" max="100">
+
+    * ``radio``
+
+      * kolečka pro vybrání jediné hodnoty z několika hodnot::
+
+           <input type="radio" name="gender" value="male">
+           <input type="radio" name="gender" value="female">
+
+    * ``checkbox``
+
+      * rámečky bez fajfky::
+
+           <input type="checkbox" name="married">
+
+      * rámeček s fajfkou::
+
+           <input type="checkbox" name="married" checked>
+
+    * ``date``
+
+      * textové pole pro datum (na mobilu se zobrazí nativní výběrčí datumu)
+
+    * ``datetime``
+    * ``datetime-local``
+    * ``time``
+    * ``week``
+    * ``month``
+
+  * speciální inputy (tlačítka):
+
+    * submit
+
+      * pro odeslání formulářových dat::
+
+           <input type="submit" value="Odeslat">
+
+    * reset
+
+      * pro vymazání / vyresetování všech hodnot ve formuláři::
+
+           <input type="reset">
+
+* select
+
+  * výběr hodnoty ze seznamu::
+
+       <select name="auta">
+         <option value="audi">Audi</option>
+         <option value="bmw">BMW</option>
+         <option value="citroen">Citroen</option>
+       </select>
+
+  * výběr hodnoty ze seznamu s defaultní hodnotou pomocí atributu
+    ``selected``::
+
+       <select name="auta">
+         <option value="audi">Audi</option>
+         <option value="bmw" selected>BMW</option>
+         <option value="citroen">Citroen</option>
+       </select>
+
+  * výběr hodnoty ze seskupeného seznamu::
+
+       <select name="auta">
+         <optgroup label="A-C">
+           <option value="audi">Audi</option>
+           <option value="bmw">BMW</option>
+           <option value="citroen">Citroen</option>
+         </optgroup>
+         <optgroup label="O-R">
+           <option value="opel">Opel</option>
+           <option value="porsche">Porsche</option>
+           <option value="renault">Renault</option>
+         </optgroup>
+       </select>
+
+* textarea
+
+  * multiřádkové textové pole (input je jen jednořákový) s možností nastavení
+    velikosti řádků a sloupců (znaků na řádek)::
+
+       <textarea name="text" cols="11" rows="3">
+       bla bla bla
+       bla bla bla
+       bla bla bla
+       </textarea>
+
+.. note::
+
+   Při práci se soubory ve formuláři je třeba přidat do ``form`` tagu atribut
+   ``enctype``, aby se souboury odeslaly na server::
+
+      <form enctype="multipart/form-data"></form>
+
+.. tip::
+
+   Kromě submit tlačítka existuje i obyčejný tlačítko ``button``::
+
+      <button>klikni na mě</button>
+
+   Rozdíly oproti submit tlačítku:
+
+   1. lze vnořit dovnitř další tagy, např. obrázek
+   2. lze použít mimo formulář
+   3. po kliknutí se nic nebude dít (žádný refresh stránky jako u submitu),
+      není-li použit Javascript
 
 Metadata
 --------
@@ -569,3 +820,18 @@ Pomocí Javascriptu jde nastavit chování webu::
       <head>
         <script src="index.js"></script>
       </head>
+
+   Aby načtení Javascriptového souboru neblokovalo vyrendrování stránky,
+   lze použít následující atributy:
+
+   * async
+
+     * skript se spustí po jeho načtení tak, aby neblokoval rendrování::
+
+          <script src="index.js" async></script>
+
+   * defer
+
+     * skript se spustí až bude kompletně celá stránka vyrendrována::
+
+          <script src="index.js" defer></script>
