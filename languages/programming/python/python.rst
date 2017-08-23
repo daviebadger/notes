@@ -106,3 +106,36 @@ Spusť skript::
 
          $ ./hello.py
          Hello world!
+
+Základní syntaxe
+================
+
+Komentáře
+---------
+
+Vlož komentář, který bude Pythonem ignorován při exekuci kódu::
+
+   $ cat hello.py
+   # print("Hello")
+
+   print("Hello world!")
+   $ python3 hello.py
+   Hello world!
+   $
+
+.. note::
+
+   Komentáře se zpravidla používájí jen tam, kde je třeba vysvětlit úmysl,
+   proč je právě použít daný kód, neboť ten nemusí být každému zřejmý při
+   čtení kódu.
+
+   V žádném případě by neměl zbytečně popisovat kód jak funguje, neboť se
+   očekává, že ten kdo bude kód číst sám rozumí Pythonu.
+
+.. tip::
+
+   Délka řádku v souboru včetně komentářů by neměla překročit počet 79 znaků::
+
+      # Strašně dlouhý ukázkový komentář,
+      # který je pro ilustraci rozložen do tří řádků,
+      # namísto jednoho dlouhého řádku překračující limit 79 znaků.
