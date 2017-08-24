@@ -203,7 +203,7 @@ Smaž proměnnou::
       age = 22
 
 Rezervovaná klíčová slova
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Názvy proměnných nesmí obsahovat tyto názvy::
 
@@ -241,10 +241,10 @@ Názvy proměnných nesmí obsahovat tyto názvy::
       $
 
 Typy hodnot
------------
+^^^^^^^^^^^
 
 Čísla
-^^^^^
+"""""
 
 * celá (int)::
 
@@ -274,7 +274,7 @@ Typy hodnot
    Mezi kódem a komentářem jsou zpravidle 2 mezery.
 
 Řetězce
-^^^^^^^
+"""""""
 
 Posloupnost libovolných znaků (str)::
 
@@ -331,7 +331,7 @@ Posloupnost libovolných znaků (str)::
       Pariatur rerum incidunt nisi expedita delectus vero!
 
 Seznamy
-^^^^^^^
+"""""""
 
 Seznam položek s libovolnou hodnotou (list)::
 
@@ -352,7 +352,7 @@ Seznam položek s libovolnou hodnotou (list)::
       {1, 2, 3, 5, 8}
 
 Slovníky
-^^^^^^^^
+""""""""
 
 Seznam párových položek, kde každému klíčí náleží jeho libovolná hodnota
 (dict)::
