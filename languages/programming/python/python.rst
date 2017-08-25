@@ -25,7 +25,7 @@ Python je defaultně nainstalovaný v Ubuntu::
 
 .. note::
 
-   Samotný příkaz ``python`` odkazuje na starší verzi::
+   Samotný příkaz ``python`` odkazuje na starou verzi::
 
       $ python --version
       Python 2.7.13
@@ -246,15 +246,15 @@ Typy hodnot
 Čísla
 """""
 
-* celá (int)::
+* celá (``int``)::
 
      python_version = 3
 
-* desetinná (float)::
+* desetinná (``float``)::
 
      temperature_celsius = 21.0
 
-* booleovské hodnoty (bool)::
+* booleovské hodnoty (``bool``)::
 
      is_married = False
      is_young = True
@@ -276,7 +276,7 @@ Typy hodnot
 Řetězce
 """""""
 
-Posloupnost libovolných znaků (str)::
+Posloupnost libovolných znaků (``str``)::
 
      name = "Davie Badger"
 
@@ -333,7 +333,7 @@ Posloupnost libovolných znaků (str)::
 Seznamy
 """""""
 
-Seznam položek s libovolnou hodnotou (list)::
+Seznam položek s libovolnou hodnotou (``list``)::
 
      cities = ["Prague", "Brno", "Ostrava"]
 
@@ -345,7 +345,7 @@ Seznam položek s libovolnou hodnotou (list)::
 
 .. tip::
 
-   Pro seznam unikátních položek je třeba použít množiny (set)::
+   Pro seznam unikátních položek je třeba použít množiny (``set``)::
 
       >>> random_numbers = {1, 1, 1, 2, 3, 5, 8}
       >>> random_numbers
@@ -355,7 +355,7 @@ Slovníky
 """"""""
 
 Seznam párových položek, kde každému klíčí náleží jeho libovolná hodnota
-(dict)::
+(``dict``)::
 
      person = {
          "first_name": "Davie",
@@ -383,6 +383,172 @@ Seznam párových položek, kde každému klíčí náleží jeho libovolná hod
    Tato prevence zabrání častému výskytu syntax erroru z důvodu chybějící čárky
    při změně kódu. Stejný princip lze uplatnit i u seznamů nebo množin.
 
+Operátory
+---------
+
+Aritmetické
+^^^^^^^^^^^
+
+* sčítání (``+``)::
+
+     >>> 1 + 1
+     2
+     >>> x = 1
+     >>> y = 1
+     >>> x + y
+     2
+
+* odčítání (``-``)::
+
+     >>> 2 - 1
+     1
+
+* násobení (``*``)::
+
+     >>> 2 * 1
+     2
+
+* dělení:
+
+  * beze zbytku (``/``)::
+
+       >>> 2 / 1
+       2.0
+
+  * zbytek po dělení (``%``)::
+
+       >>> 3 / 2
+       1
+
+* umocnění (``**``)::
+
+     >>> 2 ** 3
+     8
+
+.. note::
+
+   Při práci s aritmetickými operátory musí být zpravidla na obou stranách
+   stejné typy hodnot, jinak hrozí typový error::
+
+      >>> 1 + "1"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+.. tip::
+
+   Je-li třeba aktualizovat hodnotu v proměnné, např. přičíst číslo, lze
+   použít zkrácený zápis pomoci ``+=``::
+
+      >>> x = 1
+      >>> x = x + 1
+      >>> x
+      2
+      >>> y = 1
+      >>> y += 1
+      >>> y
+      2
+
+   Stejný princip lze aplikovat i u ostatních aritmetických operátorů:
+
+   * ``-=``
+   * ``*=``
+   * ``/=``
+   * ``%=``
+   * ``**=``
+
+Pořadí aritmetických operací
+""""""""""""""""""""""""""""
+
+1. závorky
+2. umocňování
+3. násobení a dělení
+4. sčítání a odčítání
+
+::
+
+   >>> ((1 + 1) ** 2 - 2 / 1) * 1
+   2.0
+
+Relační
+^^^^^^^
+
+* větší (``>``)::
+
+     >>> 1 > 0
+     True
+     >>> 0 > 1
+     False
+
+* menší (``<``)::
+
+     >>> 1 < 0
+     False
+     >>> 0 < 1
+     True
+
+* větší nebo rovno (``>=``)::
+
+     >>> 1 >= 0
+     True
+
+* menší nebo rovno (``<=``)::
+
+     >>> 1 <= 0
+     False
+
+* rovná se (``==``)::
+
+     >>> 1 == 1
+     True
+     >>> 1 == 1.0
+     True
+
+* nerovná se (``!=``)::
+
+     >>> "a" != "b"
+     True
+
+Logické
+^^^^^^^
+
+* a (``and``)::
+
+     >>> 0 == 0 and 1 == 1
+     True
+     >>> 0 == 0 and 0 == 1
+     False
+
+* nebo (``or``)::
+
+     >>> 0 != 0 or 1 == 1
+     True
+     >>> 0 != 0 or 1 != 1
+     False
+
+Množinové
+^^^^^^^^^
+
+* sjednocení (``!``)::
+
+     >>> {1, 2} | {3}
+     {1, 2, 3}
+
+* průnik (``&``)::
+
+     >>> {1, 2} & {1}
+     {1}
+
+* rozdíl (``-``)::
+
+     >>> {1, 2} - {1}
+     {2}
+
+* doplněk (``^``)::
+
+     >>> {1, 2} ^ {1}
+     {2}
+
 Pokročilá syntaxe
 =================
 
@@ -394,4 +560,14 @@ TODO
   * NoneType (prázdný return z funkce)
   * Entice (return více hodnot z funkce + rozbalení)
 
-* převody typů
+* převody typů (funkce int, float, str, ...)
+* not False / not True (negace)
+* více argumentů pro print funkci
+* mutable vs immutable
+* vyhodnocení pravdivosti (podmínky)
+* odmocnina (moduly)
+* funkce help() v shellu
+* patička skriptu s funkcí main
+* ostastní typy
+* zalomení kódu
+* zřetězení řetězců vs formátování pomocí f-strings
