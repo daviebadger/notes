@@ -248,16 +248,22 @@ Typy hodnot
 
 * celá (``int``)::
 
-     python_version = 3
+     >>> python_version = 3
+     >>> type(python_version)
+     <class 'int'>
 
 * desetinná (``float``)::
 
-     temperature_celsius = 21.0
+     >>> temperature_celsius = 21.0
+     >>> type(temperature_celsius)
+     <class 'float'>
 
 * booleovské hodnoty (``bool``)::
 
-     is_married = False
-     is_young = True
+     >>> is_married = False
+     >>> is_young = True
+     >>> type(is_married)
+     <class 'bool'>
 
 .. note::
 
@@ -278,7 +284,9 @@ Typy hodnot
 
 Posloupnost libovolných znaků (``str``)::
 
-     name = "Davie Badger"
+     >>> name = "Davie Badger"
+     >>> type(name)
+     <class 'str'>
 
 .. note::
 
@@ -335,7 +343,9 @@ Seznamy
 
 Seznam položek s libovolnou hodnotou (``list``)::
 
-     cities = ["Prague", "Brno", "Ostrava"]
+     >>> cities = ["Prague", "Brno", "Ostrava"]
+     >>> type(cities)
+     <class 'list'>
 
 .. note::
 
@@ -350,6 +360,8 @@ Seznam položek s libovolnou hodnotou (``list``)::
       >>> random_numbers = {1, 1, 1, 2, 3, 5, 8}
       >>> random_numbers
       {1, 2, 3, 5, 8}
+      >>> type(random_numbers)
+      <class 'set'>
 
 Slovníky
 """"""""
@@ -357,12 +369,14 @@ Slovníky
 Seznam párových položek, kde každému klíčí náleží jeho libovolná hodnota
 (``dict``)::
 
-     person = {
-         "first_name": "Davie",
-         "last_name": "Badger",
-         "age": 22,
-         "hobbies": ["programming"]
-     }
+     >>> person = {
+     ...     "first_name": "Davie",
+     ...     "last_name": "Badger",
+     ...     "age": 22,
+     ...     "hobbies": ["programming"]
+     ... }
+     >>> type(person)
+     <class 'dict'>
 
 .. note::
 
@@ -397,6 +411,8 @@ Aritmetické
      >>> y = 1
      >>> x + y
      2
+     >>> "a" + "b" + "c"
+     'abc'
 
 * odčítání (``-``)::
 
@@ -407,6 +423,8 @@ Aritmetické
 
      >>> 2 * 1
      2
+     >>> 3 * "a"
+     'aaa'
 
 * dělení:
 
@@ -549,8 +567,84 @@ Množinové
      >>> {1, 2} ^ {1}
      {2}
 
-Pokročilá syntaxe
-=================
+Podmínky
+--------
+
+Spusť patřičný kód, je-li splněna podmínka::
+
+   >>> age = 18
+   >>> if age >= 18:
+   ...     print("You're adult.")
+   You're adult.
+
+Spusť alternativní kód, není-li podmínka splněna::
+
+   >>> number = 3
+   >>> if number % 2 == 0:
+   ...     print("It's even number.")
+   ... else:
+   ...     print("It's odd number.")
+   It's odd number.
+
+Zkus další podmínky, není-li předchozí podmínka splněna::
+
+   >>> age = 17
+   >>> if age < 0:
+   ...     print("You don't exist.")
+   ... elif age < 18:
+   ...     print("You're child.")
+   ... else:
+   ...     print("You're adult.")
+   You're child.
+
+Podmínky včetně logických spojek::
+
+   >>> name = "Davie Badger"
+   >>> age = 22
+   >>> if name == "Davie Badger" and age == 22:
+   ...     print("It's probably he.")
+   ... else:
+   ...     print("It's not probably he.")
+   It's probably he.
+
+.. note::
+
+   Je-li třeba vyhodnotit pravdivost či nepravdivost hodnoty v proměnné, není
+   nutné používat relační operátory::
+
+      >>> todos = []
+      >>> if todos:
+      ...     print("I have to do something.")
+      ... else:
+      ...     print("I don't have to anything.")
+      I don't have to do anything.
+
+   Přehled pravdivostních a nepravdivostních hodnot:
+
+   =====  ================  ==================
+   Typ    Pravdivé hodnoty  Nepravdivé hodnoty
+   =====  ================  ==================
+   int    -1, 1             0
+   float  -1.0, 1.0         0.0
+   str    "text"            ""
+   list   [1, 2, 3]         []
+   set    {1, 2, 3}         set()
+   dict   {"age": 22}       {}
+   =====  ================  ==================
+
+   Ověření pravdivosti::
+
+      >>> bool([])
+      False
+      >>> bool([1, 2 3])
+      True
+
+.. tip::
+
+   Je-li třeba na základě ``if`` a ``else`` podmínky uložit nějakou hodnotu
+   do proměnné, lze použít zkrácený zápis::
+
+      is_even = True if number % 2 else False
 
 TODO
 ====
@@ -564,10 +658,18 @@ TODO
 * not False / not True (negace)
 * více argumentů pro print funkci
 * mutable vs immutable
-* vyhodnocení pravdivosti (podmínky)
 * odmocnina (moduly)
 * funkce help() v shellu
 * patička skriptu s funkcí main
 * ostastní typy
 * zalomení kódu
-* zřetězení řetězců vs formátování pomocí f-strings
+* formátování řetězců (format, f-strings)
+* násobení řetězců a sekvencí
+* indexy u sekvencí v rámci cyklů
+* input uživatele
+* explicitně vracet None ve funkci
+* třídy (dědičnost, kompozice)
+* dlouhé několikařádkové podmínky
+* try except finally else
+* except Exception pro zachycení jakékoliv výjimky
+* in ..., not in ..., is None, is not None
