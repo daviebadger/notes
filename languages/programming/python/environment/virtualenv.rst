@@ -78,6 +78,12 @@ Aktivuj virtualenv::
 
       (venv) davie@badger:~/test$
 
+.. tip::
+
+   Uvnitř virtualenvu lze spustit použitý Python zkráceně::
+
+      $ python
+
 Deaktivace
 ^^^^^^^^^^
 
