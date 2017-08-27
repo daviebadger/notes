@@ -397,6 +397,32 @@ Seznam párových položek, kde každému klíčí náleží jeho libovolná hod
    Tato prevence zabrání častému výskytu syntax erroru z důvodu chybějící čárky
    při změně kódu. Stejný princip lze uplatnit i u seznamů nebo množin.
 
+Převody hodnot
+""""""""""""""
+
+Převeď hodnotu na jiný typ, je-li to možné::
+
+   >>> int(1.0)
+   1
+   >>> int("3")
+   3
+   >>> float("1.0")
+   1.0
+   >>> float(3)
+   3.0
+   >>> str(3)
+   '3'
+   >>> str(1.0)
+   '1.0'
+   >>> list("abc")
+   ['a', 'b', 'c']
+   >>> set("aaa")
+   {'a'}
+   >>> int("text")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   ValueError: invalid literal for int() with base 10: 'text'
+
 Operátory
 ---------
 
@@ -544,6 +570,22 @@ Logické
      >>> 0 != 0 or 1 != 1
      False
 
+* ne (``not``)::
+
+     >>> 0 == 0 and not 1 == 1
+     False
+     >>> 1 != 1 or not 1 != 1
+     True
+
+.. tip::
+
+   Negaci lze taktéž použít na přepínání mezi ``True`` a ``False`` hodnotou::
+
+      >>> is_active = True
+      >>> is_active = not is_activate
+      >>> is_active
+      False
+
 Množinové
 ^^^^^^^^^
 
@@ -646,6 +688,98 @@ Podmínky včetně logických spojek::
 
       is_even = True if number % 2 else False
 
+Cykly
+-----
+
+for
+^^^
+
+Opakuj N-krát kód uvnitř cyklu::
+
+   >>> name = input("Enter your name: ")
+   Enter your name: Davie
+   >>> for character in name:
+   ...     print(character)
+   D
+   a
+   v
+   i
+   e
+
+.. note::
+
+   K jednotlivým znakům v řetězci nebo položkám v seznamu (oboje jsou tzv.
+   sekvence) lze přistupovat i pomocí indexů::
+
+      >>> cities = ["Prague", "Brno", "Ostrava"]
+      >>> cities[0]
+      'Prague'
+
+   Indexy zpravidla musí existovat v sekvenci, jinak hrozí indexový error:
+
+      >>> cities = ["Prague", "Brno", "Ostrava"]
+      >>> cities[3]
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      IndexError: list index out of range
+
+   Způsoby indexování:
+
+   ======  =========================  =============================
+   Index   Význam                     Výstup
+   ======  =========================  =============================
+   [0]     První položka              'Prague'
+   [-1]    Poslední položka           'Ostrava'
+   [1:]    Interval <1, konec>        ['Brno', 'Ostrava']
+   [:2]    Interval <začátek, 2)      ['Prague', 'Brno']
+   [1:2]   Interval <1, 2)            ['Brno']
+   [::2]   Ob jednu položku           ['Prague', 'Ostrava']
+   [::-1]  Obrácená sekvence          ['Ostrava', 'Brno', 'Prague']
+   ======  =========================  =============================
+
+.. tip::
+
+   Je-li třeba vědět, s kolikátou položkou se aktuálně pracuje::
+
+      >>> name = "Davie"
+      >>> for index, character in enumerate(name):
+      ...     print("Index", index, "contains", character, "character")
+      Index 0 contains D character
+      Index 1 contains a character
+      Index 2 contains v character
+      Index 3 contains i character
+      Index 4 contains e character
+
+Příkaz continue
+"""""""""""""""
+
+Přeskoč exekuci kódu v cyklu, je-li něco nevhodného::
+
+   >>> for number in range(11):  # <0, 11)
+   ...     if number % 2 != 0:
+   ...         continue
+   ...     print("Number", number, "is even")
+   Number 0 is even
+   Number 2 is even
+   Number 4 is even
+   Number 6 is even
+   Number 8 is even
+   Number 10 is even
+
+.. note::
+
+   Taktéž lze nastavit jiný interval pro vygenerování posloupnosti celých
+   čísel::
+
+      >>> list(range(1, 4))  # <1, 4)
+      [1, 2, 3]
+
+Příkaz break
+""""""""""""
+
+while
+^^^^^
+
 TODO
 ====
 
@@ -654,9 +788,6 @@ TODO
   * NoneType (prázdný return z funkce)
   * Entice (return více hodnot z funkce + rozbalení)
 
-* převody typů (funkce int, float, str, ...)
-* not False / not True (negace)
-* více argumentů pro print funkci
 * mutable vs immutable
 * odmocnina (moduly)
 * funkce help() v shellu
@@ -664,12 +795,11 @@ TODO
 * ostastní typy
 * zalomení kódu
 * formátování řetězců (format, f-strings)
-* násobení řetězců a sekvencí
-* indexy u sekvencí v rámci cyklů
-* input uživatele
 * explicitně vracet None ve funkci
 * třídy (dědičnost, kompozice)
 * dlouhé několikařádkové podmínky
 * try except finally else
 * except Exception pro zachycení jakékoliv výjimky
-* in ..., not in ..., is None, is not None
+* is None, is not None
+* vnořené seznamy [x][y]
+* kopie seznamu [:]
