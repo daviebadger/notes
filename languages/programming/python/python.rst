@@ -547,6 +547,9 @@ Relační
      True
      >>> 1 == 1.0
      True
+     >>> is_even = 2 % 2 == 0
+     >>> is_even
+     True
 
 * nerovná se (``!=``)::
 
@@ -700,6 +703,7 @@ Opakuj N-krát kód uvnitř cyklu::
    Enter your name: Davie
    >>> for character in name:
    ...     print(character)
+   ...
    D
    a
    v
@@ -744,6 +748,7 @@ Opakuj N-krát kód uvnitř cyklu::
       >>> name = "Davie"
       >>> for index, character in enumerate(name):
       ...     print("Index", index, "contains", character, "character")
+      ...
       Index 0 contains D character
       Index 1 contains a character
       Index 2 contains v character
@@ -759,6 +764,7 @@ Přeskoč exekuci kódu v cyklu, je-li něco nevhodného::
    ...     if number % 2 != 0:
    ...         continue
    ...     print("Number", number, "is even")
+   ...
    Number 0 is even
    Number 2 is even
    Number 4 is even
@@ -774,11 +780,109 @@ Přeskoč exekuci kódu v cyklu, je-li něco nevhodného::
       >>> list(range(1, 4))  # <1, 4)
       [1, 2, 3]
 
+.. tip::
+
+   Ignoruj aktuální položku ze sekvence::
+
+      >>> for _ in range(3):
+      ...     print("Spam")
+      ...
+      Spam
+      Spam
+      Spam
+
 Příkaz break
 """"""""""""
 
+Ukončí násilně cyklus::
+
+   >>> allowed_letter = ["d", "g", "o"]
+   >>> word = input("Enter word which contains only letters 'd' or 'g' or 'o': ")
+   Enter word which contains only letters 'd' or 'g' or 'o': test
+   >>> for letter in word:
+   ...     if letter not in allowed_letters:
+   ...         print("Invalid word", word)
+   ...         break
+   ...
+   Invalid word test
+
+.. tip::
+
+   Spusť kód, pokud v cyklu nedošlo k jeho násilnému ukončení nebo jiné chybě::
+
+      >>> allowed_letter = ["d", "g", "o"]
+      >>> word = input("Enter word which contains only letters 'd' or 'g' or 'o': ")
+      Enter word which contains only letters 'd' or 'g' or 'o': dog
+      >>> for letter in word:
+      ...     if letter not in allowed_letters:
+      ...         print("Invalid word", word)
+      ...         break
+      ... else:
+      ...     print("Yes,", word, "is a valid word")
+      ...
+      Yes, dog is a valid word
+
 while
 ^^^^^
+
+Opakuj N-krát kód uvnitř cyklu, dokud je podmínka platná::
+
+   >>> number = int(input("Guess number: "))
+   Guess number: 1
+   >>> while number != 5:
+   ...     number = int(input("Sorry, try again: "))
+   ...
+   Sorry, try again: 2
+   Sorry, try again: 3
+   Sorry, try again: 4
+   Sorry, try again: 5
+   >>> number
+   5
+
+.. note::
+
+   Místo podmínky lze použít pravdivou hodnotu, pomocí které vznikne nekonečný
+   cyklus::
+
+      >>> while True:
+      ...     print("Spam")
+      ...
+      Spam
+      Spam
+      Spam
+      Spam
+      Spam
+
+   Nekonečný cyklus lze v shellu ukončit pomocí klávesové zkratky
+   ``CTRL + c``::
+
+      >>> while True:
+      ...     print("Spam")
+      ...
+      Spam
+      Spam
+      Spam
+      ^CSpam
+      Traceback (most recent call last):
+        File "<stdin>", line 2, in <module>
+      KeyboardInterrupt
+
+   V kódu lze vyskočit z nekonečného cyklu pomocí příkazu ``break``, zpravidla
+   při nějaké splněné podmínce.
+
+.. tip::
+
+   Spusť kód, pokud se podmínka u cyklu stala nepravdivá::
+
+      >>> number = int(input("Guess number: "))
+      Guess number: 1
+      >>> while number != 3:
+      ...     number = int(input("Sorry, try again: "))
+      ... else:
+      ...     print("You've just guessed the right number")
+      Sorry, try again: 2
+      Sorry, try again: 3
+      You've just guessed the right number
 
 TODO
 ====
@@ -803,3 +907,6 @@ TODO
 * is None, is not None
 * vnořené seznamy [x][y]
 * kopie seznamu [:]
+* if 0 <= number <= 100
+* [number for number in numbers if number % 2 != 1] + vnořené
+* pass u obyčejných vlastních exception
