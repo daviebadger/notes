@@ -827,6 +827,13 @@ Nahrazení v konkrétních řádcích
 
   * nahraď všechen starý text za nový text v daných řádcích
 
+.. tip::
+
+   Nahraď text včetně respektování velkých a malých písmem, je-li case
+   sensitivita vypnuta v nastavení editoru (defaultně zapnuto)::
+
+      :1,5s/foo/bar/gI
+
 Nahrazení v celé souboru
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
