@@ -890,6 +890,135 @@ Funkce
 Vlastní funkce
 ^^^^^^^^^^^^^^
 
+Vytvoř a zavolej vlastní funkci bez argumentů::
+
+   >>> def say_hello():
+   ...     print("Hello")
+   ...
+   >>> say_hello()
+   Hi
+
+Vytvoř a zavolej vlastní funkci s povinným pozičním argumentem::
+
+   >>> def say_hello(name):
+   ...     print("Hello", name)
+   ...
+   >>> say_hello()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: say_hello() missing 1 required positional argument: 'name'
+   >>> say_hello("Davie")
+   Hello Davie
+   >>> say_hello(name="Davie")
+   Hello Davie
+
+Vytvoř a zavolej vlastní funkcí s volitelným argumentem::
+
+   >>> def say_hello(name="No One"):
+   ...     print("Hello", name)
+   ...
+   >>> say_hello()
+   Hello No One
+
+Vytvoř a zavolej vlastní funkcí s povinným pozičním a volitelným argumentem::
+
+   >>> def power(x, y=2)
+   ...     print(x * y)
+   ...
+   >>> power(2)
+   4
+   >>> power(2, 3)
+   6
+
+Vytvoř a zavolej vlastní funkci s neomezeným počtem pozičních argumentů::
+
+   >>> numbers = [1, 2, 3]
+   >>> def sum_numbers(*numbers):
+   ...     result = 0
+   ...     for number in numbers:
+   ...         result += number
+   ...     print(result)
+   ...
+   >>> def sum_numbers(*numbers)
+   6
+   >>> def sum_numbers(1, 2, 3)
+   6
+
+Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů::
+
+   >>> person = {
+   ...     "name": "Davie Badger",
+   ...     "age": 22,
+   ... }
+   >>> def person_details(**details):
+   ...     for detail in details:
+   ...         print(detail, "-", details[detail])
+   ...
+   >>> person_details(**person)
+   name - Davie Badger
+   age - 22
+   >>> person_details(name="Davie Badger", age=22)
+   name - Davie Badger
+   age - 22
+
+.. note::
+
+   K proměnným, které jsou vytvořené uvnitř funkcí, nelze z vnějšku
+   přístupovat::
+
+      >>> def create_variable_age():
+      ...     age = 22
+      ...
+      >>> age
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'age' is not defined
+      >>> create_variable_age()
+      >>> age
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'age' is not defined
+
+   Naopak zevnitř funkce lze přístupovat k vnějším (globálním) proměnnám::
+
+      >>> age = 22
+      >>> def print_age():
+      ...     print(age)
+      ...
+      >>> print_age()
+      22
+
+.. tip::
+
+   Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
+
+      >>> def example(x, y=1, *args, **kwargs):
+      ...     print(x)
+      ...     print(y)
+      ...     print(args)
+      ...     print(kwargs)
+      ...
+      >>> example(0)
+      0
+      1
+      ()
+      {}
+      >>> example(1, 2)
+      1
+      2
+      ()
+      {}
+      >>> example(1, 2, 3, 4, 5)
+      1
+      2
+      (3, 4, 5)
+      {}
+      >>> example(1, 2, 3, 4, 5, name="Davie Badger", age=22)
+      1
+      2
+      (3, 4, 5)
+      {'name': 'Davie Badger', 'age': 22}
+
 Zabudované funkce
 ^^^^^^^^^^^^^^^^^
 
