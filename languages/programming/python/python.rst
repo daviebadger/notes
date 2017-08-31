@@ -1019,6 +1019,116 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
       (3, 4, 5)
       {'name': 'Davie Badger', 'age': 22}
 
+Příkaz return
+"""""""""""""
+
+Vrať po zavolání funkci nějakou hodnotu::
+
+   >>> def multiply(x, y):
+   ...     return x * y
+   ...
+   >>> multiply(1, 2)
+   2
+   >>> result = multiply(1, 2)
+   >>> result
+   2
+   >>> def multiply(x, y):
+   ...     print(x * y)
+   ...
+   >>> result = multiply(1, 2)
+   2
+   >>> result
+   >>>
+
+Ukonči funkci a vrať hodnotu::
+
+   >>> def is_even(number):
+   ...     if number * 2 == 0:
+   ...         return True
+   ...     return False
+   >>> is_even(2)
+   True
+   >>> is_even(3)
+   False
+
+.. note::
+
+   Pokud funkce nic explicitně nevrací, tak vrácena hodnota z funkce je
+   prázdná::
+
+      >>> def test_nothing():
+      ...     pass
+      ...
+      >>> nothing = test_nothing()
+      >>> nothing
+      >>>
+      >>> type(nothing)
+      <class 'NoneType'
+      >>> nothing is None
+      True
+      >>> bool(None)
+      False
+      >>> def test_another_nothing():
+      ...     return None
+      ...
+      >>> test_another_nothing() is None
+      True
+
+   Naopak lze vracet í více než jednu hodnotu a to ve formě n-tice::
+
+      >>> def get_numbers():
+      ...     return 1, 2, 3, 4, 5
+      ...
+      >>> numbers = get_numbers()
+      >>> numbers
+      (1, 2, 3, 4, 5)
+      >>> type(numbers)
+      <class 'tuple'>
+      >>> numbers[0]
+      1
+
+.. tip::
+
+   Dokumentace funkce podle Google_ stylu (alternativě lze použít Numpy_
+   styl)::
+
+      def multiply(x, y):
+          """
+          Multiply two numbers.
+
+          Args:
+              x (int): First number for multiplication.
+              y (int): Second number for multiplication.
+
+          Returns:
+              int: Result of multiplication of two numbers.
+
+          Example:
+              >>> multiply(2, 3)
+              6
+          """
+          return x * y
+
+   Ovšem ne vždy se daří dokumentaci aktualizovat, proto je vhodné použít i
+   typové anotace a kontrolovat argumenty funkcí pomocí Mypy_ kontrolovače::
+
+      def multiply(x: int, y: int) -> int:
+          """
+          Multiply two numbers.
+
+          Args:
+              x (int): First number for multiplication.
+              y (int): Second number for multiplication.
+
+          Returns:
+              int: Result of multiplication of two numbers.
+
+          Example:
+              >>> multiply(2, 3)
+              6
+          """
+          return x * y
+
 Zabudované funkce
 ^^^^^^^^^^^^^^^^^
 
@@ -1042,14 +1152,8 @@ Seznam již existujících funkcí::
 TODO
 ====
 
-* typy:
-
-  * NoneType (prázdný return z funkce)
-  * Entice (return více hodnot z funkce + rozbalení)
-
 * mutable vs immutable
 * odmocnina (moduly)
-* funkce help() v shellu
 * patička skriptu s funkcí main
 * ostastní typy
 * zalomení kódu
@@ -1065,3 +1169,9 @@ TODO
 * if 0 <= number <= 100
 * [number for number in numbers if number % 2 != 1] + vnořené
 * pass u obyčejných vlastních exception
+* enum třídy
+* rozbalení sekvencí do proměnných, x, \*_, y
+
+.. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
+.. _Mypy: https://github.com/python/mypy
+.. _Numpy: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
