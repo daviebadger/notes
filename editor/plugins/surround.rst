@@ -120,6 +120,27 @@ Klasický Vim:
 
        ca)
 
+.. tip::
+
+   Označení textu klasickým Vimem:
+
+   * ``vi`` + uvozovka nebo závorka
+
+     * označ obsah uvnitř uvozovek nebo závorek
+
+   * ``vit``
+
+     * označ obsah tagu
+
+   * ``va`` + uvozovka nebo závorka
+
+     * označ obsah uvnitř uvozovek nebo závorek a i samotné uvozovky nebo
+       závorky
+
+   * ``vat``
+
+     * označ obsah tagu i tag samotný
+
 Odstranění obklopení
 --------------------
 
