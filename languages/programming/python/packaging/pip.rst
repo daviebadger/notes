@@ -62,6 +62,15 @@ Nainstaluj balíček bez nutnosti administrátorského oprávnění::
 
    $ pip install --user virtualenv
 
+.. note::
+
+   Je třeba přidat do shellové proměnné ``PATH`` další cestu, aby mohly
+   být spuštěný spustitelné soubory z balíčků::
+
+      # ~/.profile
+
+      export PATH="$HOME/.local/bin:$PATH"
+
 install --upgrade
 """""""""""""""""
 
