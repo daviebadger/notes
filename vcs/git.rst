@@ -1758,7 +1758,7 @@ clean
 ^^^^^
 
 clean -n
---------
+""""""""
 
 Zobraz, které soubory se smažou::
 
@@ -1772,7 +1772,7 @@ Zobraz, které soubory se smažou::
    Would remove file.txt
 
 clean -f
---------
+""""""""
 
 Smaž nesledované soubory::
 
