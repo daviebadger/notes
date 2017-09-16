@@ -1,6 +1,6 @@
-========
- Srcery
-========
+===========
+ FlatColor
+===========
 -------------
  Vzhled Vimu
 -------------
@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   Plug 'roosta/vim-srcery'
+   Plug 'MaxSt/FlatColor'
 
 Konfigurace
 ===========
@@ -29,6 +29,6 @@ Konfigurace
 
    set termguicolors
 
-   let g:srcery_underline = 0
+   colorscheme flatcolor
 
-   colorscheme srcery
+   highlight LineNr guifg=#cbe3e7
