@@ -15,6 +15,8 @@
    :depth: 3
    :suffix: .
 
+.. highlight:: markdown
+
 Značky
 ======
 
