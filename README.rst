@@ -7,12 +7,12 @@ My personal notes of software technologies I've been using (written in Czech).
 Credits
 =======
 
-To all of people who:
+To all people who:
 
-* participates in creating documentation, tutorials, articles etc.
-* writes free programming books, especially listed on GitHub_
-* asnwers questions on `Stack Overflow`_
-* shares tips & tricks on Twitter_
+* participate in creating documentation, tutorials, articles etc.
+* write free programming books, especially listed on GitHub_
+* asnwer questions on `Stack Overflow`_
+* share tips & tricks on Twitter_
 
 .. _GitHub: https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md
 .. _Stack Overflow: https://stackoverflow.com/
