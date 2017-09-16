@@ -38,8 +38,7 @@ Systémové instalace jednotlivých kontrolovačů:
 
 * reStructuredText::
 
-     $ pip3 install --user docutils
-
+     $ pip3 install --user sphinx
 
 .. note::
 
@@ -113,7 +112,7 @@ Konfigurace
    let g:syntastic_html_checkers = ['tidy']
    let g:syntastic_markdown_checkers = ['mdl']
    let g:syntastic_python_checkers = ['flake8', 'pylint']
-   let g:syntastic_rst_checkers = ['rst2pseudoxml']
+   let g:syntastic_rst_checkers = ['sphinx']
 
    nnoremap <F3> :SyntasticCheck<CR>
    nnoremap <C-X> :SyntasticReset<CR>
