@@ -1,9 +1,9 @@
 ========
  Python
 ========
-------------------------------------------------
- Všeobecný skriptovací programovací jazyk (.py)
-------------------------------------------------
+--------------------------------------
+ Skriptovací programovací jazyk (.py)
+--------------------------------------
 
 :Author: Davie Badger
 :Contact: davie.badger@gmail.com
@@ -15,17 +15,23 @@
    :depth: 3
    :suffix: .
 
+.. highlight:: python
+
 Instalace
 =========
 
-Python je defaultně nainstalovaný v Ubuntu::
+Python je defaultně nainstalovaný v Ubuntu:
+
+.. code:: none
 
    $ python3
    Python 3.6.2
 
 .. note::
 
-   Samotný příkaz ``python`` odkazuje na starou verzi::
+   Samotný příkaz ``python`` odkazuje na starou verzi:
+
+   .. code:: none
 
       $ python --version
       Python 2.7.13
@@ -33,7 +39,7 @@ Python je defaultně nainstalovaný v Ubuntu::
 První program
 =============
 
-Python programy jdou spustit dvěma způsoby:
+Program v Pythonu lze spustit dvěmi způsoby:
 
 1. pomocí konzole / interaktivního shellu
 2. pomocí souboru / skriptu
@@ -41,7 +47,9 @@ Python programy jdou spustit dvěma způsoby:
 Interaktivní shell
 ------------------
 
-Spusť interaktivní shell::
+Spusť interaktivní shell:
+
+.. code:: none
 
    $ python3
    Python 3.6.2 (default, Aug  4 2017, 14:35:04)
@@ -57,20 +65,24 @@ Každý řádek v shellu za ``>>>`` je okamžitě exekutován po stisknutí klá
    >>>
 
 Shell lze vypnout klávesovou zkratkou ``CTRL + D`` nebo zavoláním funkce
-``quit`` (platí jen uvnitř shellu)::
+``quit``, která funguje jen uvnitř shellu::
 
    >>> quit()
    $
 
 .. note::
 
-   Při vypnutí shellu zanikne i historie použitých příkazů. Ta lze zobrazit v
-   shellu postupně pomocí šipky nahoru.
+   Při vypnutí shellu zanikne i historie použitých příkazů, není-li použít
+   jiný interaktivní shell, např. `IPython`_.
+
+   Samotnou historii příkazů v shellu lze zobrazit pomocí šipky nahoru.
 
 .. tip::
 
    Jsou-li nainstalované i jiné verze Pythonu, lze je spustit s označením
-   minor verze::
+   vedlejší verze:
+
+   .. code:: none
 
       $ python3.5
       Python 3.5.3+ (default, Jun  7 2017, 23:23:48)
@@ -81,7 +93,9 @@ Shell lze vypnout klávesovou zkratkou ``CTRL + D`` nebo zavoláním funkce
 Skript
 ------
 
-Spusť skript::
+Spusť skript:
+
+.. code:: none
 
    $ cat hello.py
    print("Hello world!")
@@ -145,11 +159,21 @@ Proměnné
 
 Vytvoř proměnné::
 
-   first_name = "Davie"
-   last_name = "Badger"
-   age = 22
+   >>> first_name = "Davie"
+   >>> last_name = "Badger"
+   >>> age = 22
 
-Přepiš proměnnou::
+Vytvoř proměnné se stejnou hodnotou::
+
+   >>> x = y = z = 1
+   >>> x
+   1
+   >>> y
+   1
+   >>> z
+   1
+
+Změn hodnotu v proměnné::
 
    >>> age = 22
    >>> age
@@ -158,7 +182,7 @@ Přepiš proměnnou::
    >>> age
    23
 
-Odkaž na obsah jiné proměnné::
+Odkaž na hodnotu v jiné proměnné::
 
    >>> number = age
    >>> number
@@ -166,7 +190,7 @@ Odkaž na obsah jiné proměnné::
    >>> print(number)
    23
 
-Přehoď obsah proměnných::
+Přehoď hodnoty proměnných::
 
    >>> x = 0
    >>> y = 1
@@ -217,7 +241,7 @@ Názvy proměnných nesmí obsahovat tyto názvy::
    class               from                or
    continue            global              pass
 
-::
+Při použítí klíčového slova v názvu proměnná vznikne syntaktický error::
 
    >>> from = "Czech Republic"
      File "<stdin>", line 1
@@ -228,7 +252,9 @@ Názvy proměnných nesmí obsahovat tyto názvy::
 .. note::
 
    Pokud ve skriptu vznikne error, tak se celý program ukončí a žádný
-   další kód nebude exekutován::
+   další kód nebude exekutován:
+
+   .. code::
 
       $ cat hello.py
       from = "Czech Republic"
@@ -456,7 +482,7 @@ Aritmetické
 
   * beze zbytku (``/``)::
 
-       >>> 2 / 1
+       >>> 2 / 1  # Division always returns a floating point number
        2.0
 
   * zbytek po dělení (``%``)::
@@ -500,6 +526,52 @@ Aritmetické
    * ``/=``
    * ``%=``
    * ``**=``
+
+Odbočka k formátování řetězců
+"""""""""""""""""""""""""""""
+
+Namísto zřetězení řetězců je vhodné použít formátování řetězců::
+
+   >>> day = 11
+   >>> month = 4
+   >>> year = 1995
+   >>> "Today is " + str(day) + "." + str(month) + "." + str(year)
+   'Today is 11.4.1995'
+   >>> "Today is {0}.{1}.{2}".format(day, month, year)
+   'Today is 11.4.1995'
+   >>> "Today is {0}.{1}.{2} or {1}.{0}.{1995}?".format(day, month, year)
+   'Today is 11.4.1995 or 4.11.1995?'
+   >>> "Today is {day}.{month}.{year}".format(day=day, month=month, year=year)
+   'Today is 11.4.1995'
+
+.. note::
+
+   Od verze 3.6 lze použít zkrácený zápis pro formátování f-řetězců::
+
+      >>> first_name = "Davie"
+      >>> last_name = "Badger"
+      >>> f"My name is {first_name} {last_name}"
+      'My name is Davie Badger'
+      >>> print(f"{first_name}\n{last_name}")
+      Davie
+      Badger
+      >>> print(fr"{first_name}\n{last_name}")
+      Davie\nBadger
+      >>> f"2 * 2 is {2 * 2}"
+      '2 * 2 is 4'
+
+.. tip::
+
+   Formátovaný řetězec lze ještě dále naformátovat::
+
+      >>> "{}".format(123)
+      '123'
+      >>> "{:13}".format(123)
+      '          123'
+      >>> "{:>13}".format(123)
+      '123          '
+      >>> "{:^13}".format(123)
+      '     123     '
 
 Pořadí aritmetických operací
 """"""""""""""""""""""""""""
@@ -1157,7 +1229,6 @@ TODO
 * patička skriptu s funkcí main
 * ostastní typy
 * zalomení kódu
-* formátování řetězců (format, f-strings)
 * explicitně vracet None ve funkci
 * třídy (dědičnost, kompozice)
 * dlouhé několikařádkové podmínky
@@ -1171,7 +1242,9 @@ TODO
 * pass u obyčejných vlastních exception
 * enum třídy
 * rozbalení sekvencí do proměnných, x, \*_, y
+* složité podmínky do funkcí, aby byla podmínka čitelná
 
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
+.. _IPython: https://ipython.org/index.html
 .. _Mypy: https://github.com/python/mypy
 .. _Numpy: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
