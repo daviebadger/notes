@@ -15,6 +15,8 @@
    :depth: 3
    :suffix: .
 
+.. highlight:: html
+
 Základní značky
 ===============
 
@@ -355,7 +357,7 @@ Sémantické tagy
 
 Tagy pro lepší rozvržení webu do logických celků:
 
-* header
+* ``header``
 
   * hlavička webu, zpravidla s navigací::
 
@@ -369,15 +371,15 @@ Tagy pro lepší rozvržení webu do logických celků:
          </nav>
        </header>
 
-* nav
+* ``nav``
 
   * navigace webu
 
-* main
+* ``main``
 
   * hlavní část webu mezi hlavičkou (header) a zápatím (footer)
 
-* section
+* ``section``
 
   * označení části webu, zpravidla lišta s informacemi::
 
@@ -387,7 +389,7 @@ Tagy pro lepší rozvržení webu do logických celků:
         <img src="image.jpg" alt="image">
       </section>
 
-* article
+* ``article``
 
   * označení článku::
 
@@ -395,12 +397,12 @@ Tagy pro lepší rozvržení webu do logických celků:
          <p>článek</p>
        </article>
 
-* aside
+* ``aside``
 
   * postranní panel, zpravidla navigace vedle článku (nutno nastylovat pomocí
     CSS, aby se skutečně šel vidět panel vlevo / vpravo od článku)
 
-* footer
+* ``footer``
 
   * patička webu::
 
@@ -424,7 +426,7 @@ Tagy pro lepší rozvržení webu do logických celků:
 
    Nesémantické pomocné tagy:
 
-   * div
+   * ``div``
 
      * pro zaobalení tagů, na které lze aplikovat pomocí CSS další styly::
 
@@ -440,7 +442,7 @@ Tagy pro lepší rozvržení webu do logických celků:
             <p>test</p>
           </div>
 
-   * span
+   * ``span``
 
      * pro zaobalení části textu v odstacích, na které lze taktéž aplikovat
        styly::
@@ -630,19 +632,19 @@ Typy formulářových polí:
 
   * speciální inputy (tlačítka):
 
-    * submit
+    * ``submit``
 
       * pro odeslání formulářových dat::
 
            <input type="submit" value="Odeslat">
 
-    * reset
+    * ``reset``
 
       * pro vymazání / vyresetování všech hodnot ve formuláři::
 
            <input type="reset">
 
-* select
+* ``select``
 
   * výběr hodnoty ze seznamu::
 
@@ -676,7 +678,7 @@ Typy formulářových polí:
          </optgroup>
        </select>
 
-* textarea
+* ``textarea``
 
   * multiřádkové textové pole (input je jen jednořákový) s možností nastavení
     velikosti řádků a sloupců (znaků na řádek)::
@@ -813,7 +815,7 @@ Skripty
 Pomocí Javascriptu jde nastavit chování webu::
 
    <script>
-   console.log("Hello World!");
+     console.log("Hello World!");
    </script>
 
 .. note::
@@ -844,13 +846,13 @@ Pomocí Javascriptu jde nastavit chování webu::
    Aby načtení Javascriptového souboru neblokovalo vyrendrování stránky,
    lze použít následující atributy:
 
-   * async
+   * ``async``
 
      * skript se spustí po jeho načtení tak, aby neblokoval rendrování::
 
           <script src="index.js" async></script>
 
-   * defer
+   * ``defer``
 
      * skript se spustí až bude kompletně celá stránka vyrendrována::
 
