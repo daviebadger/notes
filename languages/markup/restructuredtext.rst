@@ -15,6 +15,8 @@
    :depth: 3
    :suffix: .
 
+.. highlight:: rst
+
 Základní značky
 ===============
 
@@ -363,16 +365,16 @@ Vlož metadata k dokumentu::
 
    U metadat lze buď použít vlastní klíče nebo již předdefinované:
 
-   * Author
-   * Authors
-   * Organization
-   * Contact
-   * Address
-   * Version
-   * Status
-   * Date
-   * Copyright
-   * Dedication
+   * ``Author``
+   * ``Authors``
+   * ``Organization``
+   * ``Contact``
+   * ``Address``
+   * ``Version``
+   * ``Status``
+   * ``Date``
+   * ``Copyright``
+   * ``Dedication``
 
 .. tip::
 
@@ -417,15 +419,15 @@ Vlož varování do textu::
 
    Seznam zabudovaných direktiv pro text se speciálním významem:
 
-   * attention
-   * caution
-   * danger
-   * error
-   * hint
-   * important
-   * note
-   * tip
-   * warning
+   * ``attention``
+   * ``caution``
+   * ``danger``
+   * ``error``
+   * ``hint``
+   * ``important``
+   * ``note``
+   * ``tip``
+   * ``warning``
 
 Načtení obsahu jiného souboru
 -----------------------------
