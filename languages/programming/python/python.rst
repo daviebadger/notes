@@ -815,7 +815,7 @@ Opakuj N-krát kód uvnitř cyklu::
    V programování se zpravidla začíná počítat od nuly.
 
 Odbočka k indexům
-'''''''''''''''''
+"""""""""""""""""
 
 Pomocí indexů lze přístupovat k jednotlivým položkám řetězce či seznamu::
 
