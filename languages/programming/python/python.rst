@@ -465,6 +465,8 @@ Aritmetické
      2
      >>> "a" + "b" + "c"
      'abc'
+     >>> [] + [1, 2, 3]
+     [1, 2, 3]
 
 * odčítání (``-``)::
 
@@ -1341,6 +1343,7 @@ TODO
 * složité podmínky do funkcí, aby byla podmínka čitelná
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
+* změna položek pomocí indexů u mutable typů
 
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
