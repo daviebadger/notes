@@ -875,7 +875,17 @@ Přeskoč exekuci kódu v cyklu, je-li něco nevhodného::
    >>> for number in range(11):  # <0, 11)
    ...     if number % 2 != 0:
    ...         continue
-   ...     print("Number", number, "is even")
+   ...     print(f"Number {number} is even")
+   ...
+   Number 0 is even
+   Number 2 is even
+   Number 4 is even
+   Number 6 is even
+   Number 8 is even
+   Number 10 is even
+   >>> for number in range(11):
+   ...     if number % 2 == 0:
+   ...         print(f"Number {number} is even")
    ...
    Number 0 is even
    Number 2 is even
@@ -913,10 +923,10 @@ Ukončí násilně cyklus::
    Enter word which contains only letters 'd' or 'g' or 'o': test
    >>> for letter in word:
    ...     if letter not in allowed_letters:
-   ...         print("Invalid word", word)
+   ...         print(f"Word '{word}' is not allowed")
    ...         break
    ...
-   Invalid word test
+   Word 'test' is not allowed
 
 .. tip::
 
@@ -927,10 +937,10 @@ Ukončí násilně cyklus::
       Enter word which contains only letters 'd' or 'g' or 'o': dog
       >>> for letter in word:
       ...     if letter not in allowed_letters:
-      ...         print("Invalid word", word)
+      ...         print(f"Word '{word}' is not allowed")
       ...         break
       ... else:
-      ...     print("Yes,", word, "is a valid word")
+      ...     print(f"Yes, {word} is a valid word")
       ...
       Yes, dog is a valid word
 
@@ -1013,7 +1023,7 @@ Vytvoř a zavolej vlastní funkci bez argumentů::
 Vytvoř a zavolej vlastní funkci s povinným pozičním argumentem::
 
    >>> def say_hello(name):
-   ...     print("Hello", name)
+   ...     print(f"Hello {name}")
    ...
    >>> say_hello()
    Traceback (most recent call last):
@@ -1027,7 +1037,7 @@ Vytvoř a zavolej vlastní funkci s povinným pozičním argumentem::
 Vytvoř a zavolej vlastní funkcí s volitelným argumentem::
 
    >>> def say_hello(name="No One"):
-   ...     print("Hello", name)
+   ...     print(f"Hello {name}")
    ...
    >>> say_hello()
    Hello No One
@@ -1064,7 +1074,7 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
    ... }
    >>> def person_details(**details):
    ...     for detail in details:
-   ...         print(detail, "-", details[detail])
+   ...         print(f"{detail} - {details[detail]}")
    ...
    >>> person_details(**person)
    name - Davie Badger
