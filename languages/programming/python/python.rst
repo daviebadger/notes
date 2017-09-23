@@ -1201,6 +1201,52 @@ Ukonči funkci a vrať hodnotu::
           """
           return x * y
 
+Příkaz pass
+"""""""""""
+
+Nevykonej žádný kód po zavolání funkce::
+
+   >>> def nothing():
+   ...     pass
+   ...
+   >>> nothing()
+   >>>
+
+.. note::
+
+   Příkaz ``pass`` se zpravidla používá k označení kódu, který ještě není
+   dokončen::
+
+      >>> def is_even():
+      ...     pass
+      ...
+      >>>
+
+   Po dokončení kódu příkaz ``pass`` zmizí::
+
+      >>> def is_even(number):
+      ...     return number % 2 == 0
+      ...
+      >>>
+
+   Bez příkazu ``pass`` vznikne odsazující error::
+
+      >>> def empty():
+      ...
+        File "<stdin>", line 2
+
+          ^
+      IndentationError: expected an indented block
+
+.. tip::
+
+   Příkaz ``pass`` lze použít i u podmínek nebo cyklů::
+
+      >>> if True:
+      ...     pass
+      ...
+      >>>
+
 Zabudované funkce
 ^^^^^^^^^^^^^^^^^
 
