@@ -784,34 +784,19 @@ Opakuj N-krát kód uvnitř cyklu::
 
 .. note::
 
-   K jednotlivým znakům v řetězci nebo položkám v seznamu (oboje jsou tzv.
-   sekvence) lze přistupovat i pomocí indexů::
+   Cykly lze aplikovat na řetězce, seznamy či slovníky::
 
-      >>> cities = ["Prague", "Brno", "Ostrava"]
-      >>> cities[0]
-      'Prague'
+      >>> person = {"name": "Davie Badger", "age": 22}
+      >>> for key in person:
+      ...    print(f"{key}: {person[key]}")
+      ...
+      name: Davie Badger
+      age: 22
 
-   Indexy zpravidla musí existovat v sekvenci, jinak hrozí indexový error:
+   Cyklus se bude opakovat tolikrát, kolik existuje položek v dané hodnotě::
 
-      >>> cities = ["Prague", "Brno", "Ostrava"]
-      >>> cities[3]
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-      IndexError: list index out of range
-
-   Způsoby indexování:
-
-   ======  =========================  =============================
-   Index   Význam                     Výstup
-   ======  =========================  =============================
-   [0]     První položka              'Prague'
-   [-1]    Poslední položka           'Ostrava'
-   [1:]    Interval <1, konec>        ['Brno', 'Ostrava']
-   [:2]    Interval <začátek, 2)      ['Prague', 'Brno']
-   [1:2]   Interval <1, 2)            ['Brno']
-   [::2]   Ob jednu položku           ['Prague', 'Ostrava']
-   [::-1]  Obrácená sekvence          ['Ostrava', 'Brno', 'Prague']
-   ======  =========================  =============================
+      >>> len("Davie")
+      5
 
 .. tip::
 
@@ -819,13 +804,68 @@ Opakuj N-krát kód uvnitř cyklu::
 
       >>> name = "Davie"
       >>> for index, character in enumerate(name):
-      ...     print("Index", index, "contains", character, "character")
+      ...     print(f"Index {index} contains {character} character")
       ...
       Index 0 contains D character
       Index 1 contains a character
       Index 2 contains v character
       Index 3 contains i character
       Index 4 contains e character
+
+   V programování se zpravidla začíná počítat od nuly.
+
+Odbočka k indexům
+'''''''''''''''''
+
+Pomocí indexů lze přístupovat k jednotlivým položkám řetězce či seznamu::
+
+   >>> name = "Davie Badger"
+   >>> name[0]
+   'D'
+   >>> cities = ["Prague", "Brno", "Ostrava"]
+   >>> cities[0]
+   'Prague'
+
+U slovníků je třeba přístupovat pomocí názvů klíčů::
+
+   >>> person = {"name": "Davie Badger"}
+   >>> person["name"]
+   'Davie Badger'
+
+.. note::
+
+   Indexy zpravidla musí existovat v sekvenci, jinak hrozí indexový error::
+
+      >>> cities = ["Prague", "Brno", "Ostrava"]
+      >>> cities[3]
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      IndexError: list index out of range
+
+   U slovníků hrozí klíčový error, pokud daný klíč neexistuje ve slovníku::
+
+      >>> empty_dict = {}
+      >>> empty_dict["key"]
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      KeyError: 'key'
+
+.. tip::
+
+   Způsoby indexování u sekvencí:
+
+   ======  =========================  =============================
+   Index   Význam                     Výstup
+   ======  =========================  =============================
+   [0]     První položka              'Prague'
+   [-1]    Poslední položka           'Ostrava'
+   [:]     Kopie sekvence             ['Prague', 'Brno', 'Ostrava']
+   [1:]    Interval <1, konec>        ['Brno', 'Ostrava']
+   [:2]    Interval <začátek, 2)      ['Prague', 'Brno']
+   [1:2]   Interval <1, 2)            ['Brno']
+   [::2]   Ob jednu položku           ['Prague', 'Ostrava']
+   [::-1]  Obrácená sekvence          ['Ostrava', 'Brno', 'Prague']
+   ======  =========================  =============================
 
 Příkaz continue
 """""""""""""""
@@ -1289,6 +1329,8 @@ TODO
 * enum třídy
 * rozbalení sekvencí do proměnných, x, \*_, y
 * složité podmínky do funkcí, aby byla podmínka čitelná
+* vlastní iterable + její definice
+* vlastní sekvence + její definice
 
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
