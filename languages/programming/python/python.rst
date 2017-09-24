@@ -1054,6 +1054,53 @@ Vytvoř a zavolej vlastní funkcí s povinným pozičním a volitelným argument
    >>> power(2, 3)
    6
 
+.. note::
+
+   K proměnným, které jsou vytvořené uvnitř funkcí, nelze z vnějšku
+   přístupovat::
+
+      >>> def create_variable_age():
+      ...     age = 22
+      ...
+      >>> age
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'age' is not defined
+      >>> create_variable_age()
+      >>> age
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'age' is not defined
+
+   Naopak zevnitř funkce lze přístupovat k vnějším (globálním) proměnnám bez
+   možností měnit její hodnotu::
+
+      >>> age = 22
+      >>> def print_age():
+      ...     print(age)
+      ...
+      >>> print_age()
+      22
+
+.. tip::
+
+   Funkce lze taktéž použít namísto dlouhých a mnohdy nečitelných podmínek::
+
+      >>> def is_leap_year(year):
+      ...     return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
+      ...
+      >>> year = int(input("Enter year: "))
+      Enter year: 1995
+      >>> if is_leap_year(year):
+      ...     print(f"{year} is a leap year")
+      ... else:
+      ...     print(f"{year} is not a leap year")
+      ...
+      1995 is not a leap year
+
+Odbočka k neomezeným argumentům pro parametry funkce
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 Vytvoř a zavolej vlastní funkci s neomezeným počtem pozičních argumentů::
 
    >>> numbers = [1, 2, 3]
@@ -1087,33 +1134,6 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
 
 .. note::
 
-   K proměnným, které jsou vytvořené uvnitř funkcí, nelze z vnějšku
-   přístupovat::
-
-      >>> def create_variable_age():
-      ...     age = 22
-      ...
-      >>> age
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-      NameError: name 'age' is not defined
-      >>> create_variable_age()
-      >>> age
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-      NameError: name 'age' is not defined
-
-   Naopak zevnitř funkce lze přístupovat k vnějším (globálním) proměnnám::
-
-      >>> age = 22
-      >>> def print_age():
-      ...     print(age)
-      ...
-      >>> print_age()
-      22
-
-.. tip::
-
    Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
 
       >>> def example(x, y=1, *args, **kwargs):
@@ -1142,6 +1162,50 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
       2
       (3, 4, 5)
       {'name': 'Davie Badger', 'age': 22}
+
+.. tip::
+
+   Jako defaultní hodnoty lze použít všechny datové typy kromě seznamů,
+   slovníků, množin a později instancí vlastních třid, kde může dojít k
+   nechtěné mutaci hodnot::
+
+      >>> def add_number(number, numbers=[]):
+      ...     numbers.append(number)
+      ...     return numbers
+      ...
+      >>> add_number(0)
+      [0]
+      >>> add_number(1)
+      [0, 1]
+      >>> add_number(2)
+      [0, 1, 2]
+
+   Pokud i přesto je nutné mít výchozí hodnotu jako prázdný list, je nezbytné
+   pro zamezení mutace použít jako defaultní argument jiný datový typ::
+
+      >>> def add_number(number, numbers=None):
+      ...     if numbers is None:
+      ...         numbers = []
+      ...     numbers.append(number)
+      ...     return numbers
+      ...
+      >>> add_number(0)
+      [0]
+      >>> add_number(1)
+      [1]
+      >>> add_number(2)
+      [2]
+
+   Hodnota ``None`` je fakticky prázdná hodnota, která nic neobsahuje::
+
+      >>> empty = None
+      >>> empty
+      >>> print(empty)
+      None
+      >>> type(empty)
+      <class 'NoneType'>
+      >>> bool(empty)
+      False
 
 Příkaz return
 """""""""""""
@@ -1184,14 +1248,8 @@ Ukonči funkci a vrať hodnotu::
       ...     pass
       ...
       >>> nothing = test_nothing()
-      >>> nothing
-      >>>
       >>> type(nothing)
       <class 'NoneType'
-      >>> nothing is None
-      True
-      >>> bool(None)
-      False
       >>> def test_another_nothing():
       ...     return None
       ...
@@ -1710,12 +1768,9 @@ TODO
 * patička skriptu s funkcí main
 * ostastní typy
 * zalomení kódu
-* explicitně vracet None ve funkci
 * třídy (dědičnost, kompozice)
-* dlouhé několikařádkové podmínky
 * try except finally else
 * except Exception pro zachycení jakékoliv výjimky
-* is None, is not None
 * vnořené seznamy [x][y]
 * if 0 <= number <= 100
 * [number for number in numbers if number % 2 != 1] + vnořené
@@ -1729,6 +1784,8 @@ TODO
 * callable objekt definice (__call__ metoda)
 * iterátor
 * IO operace
+* kontextový manažer
+* global a nonlocal
 
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
