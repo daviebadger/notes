@@ -1319,10 +1319,393 @@ Seznam již existujících funkcí::
    complex()       hasattr()     max()           round()
    delattr()       hash()        memoryviews()   set()
 
+* ``abs(number)``
+
+  * vrať absolutní hodnotu čísla::
+
+       >>> abs(-1)
+       1
+       >>> abs(0)
+       0
+       >>> abs(1.0)
+       1.0
+
+* ``all(iterable)``
+
+  * vrať ``True``, pokud všechny položky v ``iterable`` (datové typy, na které
+    lze použít cykly) jsou pravdivé::
+
+       >>> all([])
+       True
+       >>> all([1, 2, 3])
+       True
+       >>> all([0, 1, 2, 3])
+       False
+
+* ``any(iterable)``
+
+  * vrať ``True``, pokud alespoň jedna položka v ``iterable`` je pravdivá::
+
+       >>> any([])
+       False
+       >>> any([0])
+       False
+       >>> any([0, 1])
+
+* ``bool(value=False)``
+
+  * vrať ``True`` nebo ``False``, je-li hodnota pravdivá či nepravdivá::
+
+       >>> bool()
+       False
+       >>> bool(0)
+       False
+       >>> bool(1)
+       True
+
+* ``callable(object)``
+
+  * vrať ``True``, je-li daný objekt volatelný::
+
+       >>> callable("test")
+       False
+       >>> def test(): pass
+       ...
+       >>> callable(test)
+       True
+
+* ``dict(value={})``
+
+  * převeď hodnotu na slovník, je-li to možné::
+
+       >>> dict()
+       {}
+       >>> dict([("name", "Davie"), ("age", 22)])
+       {'name': 'Davie', 'age': 22}
+
+* ``divmod(x, y)``
+
+  * vrať entici s výsledkem celočíselného dělení a zbytkem::
+
+       >>> divmod(2, 1)
+       (2, 0)
+       >>> divmod(10, 3)
+       (3, 1)
+
+* ``enumerate(iterable, start=0)``
+
+  * vrať ``enumerate`` objekt, který interně přiřadí index k jednotlivým
+    položkam v ``iterable``::
+
+       >>> enumerate(["a", "b", "c"])
+       <enumerate object at 0x7fdb4258bb40>
+       >>> list(enumerate(["a", "b", "c"]))
+       [(0, 'a'), (1, 'b'), (2, 'c')]
+       >>> list(enumerate(["a", "b", "c"], start=1))
+       [(1, 'a'), (2, 'b'), (3, 'c')]
+
+* ``filter(function, iterable)``
+
+  * vrať ``filter`` objekt, ve kterém jsou položky z ``iterable``, pro které
+    funkce v ``function`` vrátila ``True`` hodnotu::
+
+       >>> filter(lambda number: number % 2 == 0, range(11))
+       <filter object at 0x7fdb42584e48>
+       >>> list(filter(lambda number: number % 2 == 0, range(11)))
+       [0, 2, 4, 6, 8, 10]
+
+* ``float(value=0.0)``
+
+  * převeď hodnotu na desetinné číslo, je-li to možné::
+
+       >>> float()
+       0.0
+       >>> float("1")
+       1.0
+       >>> float("inf")  # infinity
+       inf
+       >>> float("-inf")
+       -inf
+
+* ``frozenset(iterable=None)``
+
+  * vrať ``iterable`` zkonvertovaný na neměnitelnou množinu::
+
+       >>> frozenset()
+       frozenset()
+       >>> frozenset([0, 1, 0, 1, 0])
+       frozenset({0, 1})
+
+* ``input(prompt="")``
+
+  * vrať uživatelský vstup::
+
+       >>> input()
+
+       ''
+       >>> input("Your name: ")
+       Your name: Davie
+       'Davie'
+
+* ``int(value=0, base=10)``
+
+  * převeď hodnotu na číslo v desítkové soustavě, jeli-to možné::
+
+       >>> int()
+       0
+       >>> int("1")
+       1
+
+* ``len(sequence)``
+
+  * vrať počet položek v sekvenci::
+
+       >>> len("test")
+       4
+
+* ``list(iterable=None)``
+
+  * převeď ``iterable`` na na seznam::
+
+       >>> list()
+       []
+       >>> list(range(3))
+       [0, 1, 2]
+
+* ``map(function, iterable)``
+
+  * vrať ``map`` objekt, ve kterém jsou položky z ``iterable`` po aplikakování
+    funkce ``function``::
+
+       >>> map(lambda number: number * 2, [1, 2, 3])
+       <map object at 0x7fdb42584e48>
+       >>> list(map(lambda number: number * 2, [1, 2, 3]))
+       [2, 4, 6]
+
+* ``max(iterable, *args)``
+
+  * vrať položku s nejvyšší hodnotou z ``iterable`` či poskytnutých argumentů::
+
+       >>> max([1, 2, 3])
+       3
+       >>> max(1, 2, 3)
+       3
+
+* ``min(iterable, *args)``
+
+  * vrať položku s nejnižší hodnotou z ``iterable`` či poskytnutých argumentů::
+
+       >>> min([1, 2, 3])
+       1
+       >>> min(1, 2, 3)
+       1
+
+* ``open(file, mode="r", encoding=None)``
+
+  * otevři a vrať ``file`` objekt v daném módu ``mode`` a kódování
+    ``encoding``, pokud soubor ``file`` existuje::
+
+       >>> open("/etc/passwd")
+       <_io.TextIOWrapper name='/etc/passwd' mode='r' encoding='UTF-8'>
+
+  * základní módy:
+
+    * ``r``
+
+      * pro čtení
+
+    * ``r+``
+
+      * pro čtení a zapisování
+
+    * ``w``
+
+      * pro zapisování (přepísování) od začátku souboru
+
+    * ``w+``
+
+      * pro čtení a zapisování, pričemž se obsah existujícího souboru nejdříve
+        smaže
+
+    * ``a``
+
+      * pro zapisování na konec souboru
+
+    * ``a+``
+
+      * pro čtení a zapisování na konec souboru
+
+    * ``x``
+
+      * pro vytvoření souboru, pokud ještě neexistuje
+
+* ``print(*objects, sep=" ", end="\n")``
+
+  * vytiskni objekty ``objects`` v textové podobě na standardní výstup podle
+    daného oddělovače ``sep`` a zakončovače ``end``::
+
+       >>> print(1, 2, 3)
+       1 2 3
+       >>> print(1, 2, 3, sep="")
+       123
+       >>> print(1, 2, 3, end="")
+       123>>>
+
+* ``range(stop)``
+
+  * vrať ``range`` objekt, ve kterém jsou celá čísla od nuly po ``stop``
+    číslo::
+
+       >>> range(10)
+       range(0, 10)
+       >>> list(range(10))
+       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+* ``range(start, stop, step=0)``
+
+  * vrať ``range`` objekt, ve kterém jsou celá čísla v intervalu ``start`` až
+    ``stop`` s případným krokem ``step``::
+
+       >>> range(1, 6)
+       range(1, 6)
+       >>> list(range(1, 6))
+       [1, 2, 3, 4, 5]
+       >>> list(range(1, 6, 2))
+       [1, 3, 5]
+
+* ``reversed(sequence)``
+
+  * vrať ``list_reverseiterator`` objekt, kde jsou položky v ``sequence`` v
+    obráceném pořadí::
+
+       >>> reversed("Davie")
+       <reversed object at 0x7fdb42584eb8>
+       >>> list(reversed("Davie"))
+       ['e', 'i', 'v', 'a', 'D']
+
+* ``round(number, ndigits=None)``
+
+  * zaokrouhlí číslo na daný počet desetinných míst (není zcela přesné)::
+
+       >>> round(1.4)
+       1
+       >>> round(1.4, 0)
+       1.0
+       >>> round(1.45, 1)  # Correct is 1.5
+       1.4
+
+* ``set(iterable=None)``
+
+  * převeď ``iterable`` na množinu, je-li to množné::
+
+       >>> set()
+       set()
+       >>> set([0, 1, 0])
+       {0, 1}
+
+* ``sorted(iterable, key=None, reverse=False)``
+
+  * vrať seřazený seznam z položek v ``iterable``::
+
+       >>> sorted([3, 2, 1])
+       [1, 2, 3]
+       >>> sorted([1, 2, 3], reverse=True)
+       [3, 2, 1]
+       >>> students = [("John", "M", 18), ("Jane", "F", 17)]
+       >>> sorted(students, key=lambda student: student[2])
+       [('Jane', 'F', 17), ('John', 'M', 18)]
+
+* ``str(object="")``
+
+  * převeď ``object`` na řetězec::
+
+       >>> str()
+       ''
+       >>> str(1)
+       '1'
+       >>> str(None)
+       'None'
+
+* ``sum(iterable, start=0)``
+
+  * sečti položky v ``iterable`` od začátku ``start``::
+
+       >>> sum([1, 1, 1])
+       3
+
+* ``tuple(iterable=())``
+
+  * převeď ``iterable`` na entici, je-li to možné::
+
+       >>> tuple()
+       ()
+       >>> tuple([1])
+       (1,)
+       >>> tuple([1, 2, 3])
+       (1, 2, 3)
+
+* ``type(object)``
+
+  * vrať typ objektu ``object``::
+
+       >>> type(1)
+       <class 'int'>
+
+* ``zip(*iterables)``
+
+  * vrať ``zip`` objekt, který propojí jednotlivé položky v ``iterables`` do
+    entic::
+
+       >>> zip([1, 2, 3], ["a", "b", "c"])
+       <zip object at 0x7fdb4258dc88>
+       >>> list(zip([1, 2, 3], ["a", "b", "c"]))
+       [(1, 'a'), (2, 'b'), (3, 'c')]
+
+.. note::
+
+   U funkcí příjímací jako argument jinou funkci je vhodnější místo bezejmenné
+   lambda funkce použít standardní pojmenovanou funkci kvůli čitelnosti::
+
+      >>> def is_odd(number):
+      ...     return number % 2 != 0
+      ...
+      >>> list(filter(is_odd, range(11)))
+      [1, 3, 5, 7, 9]
+
+.. tip::
+
+   Při IO operacích se soubory je vhodnější použít konstrukci ``with`` s funkcí
+   ``open``, kde dojde k automatickému zavření souboru po ukončení práce s
+   daným souborem:
+
+      with open("/path/to/file") as file:
+          for line in file:
+              print(line)
+
+      with open("/etc/passwd") as file:
+          file_content = file.read()
+
+      with open("new_file.txt", mode="w") as file:
+          file.write("Hello World!")
+
+Odbočka k měnitelným a neměnitelným datovým typům
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+dictionary
+list
+
+tuple
+frozenset
+
+kopie
+
+* mutable vs immutable
+
+immutable u funkcí
+
 TODO
 ====
 
-* mutable vs immutable
 * odmocnina (moduly)
 * patička skriptu s funkcí main
 * ostastní typy
@@ -1334,7 +1717,6 @@ TODO
 * except Exception pro zachycení jakékoliv výjimky
 * is None, is not None
 * vnořené seznamy [x][y]
-* kopie seznamu [:]
 * if 0 <= number <= 100
 * [number for number in numbers if number % 2 != 1] + vnořené
 * pass u obyčejných vlastních exception
@@ -1344,6 +1726,9 @@ TODO
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
 * změna položek pomocí indexů u mutable typů
+* callable objekt definice (__call__ metoda)
+* iterátor
+* IO operace
 
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
