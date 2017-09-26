@@ -1054,6 +1054,37 @@ Vytvoř a zavolej vlastní funkcí s povinným pozičním a volitelným argument
    >>> power(2, 3)
    6
 
+Vytvoř a zavolej vlastní funkci s neomezeným počtem pozičních argumentů::
+
+   >>> numbers = [1, 2, 3]
+   >>> def sum_numbers(*numbers):
+   ...     result = 0
+   ...     for number in numbers:
+   ...         result += number
+   ...     print(result)
+   ...
+   >>> def sum_numbers(*numbers)
+   6
+   >>> def sum_numbers(1, 2, 3)
+   6
+
+Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů::
+
+   >>> person = {
+   ...     "name": "Davie Badger",
+   ...     "age": 22,
+   ... }
+   >>> def person_details(**details):
+   ...     for detail in details:
+   ...         print(f"{detail} - {details[detail]}")
+   ...
+   >>> person_details(**person)
+   name - Davie Badger
+   age - 22
+   >>> person_details(name="Davie Badger", age=22)
+   name - Davie Badger
+   age - 22
+
 .. note::
 
    K proměnným, které jsou vytvořené uvnitř funkcí, nelze z vnějšku
@@ -1098,72 +1129,39 @@ Vytvoř a zavolej vlastní funkcí s povinným pozičním a volitelným argument
       ...
       1995 is not a leap year
 
-Odbočka k neomezeným argumentům pro parametry funkce
-""""""""""""""""""""""""""""""""""""""""""""""""""""
+Odbočka k parametrům a argumentům funkce
+""""""""""""""""""""""""""""""""""""""""
 
-Vytvoř a zavolej vlastní funkci s neomezeným počtem pozičních argumentů::
+Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
 
-   >>> numbers = [1, 2, 3]
-   >>> def sum_numbers(*numbers):
-   ...     result = 0
-   ...     for number in numbers:
-   ...         result += number
-   ...     print(result)
+   >>> def example(x, y=1, *args, **kwargs):
+   ...     print(x)
+   ...     print(y)
+   ...     print(args)
+   ...     print(kwargs)
    ...
-   >>> def sum_numbers(*numbers)
-   6
-   >>> def sum_numbers(1, 2, 3)
-   6
-
-Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů::
-
-   >>> person = {
-   ...     "name": "Davie Badger",
-   ...     "age": 22,
-   ... }
-   >>> def person_details(**details):
-   ...     for detail in details:
-   ...         print(f"{detail} - {details[detail]}")
-   ...
-   >>> person_details(**person)
-   name - Davie Badger
-   age - 22
-   >>> person_details(name="Davie Badger", age=22)
-   name - Davie Badger
-   age - 22
+   >>> example(0)
+   0
+   1
+   ()
+   {}
+   >>> example(1, 2)
+   1
+   2
+   ()
+   {}
+   >>> example(1, 2, 3, 4, 5)
+   1
+   2
+   (3, 4, 5)
+   {}
+   >>> example(1, 2, 3, 4, 5, name="Davie Badger", age=22)
+   1
+   2
+   (3, 4, 5)
+   {'name': 'Davie Badger', 'age': 22}
 
 .. note::
-
-   Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
-
-      >>> def example(x, y=1, *args, **kwargs):
-      ...     print(x)
-      ...     print(y)
-      ...     print(args)
-      ...     print(kwargs)
-      ...
-      >>> example(0)
-      0
-      1
-      ()
-      {}
-      >>> example(1, 2)
-      1
-      2
-      ()
-      {}
-      >>> example(1, 2, 3, 4, 5)
-      1
-      2
-      (3, 4, 5)
-      {}
-      >>> example(1, 2, 3, 4, 5, name="Davie Badger", age=22)
-      1
-      2
-      (3, 4, 5)
-      {'name': 'Davie Badger', 'age': 22}
-
-.. tip::
 
    Jako defaultní hodnoty lze použít všechny datové typy kromě seznamů,
    slovníků, množin a později instancí vlastních třid, kde může dojít k
@@ -1207,6 +1205,17 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
       >>> bool(empty)
       False
 
+.. tip::
+
+   U skriptů zpravidla existuje jedna hlavní funkce, která řídí běh programu::
+
+      def main():
+          print("Hello World!")
+
+
+      if __name__ == "__main__":
+          main()
+
 Příkaz return
 """""""""""""
 
@@ -1242,7 +1251,7 @@ Ukonči funkci a vrať hodnotu::
 .. note::
 
    Pokud funkce nic explicitně nevrací, tak vrácena hodnota z funkce je
-   prázdná::
+   ``None``::
 
       >>> def test_nothing():
       ...     pass
@@ -1271,8 +1280,8 @@ Ukonči funkci a vrať hodnotu::
 
 .. tip::
 
-   Dokumentace funkce podle Google_ stylu (alternativě lze použít Numpy_
-   styl)::
+   K funcím lze psát dokumentaci, zpravidla podle Google_ stylu
+   (alternativě lze použít Numpy_ styl)::
 
       def multiply(x, y):
           """
@@ -1746,26 +1755,351 @@ Seznam již existujících funkcí::
       with open("new_file.txt", mode="w") as file:
           file.write("Hello World!")
 
-Odbočka k měnitelným a neměnitelným datovým typům
-"""""""""""""""""""""""""""""""""""""""""""""""""
 
-dictionary
-list
+Pokročila syntaxe
+=================
 
-tuple
-frozenset
+Datové typy
+===========
 
-kopie
+Čísla
+-----
 
-* mutable vs immutable
+Řetězce
+-------
 
-immutable u funkcí
+Vytvoření řetězců
+^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> ''
+   ''
+   >>> ""
+   ''
+   >>> 'text'
+   'text'
+   >>> "text"
+   'text'
+   >>> name = "Davie"
+   >>> 'Name: {}'.format(name)
+   'Name: Davie'
+   >>> f"Name: {name}"
+   'Name: Davie'
+   >>> str(1)
+   '1'
+
+.. note::
+
+   Ještě existuje zastaralý způsob formátování pomocí ``%``, kterými by však
+   měl být nahrazen novějšimi variantami::
+
+      >>> "Name: %s" % "Davie"
+      'Name: Davie'
+
+.. tip::
+
+   Další způsoby `formátování řetězců`_.
+
+Operace s řetězcemi
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> name = "Davie"
+   >>> name + " " + "Badger"
+   'Davie Badger'
+   >>> "Davie" " " "Badger"
+   'Davie Badger'
+   >>> name * 3
+   'DavieDavieDavie'
+   >>> 3 * name
+   'DavieDavieDavie'
+   >>> "D" in name
+   True
+   >>> "D" not in name
+   False
+   >>> name[0]
+   'D'
+   >>> name[0:3]
+   'Dav'
+   >>> name[0:5:2]
+   'Dve'
+   >>> len(name)
+   5
+   >>> max(name)
+   'v'
+   >>> min(name)
+   'D'
+
+Metody řetězců
+^^^^^^^^^^^^^^
+
+* ``.capitalize()``
+
+  * vrať řetězec, kde první znak je velkým písmem::
+
+       >>> "davie badger".capitalize()
+       'Davie badger'
+
+* ``.center(width, fillchar=" ")``
+
+  * vrať řetězec, který bude vycentrovaný na střed podle velikost ``width`` a
+    zbylé okraje vyplněné znakem ``fillchar``::
+
+       >>> "Davie".center(i3)
+       '    Davie    '
+
+* ``.count(sub, start=0, end=-1)``
+
+  * vrať počet výskytů ``sub`` v daném řetězci::
+
+       >>> "Davie".count("D")
+       1
+
+* ``.endswith(suffix, start=-1, end=0)``
+
+  * vrať ``True``, pokud řetězec končí od konce ``start`` na daný ``suffix``
+    nebo alespoň jeden z prefixů::
+
+       >>> name = "Davie"
+       >>> name.endswith("e")
+       True
+       >>> name.endswith("E")
+       False
+       >>> name.endswith(("a", "e", "i", "o", "u"))
+       True
+       >>> name.endswith(("a", "e", "i", "o", "u"))
+       True
+
+* ``.find(sub, start=0, end=-1)``
+
+  * vrať index prvního výskytu ``sub`` v řetězcí, jinak ``-1``, pokud ``sub``
+    neexistuje v řetězci::
+
+       >>> name = "Davie"
+       >>> name.find("e")
+       4
+       >>> name.find("E")
+       -1
+
+* ``.format(*args, **kwargs)``
+
+  * vrať naformátovaný řetězec::
+
+       >>> "Davie {}".format("Badger")
+       'Davie Badger'
+       >>> "{} {1}".format("Davie", "Badger")
+       'Davie Badger'
+       >>> "{first_name} {last_name}".format(first_name="Davie", last_name="Badger")
+
+* ``.index(sub, start=0, end=-1)``
+
+  * vrať index prvního výskytu ``sub`` v řetězci, jinak vyvolej
+    ``ValueError``::
+
+       >>> name = "Davie"
+       >>> name.index("D")
+       0
+       >>> name.index("d")
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ValueError: substring not found
+
+* ``.isalnum()``
+
+  * vrať ``True``, pokud se v řetězci nacházejí písmena a čísla::
+
+       >>> "Davie".isalnum()
+       True
+       >>> "Davie123".isalnum()
+       True
+       >>> "Davie 123".isalnum()
+       False
+
+* ``.isalpha()``
+
+  * vrať ``True``, pokud jsou v řetězci jenom písmena::
+
+       >>> "Davie".isalpha()
+       True
+       >>> "Davie Badger".isalpha()
+       False
+
+* ``.islower()``
+
+  * vrať ``True``, pokud jsou všechna písmena v řetězci malými písmeny::
+
+       >>> name = "Davie"
+       >>> name.islower()
+       False
+       >>> name.lower().islower()
+       True
+
+* ``.isnumeric()``
+
+  * vrať ``True``, pokud jsou v řetězci jenom čísla::
+
+       >>> "123".isnumeric()
+       True
+       >>> "123 456".isnumeric()
+       False
+
+* ``.istitle()``
+
+  * vrať ``True``, pokud jsou první písmeno v řetězci je velkým písmem::
+
+       >>> name = "Davie"
+       >>> name.istitle()
+       True
+       >>> name.lower().istitle()
+       False
+
+* ``.isupper()``
+
+  * vrať ``True``, pokud jsou všechna písmena v řetězci velkými písmeny::
+
+       >>> name = "Davie"
+       >>> name.isupper()
+       False
+       >>> name.upper().isupper()
+       True
+
+* ``.join(iterable)``
+
+  * vrať řetězec, kde jsou řetězcové položky z ``iterable`` zřetězeny podle
+    daného oddělovače::
+
+       >>> iterable = ["Davie", "Badger"]
+       >>> "".join(iterable)
+       'DavieBadger'
+       >>> " ".join(iterable)
+       'Davie Badger'
+       >>> "\n".join(iterable)
+       'Davie\nBadger'
+
+* ``.ljust(width, fillchar=" ")``
+
+  * vrať řetězec, který bude zarovnaný vlevo podle velikost ``width`` a zbylé
+    znaky budou vyplněné znakem ``fillchar``::
+
+       >>> "Davie".ljust(i3)
+       'Davie        '
+
+* ``.lower()``
+
+  * vrať řetězec, kde veškeré písmena jsou malými písmeny::
+
+       >>> "Davie".lower()
+       'davie'
+
+* ``.lstrip(chars=" ")``
+
+  * vrať řetězec, kde jsou z levé strany odstraněné znaky ``chars``::
+
+       >>> "   Davie".lstrip()
+       'Davie'
+       >>> "Davie".lstrip("Da")
+       'vie'
+
+* ``.replace(old, new, count=-1)``
+
+  * vrat řetězec, kde znak(y) ``old`` budou nahrazeny znak(y) ``new`` podle
+    výskytu ``count``, defaultně všechny::
+
+       >>> "Davie".replace("v", "D")
+       'DaDie'
+
+* ``.rjust(width, fillchar=" ")``
+
+  * vrať řetězec, který bude zarovnaný pravo podle velikost ``width`` a zbylé
+    znaky budou vyplněné znakem ``fillchar``::
+
+       >>> "Davie".rjust(i3)
+       '        Davie'
+
+* ``.rstrip(chars=" ")``
+
+  * vrať řetězec, kde jsou z pravé strany odstraněné znaky ``chars``::
+
+       >>> "Davie   ".rstrip()
+       'Davie'
+       >>> "Davie".rstrip("vie")
+       'Da'
+
+* ``.split(sep=None, maxsplit=-1)``
+
+  * vrať seznam, ve kterém jsou položky z řetězce rozdělené podle ``sep`` v
+    množství ``maxsplit``, defaultně neomezeno::
+
+       >>> name = "Davie Badger"
+       >>> name.split()
+       ['Davie', 'Badger']
+       >>> name.split(" ")
+       ['Davie', 'Badger']
+
+* ``.startswith(prefix, start=0, end=-1)``
+
+  * vrať ``True``, pokud řetězec začíná od začátku ``start`` na daný ``prefix``
+    nebo alespoň jeden z prefixů::
+
+       >>> name = "Davie"
+       >>> name.startswith("d")
+       False
+       >>> name.startswith("D")
+       True
+       >>> name.startswith(("a", "b", "c", "d"))
+       False
+       >>> name.startswith(("A", "B", "C", "D"))
+       True
+
+* ``.strip(chars=" ")``
+
+  * vrať řetězec, kde jsou z obou stran řetězce odstraněné znaky ``chars``::
+
+       >>> "  Davie   ".strip()
+       'Davie'
+       >>> "Davie".strip("De")
+       'avi'
+
+* ``.swapcase()``
+
+  * vrať řetězec, kde jsou prohozené velikosti písmen::
+
+       >>> "Davie".swapcase()
+       'dAVIE'
+
+* ``.title()``
+
+  * vrať řetězec, kde každé počáteční písmo slova velkým písmenem::
+
+       >>> "davie badger".title()
+       'Davie Badger'
+
+* ``.upper()``
+
+  * vrať řetězec, kde veškerá písmena jsou velkými písmeny::
+
+       >>> "Davie".upper()
+       'DAVIE'
+
+Seznamy
+-------
+
+N-tice
+------
+
+Množiny
+-------
+
+Slovníky
+--------
 
 TODO
 ====
 
+* mutable vs immutable
 * odmocnina (moduly)
-* patička skriptu s funkcí main
 * ostastní typy
 * zalomení kódu
 * třídy (dědičnost, kompozice)
@@ -1777,7 +2111,6 @@ TODO
 * pass u obyčejných vlastních exception
 * enum třídy
 * rozbalení sekvencí do proměnných, x, \*_, y
-* složité podmínky do funkcí, aby byla podmínka čitelná
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
 * změna položek pomocí indexů u mutable typů
@@ -1786,7 +2119,9 @@ TODO
 * IO operace
 * kontextový manažer
 * global a nonlocal
+* generátor
 
+.. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
 .. _Mypy: https://github.com/python/mypy
