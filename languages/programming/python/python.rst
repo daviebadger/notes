@@ -2151,6 +2151,269 @@ N-tice
 Množiny
 -------
 
+Vytvoření množin
+^^^^^^^^^^^^^^^^
+
+::
+
+   >>> set()
+   set()
+   >>> frozenset()
+   frozenset()
+   >>> {1, 2, 3}
+   {1, 2, 3}
+   >>> frozenset({1, 2, 3})
+   frozenset({1, 2, 3})
+   >>> set([1, 1, 1])
+   {1}
+
+.. note::
+
+   Obyčejné množiny jsou měnitelné::
+
+      >>> x = {1, 2, 3}
+      >>> y = x
+      >>> y.add(4)
+      >>> y
+      {1, 2, 3, 4}
+      >>> x
+      {1, 2, 3, 4}
+      >>> z = frozenset(x)
+      >>> z.add(5)
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      AttributeError: 'frozenset' object has no attribute 'add'
+
+Operace s množinami
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> x = {1, 2, 3}
+   >>> len(x)
+   3
+   >>> 1 in x
+   True
+   >>> 4 not in x
+   >>> y = {2, 3, 4}
+   >>> x | y
+   {1, 2, 3, 4}
+   >>> x & y
+   {2, 3}
+   >>> x - y
+   {1}
+   >>> y - x
+   {4}
+   >>> x ^ y
+   {1, 4}
+   >>> {1} <= x
+   True
+   >>> x >= {1}
+   True
+
+.. note::
+
+   Při použití metod namísto operátorů pro množinové operace nemusí být nutně
+   na druhé straně množina, neboť dojde k automatické konverzi::
+
+      >>> {1} | {2}
+      {1, 2}
+      >>> {1} | "a"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: unsupported operand type(s) for |: 'set' and 'str'
+      >>> {1}.union("abc")
+      {1, 'c', 'b', 'a'}
+
+Metody množin
+^^^^^^^^^^^^^
+
+* ``.add(elem)`` (set)
+
+  * přidej ``elem`` do množiny::
+
+       >>> x = {1, 2, 3}
+       >>> x.add(4)
+       >>> x
+       {1, 2, 3, 4}
+
+* ``.clear()`` (set)
+
+  * vrať množinu, kde jsou odstraněny prvky::
+
+       >>> x = {1, 2, 3}
+       >>> x.clear()
+       >>> x
+       set()
+
+* ``.copy()`` (set, frozenset)
+
+  * vrať novou množinu, kde jsou zkopírované prvky z předchozí množiny::
+
+       >>> x = {1, 2, 3}
+       >>> y = y.copy()
+       >>> y.add(4)
+       >>> y
+       {1, 2, 3, 4}
+       >>> x
+       {1, 2, 3}
+
+* ``.difference(*iterables)`` (set, frozenset)
+
+  * vrať množinu po rozdílu mezi množinou a ``iterables``::
+
+       >>> x = {1, 2, 3}
+       >>> x.difference({2, 3, 4})
+       {1}
+       >>> x.difference({2, 3, 4}, "1", [1])
+       set()
+
+* ``.difference_update(*iterables)`` (set)
+
+  * ponechej v množině jen prvky po rozdílu množiny a ``iterables``::
+
+       >>> x = {1, 2, 3}
+       >>> x.difference_update({2, 3, 4})
+       >>> x
+       {1}
+       >>> y = {1, 2, 3}
+       >>> y -= {2, 3, 4}
+       >>> y
+       {1}
+
+* ``.discard(elem)`` (set)
+
+  * odstraň ``elem`` z množiny, pokud ``elem`` existuje v množině::
+
+       >>> x = {1, 2, 3}
+       >>> x.discard(3)
+       >>> x
+       {1, 2}
+       >>> x.discard(3)
+       >>> x
+       {1, 2}
+
+* ``.intersection(*iterables)`` (set, frozenset)
+
+  * vrať množinu po průniku množiny a ``iterables``::
+
+       >>> x = {1, 2, 3}
+       >>> x.intersection({2})
+       {2}
+       >>> x.intersection({2}, "1", [4])
+       set()
+
+* ``.intersection_update(*iterables)`` (set)
+
+  * ponechej v množině jen prvky po průniku množiny a ``iterables``::
+
+       >>> x = {1, 2, 3}
+       >>> x.intersection_update({2})
+       >>> x
+       {2}
+       >>> y = {1, 2, 3}
+       >>> y &= {2}
+       {2}
+
+* ``.isdisjoint(iterable)`` (set, frozenset)
+
+  * vrať ``True``, pokud množiny nemají žádný společný prvek::
+
+       >>> x = {1, 2, 3}
+       >>> x.disjoint({4})
+       True
+       >>> x.disjoint("abc")
+       True
+
+* ``.issubset(iterable)`` (set, frozenset)
+
+  * vrať ``True``, pokud množina je podmnožinou ``iterable``::
+
+       >>> x = {1, 2, 3}
+       >>> x.issubset({1, 2, 3})
+       True
+       >>> x.issubset([1, 2, 3])
+       True
+
+* ``.issuperset(iterable)`` (set, frozenset)
+
+  * vrať ``True``, pokud množina je nadmnožinou ``iterable``::
+
+       >>> x = {1, 2, 3}
+       >>> x.issuperset({1})
+       True
+       >>> x.issuperset((1,))
+       True
+
+* ``.pop()`` (set)
+
+  * vrať libovolně odstraněný prvek z množiny::
+
+       >>> x = {1, 2, 3}
+       >>> y = x.pop()
+       >>> y
+       1
+       >>> x
+       {2, 3}
+
+* ``.remove(elem)`` (set)
+
+  * odstraň ``elem`` z množiny, avšak pokud ``elem`` neexistuje v množině,
+    vyvolej ``KeyError``::
+
+       >>> x = {1, 2, 3}
+       >>> x.remove(3)
+       >>> x
+       {1, 2}
+       >>> x.remove(3)
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       KeyError: 3
+
+* ``.symmetric_difference(iterable)`` (set, frozenset)
+
+  * vrať množinu po doplňku množiny a ``iterable``::
+
+       >>> x = {1, 2, 3}
+       >>> y = {2, 3, 4}
+       >>> x.symmetric_difference(y)
+       {1, 4}
+
+* ``.symmetric_difference_update(other)`` (set)
+
+  * ponechej v množine jen prvky po doplňku množiny a ``other``::
+
+       >>> x = {1, 2, 3}
+       >>> x.symmetric_difference({2, 3, 4})
+       >>> x
+       {1, 4}
+       >>> y = {1, 2, 3}
+       >>> y ^= {2, 3, 4}
+       {1, 4}
+
+* ``.union(*iterables)`` (set, frozenset)
+
+  * vrať množinu po sjednocení množiny a ``iterables``::
+
+       >>> x = {1, 2, 3}
+       >>> x.union({4})
+       {1, 2, 3, 4}
+       >>> x.union({4}, "5", [6])
+       {1, 2, 3, 4, 6, '5'}
+
+* ``.update(*iterables)`` (set)
+
+  * přidej do množiny další položky z ``iterables``::
+
+       >>> x = set()
+       >>> x.update({1}, [2], (3,))
+       >>> x
+       {1, 2, 3}
+       >>> y = set()
+       >>> y |= {1, 2, 3}
+       >>> y
+       {1, 2, 3}
+
 Slovníky
 --------
 
