@@ -65,7 +65,9 @@ Každý řádek v shellu za ``>>>`` je okamžitě exekutován po stisknutí klá
    >>>
 
 Shell lze vypnout klávesovou zkratkou ``CTRL + D`` nebo zavoláním funkce
-``quit``, která funguje jen uvnitř shellu::
+``quit``, která funguje jen uvnitř shellu:
+
+.. code:: none
 
    >>> quit()
    $
@@ -112,11 +114,15 @@ Spusť skript:
 
          print("Hello world!")
 
-   2. přidat oprávnění pro exekuci souboru::
+   2. přidat oprávnění pro exekuci souboru:
+
+      .. code:: none
 
          $ chmod +x hello.py
 
-   3. spustit soubor::
+   3. spustit soubor:
+
+      .. code:: none
 
          $ ./hello.py
          Hello world!
@@ -127,7 +133,9 @@ Základní syntaxe
 Komentáře
 ---------
 
-Vlož komentář, který bude Pythonem ignorován při exekuci kódu::
+Vlož komentář, který bude Pythonem ignorován při exekuci kódu:
+
+.. code:: none
 
    $ cat hello.py
    # print("Hello")
@@ -1743,7 +1751,7 @@ Seznam již existujících funkcí::
 
    Při IO operacích se soubory je vhodnější použít konstrukci ``with`` s funkcí
    ``open``, kde dojde k automatickému zavření souboru po ukončení práce s
-   daným souborem:
+   daným souborem::
 
       with open("/path/to/file") as file:
           for line in file:
