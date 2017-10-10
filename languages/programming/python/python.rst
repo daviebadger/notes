@@ -2155,6 +2155,216 @@ Metody řetězců
 Seznamy
 -------
 
+Vytvoření seznamu
+^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> []
+   >>> [1, 2, 3]
+   >>> list("abc")
+   ['a', 'b', 'c']
+
+.. note::
+
+   Seznamy jsou měnitelné::
+
+      >>> x = [1, 2, 3]
+      >>> y = x
+      >>> y.append(4)
+      >>> y
+      [1, 2, 3, 4]
+      >>> x
+      [1, 2, 3, 4]
+
+.. tip::
+
+   Vytvoř seznam pomocí jednořádkového cyklu a případně podmínky::
+
+      >>> [number for number in range(3)]
+      [0, 1, 2]
+      >>> [number + 1 for number in range(3)]
+      [1, 2, 3]
+      >>> [number for number in range(11) if number % 2 == 0]
+      [0, 2, 4, 6, 8, 10]
+      >>> [True if number % 2 == 0 else False for number in range(11)]
+      [True, False, True, False, True, False, True, False, True, False, True]
+
+Operace se seznamy
+^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> numbers = [1, 2, 3]
+   >>> numbers + [4, 5, 6]
+   [1, 2, 3, 4, 5, 6]
+   >>> numbers * 2
+   [1, 2, 3, 1, 2, 3]
+   >>> 1 in numbers
+   True
+   >>> 0 not in numbers
+   True
+   >>> numbers[0]
+   1
+   >>> numbers[0] = 0
+   >>> numbers
+   [0, 2, 3]
+   >>> numbers[:] = [1, 2, 3]
+   >>> numbers
+   [1, 2, 3]
+   >>> len(numbers)
+   3
+   >>> min(numbers)
+   1
+   >>> max(numbers)
+   3
+   >>> del numbers[2]
+   >>> numbers
+   [1, 2]
+
+.. note::
+
+   K vnořeným seznamům lze taktéž přístupovat pomocí indexů::
+
+      >>> nested_numbers = [[1, 2, 3], [4, 5, 6]]
+      >>> nested_numbers[0]
+      [1, 2, 3]
+      >>> nested_numbers[1][0]
+      4
+
+Metody seznamů
+^^^^^^^^^^^^^^
+
+* ``.append(item)``
+
+  * přidej položku ``item`` na konec seznamu::
+
+       >>> x = [1, 2, 3]
+       >>> x.append(4)
+       >>> x
+       [1, 2, 3, 4]
+
+* ``.clear()``
+
+  * vyprázdní seznam::
+
+       >>> x = [1, 2, 3]
+       >>> x.clear()
+       >>> x
+       []
+
+* ``.count(item)``
+
+  * vrať počet výskytů položky ``item`` v seznamu::
+
+       >>> x = [1, 2, 3]
+       >>> x.count(1)
+       1
+
+* ``.copy()``
+
+  * vrať nový seznam, kde jsou zkopírované prvky z předchozího seznamu::
+
+       >>> x = [1, 2, 3]
+       >>> y = x.copy()
+       >>> y.append(4)
+       >>> y
+       [1, 2, 3, 4]
+       >>> x
+       [1, 2, 3]
+
+* ``.extend(sequence)``
+
+  * rozšíř seznam o další položky z ``sequence``::
+
+       >>> x = [1, 2, 3]
+       >>> x.extend("abc")
+       >>> x
+       [1, 2, 3, 'a', 'b', 'c']
+
+* ``.index(item, start=0, end=-1)``
+
+  * vrať pořadí položky ``item`` v seznamu, pokud položka existuje, jinak
+    vyvolej ``ValueError``::
+
+       >>> x = [1, 2, 3]
+       >>> x.index(3)
+       2
+       >>> x.index(4)
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       NameError: name 'š' is not defined
+
+* ``.insert(index, item)``
+
+  * vlož do seznamu na místě ``index`` položku ``item``::
+
+       >>> x = []
+       >>> x.insert(0, 1)
+       >>> x
+       [1]
+       >>> x.insert(100, 2)
+       [1, 2]
+       >>> x.insert(-100, 0)
+       [0, 1, 2]
+
+* ``.pop(index=-1)``
+
+  * odstraň se seznamu položku na místě ``index``, pokud index existuje,
+    jinak vyvolej ``IndexError``::
+
+       >>> x = [1, 2, 3]
+       >>> x.pop()
+       3
+       >>> x.pop(1)
+       2
+       >>> x
+       [1]
+       >>> x.pop(0)
+       1
+       >>> x
+       []
+       >>> x.pop()
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       IndexError: pop from empty list
+
+* ``.remove(item)``
+
+  * odstraň položku ``item`` ze seznamu, pokud existuje, jinak vyvolej
+    ``ValueError``::
+
+       >>> x = [1, 2, 3]
+       >>> x.remove(3)
+       >>> x
+       [1, 2]
+       >>> x.remove(3)
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ValueError: list.remove(x): x not in list
+
+* ``.reverse()``
+
+  * obrať pořadí položek v seznamu::
+
+       >>> x = [1, 2, 3]
+       >>> x.reverse()
+       >>> x
+       [3, 2, 1]
+
+* ``.sort(key=None, reverse=None)``
+
+  * seřaď položky v seznamu s / bez klíče ``key``::
+
+       >>> x = [3, 2, 1]
+       >>> x.sort()
+       >>> x
+       [1, 2, 3]
+       >>> y = [{"name": "Davie", "age": 22}, {"name": "Jacob", "age": 17}]
+       >>> y.sort(key=lambda person: person["age"])
+       >>> y
+       [{'name': 'Jacob', 'age': 17}, {'name': 'Davie', 'age': 22}]
+
 N-tice
 ------
 
@@ -2251,7 +2461,7 @@ Metody množin
 
 * ``.clear()`` (set)
 
-  * vrať množinu, kde jsou odstraněny prvky::
+  * vyprázdní množinu::
 
        >>> x = {1, 2, 3}
        >>> x.clear()
@@ -2359,7 +2569,7 @@ Metody množin
 
 * ``.pop()`` (set)
 
-  * vrať libovolně odstraněný prvek z množiny::
+  * vrať odstraněný počáteční prvek z množiny::
 
        >>> x = {1, 2, 3}
        >>> y = x.pop()
@@ -2429,7 +2639,7 @@ Metody množin
 Slovníky
 --------
 
-Vytvoření slovníků
+Vytvoření slovníku
 ^^^^^^^^^^^^^^^^^^
 
 ::
@@ -2581,8 +2791,8 @@ Metody slovníků
 
 * ``.popitem()``
 
-  * odstraň ze slovníku položku, dokud slovník není prázdny, jinak vyvolej
-    ``KeyError``::
+  * odstraň ze slovníku poslední položku, dokud slovník není prázdny,
+    jinak vyvolej ``KeyError``::
 
        >>> x = {"age": 22}
        >>> x.popitem()
@@ -2659,8 +2869,6 @@ TODO
 * třídy (dědičnost, kompozice)
 * try except finally else
 * except Exception pro zachycení jakékoliv výjimky
-* vnořené seznamy [x][y]
-* [number for number in numbers if number % 2 != 1] + vnořené
 * pass u obyčejných vlastních exception
 * enum třídy
 * rozbalení sekvencí do proměnných, x, \*_, y
