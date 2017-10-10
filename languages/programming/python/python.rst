@@ -726,13 +726,15 @@ Zkus další podmínky, není-li předchozí podmínka splněna::
 
 Podmínky včetně logických spojek::
 
-   >>> name = "Davie Badger"
    >>> age = 22
-   >>> if name == "Davie Badger" and age == 22:
-   ...     print("It's probably he.")
-   ... else:
-   ...     print("It's not probably he.")
-   It's probably he.
+   >>> if age >= 18 and <= 26:
+   ...     print("You are still young person")
+   ...
+   You are still young person
+   >>> if 18 <= age <= 26:
+   ...     print("You are still young person")
+   ...
+   You are still young person
 
 .. note::
 
@@ -2658,7 +2660,6 @@ TODO
 * try except finally else
 * except Exception pro zachycení jakékoliv výjimky
 * vnořené seznamy [x][y]
-* if 0 <= number <= 100
 * [number for number in numbers if number % 2 != 1] + vnořené
 * pass u obyčejných vlastních exception
 * enum třídy
@@ -2671,6 +2672,7 @@ TODO
 * kontextový manažer
 * global a nonlocal
 * generátor
+* NotImplemented objekt u vlastních objektů
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
