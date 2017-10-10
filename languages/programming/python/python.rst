@@ -2174,6 +2174,8 @@ Vytvoření množin
    frozenset({1, 2, 3})
    >>> set([1, 1, 1])
    {1}
+   >>> {number for number in range(11) if number % 2 == 0}
+   {0, 2, 4, 6, 8, 10}
 
 .. note::
 
@@ -2649,7 +2651,6 @@ Metody slovníků
 TODO
 ====
 
-* mutable vs immutable
 * odmocnina (moduly)
 * ostastní typy
 * zalomení kódu
