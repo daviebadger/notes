@@ -2425,6 +2425,227 @@ Metody množin
 Slovníky
 --------
 
+Vytvoření slovníků
+^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> {"one": 1, "two": 2, "three": 3}
+   {'one': 1, 'two': 2, 'three': 3}
+   >>> dict(one=1, two=2, three=3)
+   {'one': 1, 'two': 2, 'three': 3}
+   >>> dict([("one", 1), ("two", 2), ("three", 3)])
+   {'one': 1, 'two': 2, 'three': 3}
+   >>> x = {"one": 1, "two": 2, "three": 3}
+   >>> y = {value: key for key, value in x.items()}
+   >>> x
+   {'one': 1, 'two': 2, 'three': 3}
+   >>> y
+   {1: 'one', 2: 'two', 3: 'three'}
+
+.. note::
+
+   Slovníky jsou měnitelné::
+
+      >>> x = {"a": 1, "b": 2, "c": 3}
+      >>> y = x
+      >>> y.popitem()
+      ('c', 3)
+      >>> y
+      {'a': 1, 'b': 2}
+      >>> x
+      {'a': 1, 'b': 2}
+
+Operace se slovníky
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> person = {"name": "Davie Badger", "age": 22}
+   >>> len(person)
+   2
+   >>> person["name"]
+   'Davie Badger'
+   >>> person["sex"] = "male"
+   >>> person
+   {'name': 'Davie Badger', 'age': 22, 'sex': 'male'}
+   >>> del person["sex"]
+   >>> del person["sex"]
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   KeyError: 'sex'
+   >>> "name" in person
+   True
+   >>> "sex" not in person
+   True
+
+.. note::
+
+   Od verze Pythonu 3.6 jsou klíče ve slovníku seřazeny podle jejich vzniku a
+   případně další aktualizaci slovníku.
+
+.. tip::
+
+   Sloučení dvou slovníků do jednoho nového slovníku::
+
+      >>> x = {"one": 1, "two": 2}
+      >>> y = {"three": 3}
+      >>> z = {**x, **e}
+      >>> z
+      {'one': 1, 'two': 2, 'three': 3}
+
+Metody slovníků
+^^^^^^^^^^^^^^^
+
+* ``.clear()``
+
+  * odstraň všechny klíče s hodnotami ze slovníku::
+
+       >>> x = {"age": 22}
+       >>> x.clear()
+       >>> x
+       {}
+
+* ``.copy()``
+
+  * vrať nový slovník, kde jsou zkopírované klíče a hodnoty z předchozího
+    slovníku::
+
+       >>> x = {"age": 22}
+       >>> y = y.copy()
+       >>> y.pop("age")
+       22
+       >>> y
+       {}
+       >>> x
+       {'age': 22}
+
+* ``.get(key, default=None)``
+
+  * vrať hodnotu pro klíč ``key``, pokud existuje, jinak ``default`` hodnotu::
+
+       >>> x = {"age": 22}
+       >>> x.get("age")
+       22
+       >>> x.get("age", 23)
+       22
+       >>> x.get("sex", "male")
+       'male'
+
+* ``.items()``
+
+  * vrať ``dict_items`` objekt, ve kterém jsou n-tice s klíčem a hodnotou::
+
+       >>> x = {"age": 22}
+       >>> y = x.items()
+       >>> y
+       dict_items([('age', 22)])
+       >>> ('age', 22) in y
+       True
+       >>> list(y)
+       [('age', 22)]
+
+* ``.keys()``
+
+  * vrať ``dict_keys`` objekt, ve kterém je seznam klíčů ze slovníku::
+
+       >>> x = {"age": 22}
+       >>> y = x.keys()
+       >>> y
+       dict_keys(['age'])
+       >>> list(y)
+       ['age']
+
+* ``.pop(key, default=None)``
+
+  * vrať hodnotu pro odstraněný klíč ``key``, pokud existoval ve slovníku,
+    jinak vyvolej ``KeyError``, pokud neni uvedena hodnota ``default``, když
+    klíč neexistuje::
+
+       >>> x = {"age": 22}
+       >>> x.pop("age")
+       22
+       >>> x
+       {}
+       >>> x.pop("age")
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       KeyError: 'age'
+       >>> x.pop("age", None)
+       >>> x.pop("age", 0)
+       0
+
+* ``.popitem()``
+
+  * odstraň ze slovníku položku, dokud slovník není prázdny, jinak vyvolej
+    ``KeyError``::
+
+       >>> x = {"age": 22}
+       >>> x.popitem()
+       ('age', 22)
+       >>> x
+       {}
+       >>> x.popitem()
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       KeyError: 'popitem(): dictionary is empty'
+
+* ``.setdefault(key, default=None)``
+
+  * vrať hodnotu pro klíč ``key``, pokud existuje, jinak jej vytvoř spolu s
+    hodnotou ``default``::
+
+       >>> x = {"age": 22}
+       >>> x.setdefault("age")
+       22
+       >>> x.setdefault("sex", "male")
+       >>> x
+       {'age': 22, 'sex': 'male'}
+
+* ``.update(other)``
+
+  * aktualizuj slovník podle klíčů a hodnot v ``other``::
+
+       >>> x = {"age": 22}
+       >>> x.update(age=23)
+       >>> x
+       {'age': 23}
+       >>> x.update({"age": 22})
+       >>> x
+       {'age': 22}
+       >>> x.update(zip(["age"], [23]))
+       >>> x
+       {'age': 23}
+       >>> x.update(sex="male")
+       >>> x
+       {'age': 23, sex: "male"}
+
+* ``.values()``
+
+  * vrať ``dict_values`` objekt, ve kterém jsou vytaženy všechny hodnoty
+    ze slovníku::
+
+       >>> x = {"age": 22}
+       >>> y = x.values()
+       >>> y
+       dict_values([22])
+       >>> 22 in y
+       True
+       >>> list(y)
+       [22]
+
+.. note::
+
+   Objekty ``dict_...`` jsou taktéž měnitelné::
+
+      >>> x = {"age": 22}
+      >>> y = x.values()
+      >>> x.update(age=23)
+      >>> x
+      {'age': 23}
+      >>> y
+      dict_values([23])
+
 TODO
 ====
 
@@ -2443,7 +2664,6 @@ TODO
 * rozbalení sekvencí do proměnných, x, \*_, y
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
-* změna položek pomocí indexů u mutable typů
 * callable objekt definice (__call__ metoda)
 * iterátor
 * IO operace
