@@ -2293,7 +2293,7 @@ Metody seznamů
        >>> x.index(4)
        Traceback (most recent call last):
          File "<stdin>", line 1, in <module>
-       NameError: name 'š' is not defined
+       ValueError: 4 is not in list
 
 * ``.insert(index, item)``
 
@@ -2367,6 +2367,111 @@ Metody seznamů
 
 N-tice
 ------
+
+Vytvoření n-tic
+^^^^^^^^^^^^^^^
+
+::
+
+   >>> ()
+   >>> (1,)
+   >>> (1, 2, 3)
+   >>> tuple(range(3))
+   (0, 1, 2)
+
+.. note::
+
+   Jednořádkový cyklus nevytvoří n-tici, ale jednorázový generátor pro
+   iteraci::
+
+      >>> generator = (number for number in range(3))
+      >>> generator
+      <generator object <genexpr> at 0x7f7256fee1a8>
+      >>> list(generator)
+      [0, 1, 2]
+      >>> list(generator)
+      []
+
+.. tip::
+
+   N-tice a další sekvence lze extrahovat do proměnných::
+
+      >>> x, y, z = (1, 2, 3)
+      >>> x
+      1
+      >>> y
+      2
+      >>> z
+      3
+      >>> first, *_, last = range(11)
+      >>> first
+      0
+      >>> _
+      [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      >>> last
+      10
+
+Operace s n-ticemi
+^^^^^^^^^^^^^^^^^^
+
+::
+
+   >>> numbers = (1, 2, 3)
+   >>> numbers + (4, 5, 6)
+   (1, 2, 3, 4, 5, 6)
+   >>> numbers * 2
+   (1, 2, 3, 1, 2, 3)
+   >>> 1 in numbers
+   True
+   >>> 0 not in numbers
+   True
+   >>> numbers[0]
+   1
+   >>> len(numbers)
+   3
+   >>> min(numbers)
+   1
+   >>> max(numbers)
+   3
+
+.. note::
+
+   Operace pro modifikaci položky budou vždy končit typovým errorem, neboť
+   n-tice je neměnitelný seznam::
+
+      >>> numbers = (1, 2, 3)
+      >>> numbers[0] = 0
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: 'tuple' object does not support item assignment
+      >>> del numbers[0]
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: 'tuple' object doesn't support item deletion
+
+Metody n-tic
+^^^^^^^^^^^^
+
+* ``.count(item)``
+
+  * vrať počet výskytů položky ``item`` v n-tici::
+
+       >>> x = (1, 2, 3)
+       >>> x.count(1)
+       1
+
+* ``.index(item, start=0, end=-1)``
+
+  * vrať pořadí položky ``item`` v seznamu, pokud položka existuje, jinak
+    vyvolej ``ValueError``::
+
+       >>> x = [1, 2, 3]
+       >>> x.index(3)
+       2
+       >>> x.index(4)
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ValueError: tuple.index(x): x not in tuple
 
 Množiny
 -------
@@ -2644,6 +2749,7 @@ Vytvoření slovníku
 
 ::
 
+   >>> {}
    >>> {"one": 1, "two": 2, "three": 3}
    {'one': 1, 'two': 2, 'three': 3}
    >>> dict(one=1, two=2, three=3)
@@ -2871,7 +2977,6 @@ TODO
 * except Exception pro zachycení jakékoliv výjimky
 * pass u obyčejných vlastních exception
 * enum třídy
-* rozbalení sekvencí do proměnných, x, \*_, y
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
 * callable objekt definice (__call__ metoda)
