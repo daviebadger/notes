@@ -2966,12 +2966,24 @@ Metody slovníků
       >>> y
       dict_values([23])
 
+PEPs
+====
+
+PEP_ je formální návrh pro vylepšení jazyka Pythonu jako takového. Mezi
+nejznámější PEPy patří:
+
+1. `PEP 8`_
+
+   * konvence pro psání kódu
+
+2. `PEP 20`_
+
+   * filisofie pro psání kódu
+
 TODO
 ====
 
-* odmocnina (moduly)
 * ostastní typy
-* zalomení kódu
 * třídy (dědičnost, kompozice)
 * try except finally else
 * except Exception pro zachycení jakékoliv výjimky
@@ -2986,9 +2998,13 @@ TODO
 * global a nonlocal
 * generátor
 * NotImplemented objekt u vlastních objektů
+* dekorátory
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
 .. _Mypy: https://github.com/python/mypy
 .. _Numpy: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
+.. _PEP: https://www.python.org/dev/peps/
+.. _PEP 8: https://www.python.org/dev/peps/pep-0008/
+.. _PEP 20: https://www.python.org/dev/peps/pep-0020/
