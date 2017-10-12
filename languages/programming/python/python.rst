@@ -1774,6 +1774,175 @@ Seznam již existujících funkcí::
       with open("new_file.txt", mode="w") as file:
           file.write("Hello World!")
 
+Importování
+-----------
+
+Moduly
+^^^^^^
+
+Modulem je každý Python soubor, ze kterého lze importovat objekty::
+
+   # fibonacci.py:
+
+   def fibonacci(number):
+       """
+       Fibonacci series up to number.
+       """
+       a, b = 0, 1
+
+       while b < number:
+           print(b, end=" ")
+           a, b = b, a + b
+       else:
+           print()
+
+Funkci ``fibonacci`` lze naimportovat do interaktivního shellu, pokud se
+soubor ``fibonacci.py`` nachází v místě, odkud je shell spuštěn::
+
+   >>> from fibonacci import fibonacci
+   >>> fibonacci(100)
+   1 1 2 3 5 8 13 21 34 55 89
+   >>>
+
+.. note::
+
+   Názvy souborů by měli být krátké a rozhodně by neměly kolidovat s již
+   existujícímí moduly ze `standardní knihovny`_. V případě víceslovného názvu
+   lze použít podtržítko.
+
+.. tip::
+
+   Pokud je modul spušteň jako skript, používá se na konci souboru následující
+   patička::
+
+      if __name__ == "__main__":
+          main()
+
+   Uvnitř podmínky bývá zpravidla kód pro exekuci programu, což je obvykle
+   zavolání nějaké funkce.
+
+Balíčky
+^^^^^^^
+
+Balíčkem je každý adresář, ve kterém jsou moduly a zpravidla i speciální soubor
+``__init__.py`` pro označení adresáře jako balíčku::
+
+   package/
+     subpackage/
+       __init__.py
+       a.py
+       b.py
+       c.py
+     __init__.py
+     a.py
+     b.py
+     c.py
+
+Pokud je interaktivní shell spuštěn z místa, ve kterém se nachází adresář
+``package``, tak lze ostatní moduly z balíčku importovat::
+
+   >>> from package.a import X
+   >>> from package.b import Y
+   >>> from package.c import Z
+   >>> from package.subpackage.a import X
+   >>> from package.subpackage.b import Y
+   >>> from package.subpackage.c import Z
+
+.. note::
+
+   U importování může dojít zacyklení, pokud např. soubor A importuje objekt
+   ze souboru B a ten naopak importuje ze souboru A::
+
+      >>> from a import X
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "/home/davie/a.py", line 1, in <module>
+          from b import Y
+        File "/home/davie/b.py", line 1, in <module>
+          from a import X
+      ImportError: cannot import name 'X'
+
+   Řešením je zpravidla neimportovat navzájem mezi sebou, nýbrž vytvořit
+   další nezávisly soubor C pro export, ze kterého budou soubory A a B
+   importovat.
+
+.. tip::
+
+   Soubor ``__init__.py`` je zpravidla prázdný, ale lze jej použít i na
+   zkrácení importovací cesty pro objekty z modulů v daném balíčku::
+
+      # __init__.py
+
+      from a import X
+
+   Zkrácený import lze pak provést s vynecháním názvu modulu::
+
+      >>> from package.a import X
+      >>> from package import X
+
+   Dále lze i přehledně vyjmenovat, jaké objekty lze zkráceně importovat::
+
+      # __init__.py
+
+      from a import X
+
+      __all__ = ["X"]
+
+Odbočka ke způsobu importování
+""""""""""""""""""""""""""""""
+
+1. celý modul / balíček::
+
+      >>> import os
+      >>> import sys
+
+2. konkrétní objekt z modulu / balíčku::
+
+      >>> from package import X
+
+3. konkrétní objekt s alisem z modulu / balíčku::
+
+      >>> from package import X as x
+
+4. všechny objekty z modulu / balíčku (nebezpečná varianta)::
+
+      >>> from package import *
+
+.. note::
+
+   Importovat lze i relativní cestou, ale preferovanější způsob je absolutní
+   cestou::
+
+      # Relative
+
+      from . import X  # from actual __init__.py
+      from .a import X
+      from .. import X  # from higher __init__.py
+      from ..a import X
+
+      # Absolute
+
+      from package.subpackage import X
+      from package.subpackage.a import X
+      from package import X
+      from package.a import X
+
+.. tip::
+
+   Z modulu / balíčku lze naimportovat i více objektu najednou::
+
+      >>> from package import X, Y, Z
+
+   Nicméně může docházet k úpravám importů a upravovat řádek s několika
+   objekty může být zdlouhavé, proto je vhodnější importovat objekty po
+   jednom::
+
+      >>> from package import X
+      >>> from package import Y
+      >>> from package import Z
+
+   Pomocí chytrého editoru lze pak rychle zakomentovat / odkomentovat / přidat
+   / upravit či odebrat import.
 
 Pokročila syntaxe
 =================
@@ -3017,3 +3186,4 @@ TODO
 .. _PEP: https://www.python.org/dev/peps/
 .. _PEP 8: https://www.python.org/dev/peps/pep-0008/
 .. _PEP 20: https://www.python.org/dev/peps/pep-0020/
+.. _standardní knihovny: https://docs.python.org/3/library/index.html
