@@ -773,7 +773,16 @@ Podmínky včetně logických spojek::
    Je-li třeba na základě ``if`` a ``else`` podmínky uložit nějakou hodnotu
    do proměnné, lze použít zkrácený zápis::
 
-      is_even = True if number % 2 else False
+      >>> number = 2
+      >>> is_even = True if number % 2 == 0 else False
+      >>> is_even
+      True
+
+   Případně i jen pomocí logických operátorů::
+
+      >>> is_married = True or False
+      >>> is_married
+      True
 
 Cykly
 -----
