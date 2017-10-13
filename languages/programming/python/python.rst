@@ -1226,14 +1226,26 @@ Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
 
 .. tip::
 
-   U skriptů zpravidla existuje jedna hlavní funkce, která řídí běh programu::
+   Funkce může omezeně či neomezeně volat samu sebe, pokud se správně předávájí
+   argumenty::
 
-      def main():
-          print("Hello World!")
-
-
-      if __name__ == "__main__":
-          main()
+      >>> def countdown(number):
+      ...     if number != -1:
+      ...         print(number)
+      ...         countdown(number - 1)
+      ...
+      >>> countdown(10)
+      10
+      9
+      8
+      7
+      6
+      5
+      4
+      3
+      2
+      1
+      0
 
 Příkaz return
 """""""""""""
@@ -1259,9 +1271,16 @@ Vrať po zavolání funkci nějakou hodnotu::
 Ukonči funkci a vrať hodnotu::
 
    >>> def is_even(number):
-   ...     if number * 2 == 0:
+   ...     if number % 2 == 0:
    ...         return True
    ...     return False
+   >>> is_even(2)
+   True
+   >>> is_even(3)
+   False
+   >>> def is_even(number):
+   ...     return number % 2 == 0
+   ...
    >>> is_even(2)
    True
    >>> is_even(3)
@@ -1806,9 +1825,20 @@ soubor ``fibonacci.py`` nachází v místě, odkud je shell spuštěn::
 
 .. note::
 
-   Názvy souborů by měli být krátké a rozhodně by neměly kolidovat s již
-   existujícímí moduly ze `standardní knihovny`_. V případě víceslovného názvu
-   lze použít podtržítko.
+   Pokud se obsah souboru změní, je nutné znovuotevřít interaktivní shell,
+   jinak se změna v kódu neprojeví.
+
+   Alternativní postup je nechat znovunačíst modul::
+
+      >>> from fibonacci import fibonacci
+      >>> fibonacci(100)
+      1 1 2 3 5 8 13 21 34 55 89
+      >>> import importlib
+      >>> import fibonacci
+      >>> importlib.reload(fibonacci)
+      >>> from fibonacci import fibonacci
+      >>> fibonacci(100)
+      1-1-2-3-5-8-13-21-34-55-89-
 
 .. tip::
 
