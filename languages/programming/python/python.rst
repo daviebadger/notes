@@ -940,8 +940,8 @@ Příkaz break
 Ukončí násilně cyklus::
 
    >>> allowed_letter = ["d", "g", "o"]
-   >>> word = input("Enter word which contains only letters 'd' or 'g' or 'o': ")
-   Enter word which contains only letters 'd' or 'g' or 'o': test
+   >>> word = input("Enter a word which contains only letters 'd' or 'g' or 'o': ")
+   Enter a word which contains only letters 'd' or 'g' or 'o': test
    >>> for letter in word:
    ...     if letter not in allowed_letters:
    ...         print(f"Word '{word}' is not allowed")
@@ -954,8 +954,8 @@ Ukončí násilně cyklus::
    Spusť kód, pokud v cyklu nedošlo k jeho násilnému ukončení nebo jiné chybě::
 
       >>> allowed_letter = ["d", "g", "o"]
-      >>> word = input("Enter word which contains only letters 'd' or 'g' or 'o': ")
-      Enter word which contains only letters 'd' or 'g' or 'o': dog
+      >>> word = input("Enter a word which contains only letters 'd' or 'g' or 'o': ")
+      Enter a word which contains only letters 'd' or 'g' or 'o': dog
       >>> for letter in word:
       ...     if letter not in allowed_letters:
       ...         print(f"Word '{word}' is not allowed")
@@ -1139,8 +1139,8 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
       >>> def is_leap_year(year):
       ...     return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
       ...
-      >>> year = int(input("Enter year: "))
-      Enter year: 1995
+      >>> year = int(input("Enter an year: "))
+      Enter an year: 1995
       >>> if is_leap_year(year):
       ...     print(f"{year} is a leap year")
       ... else:
@@ -1230,22 +1230,17 @@ Pořadí jednotlivých parametrů funkce, pro které lze zadávat argumenty::
    argumenty::
 
       >>> def countdown(number):
-      ...     if number != -1:
+      ...     if number != 0:
       ...         print(number)
       ...         countdown(number - 1)
+      ...     else:
+      ...         print("GO!")
       ...
-      >>> countdown(10)
-      10
-      9
-      8
-      7
-      6
-      5
-      4
+      >>> countdown(3)
       3
       2
       1
-      0
+      GO!
 
 Příkaz return
 """""""""""""
@@ -1974,8 +1969,258 @@ Odbočka ke způsobu importování
    Pomocí chytrého editoru lze pak rychle zakomentovat / odkomentovat / přidat
    / upravit či odebrat import.
 
+Errory a výjimky
+----------------
+
+Error je chyba ještě před spuštením programu, zpravidla syntaktická chyba::
+
+   >>> print "Hello World!"
+     File "<stdin>", line 1
+       print "Hello World!"
+                          ^
+   SyntaxError: Missing parentheses in call to 'print'. Did you mean print("Hello World!")?
+
+Výjimka je chyba až při běhu programu, kdy je vše syntakticky správně, ale něco
+je nefunkční::
+
+   >>> 1 / 0
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   ZeroDivisionError: division by zero
+
+Zachytávání výjimek
+^^^^^^^^^^^^^^^^^^^
+
+Zachyť výjimku::
+
+   >>> try:
+   ...     number = int(input("Enter a number: "))
+   ... except ValueError:
+   ...     print("That was not a number")
+   ...
+   Enter a number: a
+   That was not a number
+
+Zachyť více výjimek::
+
+   >>> try:
+   ...     number = int(input("Enter a number: "))
+   ... except ValueError:
+   ...     print("That was not a number")
+   ... except KeyboardInterrupt:
+   ...     print("\nYou are a chicken")
+   ...
+   Enter a number: ^c (CTRL + c)
+   You are a chicken
+
+Zachyť více výjimek najednou::
+
+   >>> try:
+   ...     number = int(input("Enter a number: "))
+   ... except (ValueError, KeyboardInterrupt):
+   ...     print("No number entered")
+   ...
+   Enter a number: a
+   No number entered
+
+.. note::
+
+   Výjimky se nemusí vždy vyskytnout, proto lze spustit alternativní kód
+   pro tuto situaci::
+
+      >>> def divide(x, y):
+      ...     try:
+      ...         result = x / y
+      ...     except ZeroDivisionError:
+      ...         print("You cannot divide by zero")
+      ...     else:
+      ...         print(result)
+      ...
+      >>> divide(1, 0)
+      You cannot divide by zero
+      >>> divide(1, 1)
+      1.0
+
+.. tip::
+
+   Taktéž lze spustit kód, ať už se výjimka stala nebo ne:
+
+      >>> def number():
+      ...     try:
+      ...         number = int(input("Enter a number: "))
+      ...     except ValueError:
+      ...         print("That was not a number")
+      ...     else:
+      ...         print(number)
+      ...     finally:
+      ...         print("Thanks for your activity")
+      ...
+      >>> number()
+      Enter a number: 1
+      1
+      Thanks for your activity
+      >>> number()
+      Enter a number: a
+      That was not a number
+      Thnkas for your activity
+
+   Konstrukci ``else`` lze vynechat a ponechat jen ``finally``.
+
+Vyvolání výjimek
+^^^^^^^^^^^^^^^^
+
+Vyvolej násilně výjimku::
+
+   >>> def countdown(number):
+   ...     if not isinstance(number, int):
+   ...         raise ValueError(f"{number} is not a whole number")
+   ...
+   >>> countdown("abc")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 3, in countdown
+   ValueError: abc is not a whole number
+
+.. tip::
+
+   Výjimku lze i znovu vyvolat, pokud je předtím zachycena, což může být vhodné
+   pro zaslání notifikace, ve které bude celý chybový výpis (traceback)::
+
+      >>> import traceback
+      >>> def send_email(tb):
+      ...     pass
+      ...
+      >>> try:
+      ...     number = int(input("Enter a number: "))
+      ... except Exception:
+      ...     tb = traceback.format_exc()
+      ...     send_email(tb)
+      ...     raise
+      ...
+      Enter a number: a
+      Traceback (most recent call last):
+        File "<stdin>", line 2, in <module>
+      ValueError: invalid literal for int() with base 10: 'a'
+      >>> print(tb)
+      Traceback (most recent call last):
+        File "<stdin>", line 2, in <module>
+      ValueError: invalid literal for int() with base 10: 'a'
+
+   Do výjimky ``Exception`` spádá jakákoliv výjimka.
+
+Zabudované výjimky
+^^^^^^^^^^^^^^^^^^
+
+Nejběžnější výjimky:
+
+* ``IndexError``
+
+  * neexistující index v sekvenci::
+
+       >>> x = [1, 2, 3]
+       >>> x[3]
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       IndexError: list index out of range
+
+* ``KeyError``
+
+  * neexistující klíč ve slovníku::
+
+       >>> x = {"age": 22}
+       >>> x["name"]
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       KeyError: 'name'
+
+* ``ModuleNotFoundError``
+
+  * modul či balíček nenalezen::
+
+       >>> import blablabla
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ModuleNotFoundError: No module named 'blablabla'
+
+* ``NameError``
+
+  * neexistující objekt v programu, zpravidla proměnná::
+
+       >>> blablabla
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       NameError: name 'blablabla' is not defined
+
+* ``SyntaxError``
+
+  * syntaktická chyba v kódu::
+
+       >>> print "Hello World!"
+         File "<stdin>", line 1
+           print "Hello World!"
+                              ^
+       SyntaxError: Missing parentheses in call to 'print'. Did you mean print("Hello World!")?
+
+* ``TypeError``
+
+  * neplatná operace s různými datovými typy::
+
+       >>> 1 + "a"
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+  * chybějící argument při volání funkce::
+
+       >>> def countdown(number):
+       ...     pass
+       ...
+       >>> countdown()
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       TypeError: countdown() missing 1 required positional argument: 'number'
+
+  * špatná hodnota argumentu pro funkci::
+
+       >>> int("a")
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ValueError: invalid literal for int() with base 10: 'a'
+
+`Ostatní výjimky`_ lze nalézt v dokumentaci.
+
+Vlastní výjimky
+^^^^^^^^^^^^^^^
+
+Vytvoř a vyvolej vlastní výjimku::
+
+   >>> class MyError(Exception):
+   ...     pass
+   ...
+   >>> raise MyError("Error")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   __main__.MyError: Error
+
+.. tip::
+
+   Pomocí aliasu zachycené výjimky se lze dostat k chybové zprávě::
+
+      >>> class MyError(Exception):
+      ...     pass
+      ...
+      >>> try:
+      ...     raise MyError("Error")
+      ... except MyError as error:
+      ...     print(f"Error message: {error}")
+      ...
+      Error message: Error
+
 Pokročila syntaxe
 =================
+
+Třídy
+-----
 
 Datové typy
 ===========
@@ -3191,11 +3436,7 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* ostastní typy
 * třídy (dědičnost, kompozice)
-* try except finally else
-* except Exception pro zachycení jakékoliv výjimky
-* pass u obyčejných vlastních exception
 * enum třídy
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
@@ -3213,6 +3454,7 @@ TODO
 .. _IPython: https://ipython.org/index.html
 .. _Mypy: https://github.com/python/mypy
 .. _Numpy: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
+.. _Ostatní výjimky: https://docs.python.org/3/library/exceptions.html
 .. _PEP: https://www.python.org/dev/peps/
 .. _PEP 8: https://www.python.org/dev/peps/pep-0008/
 .. _PEP 20: https://www.python.org/dev/peps/pep-0020/
