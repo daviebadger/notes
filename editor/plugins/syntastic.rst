@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   Plug 'scrooloose/syntastic'
+   Plug 'vim-syntastic/syntastic'
 
 Systémové instalace jednotlivých kontrolovačů:
 

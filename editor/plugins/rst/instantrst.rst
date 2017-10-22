@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   Plug 'rykka/instantrst'
+   Plug 'Rykka/instantrst'
 
 .. note::
 
