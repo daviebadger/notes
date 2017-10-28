@@ -2393,27 +2393,200 @@ Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
 
 .. tip::
 
-   Každý vlastní třída má zpravidla definovanou i speciální metodu
-   ``__repr__``, která zobrazí popisek objektu::
+   Defaultní atributy, respektive proměnné na instanci by neměly obsahovat
+   měnitelné datové typy jako jsou seznamy, množiny či slovníky, pokud s těmito
+   hodnotami pracují metody::
 
-      >>> class Point(object):
-      ...     def __init__(self, x, y):
-      ...         self.x = x
-      ...         self.y = y
+      >>> class Dog(object):
+      ...     tricks = []
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...     def add_trick(self, trick):
+      ...         self.tricks.append(trick)
       ...
-      >>> a = Point(0, 0)
-      >>> a
-      <__main__.Point object at 0x7fd9140ecb70>
-      >>> class Point(object):
-      ...     def __init__(self, x, y):
-      ...         self.x = x
-      ...         self.y = y
-      ...     def __repr__(self):
-      ...         return f"<Point [{self.x}, {self.y}]"
+      >>> a = Dog("Charlie")
+      >>> b = Dog("Maggie")
+      >>> a.add_trick("sit")
+      >>> b.add_trick("down")
+      >>> a.tricks
+      ['sit', 'down']
+      >>> b.tricks
+      ['sit', 'down']
+
+   Měnitelné typy je třeba přesunout konstruktor, respektive inicializační
+   metodu::
+
+      >>> class Dog(object):
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...         self.tricks = []
+      ...     def add_trick(self, trick):
+      ...         self.tricks.append(trick)
       ...
-      >>> a = Point(0, 0)
-      >>> a
-      <Point [0, 0]>
+      >>> a = Dog("Charlie")
+      >>> b = Dog("Maggie")
+      >>> a.add_trick("sit")
+      >>> b.add_trick("down")
+      >>> a.tricks
+      ['sit']
+      >>> b.tricks
+      ['down']
+
+Odbočka k reprezentaci objektu
+""""""""""""""""""""""""""""""
+
+Každá vlastní třída má zpravidla definovanou i speciální metodu ``__repr__``,
+která zobrazí popisek objektu::
+
+   >>> class Point(object):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...
+   >>> a = Point(0, 0)
+   >>> a
+   <__main__.Point object at 0x7fd9140ecb70>
+   >>> class Point(object):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...     def __repr__(self):
+   ...         return f"<Point [{self.x}, {self.y}]"
+   ...
+   >>> a = Point(0, 0)
+   >>> a
+   <Point [0, 0]>
+
+Pro textovou reprezentaci objektu se pak definuje speciální metoda ``__str__``,
+kterou si uživatel definuje sám, nejčastěji při dědičnosti::
+
+   >>> class Dog(object):
+   ...     def __init__(self, name):
+   ...         self.name = name
+   ...     def __repr__(self):
+   ...         return f"<Dog '{self.name}'>"
+   ...     def __str__(self):
+   ...         return self.name
+   ...
+   >>> dog = Dog("Buddy")
+   >>> dog
+   <Dog 'Buddy'>
+   >>> print(dog)
+   Buddy
+   >>> repr(dog)
+   "<Dog 'Buddy'>"
+   >>> str(dog)
+   'Buddy'
+
+Dědičnost
+^^^^^^^^^
+
+Zděd třídu a přidej navíc metodu::
+
+   >>> class Pet(object):
+   ...     def __init__(self, name):
+   ...         self.name = name
+   ...
+   >>> class Dog(Pet):
+   ...     def bark(self):
+   ...         return "Woof! Wwoof!"
+   ...
+   >>> dog = Dog()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: __init__() missing 1 required positional argument: 'name'
+   >>> dog = Dog("Buddy")
+   >>> dog.bark()
+   'woof-woof'
+
+Zděd třídu a uprav inicializační metodu pro příjem dalších argumentů::
+
+   >>> class Pet(object):
+   ...     def __init__(self, name):
+   ...         self.name = name
+   ...
+   >>> class Dog(Pet):
+   ...     def __init__(self, name, breed):
+   ...         super().__init__(name)
+   ...         self.breed = breed
+   ...
+   >>> dog = Dog("Buddy")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: __init__() missing 1 required positional argument: 'breed'
+   >>> dog = Dog("Buddy", "Siberian Husky")
+   >>> dog.name
+   'Buddy'
+   >>> dog.breed
+   'Siberian Husky'
+
+Zděd třídu a přepiš původní chování metody::
+
+   >>> class Pet(object):
+   ...     def __init__(self, name):
+   ...         self.name = name
+   ...     def talk(self):
+   ...         raise NotImplementedError
+   ...
+   >>> pet = Pet("Buddy")
+   >>> pet.talk()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 5, in talk
+   NotImplementedError
+   >>> class Dog(Pet):
+   ...     def talk(self):
+   ...         return "Woof! Woof!"
+   ...
+   >>> dog = Dog("Buddy")
+   >>> dog.talk()
+   'Woof! Woof!'
+
+.. note::
+
+   Zabudované funkce ``super`` umí volat atributy a metody na předkovi, tj. na
+   třídě, která byla zděděna.
+
+.. tip::
+
+   Dědit lze i z několika tříd najednou::
+
+      >>> class Base3(object): pass
+      ...
+      >>> class Base2(object): pass
+      ...
+      >>> class Base1(object): pass
+      ...
+      >>> class Base(Base1, Base2, Base3)
+      ...
+
+   Nicméně při několika násobné dědičnosti může vzniknout chaos, kdy se ztratí
+   přehled o tom, jaké atributy a metody a na jaké třídě se budou vlastně
+   volat.
+
+   Místo několika násobně dedičnosti lze použit kompozici, kdy atributy objektu
+   mohou obsahovat jiné objekty::
+
+      >>> class Salary(object):
+      ...     def __init__(self, amount):
+      ...         self.amount = amount
+      ...     def net_salary(self):
+      ...         return self.amount * 0.80
+      ...
+      >>> class Employee(object):
+      ...     def __init__(self, name, salary):
+      ...         self.name = name
+      ...         self.salary = Salary(salary)
+      ...
+      >>> employee = Employee("Davie", 1000)
+      >>> employee.name
+      'Davie'
+      >>> employee.salary
+      <__main__.Salary object at 0x7f91f25ddd68>
+      >>> employee.salary.amount
+      1000
+      >>> employee.salary.net_salary()
+      800
 
 Datové typy
 ===========
@@ -3629,8 +3802,6 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* dědičnost + přepis __str__
-* kompozice
 * řetězení metod
 * deskriptory
 * vlastní iterable + její definice
