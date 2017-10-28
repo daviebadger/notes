@@ -161,15 +161,16 @@ Konfigurace
 
 ::
 
-   " nezobrazuj některé soubory a adresáře
+   " nezobrazuj některé soubory a adresáře definované přes wildignore
 
-   let NERDTreeIgnore = [
-       \ '^build$',
-       \ '^dist$',
-       \ '^\.git$',
-       \ 'egg-info$',
-       \ '^\.mypy_cache$',
-       \ '^__pycache__$']
+   let NERDTreeRespectWildIgnore = 1
+
+   set wildignore+=build
+   set wildignore+=dist
+   set wildignore+=egg-info
+   set wildignore+=__pycache__
+   set wildignore+=.git
+   set wildignore+=.mypy_cache
 
    " zobraz skryté soubory a adresáře
 

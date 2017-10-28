@@ -21,3 +21,19 @@ Instalace
 ::
 
    Plug 'alvan/vim-closetag'
+
+Ovládání
+========
+
+Defaultně se tag uzavře, existuje-li v páru.
+
+.. tip::
+
+   Pomocí dalšího ``>`` na konci tagu lze odsadit uzavírající tag ob další
+   řáděk a kurzor vložit dovnitř tagu::
+
+      <p>|<p/>
+
+      <p>
+        |
+      </p>

@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   Plug 'rykka/riv.vim'
+   Plug 'Rykka/riv.vim'
 
 Ovládání
 ========
