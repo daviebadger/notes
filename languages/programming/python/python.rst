@@ -2180,12 +2180,21 @@ Nejběžnější výjimky:
          File "<stdin>", line 1, in <module>
        TypeError: countdown() missing 1 required positional argument: 'number'
 
-  * špatná hodnota argumentu pro funkci::
+  * nevhodný typ argumentu pro funkci::
 
        >>> int("a")
        Traceback (most recent call last):
          File "<stdin>", line 1, in <module>
        ValueError: invalid literal for int() with base 10: 'a'
+
+* ``ValueError``
+
+  * správný typ argumentu pro funkci, ale špatná hodnota::
+
+       >>> float("1,1")
+       Traceback (most recent call last):
+         File "<stdin>", line 1, in <module>
+       ValueError: could not convert string to float: '1,1'
 
 `Ostatní výjimky`_ lze nalézt v dokumentaci.
 
@@ -2221,6 +2230,190 @@ Pokročila syntaxe
 
 Třídy
 -----
+
+Vytvoř vlastní třídu (datový typ)::
+
+   >>> class Person:
+   ...     pass
+   ...
+   >>> type(Person)
+   <class 'type'>
+
+Vytvoř instanci třídy::
+
+   >>> class Person:
+   ...     pass
+   ...
+   >>> person = Person()
+   >>> type(person)
+   <class '__main__.Person'>
+
+.. note::
+
+   Každá nová třída implicitně dědí z objektu ``object``. Tento objekt lze i
+   explicitně zdědit::
+
+      >>> class Pet(object):
+      ...     pass
+      ...
+
+Atributy
+^^^^^^^^
+
+Vytvoř atributy na instanci::
+
+   >>> class Point(object):
+   ...     pass
+   ...
+   >>> point_a = Point()
+   >>> point_a.x
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: 'Point' object has no attribute 'x'
+   >>> point_a.x = 0
+   >>> point_a.x
+   0
+   >>> point_a.y = 1
+   >>> point_b = Point()
+   >>> point_b.x = 1
+   >>> point_b.y = 0
+   >>> point_a.x != point_b.x and point_a.y != point_b.y
+   True
+
+Vytvoř defaultní atributy, které budou stejné u každé vzniklé instance::
+
+   >>> class Point(object):
+   ...     x = 0
+   ...     y = 1
+   ...
+   >>> point_a = Point()
+   >>> point_b = Point()
+   >>> point_a.x == point_b.x and point_a.y == point_b.y
+
+.. note::
+
+   Pomocí zabudované funkce ``dir`` lze zobrazit všechny atributy objektu nebo
+   také objekty v daném prostoru (globální objekty / lokální objekty ve
+   funkcích)::
+
+      >>> dir()
+      ['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
+      >>> class Point(object):
+      ...     x = 0
+      ...     y = 1
+      ...
+      >>> dir(Point)
+      ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'x', 'y']
+
+.. tip::
+
+   Atributy, metody ale i funkce mohou začínat na podtržítko::
+
+      >>> def _protected_function():
+      ...     pass
+
+   Objekty, které začínájí na podtržítko slouží pro interní potřebu programu a
+   tudíž nejsou součásti veřejné API (dokumentace aj.).
+
+Metody
+^^^^^^
+
+Vytvoř speciální inicializační metodu, která příjímá argumenty při inicializaci
+objektu::
+
+   >>> class Point(object):
+   ...     pass
+   ...
+   >>> point = Point(0, 1)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: object() takes no parameters
+   >>> class Point(object):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...
+   >>> point = Point(0, 1)
+   >>> point.x
+   0
+   >>> point.y
+   1
+
+Vytvoř speciální metodu pro přetěžení operátoru rovnítka pro porovnání
+shodnosti dvou bodů::
+
+   >>> class Point(object):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...     def __eq__(self, other):
+   ...         return (
+   ...             isinstance(other, Point) and
+   ...             self.x == other.x and
+   ...             self.y == other.y
+   ...         )
+   ...
+   >>> a = Point(0, 1)
+   >>> b = Point(1, 0)
+   >>> a == b
+   False
+   >>> a != b
+   True
+   >>> a == [0, 1]
+   False
+   >>> a != [0, 1]
+   True
+
+Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
+
+   >>> class Point(object):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...     def distance_from_point(self, point):
+   ...         if not isinstance(point, Point):
+   ...             raise TypeError(f"point must be a Point, not {point.__class__.__name__}")
+   ...         return ((point.x - self.x) ** 2 + (point.y - self.y) ** 2) ** 0.5
+   ...
+   >>> a = Point(0, 0)
+   >>> b = Point(3, 3)
+   >>> a.distance_from_point(0)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 7, in distance_from_point
+   TypeError: point must be a Point, not int
+   >>> a.distance_from_point(b)
+   4.242640687119285
+
+.. note::
+
+   U každé metody je nutné zpravidla definovat počateční parametr ``self``, do
+   kterého Python vloží instanci objektu. Pomocí ``self`` objektu pak lze
+   přistupovat k atributům uvnitř metod nebo volat jiné metody.
+
+.. tip::
+
+   Každý vlastní třída má zpravidla definovanou i speciální metodu
+   ``__repr__``, která zobrazí popisek objektu::
+
+      >>> class Point(object):
+      ...     def __init__(self, x, y):
+      ...         self.x = x
+      ...         self.y = y
+      ...
+      >>> a = Point(0, 0)
+      >>> a
+      <__main__.Point object at 0x7fd9140ecb70>
+      >>> class Point(object):
+      ...     def __init__(self, x, y):
+      ...         self.x = x
+      ...         self.y = y
+      ...     def __repr__(self):
+      ...         return f"<Point [{self.x}, {self.y}]"
+      ...
+      >>> a = Point(0, 0)
+      >>> a
+      <Point [0, 0]>
 
 Datové typy
 ===========
@@ -3436,8 +3629,10 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* třídy (dědičnost, kompozice)
-* enum třídy
+* dědičnost + přepis __str__
+* kompozice
+* řetězení metod
+* deskriptory
 * vlastní iterable + její definice
 * vlastní sekvence + její definice
 * callable objekt definice (__call__ metoda)
@@ -3448,6 +3643,7 @@ TODO
 * generátor
 * NotImplemented objekt u vlastních objektů
 * dekorátory
+* zbylé klíčová slova
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
