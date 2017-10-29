@@ -2588,8 +2588,148 @@ Zděd třídu a přepiš původní chování metody::
       >>> employee.salary.net_salary()
       800
 
-Datové typy
-===========
+Iterátory
+---------
+
+Vytvoř vlastní iterátor, respektive kolekci, nad kterou půjde použít ``for``
+smyčka::
+
+   >>> class ToDoList(object):
+   ...     def __init__(self):
+   ...         self.todos = []
+   ...         self.index = 0
+   ...     def add(self, todo):
+   ...         self.todos.append(todo)
+   ...     def __iter__(self):
+   ...         return self
+   ...     def __next__(self):
+   ...         if self.index == len(self.todos):
+   ...             self.index = 0
+   ...             raise StopIteration
+   ...         self.index += 1
+   ...         return self.todos[self.index - 1]
+   ...
+   >>> todos = ToDoList()
+   >>> todos.add("a")
+   >>> todos.add("b")
+   >>> todos.add("c")
+   >>> for todo in todos:
+   ...     print(todo)
+   a
+   b
+   c
+   >>> list(todos)
+   ['a', 'b', 'c']
+
+Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
+
+   >>> class ToDoList(object):
+   ...     def __init__(self):
+   ...         self.todos = []
+   ...         self.index = 0
+   ...     def add(self, todo):
+   ...         self.todos.append(todo)
+   ...     def __iter__(self):
+   ...         return self
+   ...     def __next__(self):
+   ...         if self.index == len(self.todos):
+   ...             self.index = 0
+   ...             raise StopIteration
+   ...         self.index += 1
+   ...         return self.todos[self.index - 1]
+   ...     def __reversed__(self)
+   ...         return reversed(self.todos)
+   ...
+   >>> todos = ToDoList()
+   >>> todos.add("a")
+   >>> todos.add("b")
+   >>> todos.add("c")
+   >>> for todo in reversed(todos):
+   ...     print(todo)
+   c
+   b
+   a
+
+.. note::
+
+   Iterátory umí automaticky vyhodnocovat, jestli se položka nachází v
+   iterátoru nebo ne::
+
+   >>> class ToDoList(object):
+   ...     def __init__(self):
+   ...         self.todos = []
+   ...         self.index = 0
+   ...     def add(self, todo):
+   ...         self.todos.append(todo)
+   ...     def __iter__(self):
+   ...         return self
+   ...     def __next__(self):
+   ...         if self.index == len(self.todos):
+   ...             self.index = 0
+   ...             raise StopIteration
+   ...         self.index += 1
+   ...         return self.todos[self.index - 1]
+   ...
+   >>> todos = ToDoList()
+   >>> todos.add("a")
+   >>> "a" in todos
+   True
+   >>> "b" in todos
+   False
+
+Generátory
+----------
+
+Vytvoř generátor, respektive iterátor z funkce::
+
+   >>> def fibonacci(n):
+   ...     a, b = 0, 1
+   ...     while a <= n:
+   ...         yield a
+   ...         a, b = b, a + b
+   ...
+   >>> for number in fibonacci(100):
+   ...     print(number, end=" ")
+   ... else:
+   ...     print()
+   ...
+   0 1 1 2 3 5 8 13 21 34 55 89
+
+.. note::
+
+   Generátor automaticky na pozadí vytvoří iterátor s ``__iter__`` a
+   ``__next__`` metodami včetně vyvolání ``StopIteration`` výjimky, pokud je
+   iterace u konce.
+
+.. tip::
+
+   Vytvoř generátor pomocí jednořádkového cyklu ``for`` uvnitř závorek::
+
+      >>> (number for number in range(10))
+      <generator object <genexpr> at 0x7f91f57f5410>
+      >>> number for number in range(10)
+        File "<stdin>", line 1
+          number for number in range(10)
+                   ^
+      SyntaxError: invalid syntax
+      >>> list(number for number in range(10) if number % 2 == 0)
+      [0, 2, 4, 6, 8]
+      >>> list(True if number % 2 == 0 else False for number in range(10))
+      [True, False, True, False, True, False, True, False, True, False]
+      >>> sum(number for number in range(11))
+      55
+
+Dekorátory
+----------
+
+Vlastní dekorátory
+^^^^^^^^^^^^^^^^^^
+
+Zabudované dekorátory
+^^^^^^^^^^^^^^^^^^^^^
+
+Základní datové typy
+====================
 
 Čísla
 -----
@@ -3804,17 +3944,12 @@ TODO
 
 * řetězení metod
 * deskriptory
-* vlastní iterable + její definice
 * vlastní sekvence + její definice
 * callable objekt definice (__call__ metoda)
-* iterátor
 * IO operace
 * kontextový manažer
 * global a nonlocal
-* generátor
 * NotImplemented objekt u vlastních objektů
-* dekorátory
-* zbylé klíčová slova
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
