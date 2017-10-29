@@ -2698,8 +2698,32 @@ Vytvoř generátor, respektive iterátor z funkce::
 .. note::
 
    Generátor automaticky na pozadí vytvoří iterátor s ``__iter__`` a
-   ``__next__`` metodami včetně vyvolání ``StopIteration`` výjimky, pokud je
+   ``__next__`` metodou včetně vyvolání ``StopIteration`` výjimky, pokud je
    iterace u konce.
+
+   Na rozdíl od obyčejné funkce pro výpočet fibonacciho posloupnosti generátor
+   spotřebovává méně paměti, neboť nepotřebuje v paměti celou posloupnost, ale
+   jen její část, kterou postupně interně tahá z cyklu::
+
+      >>> def fibonacci(n):
+      ...     a, b = 0, 1
+      ...     while a <= n:
+      ...         yield a
+      ...         a, b = b, a + b
+      ...
+      >>> fibo = fibonacci(3)
+      >>> next(fibo)
+      0
+      >>> next(fibo)
+      1
+      >>> next(fibo)
+      1
+      >>> next(fibo)
+      3
+      >>> next(fibo)
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      StopIteration
 
 .. tip::
 
