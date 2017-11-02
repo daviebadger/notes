@@ -120,7 +120,7 @@ clone
 
 Zkopíruj odněkud již existující repozitář::
 
-   $ git https://daviebadger@gitlab.com/daviebadger/notes.git
+   $ git clone https://daviebadger@gitlab.com/daviebadger/notes.git
    $ ls
    notes
    $ cd notes
