@@ -32,3 +32,4 @@ Konfigurace
    colorscheme flatcolor
 
    highlight LineNr guifg=#cbe3e7
+   highlight MatchParen guifg=#c991e1 gui=bold
