@@ -110,14 +110,9 @@ Editace adresářů
 Aktualizace obsahu adresářů
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-
-   Pokud mimo Vim vznikne v dané adresářové struktuře nový objekt, tak se tato
-   změna neprojeví v NERDTree stromu, dokud to není manuálně vyžádáno
-
 * ``r``
 
-  * aktualizuj obsah daného adresáře
+  * aktualizuj obsah daného adresáře, došlo-li ke změně jeho obsahu
 
 * ``R``
 
