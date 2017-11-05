@@ -1597,7 +1597,7 @@ Seznam již existujících funkcí::
   * otevři a vrať ``file`` objekt v daném módu ``mode`` a kódování
     ``encoding``, pokud soubor ``file`` existuje::
 
-       >>> open("/etc/passwd")
+       >>> open("/etc/passwd", encoding="UTF-8")
        <_io.TextIOWrapper name='/etc/passwd' mode='r' encoding='UTF-8'>
 
   * základní módy:
@@ -2547,7 +2547,7 @@ Zděd třídu a přidej navíc metodu::
    ...
    >>> class Dog(Pet):
    ...     def bark(self):
-   ...         return "Woof! Wwoof!"
+   ...         return "Woof! Woof!"
    ...
    >>> dog = Dog()
    Traceback (most recent call last):
@@ -2555,7 +2555,12 @@ Zděd třídu a přidej navíc metodu::
    TypeError: __init__() missing 1 required positional argument: 'name'
    >>> dog = Dog("Buddy")
    >>> dog.bark()
-   'woof-woof'
+   'Woof Woof!'
+   >>> isinstance(dog, Dog)
+   True
+   >>> isinstance(dog, Pet)
+   True
+   >>> issubclass(Dog, Pet)
 
 Zděd třídu a uprav inicializační metodu pro příjem dalších argumentů::
 
@@ -2602,7 +2607,7 @@ Zděd třídu a přepiš původní chování metody::
 
 .. note::
 
-   Zabudované funkce ``super`` umí volat atributy a metody na předkovi, tj. na
+   Zabudovaná funkce ``super`` umí volat atributy a metody na předkovi, tj. na
    třídě, která byla zděděna.
 
 .. tip::
@@ -4038,7 +4043,6 @@ TODO
 * kontextový manažer
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
-* isinstance a issubclass u dedicnosti
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
