@@ -2266,6 +2266,36 @@ Vytvoř instanci třídy::
       ...     pass
       ...
 
+.. tip::
+
+   Pomocí zabudované funkce ``dir`` lze zobrazit všechny atributy objektu nebo
+   také objekty v daném jmenném prostoru::
+
+      >>> dir()
+      ['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
+      >>> class Point(object):
+      ...     x = 0
+      ...     y = 1
+      ...
+      >>> dir(Point)
+      ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'x', 'y']
+
+   Pro zjištení objektů ve jmenném prostoru a jejich hodnot lze použít
+   zabudované funkce ``globals`` a ``locals``::
+
+      >>> globals()
+      {'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__doc__': None, '__package__': None}cc
+      >>> def function():
+      ...     x, y = 0, 1
+      ...     print(locals())
+      ...
+      >>> function()
+      {'y': 1, 'x': 0}
+
+
+   Pokud je funkce ``locals`` spuštěna v globálním jmenném prostoru, budu se
+   chovat stejně jako funkce ``globals``.
+
 Atributy
 ^^^^^^^^
 
@@ -2274,20 +2304,25 @@ Vytvoř atributy na instanci::
    >>> class Point(object):
    ...     pass
    ...
-   >>> point_a = Point()
-   >>> point_a.x
+   >>> point = Point()
+   >>> point.x
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    AttributeError: 'Point' object has no attribute 'x'
-   >>> point_a.x = 0
-   >>> point_a.x
+   >>> point.x = 0
+   >>> point.x
    0
-   >>> point_a.y = 1
-   >>> point_b = Point()
-   >>> point_b.x = 1
-   >>> point_b.y = 0
-   >>> point_a.x != point_b.x and point_a.y != point_b.y
+   >>> setattr(point, "y", 1)
+   >>> point.y
+   1
+   >>> getattr(point, "y")
+   1
+   >>> hasattr(point, "y")
    True
+   >>> del point.x
+   >>> hasattr(point, "x")
+   False
+   >>> delattr(point, "y")
 
 Vytvoř defaultní atributy, které budou stejné u každé vzniklé instance::
 
@@ -2298,21 +2333,35 @@ Vytvoř defaultní atributy, které budou stejné u každé vzniklé instance::
    >>> point_a = Point()
    >>> point_b = Point()
    >>> point_a.x == point_b.x and point_a.y == point_b.y
+   True
 
 .. note::
 
-   Pomocí zabudované funkce ``dir`` lze zobrazit všechny atributy objektu nebo
-   také objekty v daném prostoru (globální objekty / lokální objekty ve
-   funkcích)::
+   Vlastní objekty jsou měnitelné při alisování::
 
-      >>> dir()
-      ['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
       >>> class Point(object):
       ...     x = 0
-      ...     y = 1
       ...
-      >>> dir(Point)
-      ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'x', 'y']
+      >>> point_a = Point()
+      >>> point_b = point_a
+      >>> point_b.x = 1
+      >>> point_a.x = 1
+
+   Pro zamezení měnitelnosti atributů na aliasovaných objektech je třeba
+   vytvořit mělkou kopii objektu::
+
+      >>> import copy
+      >>> class Point(object):
+      ...     x = 0
+      ...
+      >>> point_a = Point()
+      >>> point_b = copy.copy(point_a)
+      >>> point_b.x = 1
+      >>> point_a.x
+      0
+
+   Pokud atributy neobsahují jen primitivní datové typy, ale i jiné objekty,
+   tak je třeba použít hlubokou kopii objektu pomocí ``copy.deepcopy(object)``.
 
 .. tip::
 
@@ -2736,7 +2785,8 @@ Vytvoř generátor, respektive iterátor z funkce::
 
 .. tip::
 
-   Vytvoř generátor pomocí jednořádkového cyklu ``for`` uvnitř závorek::
+   Vytvoř jednorázový generátor pomocí jednořádkového cyklu ``for`` uvnitř
+   závorek::
 
       >>> (number for number in range(10))
       <generator object <genexpr> at 0x7f91f57f5410>
@@ -2751,6 +2801,11 @@ Vytvoř generátor, respektive iterátor z funkce::
       [True, False, True, False, True, False, True, False, True, False]
       >>> sum(number for number in range(11))
       55
+      >>> numbers = (number for number in range(10))
+      >>> list(numbers)
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      >>> list(numbers)
+      []
 
 Dekorátory
 ----------
@@ -3983,7 +4038,7 @@ TODO
 * kontextový manažer
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
-* kopie vlastních objektu (copy + deepcopy)
+* isinstance a issubclass u dedicnosti
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
