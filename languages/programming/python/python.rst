@@ -472,6 +472,12 @@ Aritmetické
 
      >>> 2 - 1
      1
+     >>> _  # last saved result
+     1
+     >>> _ - 1
+     0
+     >> _
+     0
 
 * násobení (``*``)::
 
@@ -1836,7 +1842,21 @@ soubor ``fibonacci.py`` nachází v místě, odkud je shell spuštěn::
           main()
 
    Uvnitř podmínky bývá zpravidla kód pro exekuci programu, což je obvykle
-   zavolání nějaké funkce.
+   zavolání nějaké funkce. Tato hlavní funkce by měla vracet explicitně nulu,
+   než ``None``, což indikuje, že program úspěšně skončil.
+
+   Pro propojení exit statusu skriptu s shellem je vhodné ještě použít
+   systémovou knihovnu::
+
+      import sys
+
+
+      def main():
+          return 0
+
+
+      if __name__ == "__main__":
+         sys.exit(main())
 
 Balíčky
 ^^^^^^^
@@ -3827,6 +3847,19 @@ Vytvoření slovníku
       {'a': 1, 'b': 2}
       >>> x
       {'a': 1, 'b': 2}
+
+.. tip::
+
+   U rozsáhlejších slovníku nebo i jiných kolekcí lze použít vylepšený
+   ``print`` pro strukturovanější výpis hodnot::
+
+      >>> people = [{"name": "Davie", "gender": "M", "age": 22}, {"name": "Jacob", "gender": "M", "age": 17}]
+      >>> print(people)
+      [{'name': 'Davie', 'gender': 'M', 'age': 22}, {'name': 'Jacob', 'gender': 'M', 'age': 17}]
+      >>> import pprint
+      >>> pprint.pprint(people)
+      [{'age': 22, 'gender': 'M', 'name': 'Davie'},
+       {'age': 17, 'gender': 'M', 'name': 'Jacob'}]
 
 Operace se slovníky
 ^^^^^^^^^^^^^^^^^^^
