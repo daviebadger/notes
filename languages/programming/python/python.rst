@@ -154,14 +154,6 @@ Vlož komentář, který bude Pythonem ignorován při exekuci kódu:
    V žádném případě by neměl zbytečně popisovat kód jak funguje, neboť se
    očekává, že ten kdo bude kód číst sám rozumí Pythonu.
 
-.. tip::
-
-   Délka řádku v souboru včetně komentářů by neměla překročit počet 79 znaků::
-
-      # Strašně dlouhý ukázkový komentář,
-      # který je pro ilustraci rozložen do tří řádků,
-      # namísto jednoho dlouhého řádku překračující limit 79 znaků.
-
 Proměnné
 --------
 
@@ -2081,6 +2073,23 @@ Vyvolej násilně výjimku::
      File "<stdin>", line 3, in countdown
    ValueError: abc is not a whole number
 
+.. note::
+
+   Vyvolat výjimku lze i pomocí příkazu ``assert`` spolu s podmínkou, pokud je
+   neplatná::
+
+      >>> assert 1 == 2
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      AssertionError
+      >>> assert 1 == 2, "1 is not 2"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      AssertionError: 1 is not 2
+
+   Avšak ``assert`` oveřování se používá jen pro interní potřebu, zejména u
+   testování kódu.
+
 .. tip::
 
    Výjimku lze i znovu vyvolat, pokud je předtím zachycena, což může být vhodné
@@ -3974,6 +3983,7 @@ TODO
 * kontextový manažer
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
+* kopie vlastních objektu (copy + deepcopy)
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
@@ -3984,4 +3994,3 @@ TODO
 .. _PEP: https://www.python.org/dev/peps/
 .. _PEP 8: https://www.python.org/dev/peps/pep-0008/
 .. _PEP 20: https://www.python.org/dev/peps/pep-0020/
-.. _standardní knihovny: https://docs.python.org/3/library/index.html
