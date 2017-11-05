@@ -2510,6 +2510,32 @@ Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
       >>> b.tricks
       ['down']
 
+Odbočka k řetězení metod
+""""""""""""""""""""""""
+
+Pokud metoda vrací objekt a ten má metody k volání, tak lze tyto metody volat
+hned po zavolání předchozí metody::
+
+   >>> class Account(object):
+   ...     def __init__(self, balance=0):
+   ...         self.balance = balance
+   ...     def deposit(self, amount):
+   ...         self.balance += amount
+   ...         return self
+   ...     def withdraw(self, amount):
+   ...         self.balance -= amount
+   ...         return self
+   ...
+   >>> account = Account(100)
+   >>> account.withdraw(50).deposit(25).withdraw(75)
+   >>> account.balance
+   0
+
+.. note::
+
+   Pokud atribut obsahuje jiný objekt s atributy, tak lze také řetezit
+   atributy stejně jako metody.
+
 Odbočka k reprezentaci objektu
 """"""""""""""""""""""""""""""
 
@@ -4068,7 +4094,6 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* řetězení metod
 * deskriptory
 * vlastní sekvence + její definice
 * callable objekt definice (__call__ metoda)
@@ -4076,6 +4101,7 @@ TODO
 * kontextový manažer
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
+* multithreading a multiprocessing a aio
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
