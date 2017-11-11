@@ -2697,13 +2697,16 @@ Zděd třídu a přepiš původní chování metody::
       >>> employee.salary.net_salary()
       800
 
+Datové modely
+-------------
+
 Iterátory
----------
+^^^^^^^^^
 
 Vytvoř vlastní iterátor, respektive kolekci, nad kterou půjde použít ``for``
 smyčka::
 
-   >>> class ToDoList(object):
+   >>> class ToDo(object):
    ...     def __init__(self):
    ...         self.todos = []
    ...         self.index = 0
@@ -2718,7 +2721,7 @@ smyčka::
    ...         self.index += 1
    ...         return self.todos[self.index - 1]
    ...
-   >>> todos = ToDoList()
+   >>> todos = ToDo()
    >>> todos.add("a")
    >>> todos.add("b")
    >>> todos.add("c")
@@ -2732,7 +2735,7 @@ smyčka::
 
 Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
 
-   >>> class ToDoList(object):
+   >>> class ToDo(object):
    ...     def __init__(self):
    ...         self.todos = []
    ...         self.index = 0
@@ -2749,7 +2752,7 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    ...     def __reversed__(self)
    ...         return reversed(self.todos)
    ...
-   >>> todos = ToDoList()
+   >>> todos = ToDo()
    >>> todos.add("a")
    >>> todos.add("b")
    >>> todos.add("c")
@@ -2764,7 +2767,7 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    Iterátory umí automaticky vyhodnocovat, jestli se položka nachází v
    iterátoru nebo ne::
 
-   >>> class ToDoList(object):
+   >>> class ToDo(object):
    ...     def __init__(self):
    ...         self.todos = []
    ...         self.index = 0
@@ -2779,7 +2782,7 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    ...         self.index += 1
    ...         return self.todos[self.index - 1]
    ...
-   >>> todos = ToDoList()
+   >>> todos = ToDo()
    >>> todos.add("a")
    >>> "a" in todos
    True
@@ -2787,7 +2790,7 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    False
 
 Generátory
-----------
+^^^^^^^^^^
 
 Vytvoř generátor, respektive iterátor z funkce::
 
@@ -2857,6 +2860,140 @@ Vytvoř generátor, respektive iterátor z funkce::
       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       >>> list(numbers)
       []
+
+Sekvence
+^^^^^^^^
+
+Kontextový manažer
+^^^^^^^^^^^^^^^^^^
+
+Vytvoř vlastní kontextový manažer na způsob funkce ``open``, který na pozadí
+otevře soubor před exekucí kódu uvnitř bloku ``with`` a pak jej také na pozadí
+zavře::
+
+   >>> class File(object):
+   ...     def __init__(self, filename, mode="r"):
+   ...         self.filename = filename
+   ...         self.mode = mode
+   ...     def __enter__(self):
+   ...         self.open_file = open(self.filename, self.mode)
+   ...         return self.open_file
+   ...     def __exit__(self, exc_type, exc_value, traceback):
+   ...         self.open_file.close()
+   ...
+   >>> with File("test.txt", "w") as file:
+   ...     file.write("test")
+   ...
+   4
+   >>> with File("text.txt") as file:
+   ...     print(file.read())
+   ...
+   test
+   >>> with open("file.txt") as file:
+   ...     print(file.read())
+   ...
+   test
+
+.. note::
+
+   Když uvnitř ``with`` bloku nastane výjimka, tak argumenty pro parametry
+   magické metody ``__exit__`` budou obsahovat hodnotu ``None``.
+
+   Parametry v ``__exit__`` metodě lze zkrátit do jednoho, pokud nepotřebuji
+   pracovat s výjimkou z ``with`` bloku::
+
+      >>> class File(object):
+      ...     def __init__(self, filename, mode="r"):
+      ...         self.filename = filename
+      ...         self.mode = mode
+      ...     def __enter__(self):
+      ...         self.open_file = open(self.filename, self.mode)
+      ...         return self.open_file
+      ...     def __exit__(self, *args):
+      ...         self.open_file.close()
+      ...
+
+.. tip::
+
+   Vytvoř kontextový manažer z generátoru pomocí dekorátoru
+   ``contextmanager``::
+
+      >>> from contextlib import contextmanager
+      >>> @contextmanager
+      ... def open_file(filename, mode="r"):
+      ...     print("opening file")
+      ...     file = open(filename, mode)
+      ...     yield file
+      ...     print("closing file")
+      ...     file.close()
+      ...
+      >>> with open_file("test.txt") as file:
+      ...     print(file.read())
+      ...
+      opening file
+      test
+      closing file
+
+   Pokud nastane uvnitř ``with`` bloku výjimka, tak se nespustí závěrečný kód
+   za příkazem ``yield``::
+
+      >>> with open_file("test.txt") as file:
+      ...     print(file.read())
+      ...     assert 0
+      ...
+      opening file
+      test
+      Traceback (most recent call last):
+        File "<stdin>", line 3, in <module>
+      AssertionError
+
+   Pro ošetření exitového kódu je třeba použít konstrukci ``try/finally``::
+
+      >>> from contextlib import contextmanager
+      >>> @contextmanager
+      ... def open_file(filename, mode="r"):
+      ...     print("opening file")
+      ...     file = open(filename, mode)
+      ...     try:
+      ...         yield file
+      ...     finally:
+      ...         print("closing file")
+      ...         file.close()
+      ...
+      >>> with open_file("test.txt") as file:
+      ...     print(file.read())
+      ...     assert 0
+      ...
+      opening file
+      test
+      closing file
+      Traceback (most recent call last):
+        File "<stdin>", line 3, in <module>
+      AssertionError
+
+   Vytvoř hybridní kontextový manažer, který lze použít i jako dekorátor::
+
+      >>> import time
+      >>> from contexlib import ContextDecorator
+      >>> class timeit(ContextDecorator):
+      ...     def __enter__(self):
+      ...         self.start = time.time()
+      ...         return self
+      ...     def __exit__(self, *args):
+      ...         self.end = time.time()
+      ...         print(f"It took {self.end - self.start:.2f} seconds")
+      ...
+      >>> with timeit():
+      ...     time.sleep(1)
+      ...
+      It took 1.00 seconds
+      >>> @timeit()
+      ... def sleep(seconds):
+      ...     time.sleep(seconds)
+      ...
+      >>> sleep(3)
+      It took 3.00 seconds
+
 
 Dekorátory
 ----------
@@ -4098,10 +4235,13 @@ TODO
 * vlastní sekvence + její definice
 * callable objekt definice (__call__ metoda)
 * IO operace
-* kontextový manažer
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
+* abstraktní třídy (collections.abc.*), meta třídy
+* pokročilé datový typy z collections
+* reduce + functools
+* suppress u výjimek
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
