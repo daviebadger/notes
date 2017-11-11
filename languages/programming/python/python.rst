@@ -2078,6 +2078,45 @@ Zachyť více výjimek najednou::
 
    Konstrukci ``else`` lze vynechat a ponechat jen ``finally``.
 
+Potlačení výjimek
+^^^^^^^^^^^^^^^^^
+
+Potlač výjimku při smazání neexistujícího souboru::
+
+   >>> import os
+   >>> os.remove("dummy_file.txt")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   FileNotFoundError: [Errno 2] No such file or directory: 'dummy_file.txt'
+   >>> def delete_file(filename):
+   ...     try:
+   ...         os.remove(filename)
+   ...     except FileNotFoundError:
+   ...         pass
+   ...
+   >>> delete_file("dummy_file.txt")
+   >>>
+
+.. tip::
+
+   Potlač zkráceně výjimku::
+
+      >>> from contextlib import suppress
+      >>> delete_file(filename):
+      ...     with suppress(FileNotFoundError):
+      ...         os.remove(filename)
+      ...
+      >>> delete_file("dummy_file.txt")
+      >>>
+
+   Importováný kontextový manažer ``suppress`` umí potlačit i více výjimek
+   najednou::
+
+      >>> with suppress(IndexError, TypeError, ValueError):
+      ...     pass
+      ...
+      >>>
+
 Vyvolání výjimek
 ^^^^^^^^^^^^^^^^
 
@@ -2993,7 +3032,6 @@ zavře::
       ...
       >>> sleep(3)
       It took 3.00 seconds
-
 
 Dekorátory
 ----------
@@ -4241,7 +4279,6 @@ TODO
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datový typy z collections
 * reduce + functools
-* suppress u výjimek
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
