@@ -3120,6 +3120,31 @@ Vytvoř z metody read-only atribut (property)::
 staticmethod
 """"""""""""
 
+Vytvoř statickou metodu, která nepotřebuje pracovat s ``self`` objektem::
+
+   >>> class Dog(object):
+   ...     def __init__(name):
+   ...         self.name = name
+   ...     @staticmethod
+   ...     def bark():
+   ...         return "Woof! Woof!"
+   ...
+   >>> dog = Dog("Buddy")
+   >>> dog.bark()
+   'Woof! Woof!'
+
+.. note::
+
+   Statickou metodu lze volat i bez nutnosti vytvářoní instance třídy::
+
+      >>> class Dog(object):
+      ...     @staticmethod
+      ...     def bark():
+      ...         return "Woof! Woof!"
+      ...
+      >>> Dog.bark()
+      'Woof! Woof!'
+
 classmethod
 """""""""""
 
