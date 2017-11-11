@@ -3042,6 +3042,87 @@ Vlastní dekorátory
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
 
+property
+""""""""
+
+Vytvoř z metody read-only atribut (property)::
+
+   >>> class Person(object):
+   ...     def __init__(self, first_name, last_name):
+   ...         self.first_name = first_name
+   ...         self.last_name = last_name
+   ...     @property
+   ...     def full_name(self):
+   ...         return f"{self.first_name} {self.last_name}"
+   ...
+   >>> person = Person("Davie", "Badger")
+   >>> person.full_name
+   'Davie Badger'
+   >>> employee.full_name = "John Doe"
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: can't set attribute
+   >>> del employee.full_name
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: can't delete attribute
+
+.. tip::
+
+   Povol změnu a mázání property atributu::
+
+      >>> class Person(object):
+      ...     def __init__(self, first_name, last_name):
+      ...         self.first_name = first_name
+      ...         self.last_name = last_name
+      ...     @property
+      ...     def full_name(self):
+      ...         return f"{self.first_name} {self.last_name}"
+      ...     @full_name.setter
+      ...     def full_name(self, new_name):
+      ...         if not isinstance(new_name, str):
+      ...             raise ValueError(f"New name must be str, not '{value.__class__.__name__}'")
+      ...         self.first_name, self.last_name = new_name.split(" ")
+      ...     @full_name.deleter
+      ...     def full_name(self):
+      ...         del self.first_name, self.last_name
+      ...
+      >>> person = Person("Davie", "Badger")
+      >>> person.full_name
+      'Davie Badger'
+      >>> person.full_name = 1
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 11, in full_name
+      ValueError: New name must be str, not 'int'
+      >>> person.full_name = "John"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 12, in full_name
+      ValueError: not enough values to unpack (expected 2, got 1)
+      >>> person.full_name = "John John John"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 12, in full_name
+      ValueError: too many values to unpack (expected 2)
+      >>> person.full_name = "John Doe"
+      >>> person.first_name
+      'John'
+      >>> person.last_name
+      'Doe'
+      >>> del person.full_name
+      >>> person.full_name
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 7, in full_name
+      AttributeError: 'Person' object has no attribute 'first_name'
+
+staticmethod
+""""""""""""
+
+classmethod
+"""""""""""
+
 Základní datové typy
 ====================
 
@@ -4264,7 +4345,7 @@ nejznámější PEPy patří:
 
 2. `PEP 20`_
 
-   * filisofie pro psání kódu
+   * filosofie pro psání kódu
 
 TODO
 ====
@@ -4277,8 +4358,10 @@ TODO
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
-* pokročilé datový typy z collections
+* pokročilé datové typy z collections
 * reduce + functools
+* __slots__
+* srovnat property a descriptor
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
