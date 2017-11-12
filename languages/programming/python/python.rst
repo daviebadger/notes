@@ -3067,6 +3067,12 @@ Vytvoř z metody read-only atribut (property)::
      File "<stdin>", line 1, in <module>
    AttributeError: can't delete attribute
 
+.. note::
+
+   Read-only property atributy nejsou kešované v paměti. Pro náročnější
+   výpočetní operace je vhodnější použít metody, neboť u atributů se očekává
+   rychlý návrat hodnoty.
+
 .. tip::
 
    Povol změnu a mázání property atributu::
@@ -3147,6 +3153,53 @@ Vytvoř statickou metodu, která nepotřebuje pracovat s ``self`` objektem::
 
 classmethod
 """""""""""
+
+Vytvoř metodu, která bude pracovat se třídou, tak jak bylo definována a nikoliv
+její instancí::
+
+   >>> class Date(object):
+   ...     def __init__(self, day, month, year)
+   ...         self.day = day
+   ...         self.month = month
+   ...         self.year = year
+   ...     @classmethod
+   ...     def from_string(cls, date)
+   ...         day, month, year = map(int, date.split("-"))
+   ...         return cls(day, month, year)
+   ...
+   >>> date = Date.from_string("11-04-1995")
+   >>> date.day
+   11
+   >>> date.month
+   4
+   >>> date.year
+   1995
+
+.. note::
+
+   Pomocí ``cls`` objektu lze přistupovat i k defaultním atributům na třídě::
+
+      >>> class Point(object):
+      ...     x = 0
+      ...     y = 1
+      ...     @classmethod
+      ...     def origin_x(cls):
+      ...         return cls.x
+      ...     @classmethod
+      ...     def origin_y(cls):
+      ...         return cls.y
+      ...
+      >>> point = Point()
+      >>> point.x = 1
+      >>> point.y = 0
+      >>> point.x
+      1
+      >>> point.origin_x()
+      0
+      >>> point.y
+      0
+      >>> point.origin_y()
+      1
 
 Základní datové typy
 ====================
@@ -4387,6 +4440,7 @@ TODO
 * reduce + functools
 * __slots__
 * srovnat property a descriptor
+* dekorátory v stdlib
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
