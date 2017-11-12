@@ -3077,7 +3077,8 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
    ...         return cache[n]
    ...     return wrapper
    ...
-   >>> def recursive_fibonacci(n):
+   >>> @memoize
+   ... def recursive_fibonacci(n):
    ...     if n == 0:
    ...         return 0
    ...     elif n == 1:
@@ -3089,7 +3090,30 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
    1
    >>> recursive_fibonacci(10)
    55
-   >>> recursive_fibonacci(10)
+   >>> recursive_fibonacci(100)
+   354224848179261915075
+
+Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hodnotou::
+
+   >>> class memoize(object):
+   ...     def __init__(self, func):
+   ...         self.func = func
+   ...         self.cache = {}
+   ...     def __call__(self, n):
+   ...         if n not in self.cache:
+   ...             self.cache[n] = self.func(n)
+   ...         return self.cache[n]
+   ...
+   >>> @memoize
+   ... def recursive_fibonacci(n):
+   ...     if n == 0:
+   ...         return 0
+   ...     elif n == 1:
+   ...         return 1
+   ...     else:
+   ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
+   ...
+   >>> recursive_fibonacci(100)
    354224848179261915075
 
 .. note::
@@ -3119,6 +3143,20 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
       It took 1.00 seconds
       >>> sleep.__name__
       'sleep'
+
+   V případě dekorátoru pomocí třídy třeba použit v inicializační metodě
+   funkci ``update_wrapper`` z ``functools``::
+
+      >>> from functools import update_wrapper
+      >>> class memoize(object):
+      ...     def __init__(self, func):
+      ...         self.func = func
+      ...         self.cache = {}
+      ...         update_wrapper(self, func)
+      ...     def __call__(self, n):
+      ...         if n not in self.cache:
+      ...             self.cache[n] = self.func(n)
+      ...         return self.cache[n]
 
 .. tip::
 
@@ -4573,17 +4611,16 @@ TODO
 
 * deskriptory
 * vlastní sekvence + její definice
-* callable objekt definice (__call__ metoda)
 * IO operace
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
-* reduce + functools
+* reduce z functools
 * __slots__
 * srovnat property a descriptor
-* memoizace lru_cache
+* memoizace s lru_cache
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
