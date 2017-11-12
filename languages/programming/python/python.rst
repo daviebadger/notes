@@ -1037,7 +1037,7 @@ Vytvoř a zavolej vlastní funkci bez argumentů::
    ...     print("Hello")
    ...
    >>> say_hello()
-   Hi
+   Hello
 
 Vytvoř a zavolej vlastní funkci s povinným pozičním argumentem::
 
@@ -3039,6 +3039,149 @@ Dekorátory
 Vlastní dekorátory
 ^^^^^^^^^^^^^^^^^^
 
+Vytvoř a použij vlastní časovací dekorátor::
+
+   >>> import time
+   >>> def timeit(func):
+   ...     def wrapper(*args, **kwargs):
+   ...         start = time.time()
+   ...         func(*args, **kwargs)
+   ...         end = time.time()
+   ...         print(f"It took {end - start:.2f} seconds")
+   ...     return wrapper
+   ...
+   >>> def sleep(seconds):
+   ...     time.sleep(seconds)
+   ...
+   >>> sleep = timeit(sleep)
+   >>> sleep(1)
+   It took 1.00 seconds
+   >>> @timeit
+   ... def sleep(seconds):
+   ...     time.sleep(seconds)
+   ...
+   >>> sleep(1)
+   It took 1.00 seconds
+   >>> sleep.__name__  # should be 'sleep'
+   'wrapper'
+
+Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
+
+   >>> from functools import wraps
+   >>> def memoize(func):
+   ...     cache = {}
+   ...     @wraps(func)
+   ...     def wrapper(n):
+   ...         if n not in cache:
+   ...             cache[n] = func(n)
+   ...         return cache[n]
+   ...     return wrapper
+   ...
+   >>> def recursive_fibonacci(n):
+   ...     if n == 0:
+   ...         return 0
+   ...     elif n == 1:
+   ...         return 1
+   ...     else:
+   ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
+   ...
+   >>> recursive_fibonacci(1)
+   1
+   >>> recursive_fibonacci(10)
+   55
+   >>> recursive_fibonacci(10)
+   354224848179261915075
+
+.. note::
+
+   Při použití vlastního dekorátoru se změní název dekorované funkce v atributu
+   ``__name__`` a taktéž její dokumentace uchována v atributu ``__doc__``.
+
+   Tumuto přepisu lze zabránit pomocí dekorátoru ``wraps`` ze zabudované
+   knihovny ``functools``::
+
+      >>> import time
+      >>> from functools import wraps
+      >>> def timeit(func):
+      ...     @wraps(func)
+      ...     def wrapper(*args, **kwargs):
+      ...         start = time.time()
+      ...         func(*args, **kwargs)
+      ...         end = time.time()
+      ...         print(f"It took {end - start:.2f} seconds")
+      ...     return wrapper
+      ...
+      >>> @timeit
+      ... def sleep(seconds):
+      ...     time.sleep(seconds)
+      ...
+      >>> sleep(1)
+      It took 1.00 seconds
+      >>> sleep.__name__
+      'sleep'
+
+.. tip::
+
+   Vytvoř a použij dekorátor, který přijímá argumenty::
+
+      >>> import time
+      >>> from functools import wraps
+      >>> def logit(logfile):
+      ...     def decorator_wrapper(func):
+      ...         @wraps(func)
+      ...         def func_wrapper(*args, **kwargs):
+      ...             log = f"Calling function '{func.__name__}'"
+      ...             print(log)
+      ...             with open(logfile, "a") as file:
+      ...                 file.write(f"{log}\n")
+      ...             return func(*args, **kwargs)
+      ...         return func_wrapper
+      ...     return decorator_wrapper
+      ...
+      >>> def sleep(seconds):
+      ...     print("before sleep")
+      ...     time.sleep(seconds)
+      ...     print("after sleep")
+      >>> sleep = logit("test.log")(sleep)
+      >>> sleep(1)
+      Calling function 'sleep'
+      before sleep
+      after sleep
+      >>> @logit("test.log")
+      ... def sleep(seconds):
+      ...     print("before sleep")
+      ...     time.sleep(seconds)
+      ...     print("after sleep")
+      ...
+      >>> sleep(1)
+      Calling function 'sleep'
+      before sleep
+      after sleep
+
+Odbočka k řetězení dekorátorů
+"""""""""""""""""""""""""""""
+
+Dekorátory lze řetězit za sebou::
+
+   >>> def bold(func):
+   ...     @wraps(func)
+   ...     def wrapper(*args, **kwargs):
+   ...         return f"<b>{func(*args, **kwargs)}</b>"
+   ...     return wrapper
+   ...
+   >>> def italic(func):
+   ...     @wraps(func)
+   ...     def wrapper(*args, **kwargs):
+   ...         return f"<i>{func(*args, **kwargs)}</i>"
+   ...     return wrapper
+   >>> @bold
+   ... @italic
+   ... def say_hello():
+   ...     return "Hello"
+   ...
+   >>> say_hello()
+   '<b><i>Hello</i></b>'
+
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -4440,7 +4583,7 @@ TODO
 * reduce + functools
 * __slots__
 * srovnat property a descriptor
-* dekorátory v stdlib
+* memoizace lru_cache
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
