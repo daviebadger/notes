@@ -127,21 +127,6 @@ Ovládání příkazového řádku
 Šipkami nahoru a dolu lze procházet historii použitých příkazů. Nahoru dále
 do minulosti a dolu zpátky do přítomnosti.
 
-.. tip::
-
-   Historii lze také zobrazit příkazem ``history``::
-
-      $ history
-          1  ahoj
-          2  man
-          3  man --help
-
-   Příkazům je vždy přiřazeno číslo podle pořádí, ve kterém byly spušteny od
-   začátku používání příkazového řádku. Pokud chci spustit znovu nějaký příkaz
-   z historie, mohu napsat::
-
-      $ !2
-
 Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje příkaz
 ``exit``::
 
@@ -156,14 +141,46 @@ Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje p
    Může se jednat o kopírování a vkládání textu (klasické ``CTRL + C`` a
    ``CTRL + V`` nefunguje), zobrazení více oken terminálu najednou atd.
 
+.. tip::
+
+   Historii příkazů lze také zobrazit příkazem ``history``::
+
+      $ history
+          1  ahoj
+          2  man
+          3  man --help
+
+   Příkazům je vždy přiřazeno číslo podle pořádí, ve kterém byly spušteny od
+   začátku používání příkazového řádku. Pokud chci spustit znovu nějaký příkaz
+   z historie, mohu napsat::
+
+      $ !2
+
+   Dále lze zpětně z historie vyhledat příkaz pomocí klávesové zkrátky
+   ``CTRL + r``, která zobrazí reverzní vyhledávač::
+
+      (reverse-i-search)``:
+
+   Do vyhledávače stačí napsat část příkazu, dokud vyhledávač nenajde nějakou
+   shodu::
+
+      (reverse-i-search)`hist`: history
+
+   Pokud nalezený příkaz není ten pravý, je třeba více rozepsat příkaz do
+   vyhledávače nebo jej ukončit pomocí klávesové zkratky ``CTRL + c`` a příkaz
+   napsat explicitně.
+
+   Naopak, jestliže vyhledávač příkaz našel, stačí stisknout klávesu ``ENTER``
+   pro spuštění nalezeného příkazu.
+
 Příkazy
 =======
 
 .. note::
 
-   Některé příkazy níže jsou dostupné dostupné ve všech operačních systémech
-   vycházejích z Unixu, jiné jen v Linuxu a jiné jen v konkrétní Linuxové
-   větvi či distribuci (Ubuntu).
+   Některé příkazy níže jsou dostupné ve všech operačních systémech vycházejích
+   z Unixu, jiné jen v Linuxu a jiné jen v konkrétní Linuxové distribuci
+   (např. Ubuntu).
 
    Samotné Bash příkazy lze zobrazit příkazem ``help``::
 
@@ -1015,7 +1032,7 @@ grep -n
 
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text spolu s čísly řádků::
 
-   $ grep Bash bash.rst
+   $ grep -n Bash bash.rst
    2: Bash
 
 grep -i
@@ -1024,7 +1041,7 @@ grep -i
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
 a velká písmena::
 
-   $ grep bAsH bash.rst
+   $ grep -i bAsH bash.rst
    Bash
    BASH
 
@@ -1108,7 +1125,6 @@ find
 Vyhledej všechny soubory v nějakém adresáři včetně jeho vnořených adresářů::
 
    $ find ~
-   $ find ~ | wc -l
 
 .. note::
 
@@ -1116,7 +1132,7 @@ Vyhledej všechny soubory v nějakém adresáři včetně jeho vnořených adres
    errory, aby se nenarušoval standardní výstup, pokud je někdě problém s
    oprávněním::
 
-      $ find / 2> /dev/null | wc -l
+      $ find / 2> /dev/null
 
 find -type
 """"""""""
@@ -1145,7 +1161,7 @@ Vyhledej jen ty soubory, které odpovídájí danému jménu (patternu)::
 .. note::
 
    Při používání zástupných znaků je vhodné vždy celý pattern zaobalit do
-   uvozovek, aby se příkaz ``find`` choval podle naše očekování.
+   uvozovek, aby se příkaz ``find`` choval podle očekování.
 
 find -size
 """"""""""
@@ -1234,7 +1250,7 @@ Zkompresuj pomaleji, ale lépe nějaký soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
-   $ gzip bash.rst
+   $ bzip2 bash.rst
    $ ls -lh
    -rw-r--r-- 1 davie davie 9,4K kvě  6 19:46 bash.rst.bz2
 
@@ -1250,7 +1266,7 @@ Dekompresuj zkompresovaný ``.bz2`` soubor::
 
    $ ls -lh
    -rw-r--r-- 1 davie davie 9,4K kvě  6 19:46 bash.rst.bz2
-   $ gunzip bash.rst.gz
+   $ bunzip2 bash.rst.gz
    $ ls -lh
    -rw-r--r-- 1 davie davie  30K kvě  6 19:46 bash.rst
 
@@ -1270,11 +1286,11 @@ Legenda:
 =====  ======
 Volba  Význam
 =====  ======
-c      vytvoří archív
+c      vytvoř archív
 f      archív jako soubor
 j      bzip2 komprese / dekomprese
-t      zobrazí obsah archívu
-x      rozbalí archív
+t      zobraz obsah archívu
+x      rozbal archív
 z      gzip komprese / dekomprese
 =====  ======
 
@@ -1311,7 +1327,7 @@ Vlastnictví a oprávnění k souborům
 chmod
 ^^^^^
 
-Zmeň práva k souboru či adresáři::
+Změn práva k souboru či adresáři::
 
    $ ls -l
    -rw-rw-r-- 1 davie davie     0 kvě  7 14:28 file.txt
@@ -1336,17 +1352,17 @@ Práva k souborům obecně jsou rozdělena postupně do tří skupin:
 
 Každá tato skupinu může mít přidělena následující práva:
 
-* r (váha 4)
+* ``r`` (váha 4)
 
-  * možnost otevřít soubor a přecíst jeho obsah
+  * možnost otevřít soubor a přečíst jeho obsah
   * v případě adresáře možnost zobrazit obsah adresáře
 
-* w (váha 2)
+* ``w`` (váha 2)
 
   * možnost provést změny v souboru
   * v případě adresáře možnost vytvářet soubory, přejmenovávat je či mazat
 
-* x (váha 1)
+* ``x`` (váha 1)
 
   * možnost spustit soubor jako program, pokud má požadovanou hlavičku
     (shebang)::
@@ -1364,10 +1380,10 @@ Každá tato skupinu může mít přidělena následující práva:
 Kromě vah lze práva měnit i slovním způsobem. U skupin se používá toto
 pojmenování:
 
-* u (uživatel)
-* g (skupina)
-* o (ostatní)
-* a (všichni)
+* ``u`` (uživatel)
+* ``g`` (skupina)
+* ``o`` (ostatní)
+* ``a`` (všichni)
 
 Ukázky:
 
@@ -1475,7 +1491,7 @@ ps -u
 """""
 
 Zobraz seznam všech procesů, které uživatel sám spustil, s podrobnějšími
-informaci::
+informacemi::
 
    $ ps -u
    USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
@@ -1595,7 +1611,6 @@ bg n
 Přesuň na pozadí Ntý job::
 
    $ bg 1
-
 
 kill
 ^^^^
@@ -2083,21 +2098,21 @@ Kurzor
 
 * ``CTRL + a``
 
-  * skočí na začátek řádku::
+  * skoč na začátek řádku::
 
        $ ls -l
          <-----
 
 * ``CTRL + e``
 
-  * skočí na konec řádku::
+  * skoč na konec řádku::
 
        $ ls -l
          ----->
 
 * ``ALT + f``
 
-  * skočí doprava o jedno slovo::
+  * skoč doprava o jedno slovo::
 
        $ ls --all --reverse
          -->
@@ -2106,7 +2121,7 @@ Kurzor
 
 * ``ALT + b``
 
-  * skočí doleva o jedno slovo::
+  * skoč doleva o jedno slovo::
 
        $ ls --all --reverse
                     <-------
@@ -2121,7 +2136,7 @@ Záměna textu
 
 * ``CTRL + t``
 
-  * zamění písmenko v místě kurzoru s předchozím::
+  * zaměn písmenko v místě kurzoru s předchozím::
 
        $ ls
          <--
@@ -2129,7 +2144,7 @@ Záměna textu
 
 * ``ALT + t``
 
-  * zamění slovo v místě kurzoru s předchozím::
+  * zaměn slovo v místě kurzoru s předchozím::
 
        $ ls -l
          <-----
@@ -2137,7 +2152,7 @@ Záměna textu
 
 * ``ALT + l``
 
-  * zamění znaky od kurzoru po konec slova na malá písmena::
+  * zaměn znaky od kurzoru po konec slova na malá písmena::
 
        $ ls --REVERSE
            ---------->
@@ -2145,7 +2160,7 @@ Záměna textu
 
 * ``ALT + u``
 
-  * zamění znaky od kurzoru po konec slova na velká písmena::
+  * zaměn znaky od kurzoru po konec slova na velká písmena::
 
        $ ls --all
            ------>
@@ -2211,7 +2226,7 @@ Kontrola procesů
 
 * ``CTRL + c``
 
-  * ukončí daný proces::
+  * ukonči daný proces::
 
        $ ping localhost
        PING localhost (127.0.0.1) 56(84) bytes of data.
@@ -2223,7 +2238,7 @@ Kontrola procesů
 
 * ``CTRL + z``
 
-  * pozastaví běh procesu::
+  * pozastav běh procesu::
 
        $ python3 -q
        >>>
@@ -2232,8 +2247,8 @@ Kontrola procesů
 
 * ``CTRL + d``
 
-  * ukončí shell, pokud je nějaký další otevřen (např. Python interpret) nebo
-    zavře samotný terminál
+  * ukonči shell, pokud je nějaký další otevřen (např. Python interpret) nebo
+    zavři samotný terminál
 
 Ostatní
 -------
@@ -2260,7 +2275,7 @@ Ostatní
 
 * ``CTRL + l``
 
-  * vyčístí obrazovku od předchozích příkazů a jejich výstupů
+  * vyčísti obrazovku od předchozích příkazů a jejich výstupů
   * stejného výsledku lze docílit příkazem::
 
        $ clear

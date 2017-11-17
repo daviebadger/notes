@@ -30,7 +30,7 @@ Bez Gitu::
 
    $ vimdiff file_a.txt file_b.txt file_c.txt
 
-S gitem po konfiguraci::
+S Gitem po konfiguraci::
 
    $ git difftool
    $ git mergetool
@@ -72,6 +72,10 @@ Rozbalení a zabalení nezměneného textu
 * ``zc``
 
   * zabal zpátky nezměnený text
+
+.. note::
+
+   Taktéž lze použít další příkazy pro foldování (práce se zabalenými texty).
 
 Fixování merge konfliktu
 ------------------------

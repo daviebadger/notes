@@ -35,19 +35,18 @@ Základní ovládání
 Otevření a zavření editoru
 --------------------------
 
-Vim se spustí stejnojmenným příkazem::
+Spusť Vim::
 
    $ vim
 
-Pro zavření Vimu je třeba napsat na klávesnici::
+Zavři spuštěný Vim::
 
    :q
 
 .. note::
 
-   Pokud se v editoru nedopatřením objevil nějaký nový text, tak je třeba pro
-   jistotu stisknout klávesu ``ESC`` a poté jej zavřít násilným způsobem (bez
-   uložení)::
+   Pokud nejde editor zavřít, je třeba stisknout klávesu ``ESC`` a poté jej
+   zavřít násilně příkazem:
 
       :q!
 
@@ -57,19 +56,19 @@ Odbočka k módům
 Ve Vimu jsou zavedené tzv. módy, pomocí kterých se editor patřičně ovládá. Ty
 nejzákladnější jsou:
 
-1. Normal
+1. ``Normal``
 
    * výchozí stav po spuštení Vimu
    * slouží pro navigaci v textu nebo pro přepínání na jiný mód, přičemž z
      jiného módu se zpátky na Normal mód přepne pomocí klávesy ``ESC``
 
-2. Insert
+2. ``Insert``
 
    * mód pro vkládání textu do souboru
    * zapne se zpravidla stisknutím písmenka ``i``, po kterém lze začít
      psát či editovat text
 
-3. Command-line
+3. ``Command-line``
 
    * mód pro ovládání editoru jako takového pomocí příkazů
    * editor se ovládá z příkazového řádku, který se objeví po stisknutí
@@ -410,6 +409,12 @@ Skok na konkrétní znak na řádku
   * skoč dozadu na první výskyt daného znaku
   * taktéž lze použít ``;`` a ``,``, akorát chování je obráceně
 
+.. tip::
+
+   Skoč na 80tý sloupec / znak na řádku, existuje-li, jinak na poslední znak::
+
+      80|
+
 Skok na další výskyt slova v souboru
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -530,10 +535,6 @@ Je-li třeba zároveň i odřádkovat:
       9ix + ESC
       xxxxxxxxx
 
-   Stejného postupu lze docílit pomocí jednoho vložení písmenka ``x`` a pak
-   v Normal módu napst ``8.``, kdy se ještě 8x vloží písmenko ``x``. Tečka
-   ``.`` zopakuje předchozí akci.
-
 Editace textu
 =============
 
@@ -640,12 +641,12 @@ Mazání po řádku
 
    Pomocí ``J`` lze spojit aktuální a spodní řádek do jednoho řádku, pričemž
    mezi ně se automaticky vloží mezera. Přes ``gJ`` se tyto řádky spojí bez
-   mezery.
+   mezery, avšak je respektováno možné odsazení spodního řádku.
 
 Mazání vymezené části textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Stiskem ``x`` nebo ``d`` při označeném textu ve Visual módu, viz níže.
+Stiskem ``x`` nebo ``d`` při označeném textu ve Visual módu.
 
 Odbočka k Visual módu
 """""""""""""""""""""
@@ -1088,7 +1089,7 @@ Přecházení mezi záložkami
 
 * číslo + ``gt``
 
-  * přeni se na danou záložku (čísluje se od jedničky)
+  * přepni se na danou záložku (čísluje se od jedničky)
 
 * ``:tabfir``
 
@@ -1179,7 +1180,7 @@ Vytvoření a ukončení makra
 .. tip::
 
    Pokud se před ukončení nahrávání příkazu stiskne ještě ``@`` + písmeno, tak
-   se po exekuci makra opět zavolá rekurzivně exekuce daného makra.
+   se po exekuci makra opět zavolá rekurzivně dané makro.
 
 Exekuce makra
 ^^^^^^^^^^^^^
@@ -1380,9 +1381,7 @@ Pluginy
 -------
 
 Pluginy rozšířují Vim o další funkcionalitu a vychytávky. Pro správu pluginů
-je vhodné použít nějaký manažer, např. Vim Plug:
-
-https://github.com/junegunn/vim-plug
+je vhodné použít nějaký manažer, např. `Vim Plug`_:
 
 Tento manažer se stáhne příkazem::
 
@@ -1415,3 +1414,5 @@ pracovat následujícimi způsoby:
 * ``:PlugClean``
 
   * odstraň zdrojové soubory pro smazané pluginy z konfiguračního souboru
+
+.. _Vim Plug: https://github.com/junegunn/vim-plug

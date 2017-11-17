@@ -28,25 +28,23 @@ Základní ovládání
 Nastavení
 ---------
 
-Nezbytné pro běh Gitu.
-
 config
 ^^^^^^
-
-Zobraz nebo nastav nastavení Gitu.
 
 config --global
 """""""""""""""
 
-Nastav globálně identitu uživatele (povinné)::
+Nastav globálně identitu uživatele pro všechny repozitáře::
 
    $ git config --global user.name "Davie Badger"
    $ git config --global user.email "davie.badger@gmail.com"
 
 .. note::
 
-   Bez použítí volby ``--global`` bude nastavení platné jenom v daném
-   repozitáři.
+   Bez použítí volby ``--global`` bude nastavení platné jen v daném
+   repozitáři::
+
+      $ git config user.name "Davie Badger"
 
 config --list
 """""""""""""
@@ -71,14 +69,16 @@ Zobraz lokální nastavení Gitu::
       user.name=Davie Badger
       user.email=davie.badger@gmail.com
 
-Globální nastavení se ukládá do souboru ``~/.gitignore`` a lokální v rootu
-repozitáře v ``.git/config``.
+   Globální nastavení se ukládá do souboru ``~/.gitconfig`` a lokální v rootu
+   repozitáře v ``.git/config``.
 
 .. tip::
 
    Zobraz jen konkrétní nastavení::
 
       $ git config user.name
+      Davie Badger
+      $ git config --global user.name
       Davie Badger
 
 config --unset
@@ -92,7 +92,8 @@ Zruš dané nastavení::
 
 .. note::
 
-   Stejného výsledku lze docílit smazáním příslušného řádku v ``~/.gitconfig``.
+   Stejného výsledku lze docílit smazáním příslušného řádku v ``~/.gitconfig``,
+   respektive ``.git/config``.
 
 Vytvoření repozitáře
 --------------------
@@ -113,14 +114,14 @@ Vytvoř Git repozitář v novém adresáři::
 
    Při vytvoření repozitáře vznikne skrytý ``.git/`` adresář, kam se ukládájí
    informace o repozitáři. Při smazání tohoto adresáře dojde k zániku Gitu,
-   avšak soubory a adresáři zůstanou.
+   avšak soubory a adresáře zůstanou.
 
 clone
 ^^^^^
 
 Zkopíruj odněkud již existující repozitář::
 
-   $ git https://daviebadger@gitlab.com/daviebadger/notes.git
+   $ git clone https://daviebadger@gitlab.com/daviebadger/notes.git
    $ ls
    notes
    $ cd notes
@@ -136,9 +137,11 @@ Zkopíruj odněkud již existující repozitář::
 .. tip::
 
    Zkopíruj existující repozitář do aktuálního pracovní adresáře bez vytvoření
-   stejnojmenné složky::
+   stejnojmenného adresáře::
 
       $ git clone https://daviebadger@gitlab.com/daviebadger/notes.git .
+      $ ls
+      editor  languages  README.rst  shell  terminal  vcs
 
 Zaznamenávání změn v repozitáři
 -------------------------------
@@ -172,9 +175,9 @@ Odbočka ke stavům souborů
 
 Soubory v repozitářích se mohou nacházet v následujících stavech:
 
-* Untracked
+* ``Untracked``
 
-  * nový soubor, který není v předchozím snímku repozitáře a v aktuální stavu
+  * nový soubor, který není v předchozím snímku repozitáře a v aktuálním stavu
     repozitáře není ještě sledován Gitem::
 
        $ ls
@@ -191,12 +194,12 @@ Soubory v repozitářích se mohou nacházet v následujících stavech:
 
        nothing added to commit but untracked files present (use "git add" to track)
 
-* Unmodified
+* ``Unmodified``
 
   * soubor je sledován Gitem a nachází se v předchozím snímku repozitáře, ale
     od té doby se nezměnil jeho obsah
 
-* Modified
+* ``Modified``
 
   * soubor se nachází v předchozím snímku, ale v aktuálním stavu repozitáře
     došlo k jeho modifikaci (změna obsahu souboru, přejmenování, smazání atd.),
@@ -204,7 +207,7 @@ Soubory v repozitářích se mohou nacházet v následujících stavech:
   * taktéž se jedná o soubor, kde byla zaznamenána modifikace, ale v daném
     souboru došlo ještě k další modifikaci, která už není zaznamenána
 
-* Staged
+* ``Staged``
 
   * soubor, který je zaznamenán včetně jeho modifikace a je připraven pro
     uložení stavu (vytvoření snímku)::
@@ -259,7 +262,7 @@ kromě prázdných adresářů. Tomuto chování lze zabránit pomocí souboru
 
    !file.txt
 
-   # ignoruj všechny složky s daným názvem
+   # ignoruj všechny adresáře s daným názvem
 
    __pycache__/
 
@@ -306,7 +309,7 @@ Zobraz rozdíly v souborech::
    zároveň u nich existuje poslední zaznamenána změna nebo snímek, aby vůbec
    bylo možné nějaké rozdíly zobrazit.
 
-Zobraz rozdíl jen u konkrétních složek::
+Zobraz rozdíl jen u konkrétních adresářů::
 
    $ git diff dir/
 
@@ -339,7 +342,7 @@ Zobraz rozdíly u těch souborů, které jsou ve ``Staged`` módu::
 diff HEAD
 """""""""
 
-Zobraz rozdíly nezáležijích na stavu souborů::
+Zobraz rozdíly nezáležicích na stavu souborů::
 
    $ git diff HEAD
 
@@ -524,8 +527,8 @@ Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive na
 
 .. note::
 
-   Pro změnu stavu z ``Modified`` na ``Unmodified`` (dojde k trvalému zahození
-   změn) je třeba použít jiný příkaz a to ``git checkout --``::
+   Pro změnu stavu z ``Modified`` na ``Unmodified`` je třeba použít jiný příkaz
+   a to ``git checkout --``, při kterém však dojde k trvalému zahození změn::
 
       $ cat new.txt
       $ git add new.txt
@@ -560,7 +563,7 @@ Odstraň všechny commity až po nějaký commit::
 reset --hard
 """"""""""""
 
-Odstraň poslední commit a trvale smaž soubory v daném commitu::
+Odstraň poslední commit a trvale smaž změny v souborech v daném commitu::
 
    $ git reset --hard HEAD~
 
@@ -695,7 +698,6 @@ Zobraz jen Ntý počet commitů::
    Date:   Sun May 21 19:56:34 2017 +0200
 
        Remove file.txt from Git
-   $
 
 log -p
 """"""
@@ -731,8 +733,8 @@ Zobraz u historie commitů i přehled souborů, které se změnily::
 log --oneline
 """""""""""""
 
-Zobraz jednořádkově historii commitů, kde jsou jen hashe commitů (ID) a
-předměty commitů::
+Zobraz jednořádkově historii commitů, kde jsou jen zkrácené hashe commitů (ID)
+a předměty commitů::
 
    $ git log --oneline
    3cdddbb Add new.txt
@@ -764,7 +766,7 @@ Volba  Význam
 .. note::
 
    Se zkráceným hashi commitů lze dále pracovat v ostatních Git příkazech, kde
-   je třeba znát odkaz na konkrétní commit (jeho ID).
+   je třeba znát odkaz na konkrétní commit, respektive jeho ID.
 
 log --folow
 """""""""""
@@ -825,8 +827,8 @@ Zobraz jen ty commity, které byly vytvořeny po daném datu::
 
 .. note::
 
-   Volby ``--before`` a ``--after`` jdou zkombinovat pro vytvoření rozsahu
-   od - do.
+   Volby ``--before`` a ``--after`` lze zkombinovat pro vytvoření rozsahu od
+   do.
 
 show
 ^^^^
@@ -879,9 +881,8 @@ Vytvoř nový tag::
 
    $ git tag -a v0.2.0
 
-Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoří
-zprávy popisující tag. Otevření editoru lze taktéž přeskočit přes volbu
-``-m``::
+Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoření zprávy
+popisující tag. Otevření editoru lze taktéž přeskočit přes volbu ``-m``::
 
    $ git tag -a v0.2.0 -m "v0.2.0"
 
@@ -922,17 +923,17 @@ následující tvar::
 
    MAJOR.MINOR.PATCH
 
-* MAJOR
+* ``MAJOR``
 
   * číslo hlavní verze, kde změny nejsou zpětně kompatibilní z předešlou
     hlavní verzí
 
-* MINOR
+* ``MINOR``
 
   * číslo vedlejší verze, kde při zachování zpětné kompatibility došlo k
     přídání další funkcionality
 
-* PATCH
+* ``PATCH``
 
   * číslo aktualizační (záplatové) verze, kde došlo zejména k opravám chyb nebo
     taky k vylepšení algoritmů (zrychlení běhu programu) při zachování zpětné
@@ -950,7 +951,7 @@ tvar::
 
    MAJOR.MINOR.PATCH-alpha|beta|rc[.číslo]
 
-* alpha
+* ``alpha``
 
   * zmražení vývoje nových funkcionalit, začátek testování softwaru od
     samotných vývojářů::
@@ -959,7 +960,7 @@ tvar::
        0.3.0-alpha.1
        0.3.0-alpha.2
 
-* beta
+* ``beta``
 
   * začátek testování softwaru ze strany uživatelů::
 
@@ -967,7 +968,7 @@ tvar::
        0.3.0-beta.1
        0.3.0-beta.2
 
-* rc
+* ``rc``
 
   * konec testování a opravování kódu, pokud se nevyskytne nějaká závažnější
     chyba::
@@ -1049,9 +1050,9 @@ Pomocí větví lze separovat kód pro vývoj nových funkcionalit nebo pro opra
 chyb, aniž by se nějak narušoval funkční kód. Větve umí automaticky vytvořit
 kopii kódu, tudíž není třeba spravovat archívy nebo opouštět pracovní adresář.
 
-Každý repozitář vždy začíná na větví zvane ``master``, od které lze odbočit
-do jiné větve něco vyvinout nebo opravit a pak se vrátit zprátky. Tuto
-odbočenou větev lze pak sloučit do ``master`` větve, aby se sjednotil kód.
+Každý repozitář vždy začíná na větví zvané ``master``, od které lze odbočit
+do jiné větve něco vyvinout nebo opravit a pak se vrátit zpátky. Tuto odbočenou
+větev lze pak sloučit do ``master`` větve, aby se sjednotil kód.
 
 ::
 
@@ -1161,7 +1162,7 @@ Smaž danou větev::
 
 .. note::
 
-   Git může odmítnout smazání dané větve, neboť ještě nebyla mergnuta do jiné
+   Git může odmítnout smazání dané větve, pokud ještě nebyla mergnuta do jiné
    větve. Pro násilné smázání této větve je třeba použít ``-D`` volbu::
 
       $ git branch -D <jméno_větve>
@@ -1194,7 +1195,7 @@ Přepni se předchozí větev::
 
 .. tip::
 
-   Daná větev při vytvoření vždy zdědi commity z větve, ze které byla
+   Daná větev při vytvoření vždy zdědí commity z větve, ze které byla
    vytvořena, což je zpravidla ``master`` větev. Pokud chci vidět jenom nové
    commity, mohu použít volbu ``--not`` u ``git log`` příkazu::
 
@@ -1350,8 +1351,8 @@ Sluč obsah aktuální větve s nějakou jinou větví::
 Odbočka ke konfliktům
 """""""""""""""""""""
 
-Při slučování větví může dojít ke konfliktu, neboť se obou větví změnil
-soubor(y) a Git neví, které verza je ta správná::
+Při slučování větví může dojít ke konfliktu, neboť se v obou větví změnil
+soubor(y) a Git neví, která verze je ta správná::
 
    $ git init
    $ echo hello > hello.txt
@@ -1376,9 +1377,9 @@ Každý konfliktní soubor bude mít v sobě následující značky::
    davie
    >>>>>>> update-hello
 
-Mezi značkou ``<<<<<<< HEAD`` a ``=======`` se nachází verze souboru v aktální
+Mezi značkou ``<<<<<<< HEAD`` a ``=======`` se nachází verze souboru v aktuální
 větvi. Mezi ``=======`` a ``>>>>>>> update-hello`` pak verze z dané větve. Z
-těchto dvou variant je třeba vybrat tu, které má zůstat a zbytek smazat včetně
+těchto dvou variant je třeba vybrat tu, která má zůstat a zbytek smazat včetně
 značek.
 
 .. note::
@@ -1459,9 +1460,9 @@ Odbočka ke vzdáleným repozitářům
 """"""""""""""""""""""""""""""""
 
 Repozitáře nemusí existovat jen lokálně, ale mohou být taky na nějakém Git
-serveru, kam můžou mít uživatelé přístup.
+serveru, kam mohou mít uživatelé přístup.
 
-Vzdálené repozitáře slouží jako centrální místo, odkud si uživatele tahají
+Vzdálené repozitáře slouží jako centrální místo, odkud si uživatelé tahají
 veškeré změny nebo naopak je tam nahrávájí. Vedle toho jsou vhodné i pro
 zálohování kódu.
 

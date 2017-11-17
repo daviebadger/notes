@@ -23,11 +23,11 @@ Obecné
 
 * ``F11``
 
-  * zobrazí Tilix přes celou obrazovku nebo také zavře toto zobrazení
+  * zobraz Tilix přes celou obrazovku nebo také ukonči toto zobrazení
 
 * ``CTRL + SHIFT + n``
 
-  * otevře další Tilix
+  * otevři další Tilix
 
 Kopírování a vkládání textu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -63,11 +63,11 @@ Otevření nového okna
 
 * ``CTRL + ALT + d``
 
-  * otevře dole další okno terminálu
+  * otevři dole další okno terminálu
 
 * ``CTRL + ALT + r``
 
-  * otevře vpravo další okno terminálu
+  * otevři vpravo další okno terminálu
 
 Přepínaní mezi okny
 ^^^^^^^^^^^^^^^^^^^
@@ -123,11 +123,11 @@ Zobrazení session přehledu
 
 * ``F12``
 
-  * zobrazí v bočním panelu přehled a náhled všech otevřených session
+  * zobraz v bočním panelu přehled a náhled všech otevřených session
 
 * ``CTRL + ALT + p``
 
-  * zobrazí přepínač otevřených a zavřených (uložených) session
+  * zobraz přepínač otevřených a zavřených (uložených) session
 
 Přepínání mezi session
 ^^^^^^^^^^^^^^^^^^^^^^
