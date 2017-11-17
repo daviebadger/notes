@@ -1786,6 +1786,51 @@ Seznam již existujících funkcí::
       with open("new_file.txt", mode="w") as file:
           file.write("Hello World!")
 
+Odbočka k reduce funkci
+"""""""""""""""""""""""
+
+Vedle zabudovaných funcí ``map`` a ``filter`` existuje ještě funkce ``reduce``
+ze standardní knihovny ``functools``, která postupně provádí operace nad
+každou další položkou z ``iterable`` s výsledkem předchozích dvou položek::
+
+   >>> from functools import reduce
+   >>> numbers = range(1, 6)
+   >>> # reduce(function, iterable, initializer=None)
+   ...
+   >>> # reduce like sum
+   ... reduce(lambda x, y: x + y, numbers)
+   15
+   >>> # reduce like max
+   ... reduce(lambda x, y: x if x > y else y, numbers)
+   5
+   >>> # reduce like min
+   ... reduce(lambda x, y: x if x < y else y, numbers)
+   1
+   >>> reduce(lambda x, y: x * y, numbers)
+   120
+
+.. note::
+
+   Pokud je ``iterable`` prázdný, tak se vyvolá typový error::
+
+      >>> reduce(lambda x, y: x + y, [])
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: reduce() of empty sequence with no initial value
+
+   Pro zamezení typové chyby je třeba použít výchozí hodnotu::
+
+      >>> reduce(lambda x, y: x + y, [], 0)
+      0
+
+   Avšak pokud není ``iterable`` prázdný a výchozí hodnota je nastavena,
+   tak výchozí hodnota se bere jako první položka v ``iterable``::
+
+      >>> reduce(lambda x, y: x + y, [1], 1)
+      2
+      >>> reduce(lambda x, y: x + y, [1])
+      1
+
 Importování
 -----------
 
@@ -4634,13 +4679,11 @@ TODO
 
 * deskriptory
 * vlastní sekvence + její definice
-* IO operace
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
-* reduce z functools
 * __slots__
 * srovnat property a descriptor
 
