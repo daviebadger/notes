@@ -2384,6 +2384,24 @@ Vytvoř instanci třídy::
       >>> dir(Point)
       ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'x', 'y']
 
+   Pokud je funkce ``dir`` použíta v globálním jmenném prostoru ve skriptu,
+   tak vrací více objektů oprotí shellu, hlavně magickou proměnnou
+   ``__file__``, která vrací název skriptu::
+
+      # print(dir())
+
+      ['__annotations__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__']
+
+      # print(__file__)
+
+      "test.py"
+
+      # import os
+      # print(os.path.abspath(__file__))
+
+      "/home/davie/test.py"
+
+
    Pro zjištení objektů ve jmenném prostoru a jejich hodnot lze použít
    zabudované funkce ``globals`` a ``locals``::
 
@@ -4672,13 +4690,37 @@ nejznámější PEPy patří:
 
 2. `PEP 20`_
 
-   * filosofie pro psání kódu
+   * filosofie pro psání kódu::
+
+        >>> import this
+        The Zen of Python, by Tim Peters
+
+        Beautiful is better than ugly.
+        Explicit is better than implicit.
+        Simple is better than complex.
+        Complex is better than complicated.
+        Flat is better than nested.
+        Sparse is better than dense.
+        Readability counts.
+        Special cases aren't special enough to break the rules.
+        Although practicality beats purity.
+        Errors should never pass silently.
+        Unless explicitly silenced.
+        In the face of ambiguity, refuse the temptation to guess.
+        There should be one-- and preferably only one --obvious way to do it.
+        Although that way may not be obvious at first unless you're Dutch.
+        Now is better than never.
+        Although never is often better than *right* now.
+        If the implementation is hard to explain, it's a bad idea.
+        If the implementation is easy to explain, it may be a good idea.
+        Namespaces are one honking great idea -- let's do more of those!
 
 TODO
 ====
 
 * deskriptory
 * vlastní sekvence + její definice
+* IO operace (metody, file objekt)
 * global a nonlocal
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
@@ -4686,6 +4728,10 @@ TODO
 * pokročilé datové typy z collections
 * __slots__
 * srovnat property a descriptor
+* itertools
+* operator (např. mul do reduce)
+* funktory
+* dispatch funkcí podle argumentů namísto klasických podmínek a returnů
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
