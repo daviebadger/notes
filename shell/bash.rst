@@ -127,21 +127,6 @@ Ovládání příkazového řádku
 Šipkami nahoru a dolu lze procházet historii použitých příkazů. Nahoru dále
 do minulosti a dolu zpátky do přítomnosti.
 
-.. tip::
-
-   Historii lze také zobrazit příkazem ``history``::
-
-      $ history
-          1  ahoj
-          2  man
-          3  man --help
-
-   Příkazům je vždy přiřazeno číslo podle pořádí, ve kterém byly spušteny od
-   začátku používání příkazového řádku. Pokud chci spustit znovu nějaký příkaz
-   z historie, mohu napsat::
-
-      $ !2
-
 Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje příkaz
 ``exit``::
 
@@ -155,6 +140,38 @@ Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje p
    Pak ještě existují další klávesové zkratky, které používá samotný terminál.
    Může se jednat o kopírování a vkládání textu (klasické ``CTRL + C`` a
    ``CTRL + V`` nefunguje), zobrazení více oken terminálu najednou atd.
+
+.. tip::
+
+   Historii příkazů lze také zobrazit příkazem ``history``::
+
+      $ history
+          1  ahoj
+          2  man
+          3  man --help
+
+   Příkazům je vždy přiřazeno číslo podle pořádí, ve kterém byly spušteny od
+   začátku používání příkazového řádku. Pokud chci spustit znovu nějaký příkaz
+   z historie, mohu napsat::
+
+      $ !2
+
+   Dále lze zpětně z historie vyhledat příkaz pomocí klávesové zkrátky
+   ``CTRL + r``, která zobrazí reverzní vyhledávač::
+
+      (reverse-i-search)``:
+
+   Do vyhledávače stačí napsat část příkazu, dokud vyhledávač nenajde nějakou
+   shodu::
+
+      (reverse-i-search)`hist`: history
+
+   Pokud nalezený příkaz není ten pravý, je třeba více rozepsat příkaz do
+   vyhledávače nebo jej ukončit pomocí klávesové zkratky ``CTRL + c`` a příkaz
+   napsat explicitně.
+
+   Naopak, jestliže vyhledávač příkaz našel, stačí stisknout klávesu ``ENTER``
+   pro spuštění nalezeného příkazu.
 
 Příkazy
 =======
