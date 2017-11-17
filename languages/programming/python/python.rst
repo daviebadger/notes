@@ -3079,10 +3079,8 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
    ...
    >>> @memoize
    ... def recursive_fibonacci(n):
-   ...     if n == 0:
-   ...         return 0
-   ...     elif n == 1:
-   ...         return 1
+   ...     if n in (0, 1):
+   ...         return n
    ...     else:
    ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
    ...
@@ -3106,10 +3104,8 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
    ...
    >>> @memoize
    ... def recursive_fibonacci(n):
-   ...     if n == 0:
-   ...         return 0
-   ...     elif n == 1:
-   ...         return 1
+   ...     if n in (0, 1):
+   ...         return n
    ...     else:
    ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
    ...
@@ -3195,6 +3191,33 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
       Calling function 'sleep'
       before sleep
       after sleep
+
+Odbočka k memoizaci
+"""""""""""""""""""
+
+Pokud se funkce často volá se stejnými argumenty, lze použit memoizaci pro
+kešování výsledků. Kromě vlastní implementace memoizace lze použit i dekorátor
+``lru_cache`` z ``functools`` knihovny::
+
+   >>> from functools import lru_cache
+   >>> @lru_cache(maxsize=None)
+   ... def recursive_fibonacci(n):
+   ...     if n in (0, 1):
+   ...         return n
+   ...     return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
+   ...
+   >>> [recursive_fibonacci(n) for n in range(10)]
+   [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+   >>> recursive_fibonacci.cache_info()
+   CacheInfo(hits=16, misses=10, maxsize=None, currsize=10)
+   >>> recursive_fibonacci.cache_clear()
+   >>> recursive_fibonacci.cache_info()
+   CacheInfo(hits=0, misses=0, maxsize=None, currsize=0)
+
+.. note::
+
+   Maximální pamět může být neomezená (``None``) nebo nejlepé omezená s
+   mocninami dvojky (2, 4, 8, 16, 32, 64, 128, 256 atd.).
 
 Odbočka k řetězení dekorátorů
 """""""""""""""""""""""""""""
@@ -4620,7 +4643,6 @@ TODO
 * reduce z functools
 * __slots__
 * srovnat property a descriptor
-* memoizace s lru_cache
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
