@@ -1085,7 +1085,7 @@ Vytvoř a zavolej vlastní funkci s neomezeným počtem pozičních argumentů::
    >>> def sum_numbers(1, 2, 3)
    6
 
-Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů::
+Vytvoř a zavolej vlastní funkci s neomezeným počtem klíčových argumentů::
 
    >>> person = {
    ...     "name": "Davie Badger",
@@ -1101,6 +1101,41 @@ Vytvoř a zavolej vlastní Funkci s neomezeným počtem volitelných argumentů:
    >>> person_details(name="Davie Badger", age=22)
    name - Davie Badger
    age - 22
+   >>> person_details("Davie Badger", 22)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: person_details() takes 0 positional arguments but 2 were given
+
+Vytvoř a zavolej vlastní funkci s povinným pozičním a klíčovým argumentem::
+
+   >>> def say_hello(name, *, repeat):
+   ...     for _ in range(repeat)
+   ...         print(f"Hello {name}")
+   ...
+   >>> say_hello("Davie")
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: say_hello() missing 1 required keyword-only argument: 'repeat'
+   >>> say_hello("Davie", 3)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: say_hello() takes 1 positional argument but 2 were given
+   >>> say_hello("Davie", repeat=3)
+   Hello Davie
+   Hello Davie
+   Hello Davie
+
+Vytvoř a zavolej vlastní funkci s povinnými klíčovými argumenty::
+
+   >>> def person_details(*, name, age):
+   ...     print(f"{name}, {age}")
+   ...
+   >>> person_details("Davie Badger", 22)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: person_details() takes 0 positional arguments but 2 were given
+   >>> person_details(name="Davie Badger", age=22)
+   Davie Badger, 22
 
 .. note::
 
@@ -2401,7 +2436,6 @@ Vytvoř instanci třídy::
 
       "/home/davie/test.py"
 
-
    Pro zjištení objektů ve jmenném prostoru a jejich hodnot lze použít
    zabudované funkce ``globals`` a ``locals``::
 
@@ -3224,16 +3258,16 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
       >>> import time
       >>> from functools import wraps
       >>> def logit(logfile):
-      ...     def decorator_wrapper(func):
+      ...     def decorator(func):
       ...         @wraps(func)
-      ...         def func_wrapper(*args, **kwargs):
+      ...         def wrapper(*args, **kwargs):
       ...             log = f"Calling function '{func.__name__}'"
       ...             print(log)
       ...             with open(logfile, "a") as file:
       ...                 file.write(f"{log}\n")
       ...             return func(*args, **kwargs)
-      ...         return func_wrapper
-      ...     return decorator_wrapper
+      ...         return wrapper
+      ...     return wrapper
       ...
       >>> def sleep(seconds):
       ...     print("before sleep")
@@ -4732,6 +4766,14 @@ TODO
 * operator (např. mul do reduce)
 * funktory
 * dispatch funkcí podle argumentů namísto klasických podmínek a returnů
+* nested unpacking
+* coroutine (generátor s voláním metod jako consumer dat)
+* __new__ (konstruktor)
+
+::
+
+   def __radd__(self, other):
+       return self.__add__(other)
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
