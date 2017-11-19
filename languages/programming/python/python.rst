@@ -2991,6 +2991,16 @@ Vytvoř generátor, respektive iterátor z funkce::
         File "<stdin>", line 1, in <module>
       StopIteration
 
+   Pokud je iterace u konce (iterátor je prázdný), lze ``StopIteration`` error
+   potlačit pomocí výchozí hodnoty v zabudované funkci ``next``::
+
+      >>> next(iter([]))
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      StopIteration
+      >>> next(iter([]), None)
+      >>>
+
 .. tip::
 
    Vytvoř jednorázový generátor pomocí jednořádkového cyklu ``for`` uvnitř
@@ -4788,18 +4798,15 @@ TODO
 
 * deskriptory (lazy / cached property)
 * vlastní sekvence
-* IO operace (metody, file objekt)
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
 * __slots__ (immutable)
 * itertools
-* dispatch funkcí podle argumentů namísto klasických podmínek a returnů
 * nested unpacking
 * coroutine (generátor s voláním metod jako consumer dat)
 * __new__ (konstruktor)
-* potlačení StopIteration u next
 
 ::
 
