@@ -2498,7 +2498,8 @@ Vytvoř atributy na instanci::
    False
    >>> delattr(point, "y")
 
-Vytvoř defaultní atributy, které budou stejné u každé vzniklé instance::
+Vytvoř defaultní atributy (proměnné na třídě), které budou stejné u každé
+vzniklé instance::
 
    >>> class Point(object):
    ...     x = 0
@@ -2546,6 +2547,56 @@ Vytvoř defaultní atributy, které budou stejné u každé vzniklé instance::
 
    Objekty, které začínájí na podtržítko slouží pro interní potřebu programu a
    tudíž nejsou součásti veřejné API (dokumentace aj.).
+
+Odbočka ke speciální __slots__ proměnné na třídě
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+Pomocí proměnné ``__slots__`` na třídě lze striktně definovat, jaké atributy
+mohou existovat, čímž lze ušetřit na paměti, je-li v programu velké množství
+instancí::
+
+   >>> class Point(object):
+   ...     __slots__ = ["x", "y"]
+   ...     def __init__(self, x, y):
+   ...        self.x = x
+   ...        self.y = y
+   ...
+   >>> point = Point(0, 1)
+   >>> point.x
+   0
+   >>> point.y
+   1
+   >>> point.z = 2
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: 'Point' object has no attribute 'z'
+   >>> point.x = 1
+   >>> point.x
+   1
+
+.. note::
+
+   Pří použítí proměnné ``__slots__`` pak nelze použít uvedené atributy jako
+   další proměnné na třídě pro definovaní defaultních hodnot::
+
+      >>> class Point(object):
+      ...     __slots__ = ["x", "y"]
+      ...     x = 0
+      ...     y = 1
+      ...
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      ValueError: 'x' in __slots__ conflicts with class variable
+
+.. tip::
+
+   Pro správnou funkčnost proměnné ``__slots__`` je třeba ji mít definovanou
+   na třídě a každě další zdědené třídě, kde je třeba uvést jen nové atributy,
+   aby došlo ke kýženému výsledku.
+
+   Pokud není tato situace řádně ošetřena, k žádnému šetření paměti nedojde
+   a na instanci půjde přidávat další nové atributy, neboť bude přítomný
+   speciální atribut ``__dict__``, což je slovník atributů a jejich hodnot.
 
 Metody
 ^^^^^^
@@ -2617,6 +2668,23 @@ Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
    >>> a.distance_from_point(b)
    4.242640687119285
 
+Vytvoř normální metody, které lze řetězit za sebou::
+
+   >>> class Account(object):
+   ...     def __init__(self, balance=0):
+   ...         self.balance = balance
+   ...     def deposit(self, amount):
+   ...         self.balance += amount
+   ...         return self
+   ...     def withdraw(self, amount):
+   ...         self.balance -= amount
+   ...         return self
+   ...
+   >>> account = Account(100)
+   >>> account.withdraw(50).deposit(25).withdraw(75)
+   >>> account.balance
+   0
+
 .. note::
 
    U každé metody je nutné zpravidla definovat počateční parametr ``self``, do
@@ -2663,32 +2731,6 @@ Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
       ['sit']
       >>> b.tricks
       ['down']
-
-Odbočka k řetězení metod
-""""""""""""""""""""""""
-
-Pokud metoda vrací objekt a ten má metody k volání, tak lze tyto metody volat
-hned po zavolání předchozí metody::
-
-   >>> class Account(object):
-   ...     def __init__(self, balance=0):
-   ...         self.balance = balance
-   ...     def deposit(self, amount):
-   ...         self.balance += amount
-   ...         return self
-   ...     def withdraw(self, amount):
-   ...         self.balance -= amount
-   ...         return self
-   ...
-   >>> account = Account(100)
-   >>> account.withdraw(50).deposit(25).withdraw(75)
-   >>> account.balance
-   0
-
-.. note::
-
-   Pokud atribut obsahuje jiný objekt s atributy, tak lze také řetezit
-   atributy stejně jako metody.
 
 Odbočka k reprezentaci objektu
 """"""""""""""""""""""""""""""
@@ -3204,7 +3246,7 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
    ...
    >>> @memoize
    ... def recursive_fibonacci(n):
-   ...     if n in (0, 1):
+   ...     if n in [0, 1]:
    ...         return n
    ...     else:
    ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
@@ -3229,7 +3271,7 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
    ...
    >>> @memoize
    ... def recursive_fibonacci(n):
-   ...     if n in (0, 1):
+   ...     if n in [0, 1]:
    ...         return n
    ...     else:
    ...         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
@@ -3367,7 +3409,7 @@ kešování výsledků. Kromě vlastní implementace memoizace lze použit i dek
    >>> from functools import lru_cache
    >>> @lru_cache(maxsize=None)
    ... def recursive_fibonacci(n):
-   ...     if n in (0, 1):
+   ...     if n in [0, 1]:
    ...         return n
    ...     return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
    ...
@@ -4815,10 +4857,9 @@ TODO
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
-* __slots__ (immutable)
 * itertools
 * coroutine (generátor s voláním metod jako consumer dat)
-* __new__ (konstruktor)
+* ostatní magické metody, např. __new__ (konstruktor)
 
 ::
 
