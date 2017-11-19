@@ -3209,6 +3209,25 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
    >>> recursive_fibonacci(100)
    354224848179261915075
 
+Vytvoř a použij několik dekorátorů za sebou::
+
+   >>> def bold(func):
+   ...     def wrapper(*args, **kwargs):
+   ...         return f"<b>{func(*args, **kwargs)}</b>"
+   ...     return wrapper
+   ...
+   >>> def italic(func):
+   ...     def wrapper(*args, **kwargs):
+   ...         return f"<i>{func(*args, **kwargs)}</i>"
+   ...     return wrapper
+   >>> @bold
+   ... @italic
+   ... def say_hello():
+   ...     return "Hello"
+   ...
+   >>> say_hello()
+   '<b><i>Hello</i></b>'
+
 .. note::
 
    Při použití vlastního dekorátoru se změní název dekorované funkce v atributu
@@ -3237,7 +3256,7 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
       >>> sleep.__name__
       'sleep'
 
-   V případě dekorátoru pomocí třídy třeba použit v inicializační metodě
+   V případě dekorátoru pomocí třídy je třeba použit v inicializační metodě
    funkci ``update_wrapper`` z ``functools``::
 
       >>> from functools import update_wrapper
@@ -3250,6 +3269,27 @@ Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hod
       ...         if n not in self.cache:
       ...             self.cache[n] = self.func(n)
       ...         return self.cache[n]
+
+   V obou případech má dekorovaná funkce magický atribut ``__wrapped__``, ve
+   kterém je ukryta původní funkce bez dekorátorů::
+
+      >>> from functools import wraps
+      ... def verbose(func):
+      ...     @wraps(func)
+      ...     def wrapper(*args, **kwargs):
+      ...         print("before function call")
+      ...         return func(*args, **kwargs)
+      ...     return wrapper
+      ...
+      >>> @verbose
+      ... def add(x, y):
+      ...     return x + y
+      ...
+      >>> add(1, 1)
+      before function call
+      2
+      >>> add.__wrapped__(1, 1)
+      2
 
 .. tip::
 
@@ -3315,30 +3355,6 @@ kešování výsledků. Kromě vlastní implementace memoizace lze použit i dek
 
    Maximální pamět může být neomezená (``None``) nebo nejlepé omezená s
    mocninami dvojky (2, 4, 8, 16, 32, 64, 128, 256 atd.).
-
-Odbočka k řetězení dekorátorů
-"""""""""""""""""""""""""""""
-
-Dekorátory lze řetězit za sebou::
-
-   >>> def bold(func):
-   ...     @wraps(func)
-   ...     def wrapper(*args, **kwargs):
-   ...         return f"<b>{func(*args, **kwargs)}</b>"
-   ...     return wrapper
-   ...
-   >>> def italic(func):
-   ...     @wraps(func)
-   ...     def wrapper(*args, **kwargs):
-   ...         return f"<i>{func(*args, **kwargs)}</i>"
-   ...     return wrapper
-   >>> @bold
-   ... @italic
-   ... def say_hello():
-   ...     return "Hello"
-   ...
-   >>> say_hello()
-   '<b><i>Hello</i></b>'
 
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
@@ -4752,7 +4768,7 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* deskriptory
+* deskriptory (lazy / cached property)
 * vlastní sekvence + její definice
 * IO operace (metody, file objekt)
 * global a nonlocal
@@ -4760,11 +4776,10 @@ TODO
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
-* __slots__
+* __slots__ (immutable)
 * srovnat property a descriptor
 * itertools
 * operator (např. mul do reduce)
-* funktory
 * dispatch funkcí podle argumentů namísto klasických podmínek a returnů
 * nested unpacking
 * coroutine (generátor s voláním metod jako consumer dat)
