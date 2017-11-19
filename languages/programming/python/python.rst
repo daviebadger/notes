@@ -4171,7 +4171,7 @@ Vytvoření n-tic
 
 .. tip::
 
-   N-tice a další sekvence lze extrahovat do proměnných::
+   N-tice a další sekvence lze rozbalit do proměnných::
 
       >>> x, y, z = (1, 2, 3)
       >>> x
@@ -4187,6 +4187,15 @@ Vytvoření n-tic
       [1, 2, 3, 4, 5, 6, 7, 8, 9]
       >>> last
       10
+
+   Rozbalit lze i z vnořených sekvencí pomocí n-tic::
+
+      >>> x, (y, z) = [1, [2, 3]]
+      >>> print(x, y, z)
+      1 2 3
+      >>> x, (y, (z,)) = [1, [2, [3]]]
+      >>> print(x, y, z)
+      1 2 3
 
 Operace s n-ticemi
 ^^^^^^^^^^^^^^^^^^
@@ -4654,6 +4663,10 @@ Metody slovníků
        True
        >>> list(y)
        [('age', 22)]
+       >>> for key, value in x.items():
+       ...     print(f"Key: {key}, Value: {value}")
+       ...
+       Key: age, Value: 22
 
 * ``.keys()``
 
@@ -4804,7 +4817,6 @@ TODO
 * pokročilé datové typy z collections
 * __slots__ (immutable)
 * itertools
-* nested unpacking
 * coroutine (generátor s voláním metod jako consumer dat)
 * __new__ (konstruktor)
 
