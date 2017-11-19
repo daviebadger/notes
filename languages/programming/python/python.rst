@@ -1848,6 +1848,7 @@ každou další položkou z ``iterable`` s výsledkem předchozích dvou polože
 
    Pokud je ``iterable`` prázdný, tak se vyvolá typový error::
 
+      >>> from functools import reduce
       >>> reduce(lambda x, y: x + y, [])
       Traceback (most recent call last):
         File "<stdin>", line 1, in <module>
@@ -1855,16 +1856,34 @@ každou další položkou z ``iterable`` s výsledkem předchozích dvou polože
 
    Pro zamezení typové chyby je třeba použít výchozí hodnotu::
 
+      >>> from functools import reduce
       >>> reduce(lambda x, y: x + y, [], 0)
       0
 
    Avšak pokud není ``iterable`` prázdný a výchozí hodnota je nastavena,
    tak výchozí hodnota se bere jako první položka v ``iterable``::
 
+      >>> from functools import reduce
       >>> reduce(lambda x, y: x + y, [1], 1)
       2
       >>> reduce(lambda x, y: x + y, [1])
       1
+
+.. tip::
+
+   Místo nečitelných lambda funkcí lze použít čitelné funkce ze zabudované
+   knihovny ``operator``, které jsou ekvivalentem operací s operátory::
+
+      >>> from functools import reduce
+      >>> from operator import add, sub, mul, truediv
+      >>> reduce(add, [1, 2, 3])
+      6
+      >>> reduce(sub, [3, 2, 1])
+      0
+      >>> reduce(mul, [1, 1, 1])
+      1
+      >>> reduce(truediv, [6, 3, 2, 1])
+      1.0
 
 Importování
 -----------
@@ -2447,7 +2466,6 @@ Vytvoř instanci třídy::
       ...
       >>> function()
       {'y': 1, 'x': 0}
-
 
    Pokud je funkce ``locals`` spuštěna v globálním jmenném prostoru, budu se
    chovat stejně jako funkce ``globals``.
@@ -4769,21 +4787,19 @@ TODO
 ====
 
 * deskriptory (lazy / cached property)
-* vlastní sekvence + její definice
+* vlastní sekvence
 * IO operace (metody, file objekt)
-* global a nonlocal
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*), meta třídy
 * pokročilé datové typy z collections
 * __slots__ (immutable)
-* srovnat property a descriptor
 * itertools
-* operator (např. mul do reduce)
 * dispatch funkcí podle argumentů namísto klasických podmínek a returnů
 * nested unpacking
 * coroutine (generátor s voláním metod jako consumer dat)
 * __new__ (konstruktor)
+* potlačení StopIteration u next
 
 ::
 
