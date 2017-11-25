@@ -34,9 +34,9 @@ Ovládání
 Zobrazení okna
 --------------
 
-* ``:TagbarToggle``
+* ``:TagbarOpenAutoClose``
 
-  * otevři nebo zavři Tagbar okno
+  * otevři a skoč do Tagbar okna
 
 Ovládání okna
 -------------
@@ -87,7 +87,7 @@ Konfigurace
 
 ::
 
-   nnoremap <F2> :TagbarToggle<CR>
+   nnoremap <F2> :TagbarOpenAutoClose<CR>
 
 .. note::
 

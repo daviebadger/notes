@@ -1712,15 +1712,22 @@ Vyhledávání
 grep
 ^^^^
 
-Najdi v repozitáři určitý výraz napříč adresáři a soubory::
+Najdi v repozitáři určitý text napříč adresáři a soubory::
 
-   $ git grep git
+   $ git grep "git"
    vimrc:Plug 'tpope/vim-fugitive'
 
 .. note::
 
-   U grepu lze použít stejné volby ``-i`` a ``-n`` jako u Unixového ``grep``
-   příkazu.
+   U grepu lze použít stejné volby ``-i``, ``l`` nebo ``-n`` jako u
+   Unixového ``grep`` příkazu.
+
+.. tip::
+
+   Najdi text v souborech a nahraď je jiný textem pomocí stejného principu
+   jako ve Vimu::
+
+      $ git grep -l "git" | xargs sed -i "s/git/vcs/g"
 
 blame
 ^^^^^

@@ -1002,7 +1002,7 @@ grep
 
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
 
-   $ ls ~ | grep Doc
+   $ ls ~ | grep "Doc"
    Documents
 
 .. note::
@@ -1010,7 +1010,7 @@ Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
    ``grep`` příkaz lze použít i samostatně, nicméně je třeba mít nějaký
    soubor po ruce::
 
-      $ grep Bash bash.rst
+      $ grep "Bash" bash.rst
       Bash
 
 Odbočka k rourám
@@ -1032,7 +1032,7 @@ grep -n
 
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text spolu s čísly řádků::
 
-   $ grep -n Bash bash.rst
+   $ grep -n "Bash" bash.rst
    2: Bash
 
 grep -i
@@ -1041,9 +1041,34 @@ grep -i
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
 a velká písmena::
 
-   $ grep -i bAsH bash.rst
+   $ grep -i "bAsH" bash.rst
    Bash
    BASH
+
+grep -r
+"""""""
+
+Vyhledej text rekurzivně napříč adresářemi a soubory::
+
+   $ grep -r "foo"
+   a.txt:foo
+   a/a.txt:foo
+   a/a/a.txt:foo
+   $ grep -rl "foo"
+   a.txt
+   a/a.txt
+   a/a/a.txt
+   $ grep -r "foo" ~/test
+   /home/davie/test/a.txt:foo
+   /home/davie/test/a/a.txt:foo
+   /home/davie/test/a/a/a.txt:foo
+
+.. tip::
+
+   Nahraď text v nalezených souborech jiným textem pomocí stejného principu,
+   jako je Vimu::
+
+      $ grep -rl "foo" | xargs sed -i "/s/foo/bar/g"
 
 tee
 ^^^
@@ -1910,24 +1935,6 @@ sftp
 Ostatní příkazy
 ---------------
 
-date
-^^^^
-
-Zobraz aktuální čas a datum v počítači::
-
-   $ date
-   Ne kvě  7 18:14:05 CEST 2017
-
-Zobraz jen čas::
-
-   $ date +"%T"
-   18:15:14
-
-Zobraz jen datum ve formátu ``DD-MM-YYYY``::
-
-   $ date +"%d-%m-%y"
-   07-05-17
-
 cal
 ^^^
 
@@ -1950,6 +1957,50 @@ Zobraz kalendář pro tento rok::
 Zobraz kalendář pro konkrétní rok::
 
    $ cal -y 1995
+
+date
+^^^^
+
+Zobraz aktuální čas a datum v počítači::
+
+   $ date
+   Ne kvě  7 18:14:05 CEST 2017
+
+Zobraz jen čas::
+
+   $ date +"%T"
+   18:15:14
+
+Zobraz jen datum ve formátu ``DD-MM-YYYY``::
+
+   $ date +"%d-%m-%y"
+   07-05-17
+
+diff
+^^^^
+
+Zobraz rozdíly mezi soubory, jsou-li nějaké::
+
+   $ echo 0 > a.txt
+   $ echo 1 > b.txt
+   $ diff a.txt b.txt
+   1c1
+   < 0
+   ---
+   > 1
+   $ echo 0 > b.txt
+   $ diff a.txt b.txt
+   $
+
+diff -y
+"""""""
+
+Porovnej vedle sebe soubory::
+
+   $ diff -y a.txt b.txt
+   0                       0
+   $ echo 1 > b.txt
+   0                    |  1
 
 df -h
 ^^^^^
