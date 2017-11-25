@@ -1935,24 +1935,6 @@ sftp
 Ostatní příkazy
 ---------------
 
-date
-^^^^
-
-Zobraz aktuální čas a datum v počítači::
-
-   $ date
-   Ne kvě  7 18:14:05 CEST 2017
-
-Zobraz jen čas::
-
-   $ date +"%T"
-   18:15:14
-
-Zobraz jen datum ve formátu ``DD-MM-YYYY``::
-
-   $ date +"%d-%m-%y"
-   07-05-17
-
 cal
 ^^^
 
@@ -1975,6 +1957,50 @@ Zobraz kalendář pro tento rok::
 Zobraz kalendář pro konkrétní rok::
 
    $ cal -y 1995
+
+date
+^^^^
+
+Zobraz aktuální čas a datum v počítači::
+
+   $ date
+   Ne kvě  7 18:14:05 CEST 2017
+
+Zobraz jen čas::
+
+   $ date +"%T"
+   18:15:14
+
+Zobraz jen datum ve formátu ``DD-MM-YYYY``::
+
+   $ date +"%d-%m-%y"
+   07-05-17
+
+diff
+^^^^
+
+Zobraz rozdíly mezi soubory, jsou-li nějaké::
+
+   $ echo 0 > a.txt
+   $ echo 1 > b.txt
+   $ diff a.txt b.txt
+   1c1
+   < 0
+   ---
+   > 1
+   $ echo 0 > b.txt
+   $ diff a.txt b.txt
+   $
+
+diff -y
+"""""""
+
+Porovnej vedle sebe soubory::
+
+   $ diff -y a.txt b.txt
+   0                       0
+   $ echo 1 > b.txt
+   0                    |  1
 
 df -h
 ^^^^^
