@@ -3358,10 +3358,8 @@ Vytvoř a použij vlastní časovací dekorátor::
 
 Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
 
-   >>> from functools import wraps
    >>> def memoize(func):
    ...     cache = {}
-   ...     @wraps(func)
    ...     def wrapper(n):
    ...         if n not in cache:
    ...             cache[n] = func(n)
@@ -3381,6 +3379,25 @@ Vytvoř a použíj vlastní kešovací dekorátor s návratovou hodnotou::
    55
    >>> recursive_fibonacci(100)
    354224848179261915075
+
+Vytvoř a použij vlastní dekorátor pro počitání volání funkcí::
+
+   >>> def count(func):
+   ...     def wrapper(*args, **kwargs):
+   ...         wrapper.count += 1
+   ...         return func(*args, **kwargs)
+   ...     wrapper.count = 0
+   ...     return wrapper
+   ...
+   >>> @count
+   ... def nothing():
+   ...     pass
+   ...
+   >>> nothing()
+   >>> nothing()
+   >>> nothing()
+   >>> nothing.count
+   3
 
 Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hodnotou::
 
