@@ -3399,6 +3399,21 @@ Vytvoř a použij vlastní dekorátor pro počitání volání funkcí::
    >>> nothing.count
    3
 
+Vytvoř a použij vlastní dekorátor, který automaticky spustí kód při dekorování
+funkcí::
+
+   >>> decorated_functions = []
+   >>> def decorate(func):
+   ...     decorated_functions.append(func.__name__)
+   ...     return func
+   ...
+   >>> @decorate
+   ... def nothing():
+   ...     pass
+   ...
+   >>> decorated_functions
+   ['nothing']
+
 Vytvoř a použij vlastní kešovací dekorátor pomocí třídy s návratou hodnotou::
 
    >>> class memoize(object):
@@ -5069,7 +5084,6 @@ TODO
 * pokročilé datové typy z collections
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor)
-* dekorátory, kód před vnitřní funkcí v runtime
 * closures
 * partial, single_dispatch
 
