@@ -3578,61 +3578,130 @@ Vytvoř z metody read-only atribut (property)::
      File "<stdin>", line 1, in <module>
    AttributeError: can't delete attribute
 
+Použij property pro validaci vstupu, jako u deskriptoru::
+
+   >>> class Person(object):
+   ...     def __init__(self, name, age):
+   ...         self.name = name
+   ...         self.age = age
+   ...     @property
+   ...     def age(self):
+   ...         return self._age
+   ...     @age.setter
+   ...     def age(self, value):
+   ...         if value < 1:
+   ...             raise ValueError("age must be greater than zero")
+   ...         self._age = value
+   ...     @age.deleter
+   ...     def age(self):
+   ...         del self._age
+   ...
+   >>> p = Person("Davie", -1)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 4, in __init__
+     File "<stdin>", line 11, in age
+   ValueError: age must be greater than zero
+   >>> p = Person("Davie", 22)
+   >>> del p.age
+
 .. note::
 
-   Read-only property atributy nejsou kešované v paměti. Pro náročnější
-   výpočetní operace je vhodnější použít metody, neboť u atributů se očekává
-   rychlý návrat hodnoty.
+   Property dekorátor, ale i staticmethod nebo classmethod dekorátory jsou
+   abstrakci nad deskriptory.
 
 .. tip::
 
-   Povol změnu a mázání property atributu::
+   Vytvoř kešovanou verzi property atributu::
 
+      >>> from functools import update_wrapper
+      >>> class cached_property(object):
+      ...     def __init__(self, func):
+      ...         self.func = func
+      ...         update_wrapper(self, func)
+      ...     def __get__(self, instance, owner):
+      ...         if instance is not None:
+      ...             value = instance.__dict__[self.func.__name__] = self.func(instance)
+      ...             return value
+      ...         else:
+      ...             return self
+      ...
       >>> class Person(object):
       ...     def __init__(self, first_name, last_name):
       ...         self.first_name = first_name
       ...         self.last_name = last_name
-      ...     @property
+      ...     @cached_property
       ...     def full_name(self):
       ...         return f"{self.first_name} {self.last_name}"
-      ...     @full_name.setter
-      ...     def full_name(self, new_name):
-      ...         if not isinstance(new_name, str):
-      ...             raise ValueError(f"New name must be str, not '{value.__class__.__name__}'")
-      ...         self.first_name, self.last_name = new_name.split(" ")
-      ...     @full_name.deleter
-      ...     def full_name(self):
-      ...         del self.first_name, self.last_name
       ...
-      >>> person = Person("Davie", "Badger")
-      >>> person.full_name
+      >>> p = Person("Davie", "Badger")
+      >>> p.full_name
       'Davie Badger'
-      >>> person.full_name = 1
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-        File "<stdin>", line 11, in full_name
-      ValueError: New name must be str, not 'int'
-      >>> person.full_name = "John"
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-        File "<stdin>", line 12, in full_name
-      ValueError: not enough values to unpack (expected 2, got 1)
-      >>> person.full_name = "John John John"
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-        File "<stdin>", line 12, in full_name
-      ValueError: too many values to unpack (expected 2)
-      >>> person.full_name = "John Doe"
-      >>> person.first_name
-      'John'
-      >>> person.last_name
-      'Doe'
-      >>> del person.full_name
-      >>> person.full_name
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-        File "<stdin>", line 7, in full_name
-      AttributeError: 'Person' object has no attribute 'first_name'
+      >>> p.first_name = "Jacob"
+      >>> p.full_name
+      'Davie Badger'
+
+   Vytvoř kešovanou property s volitelnou možnosti nastavení délky keše
+   (defaultně neomezeno) a taktéž její smazaní::
+
+      >>> import time
+      >>> from functools import update_wrapper
+      >>> class cached_property(object):
+      ...     def __init__(self, ttl):
+      ...         if callable(ttl):  # ttl is not set
+      ...             func = ttl
+      ...             ttl = None
+      ...         else:
+      ...             func = None
+      ...         self.ttl = ttl
+      ...         self._set_func(func)
+      ...     def __call__(self, func):
+      ...         self._set_func(func)
+      ...         return self
+      ...     def __get__(self, instance, owner):
+      ...         if instance is None:
+      ...             return self
+      ...         now = time.time()
+      ...         name = self.__name__
+      ...         instance_dict = instance.__dict__
+      ...         if name in instance_dict:
+      ...             value, last_update = instance_dict[name]
+      ...             ttl_expired = self.ttl < (now - last_update) if self.ttl is not None else False
+      ...             if not ttl_expired:
+      ...                 return value
+      ...         value = self.func(instance)
+      ...         instance_dict[name] = (value, now)
+      ...         return value
+      ...     def __set__(self, instance, value):
+      ...         raise AttributeError(f"can't set {self.__name__}")
+      ...     def __delete__(self, instance):
+      ...         instance.__dict__.pop(self.__name__, None)
+      ...     def _set_func(self, func):
+      ...         self.func = func
+      ...         if self.func is not None:
+      ...             update_wrapper(self, func)
+      ...
+      >>> class Person(object):
+      ...     def __init__(self, first_name, last_name):
+      ...         self.first_name = first_name
+      ...         self.last_name = last_name
+      ...     @cached_property(10)  # seconds
+      ...     def full_name(self):
+      ...         return f"{self.first_name} {self.last_name}"
+      ...
+      >>> p = Person("Davie", "Badger")
+      >>> p.full_name
+      'Davie Badger'
+      >>> p.first_name = "Jacob"
+      >>> p.full_name
+      'Davie Badger'
+      >>> time.sleep(10)
+      >>> p.full_name
+      'Jacob Badger'
+      >>> del p.full_name
+      >>> p.first_name = "Davie"
+      >>> p.full_name
+      'Davie Badger'
 
 staticmethod
 """"""""""""
@@ -4975,7 +5044,6 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* deskriptory (lazy / cached property)
 * vlastní sekvence
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
