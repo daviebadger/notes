@@ -2893,6 +2893,130 @@ Zděd třídu a přepiš původní chování metody::
       >>> employee.salary.net_salary()
       800
 
+
+Modifikace tříd
+---------------
+
+Deskriptory
+^^^^^^^^^^^
+
+Vytvoř deskriptor pro validaci vstupních hodnot při inicializaci objektu::
+
+   >>> class NonNegativeInteger(object):
+   ...     def __init__(self, name):
+   ...         self.name = name
+   ...     def __set__(self, instance, value):
+   ...         if value < 1:
+   ...             raise ValueError(f"{self.name} must be greater than zero")
+   ...         instance.__dict__[self.name] = value
+   ...     def __delete__(self, instance):
+   ...         del instance.__dict__[self.name]
+   >>> class Person(object):
+   ...     age = NonNegativeInteger("age")
+   ...     def __init__(self, name, age):
+   ...         self.name = name
+   ...         self.age = age
+   >>> p = Person("Davie", 0)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 5, in __init__
+     File "<stdin>", line 8, in __set__
+   ValueError: age must be greater than zero
+   >>> p = Person("Davie", 22)
+   >>> p.age
+   22
+   >>> del p.age
+   >>> p.age
+   <__main__.NonNegativeInteger object at 0x7f322588a160>
+
+.. note::
+
+   Pokud je vynechána metoda ``__delete__`` na deskriptoru, tak daný atribut
+   na instanci nepůjde smazat::
+
+      >>> class NonNegativeInteger(object):
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...     def __set__(self, instance, value):
+      ...         if value < 1:
+      ...             raise ValueError(f"{self.name} must be greater than zero")
+      ...         instance.__dict__[self.name] = value
+      >>> class Person(object):
+      ...     age = NonNegativeInteger("age")
+      ...     def __init__(self, name, age):
+      ...         self.name = name
+      ...         self.age = age
+      >>> p = Person("Davie", 22)
+      >>> p.age
+      22
+      >>> del p.age
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 5, in __init__
+      AttributeError: __delete__
+
+   Stejný princip nastane v případě, bude-li chybět metoda ``__set__``.
+
+   Deskriptory zpravidla obsahují jen ``__get__`` metodu (nedatový deskriptor)
+   nebo ``__get__`` a ``__set__``, respektive i ``__delete__`` (datový
+   deskriptor)::
+
+      >>> class FullName(object):
+      ...     def __get__(self, instance, owner):
+      ...         if instance is not None:
+      ...             return f"{instance.first_name} {instance.last_name}"
+      ...         else:
+      ...             return self
+      ...     def __set__(self, instance, value):
+      ...         raise AttributeError("can't set attribute")
+      >>> class Person(object):
+      ...     full_name = FullName()
+      ...     def __init__(self, first_name, last_name):
+      ...         self.first_name = first_name
+      ...         self.last_name = last_name
+      >>> p = Person
+      >>> p.full_name
+      <__main__.FullName object at 0x7f322589ac50>
+      >>> p = Person("Davie", "Badger")
+      >>> p.full_name
+      'Davie Badger'
+      >>> p.full_name = "Jacob Badger"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 8, in __set__
+      AttributeError: can't set attribute
+
+.. tip::
+
+   Od verze Python verze 3.6 již není třeba posílat název atributu do
+   deskriptoru::
+
+      >>> class Gender(object):
+      ...     def __init__(self, options):
+      ...         self.options = options
+      ...     def __get__(self, instance, owner):
+      ...         if instance is not None:
+      ...             return instance.__dict__[self.name]
+      ...         else:
+      ...             return self
+      ...     def __set__(self, instance, value):
+      ...         if value not in self.options:
+      ...             raise ValueError(f"{self.name} must be one of {self.options}")
+      ...         instance.__dict__[self.name] = value
+      ...     def __set_name__(self, owner, name):
+      ...         self.name = name
+      >>> class Person(object):
+      ...     gender = Gender(["M", "F"])
+      ...     def __init__(self, name, gender):
+      ...         self.name = name
+      ...         self.gender = gender
+      >>> p = Person("Davie", "male")
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 5, in __init__
+        File "<stdin>", line 8, in __set__
+      ValueError: gender must be one of ['M', 'F']
+
 Datové modely
 -------------
 
@@ -4627,17 +4751,17 @@ Operace se slovníky
    2
    >>> person["name"]
    'Davie Badger'
-   >>> person["sex"] = "male"
+   >>> person["gender"] = "male"
    >>> person
-   {'name': 'Davie Badger', 'age': 22, 'sex': 'male'}
-   >>> del person["sex"]
-   >>> del person["sex"]
+   {'name': 'Davie Badger', 'age': 22, 'gender': 'male'}
+   >>> del person["gender"]
+   >>> del person["gender"]
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-   KeyError: 'sex'
+   KeyError: 'gender'
    >>> "name" in person
    True
-   >>> "sex" not in person
+   >>> "gender" not in person
    True
 
 .. note::
@@ -4690,7 +4814,7 @@ Metody slovníků
        22
        >>> x.get("age", 23)
        22
-       >>> x.get("sex", "male")
+       >>> x.get("gender", "male")
        'male'
 
 * ``.items()``
@@ -4763,9 +4887,9 @@ Metody slovníků
        >>> x = {"age": 22}
        >>> x.setdefault("age")
        22
-       >>> x.setdefault("sex", "male")
+       >>> x.setdefault("gender", "male")
        >>> x
-       {'age': 22, 'sex': 'male'}
+       {'age': 22, 'gender': 'male'}
 
 * ``.update(other)``
 
@@ -4781,9 +4905,9 @@ Metody slovníků
        >>> x.update(zip(["age"], [23]))
        >>> x
        {'age': 23}
-       >>> x.update(sex="male")
+       >>> x.update(gender="male")
        >>> x
-       {'age': 23, sex: "male"}
+       {'age': 23, gender: "male"}
 
 * ``.values()``
 
@@ -4855,11 +4979,14 @@ TODO
 * vlastní sekvence
 * NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
-* abstraktní třídy (collections.abc.*), meta třídy
+* abstraktní třídy (collections.abc.*)
+* meta třídy
 * pokročilé datové typy z collections
 * itertools
-* coroutine (generátor s voláním metod jako consumer dat)
 * ostatní magické metody, např. __new__ (konstruktor)
+* dekorátory, kód před vnitřní funkcí v runtime
+* closures
+* partial, single_dispatch
 
 ::
 
