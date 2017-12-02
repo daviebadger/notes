@@ -488,10 +488,17 @@ Aritmetické
 
 * dělení:
 
-  * beze zbytku (``/``)::
+  * klasické (``/``)::
 
        >>> 2 / 1  # Division always returns a floating point number
        2.0
+
+  * celočíselné (``//``)::
+
+       >>> 2 // 1
+       2
+       >>> 3 // 2
+       1
 
   * zbytek po dělení (``%``)::
 
@@ -532,6 +539,7 @@ Aritmetické
    * ``-=``
    * ``*=``
    * ``/=``
+   * ``//=``
    * ``%=``
    * ``**=``
 
@@ -2822,6 +2830,8 @@ Zděd třídu a přidej navíc metodu::
    True
    >>> isinstance(dog, Pet)
    True
+   >>> isinstance(dog, (Dog, Pet))
+   True
    >>> issubclass(Dog, Pet)
 
 Zděd třídu a uprav inicializační metodu pro příjem dalších argumentů::
@@ -3263,6 +3273,188 @@ Vytvoř generátor, respektive iterátor z funkce::
 
 Sekvence
 ^^^^^^^^
+
+Čísla
+^^^^^
+
+Vytvoř číselný objekt s podporou pro základní aritmetické operace::
+
+   >>> class Number(object):
+   ...     def __init__(self, value):
+   ...         self._value = value
+   ...     def __add__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value + other._value)
+   ...         return Number(self._value + other)
+   ...     def __sub__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value - other._value)
+   ...         return Number(self._value - other)
+   ...     def __mul__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value * other._value)
+   ...         return Number(self._value * other)
+   ...     def __truediv__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value / other._value)
+   ...         return Number(self._value / other)
+   ...     def __floordiv__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value // other._value)
+   ...         return Number(self._value // other)
+   ...     def __mod__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value % other._value)
+   ...         return Number(self._value % other)
+   ...     def __divmod__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return divmod(self._value, other._value)
+   ...         return divmod(self._value, other)
+   ...     def __pow__(self, other):
+   ...         if isinstance(other, Number):
+   ...             return Number(self._value ** other._value)
+   ...         return Number(self._value ** other)
+   ...     def __repr__(self):
+   ...         return f"<Number {self._value}>"
+   ...
+   >>> n = Number(3)
+   >>> n
+   <Number 3>
+   >>> n + 3
+   <Number 6>
+   >>> n - 3
+   <Number 0>
+   >>> n * 3
+   <Number 9>
+   >>> n / 3
+   <Number 1.0>
+   >>> n // 3
+   <Number 1>
+   >>> divmod(n, 2)
+   (1, 1)
+   >>> n ** 2
+   <Number 9>
+
+Vytvoř číselný objekt s podporou pro unární operace::
+
+   >>> class Number(object):
+   ...     def __init__(self, value):
+   ...         self._value = value
+   ...     def __pos__(self):
+   ...         return Number(+(self._value))
+   ...     def __neg__(self):
+   ...         return Number(-(self._value))
+   ...     def __abs__(self):
+   ...         return Number(abs(self._value))
+   ...     def __repr__(self):
+   ...         return f"<Number {self._value}>"
+   ...
+   >>> n = Number(-3)
+   >>> +n
+   <Number -3>
+   >>> -n
+   <Number 3>
+   >>> abs(n)
+   <Number 3>
+
+Vytvoř číselný objekt s podporou pro zabudované číselné funkce::
+
+   >>> class Number(object):
+   ...     def __init__(self, value):
+   ...         self._value = value
+   ...     def __int__(self):
+   ...         return int(self._value)
+   ...     def __float__(self):
+   ...         return float(self._value)
+   ...     def __round__(self, ndigits=None):
+   ...         return Number(round(self._value, ndigits))
+   ...     def __repr__(self):
+   ...         return f"<Number {self._value}>"
+   ...
+   >>> n = Number(3.3)
+   >>> int(n)
+   3
+   >>> float(n)
+   3.3
+   >>> round(n, 1)
+   <Number 3.3>
+
+.. note::
+
+   Pokud je u operací s čísly nalevo jiný datový typ a napravo vlastní číselný
+   objekt, tak operace nebude povolena, dokud se nenaimplementuje patřičná
+   obrácená metoda::
+
+      >>> class Number(object):
+      ...     def __init__(self, value):
+      ...         self._value = value
+      ...     def __add__(self, other):
+      ...         if isinstance(other, Number):
+      ...             return Number(self._value + other._value)
+      ...         return Number(self._value + other)
+      ...     def __radd__(self, other):
+      ...         return self.__add__(other)
+      ...     def __repr__(self):
+      ...         return f"<Number {self._value}>"
+      ...
+      >>> n = Number(0)
+      >>> 1 + n
+      <Number 1>
+
+   Operace se zkráceným přiřazením hodnot do proměnné automaticky volají na
+   pozadí patřičné callbackové metody, aniž by bylo např. nutné implementovat
+   vlastní ``__iadd__`` metodu::
+
+      >>> class Number(object):
+      ...     def __init__(self, value):
+      ...         self._value = value
+      ...     def __add__(self, other):
+      ...         if isinstance(other, Number):
+      ...             return Number(self._value + other._value)
+      ...         return Number(self._value + other)
+      ...     def __repr__(self):
+      ...         return f"<Number {self._value}>"
+      ...
+      >>> n = Number(0)
+      >>> n += 1
+      >>> n
+      <Number 1>
+
+   Ostatní metody včetně podpory pro bínární operace ``&``, ``^``, ``|`` aj.
+   lze nalézt `ZDE <https://docs.python.org/3.6/reference/datamodel.html#emulating-numeric-types>`_
+
+.. tip::
+
+   Pokud není v číselném objektu definována speciální metoda pro určitou
+   operaci, tak daná operace nebude fungovat, neboť není implementována.
+
+   Stejné nefunkčnosti operace lze docílit, pokud je u operací použit
+   nevhodný typ::
+
+      >>> class Number(object):
+      ...     def __init__(self, value):
+      ...         self._value = value
+      ...     def __add__(self, other):
+      ...         if isinstance(other, Number):
+      ...             return Number(self._value + other._value)
+      ...         elif isinstance(other, (int, float)):
+      ...             return Number(self._value + other)
+      ...         else:
+      ...             return NotImplemented
+      ...     def __repr__(self):
+      ...         return f"<Number {self._value}>"
+      ...
+      >>> n = Number(3)
+      >>> n + Number(3)
+      <Number 6>
+      >>> n + 3
+      <Number 6>
+      >>> n + 3.0
+      <Number 6.0>
+      >>> n + "3"
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: unsupported operand type(s) for +: 'Number' and 'str'
 
 Kontextový manažer
 ^^^^^^^^^^^^^^^^^^
@@ -5147,7 +5339,6 @@ TODO
 ====
 
 * vlastní sekvence
-* NotImplemented objekt u vlastních objektů
 * multithreading a multiprocessing a aio
 * abstraktní třídy (collections.abc.*)
 * meta třídy
@@ -5157,11 +5348,8 @@ TODO
 * closures (callable)
 * partial, single_dispatch
 * yield from
-
-::
-
-   def __radd__(self, other):
-       return self.__add__(other)
+* next(iter(dict.items()))
+* přejmenovat atributy u vlastných objektu na skryté
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
