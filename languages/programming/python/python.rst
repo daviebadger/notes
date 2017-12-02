@@ -1736,6 +1736,26 @@ Seznam již existujících funkcí::
        >>> set([0, 1, 0])
        {0, 1}
 
+* ``slice(stop)``
+
+  * vrať ``slice`` objekt s intervalem jako u indexování nebo funkce
+    ``range``::
+
+       >>> numbers = list(range(10))
+       >>> first_three = slice(3)
+       >>> numbers[first_three]
+       [0, 1, 2]
+
+* ``slice(start, stop, step=None)``
+
+  * vrať ``slice`` objekt s intervalem jako u indexování nebo funkce
+    ``range``::
+
+       >>> numbers = list(range(10))
+       >>> every_second = slice(0, 10, 2)
+       >>> numbers[every_second]
+       [0, 2, 4, 6, 8]
+
 * ``sorted(iterable, key=None, reverse=False)``
 
   * vrať seřazený seznam z položek v ``iterable``::
@@ -5128,8 +5148,10 @@ TODO
 * pokročilé datové typy z collections
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor)
-* closures
+* closures (callable)
 * partial, single_dispatch
+* yield from
+* iterator aka range
 
 ::
 
