@@ -3058,18 +3058,18 @@ smyčka::
 
    >>> class ToDo(object):
    ...     def __init__(self):
-   ...         self.todos = []
-   ...         self.index = 0
+   ...         self._todos = []
+   ...         self._index = 0
    ...     def add(self, todo):
-   ...         self.todos.append(todo)
+   ...         self._todos.append(todo)
    ...     def __iter__(self):
    ...         return self
    ...     def __next__(self):
-   ...         if self.index == len(self.todos):
-   ...             self.index = 0
+   ...         if self._index == len(self._todos):
+   ...             self._index = 0
    ...             raise StopIteration
-   ...         self.index += 1
-   ...         return self.todos[self.index - 1]
+   ...         self._index += 1
+   ...         return self._todos[self._index - 1]
    ...
    >>> todos = ToDo()
    >>> todos.add("a")
@@ -3087,20 +3087,20 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
 
    >>> class ToDo(object):
    ...     def __init__(self):
-   ...         self.todos = []
-   ...         self.index = 0
+   ...         self._todos = []
+   ...         self._index = 0
    ...     def add(self, todo):
-   ...         self.todos.append(todo)
+   ...         self._todos.append(todo)
    ...     def __iter__(self):
    ...         return self
    ...     def __next__(self):
-   ...         if self.index == len(self.todos):
-   ...             self.index = 0
+   ...         if self._index == len(self._todos):
+   ...             self._index = 0
    ...             raise StopIteration
-   ...         self.index += 1
-   ...         return self.todos[self.index - 1]
+   ...         self._index += 1
+   ...         return self._todos[self._index - 1]
    ...     def __reversed__(self)
-   ...         return reversed(self.todos)
+   ...         return reversed(self._todos)
    ...
    >>> todos = ToDo()
    >>> todos.add("a")
@@ -3119,14 +3119,14 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
 
       >>> class Series(object):
       ...     def __init__(self, stop):
-      ...         self.stop = stop
+      ...         self._stop = stop
       ...     def __iter__(self):
       ...         n = 0
-      ...         while n < self.stop:
+      ...         while n < self._stop:
       ...             yield n
       ...             n += 1
       ...     def __reversed__(self):
-      ...         n = self.stop - 1
+      ...         n = self._stop - 1
       ...         while n >= 0:
       ...             yield n
       ...             n -= 1
@@ -3152,13 +3152,13 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
 
       >>> class ToDo(object):
       ...     def __init__(self):
-      ...         self.todos = []
+      ...         self._todos = []
       ...     def add(self, todo):
-      ...         self.todos.append(todo)
+      ...         self._todos.append(todo)
       ...     def __iter__(self):
-      ...         return iter(self.todos)
+      ...         return iter(self._todos)
       ...     def __reversed__(self):
-      ...         return reversed(self.todos)
+      ...         return reversed(self._todos)
       ...
       >>> todos = ToDo()
       >>> todos.add("a")
@@ -5349,7 +5349,6 @@ TODO
 * partial, single_dispatch
 * yield from
 * next(iter(dict.items()))
-* přejmenovat atributy u vlastných objektu na skryté
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
