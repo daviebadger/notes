@@ -164,7 +164,7 @@ Vlož hypertextový odkaz::
 
 Vlož hypertextový odkaz s popiskem::
 
-   `Google <https://google.com`_
+   `Google <https://google.com>`_
 
 .. note::
 
