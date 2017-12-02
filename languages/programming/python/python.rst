@@ -3107,27 +3107,33 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    Iterátory umí automaticky vyhodnocovat, jestli se položka nachází v
    iterátoru nebo ne::
 
-   >>> class ToDo(object):
-   ...     def __init__(self):
-   ...         self.todos = []
-   ...         self.index = 0
-   ...     def add(self, todo):
-   ...         self.todos.append(todo)
-   ...     def __iter__(self):
-   ...         return self
-   ...     def __next__(self):
-   ...         if self.index == len(self.todos):
-   ...             self.index = 0
-   ...             raise StopIteration
-   ...         self.index += 1
-   ...         return self.todos[self.index - 1]
-   ...
-   >>> todos = ToDo()
-   >>> todos.add("a")
-   >>> "a" in todos
-   True
-   >>> "b" in todos
-   False
+      >>> class Series(object):
+      ...     def __init__(self, stop):
+      ...         self.stop = stop
+      ...     def __iter__(self):
+      ...         n = 0
+      ...         while n < self.stop:
+      ...             yield n
+      ...             n += 1
+      ...     def __reversed__(self):
+      ...         n = self.stop - 1
+      ...         while n >= 0:
+      ...             yield n
+      ...             n -= 1
+      ...
+      >>> series = Series(3)
+      >>> 0 in series
+      True
+      >>> 3 in series
+      False
+      >>> 3 not in series
+      True
+      >>> for number in series:
+      ...     print(number)
+      ...
+      0
+      1
+      2
 
 .. tip::
 
@@ -5151,7 +5157,6 @@ TODO
 * closures (callable)
 * partial, single_dispatch
 * yield from
-* iterator aka range
 
 ::
 
