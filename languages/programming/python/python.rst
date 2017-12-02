@@ -3109,6 +3109,50 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    >>> "b" in todos
    False
 
+.. tip::
+
+   Obsahuje-li objekt interně kolekci hodnot, tak lze přeskočit pamatování
+   položek v kolekci pomocí indexů a metodu ``__next__``::
+
+      >>> class ToDo(object):
+      ...     def __init__(self):
+      ...         self.todos = []
+      ...     def add(self, todo):
+      ...         self.todos.append(todo)
+      ...     def __iter__(self):
+      ...         return iter(self.todos)
+      ...     def __reversed__(self):
+      ...         return reversed(self.todos)
+      ...
+      >>> todos = ToDo()
+      >>> todos.add("a")
+      >>> todos.add("b")
+      >>> todos.add("c")
+      >>> for todo in todos:
+      ...     print(todo)
+      ...
+      a
+      b
+      c
+      >>> for todo in todos:
+      ...     print(todo)
+      ...
+      a
+      b
+      c
+      >>> for todo in reversed(todos):
+      ...     print(todo)
+      ...
+      c
+      b
+      a
+      >>> for todo in reversed(todos):
+      ...     print(todo)
+      ...
+      c
+      b
+      a
+
 Generátory
 ^^^^^^^^^^
 
