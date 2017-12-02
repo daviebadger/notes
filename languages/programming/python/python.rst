@@ -5196,6 +5196,11 @@ Metody slovníků
        ...     print(f"Key: {key}, Value: {value}")
        ...
        Key: age, Value: 22
+       >>> key, value = next(iter(x.items()))
+       >>> key
+       'age'
+       >>> value
+       22
 
 * ``.keys()``
 
@@ -5348,7 +5353,6 @@ TODO
 * closures (callable)
 * partial, single_dispatch
 * yield from
-* next(iter(dict.items()))
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
