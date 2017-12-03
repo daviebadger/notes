@@ -3283,6 +3283,12 @@ knihovny ``collections.abc``, které umí včas detekovat, jestli nechybí něja
 magická metoda nebo naopak umí přidat další metody na základě již existujích
 metod.
 
+.. note::
+
+   Jestliže kontejner nemá definovanou metodu ``__bool__``, tak se pravdivost
+   kontejneru vyhodnotí automaticky pomocí metody ``__len__``. Pokud tato
+   metoda vrátí nulu, jedná se o kontejner nepravdivý a naopak (>= 1).
+
 Sekvence
 """"""""
 
@@ -3291,13 +3297,104 @@ radd
 mul
 rmul
 
-.. note::
-
-   Pravdivost sekvence, ale i jiného kontejneru, se určí automaticky pomocí
-   metody ``__len__``. Pokud tato metoda vrátí 0, je kontejner nepravdivý.
-
 Množiny
 """""""
+
+Vytvoř napodobeninu neměnitelné množiny::
+
+   >>> from collections.abc import Set
+   >>> class ImmutableSet(Set):
+   ...     def __init__(self, *args):
+   ...         self._set = set(args)
+   ...     def __contains__(self, item):
+   ...         return item in self._set
+   ...     def __iter__(self):
+   ...         return iter(self._set)
+   ...     def __len__(self):
+   ...         return len(self._set)
+   ...
+   >>> s = ImmutableSet(1, 1, 1)
+   >>> 1 in s
+   True
+   >>> 0 not in s
+   True
+   >>> for item in s:
+   ...     print(item)
+   ...
+   1
+   >>> len(s)
+   1
+   >>> t = ImmutableSet(2, 3)
+   >>> s == t
+   False
+   >>> s & t
+   <__main__.ImmutableSet object at 0x7f062ed7f438>
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(s)))
+   ['isdisjoint']
+
+Vytvoř napodobeninu měnitelné množiny::
+
+   >>> from collections.abc import MutableSet
+   >>> class MutableSetCollection(MutableSet):
+   ...     def __init__(self, *args):
+   ...         self._set = set(args)
+   ...     def __contains__(self, item):
+   ...         return item in self._set
+   ...     def __iter__(self):
+   ...         return iter(self._set)
+   ...     def __len__(self):
+   ...         return len(self._set)
+   ...     def __repr__(self):
+   ...         return f"<MutableSetCollection {self._set}>"
+   ...     def add(self, value):
+   ...         self._set.add(value)
+   ...     def discard(self, value):
+   ...         self._set.discard(value)
+   ...
+   >>> s = MutableSetCollection()
+   >>> len(s)
+   0
+   >>> s.add(1)
+   >>> s
+   <MutableSetCollection {1}>
+   >>> s.discard(1)
+   >>> s
+   <MutableSetCollection set()>
+   >>> s.add(0)
+   >>> t = MutableSetCollection(1)
+   >>> s & t
+   <MutableSetCollection {<generator object Set.__and__.<locals>.<genexpr> at 0x7f062ed6a2b0>}>
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(s)))
+   ['add', 'clear', 'discard', 'isdisjoint', 'pop', 'remove']
+
+.. note::
+
+   Pro správné zobrazení výsledků množinových operací je třeba upravit
+   metody pro sjednocení (``__or__``), průnik (``__and__``), rozdíl
+   (``__sub__``) a doplněk (``__xor__``)::
+
+      >>> from collections.abc import Set
+      >>> class ImmutableSet(Set):
+      ...     def __init__(self, *args):
+      ...         if args and len(args) == 1 and isinstance(args[0], set):
+      ...             self._set = args[0]
+      ...         else:
+      ...             self._set = set(args)
+      ...     def __contains__(self, item):
+      ...         return item in self._set
+      ...     def __iter__(self):
+      ...         return iter(self._set)
+      ...     def __len__(self):
+      ...         return len(self._set)
+      ...     def __or__(self, other):
+      ...         return ImmutableSet(self._set | other._set)
+      ...     def __repr__(self):
+      ...         return f"<ImmutableSet {self._set}>"
+      ...
+      >>> s = ImmutableSet(0)
+      >>> t = ImmutableSet(1)
+      >>> s | t
+      <ImmutableSet {0, 1}>
 
 Slovníky
 """"""""
