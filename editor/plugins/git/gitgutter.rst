@@ -33,6 +33,10 @@ Ovládání
 
   * skoč na další změnu v souboru
 
+* ``\hu``
+
+  * zahoď změnu na řádku / řádcích se značkou Git diffu
+
 Konfigurace
 ===========
 
