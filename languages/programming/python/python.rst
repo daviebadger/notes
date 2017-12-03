@@ -3099,7 +3099,7 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
    ...             raise StopIteration
    ...         self._index += 1
    ...         return self._todos[self._index - 1]
-   ...     def __reversed__(self)
+   ...     def __reversed__(self):
    ...         return reversed(self._todos)
    ...
    >>> todos = ToDo()
@@ -3148,7 +3148,8 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
 .. tip::
 
    Obsahuje-li objekt interně kolekci hodnot, tak lze přeskočit pamatování
-   položek v kolekci pomocí indexů a metodu ``__next__``::
+   položek v kolekci pomocí indexů a metodu ``__next__``, avšak metoda
+   ``__iter__`` musí vracet iterátor::
 
       >>> class ToDo(object):
       ...     def __init__(self):
@@ -3271,8 +3272,134 @@ Vytvoř generátor, respektive iterátor z funkce::
       >>> list(numbers)
       []
 
+Kontejnery
+^^^^^^^^^^
+
+Emulace objektů, které se chovájí obdobně, jaké zabudované typy, tj. seznamy,
+n-tice, množiny, slovníky aj.
+
+Jako pomoc pro vytváření kontejnerů existují abstraktivní třídy ze zabudované
+knihovny ``collections.abc``, které umí včas detekovat, jestli nechybí nějaká
+magická metoda nebo naopak umí přidat další metody na základě již existujích
+metod.
+
 Sekvence
-^^^^^^^^
+""""""""
+
+add
+radd
+mul
+rmul
+
+.. note::
+
+   Pravdivost sekvence, ale i jiného kontejneru, se určí automaticky pomocí
+   metody ``__len__``. Pokud tato metoda vrátí 0, je kontejner nepravdivý.
+
+Množiny
+"""""""
+
+Slovníky
+""""""""
+
+Vytvoř napodobeninu neměnitelného slovníku::
+
+   >>> from collections.abc import Mapping
+   >>> class ImmutableDict(Mapping):
+   ...     def __init__(self, **kwargs):
+   ...         self._dict = kwargs
+   ...     def __contains__(self, key):
+   ...         return key in self._dict
+   ...     def __getitem__(self, key):
+   ...         return self._dict[key]
+   ...     def __iter__(self):
+   ...         return iter(self._dict.keys())
+   ...     def __len__(self):
+   ...         return len(self._dict)
+   ...
+   >>> d = ImmutableDict(name="Davie", age=22)
+   >>> "name" in d
+   True
+   >>> "gender" not in d
+   True
+   >>> d["age"]
+   22
+   >>> for key in d:
+   ...     print(key)
+   ...
+   name
+   age
+   >>> len(d)
+   2
+   >>> bool(d)
+   True
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(d)))
+   ['get', 'items', 'keys', 'values']
+   >>> d["age"] = 23
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: 'ImmutableDict' object does not support item assignment
+   >>> del d["age"]
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: 'ImmutableDict' object does not support item assignment
+
+Vytvoř napodobeninu měnitelného slovníku::
+
+   >>> from collections.abc import MutableMapping
+   >>> class MutableDict(MutableMapping):
+   ...     def __init__(self, **kwargs):
+   ...         self._dict = kwargs
+   ...     def __contains__(self, key):
+   ...         return key in self._dict
+   ...     def __delitem__(self, key):
+   ...         del self._dict[key]
+   ...     def __getitem__(self, key):
+   ...         return self._dict[key]
+   ...     def __iter__(self):
+   ...         return iter(self._dict.keys())
+   ...     def __len__(self):
+   ...         return len(self._dict)
+   ...     def __setitem__(self, key, value):
+   ...         self._dict[key] = value
+   ...
+   >>> d = MutableDict()
+   >>> d["name"] = "Davie"
+   >>> d["name"]
+   'Davie'
+   >>> del d["name"]
+   >>> d["name"]
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 9, in __getitem__
+   KeyError: 'name'
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(d)))
+   ['clear', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+
+.. note::
+
+   Pokud se klíč nenachází ve slovníků, měla by metoda ``__getitem__`` vyvolat
+   ``KeyError`` výjimku. Stejný princip lze uplatnit u ``__setitem__`` nebo
+   ``__delitem__``.
+
+.. tip::
+
+   Pokud se klíč nenachází ve slovníků, lze vrátit nějakou výchozí hodnotu
+   pomocí metody ``__missing__``::
+
+      >>> class Dict(object):
+      ...     def __init__(self, **kwargs):
+      ...         self._dict = kwargs
+      ...     def __getitem__(self, key):
+      ...         if key not in self._dict:
+      ...             return self.__missing__(key)
+      ...         return self._dict[key]
+      ...     def __missing__(self, key):
+      ...         return 0
+      ...
+      >>> d = Dict()
+      >>> d["test"]
+      0
 
 Čísla
 ^^^^^
@@ -5343,9 +5470,7 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* vlastní sekvence
 * multithreading a multiprocessing a aio
-* abstraktní třídy (collections.abc.*)
 * meta třídy
 * pokročilé datové typy z collections
 * itertools
