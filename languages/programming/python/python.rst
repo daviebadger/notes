@@ -3292,10 +3292,151 @@ metod.
 Sekvence
 """"""""
 
-add
-radd
-mul
-rmul
+Vytvoř napodobeninu neměnitelné n-tice::
+
+   >>> from collections.abc import Sequence
+   >>> class Tuple(Sequence):
+   ...     def __init__(self, *args):
+   ...         self._tuple = args
+   ...     def __contains__(self, item):
+   ...         return item in self._tuple
+   ...     def __getitem__(self, key):
+   ...         return self._tuple[key]
+   ...     def __iter__(self):
+   ...         return iter(self._tuple)
+   ...     def __len__(self):
+   ...         return len(self._tuple)
+   ...
+   >>> t = Tuple(1, 2, 3)
+   >>> 1 in t
+   True
+   >>> 0 not in t
+   True
+   >>> t[0]
+   1
+   >>> t[-1]
+   3
+   >>> for item in t:
+   ...     print(item)
+   ...
+   1
+   2
+   3
+   >>> len(t)
+   3
+   >>> reversed(t)
+   <generator object Sequence.__reversed__ at 0x7f062ed6a678>
+   >>> list(reversed(t))
+   [3, 2, 1]
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(t)))
+   ['count', 'index']
+
+Vytvoř napodobeninu měnitelného seznamu::
+
+   >>> from collections.abc import MutableSequence
+   >>> class List(MutableSequence):
+   ...     def __init__(self, *args):
+   ...         self._list = list(args)
+   ...     def __contains__(self, item):
+   ...         return item in self._list
+   ...     def __delitem__(self, index):
+   ...         del self._list[index]
+   ...     def __getitem__(self, index):
+   ...         return self._list[index]
+   ...     def __iter__(self):
+   ...         return iter(self._list)
+   ...     def __len__(self):
+   ...         return len(self._list)
+   ...     def __setitem__(self, index, value):
+   ...         self._list[index] = value
+   ...     def __repr__(self):
+   ...         return f"<List {self._list}>"
+   ...     def insert(self, index, value):
+   ...         self._list.insert(index, value)
+   ...
+   >>> l = List(1, 2, 3)
+   >>> 1 in l
+   True
+   >>> 0 not in l
+   True
+   >>> del l[0]
+   >>> l[0]
+   2
+   >>> for item in l
+   ...     print(item)
+   ...
+   2
+   3
+   >>> len(l)
+   2
+   >>> l[0] = 1
+   >>> l
+   <List [1, 3]>
+   >>> l.insert(1, 2)
+   >>> l
+   <List [1, 2, 3]>
+   >>> reversed(l)
+   <generator object Sequence.__reversed__ at 0x7f062ed6a678>
+   >>> list(reversed(l))
+   [3, 2, 1]
+   >>> list(filter(lambda attr: not attr.startswith("_"), dir(l)))
+   ['append', 'clear', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse']
+
+.. note::
+
+   Metody ``__getitem__``, ``__setitem__`` a ``__delitem__``. by měly vyvolat
+   ``TypeError`` výjimku, pokud požadovaný index není celé číslo nebo objekt
+   ``Slice``.
+
+   Jestlíže je index celé číslo a je mimo rozmezí sekvence, měla by se vyvolat
+   ``IndexError`` výjimka.
+
+.. tip::
+
+   Sčítání a násobení sekvenci celými čísly::
+
+      >>> from collections.abc import Sequence
+      >>> class Tuple(Sequence):
+      ...     def __init__(self, *args):
+      ...         if args and len(args) == 1 and isinstance(args, tuple):
+      ...             self._tuple = args[0]
+      ...         else:
+      ...             self._tuple = args
+      ...     def __contains__(self, item):
+      ...         return item in self._tuple
+      ...     def __getitem__(self, key):
+      ...         return self._tuple[key]
+      ...     def __iter__(self):
+      ...         return iter(self._tuple)
+      ...     def __len__(self):
+      ...         return len(self._tuple)
+      ...     def __add__(self, other):
+      ...         if not isinstance(other, Tuple):
+      ...             return NotImplemented
+      ...         return Tuple(self._tuple + other._tuple)
+      ...     def __radd__(self, other):
+      ...         return self.__add__(other)
+      ...     def __mul__(self, other):
+      ...         if not isinstance(other, int):
+      ...             return NotImplemented
+      ...         return Tuple(self._tuple * other)
+      ...     def __rmul__(self, other):
+      ...         return self.__mul__(other)
+      ...     def __repr__(self):
+      ...         return f"<Tuple {self._tuple}>"
+      ...
+      >>> t = Tuple(1, 2, 3)
+      >>> t
+      <Tuple (1, 2, 3)>
+      >>> u = Tuple(4, 5, 6)
+      >>> t + u
+      <Tuple (1, 2, 3, 4, 5, 6)>
+      >>> u + t
+      <Tuple (4, 5, 6, 1, 2, 3)>
+      >>> t * 2
+      <Tuple (1, 2, 3, 1, 2, 3)>
+      >>> 2 * t
+      <Tuple (1, 2, 3, 1, 2, 3)>
 
 Množiny
 """""""
@@ -5392,6 +5533,24 @@ Metody slovníků
        >>> x
        {'age': 22}
 
+* ``.fromkeys(sequence, default=None)``
+
+  * vytvoř slovník z položek ``sequence`` a defaultní hodnotou ``default``::
+
+       >>> x = ["a", "b", "c"]
+       >>> dict.fromkeys(x)
+       {'a': None, 'b': None, 'c': None}
+       >>> dict.fromkeys(x, 0)
+       {'a': 0, 'b': 0, 'c': 0}
+       >>> y = dict.fromkeys(x, [])
+       >>> y["a"].append(0)
+       >>> y
+       {'a': [0], 'b': [0], 'c': [0]}
+       >>> y = {item: [] for item in x}
+       >>> y["a"].append(0)
+       >>> y
+       {'a': [0], 'b': [], 'c': []}
+
 * ``.get(key, default=None)``
 
   * vrať hodnotu pro klíč ``key``, pokud existuje, jinak ``default`` hodnotu::
@@ -5575,6 +5734,7 @@ TODO
 * closures (callable)
 * partial, single_dispatch
 * yield from
+* Decimal
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
