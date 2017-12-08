@@ -59,7 +59,7 @@ Snippety se tvoří v nakonfigurovaném adresáři, např.::
       extends html, htmldjango
 
 Syntaxe
--------
+^^^^^^^
 
 Vytvoř obyčejný snippet::
 
@@ -103,7 +103,7 @@ se automaticky doplní na základě první reference)::
        Full Name: $1 $2
 
 Vytvoř snippet, ve kterém může být proměnná naplněna z označeného textu z
-Visual módu::
+Visual módu (refaktoring)::
 
    snippet def
        def ${1:func_name}(${2:params}):
@@ -129,21 +129,48 @@ Visual módu::
       snippet hwn
           print("Hello ${0:name}!")
 
+Expanze snippetů
+================
+
+Klávesové zkratky po nakonfigurování:
+
+* ``CTRL + j``
+
+  * vlož daný snippet do souboru::
+
+        hw
+          ^ CTRL + j
+
+        ----
+
+        print("Hello World!")
+
+* ``CTRL + l``
+
+  * skoč na další proměnnou ve vloženém snippetu
+
+* ``CTRL + h``
+
+  * skoč na předchozí proměnnou ve vloženém snippetu
+
+.. note::
+
+   Pokud snippet očekává možný vstup do proměnné z označené textu, tak je třeba
+   postupovat následovně:
+
+   1. označit text, na jehož místo se vloží snippet
+   2. stisknout ``CTRL + j``
+   3. napsat název snippetu
+   4. opět stisknout ``CTRL + j`` pro expanzi daného snippetu
+
 Konfigurace
 ===========
 
 ::
 
-   " vlož do souborů daný snippet
-
    let g:UltiSnipsExpandTrigger="<C-j>"
-
-   " skoč na další / předchozí input ve snippetu
-
    let g:UltiSnipsJumpForwardTrigger="<C-l>"
    let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-
-   " otevři v horizontálním okně zdrojový kód snippetu
 
    let g:UltiSnipsEditSplit="horizontal"
    let g:UltiSnipsSnippetsDir="~/.vim/snippets"
