@@ -5690,6 +5690,80 @@ Metody slovníků
       >>> y
       dict_values([23])
 
+Pokročilé datové typy
+=====================
+
+Modifikované slovníky
+---------------------
+
+defaultdict
+^^^^^^^^^^^
+
+Vytvoř slovník, kde chybějící klíč se bude chovat jako konkrétní datový typ::
+
+   >>> from collections import defaultdict
+   >>> harvest = defaultdict(int)
+   >>> harvest["apples"] += 1
+   >>> harvest["bananas"] += 2
+   >>> harvest
+   defaultdict(<class 'int'>, {'apples': 1, 'bananas': 2})
+   >>> harvest["apples"]
+   1
+   >>> harvest["bananas"]
+   2
+   >>> harvest["cherries"]
+   0
+   >>> harvest
+   defaultdict(<class 'int'>, {'apples': 1, 'bananas': 2, 'cherries': 0})
+
+Vytvoř slovník, kde chybějící klíč bude mít konkrétní výchozí hodnotu::
+
+   >>> from collections import defaultdict
+   >>> harvest = defaultdict(1)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: first argument must be callable or None
+   >>> harvest = defaultdict(lambda: 1)
+   >>> harvest["apples"]
+   1
+
+.. note::
+
+   Pokud ``defaultdict`` nemá zadanou výchozí hodnotu, bude se chovat stejně
+   jako obyčejný slovník::
+
+      >>> from collections import defaultdict
+      >>> harvest = defaultdict()
+      >>> harvest["apples"] += 3
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      KeyError: 'apples'
+
+.. tip::
+
+   Vytvoř rekurzivně chybějící klíče::
+
+      >>> from collections import defaultdict
+      >>> tree = lambda: defaultdict(tree)
+      >>> harvest = tree()
+      >>> harvest["fruit"]["berries"]["strawberries"] = 3
+      >>> harvest
+      defaultdict(<function <lambda> at 0x7f85817d36a8>, {'fruit': defaultdict(<function <lambda> at 0x7f85817d36a8>, {'berries': defaultdict(<function <lambda> at 0x7f85817d36a8>, {'strawberries': 3})})})
+      >>> harvest["fruit"]["berries"]["strawberries"]
+      3
+      >>> harvest["fruit"]["berries"]["blueberries"]
+      defaultdict(<function <lambda> at 0x7f85817d36a8>, {})
+
+   Rekurzivně lze vytvořít klíče i pomocí ``dict`` objektu, avšak jen do
+   první úrovně vnoření::
+
+      >>> harvest = defaultdict(dict)
+      >>> harvest["fruit"]["berries"] = 3
+      >>> harvest["vegetable"]["roots"]["carrots"] = 3
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      KeyError: 'roots'
+
 PEPs
 ====
 
@@ -5732,7 +5806,6 @@ TODO
 
 * multithreading a multiprocessing a aio
 * meta třídy
-* pokročilé datové typy z collections
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor)
 * closures (callable)
