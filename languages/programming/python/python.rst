@@ -5696,6 +5696,66 @@ Pokročilé datové typy
 Modifikované slovníky
 ---------------------
 
+Counter
+^^^^^^^
+
+Vytvoř slovník s počtem jednotlivých položek z ``iterable``::
+
+   >>> from collections import Counter
+   >>> count = Counter("Davie Badger")
+   >>> count
+   Counter({'a': 2, 'e': 2, 'D': 1, 'v': 1, 'i': 1, ' ': 1, 'B': 1, 'd': 1, 'g': 1, 'r': 1})
+   >>> counter["a"]
+   2
+
+.. note::
+
+   Pokud se klíč nenachází v ``Counter`` objektu, tak defaultně se vrátí nula::
+
+      >>> from collections import Counter
+      >>> count = Counter()
+      >>> count["test"]
+      0
+
+.. tip::
+
+   Zobraz nejvyskytovanější prvky::
+
+      >>> from collections import Counter
+      >>> count = Counter("Hello World!")
+      >>> count.most_common(1)
+      [('l', 3)]
+      >>> count.most_common(3)
+      [('l', 3), ('o', 2), ('H', 1)]
+      >>> count.most_common()
+      [('l', 3), ('o', 2), ('H', 1), ('e', 1), (' ', 1), ('W', 1), ('r', 1), ('d', 1), ('!', 1)]
+
+   Zobraz nejméně vyskytované prvky::
+
+      >>> from collections import Counter
+      >>> count = Counter("Hello World!")
+      >>>
+      >>> # last 1
+      ...
+      >>> count.most_common()[:-1-1:-1]
+      [('!', 1)]
+      >>> count.most_common()[:-2:-1]
+      [('!', 1)]
+      >>>
+      >>> # last 2
+      ...
+      >>> count.most_common()[:-2-1:-1]
+      [('!', 1), ('d', 1)]
+      >>> count.most_common()[:-3:-1]
+      [('!', 1), ('d', 1)]
+      >>>
+      >>> # last 3
+      ...
+      >>> count.most_common()[:-3-1:-1]
+      [('!', 1), ('d', 1), ('r', 1)]
+      >>> count.most_common()[:-4:-1]
+      [('!', 1), ('d', 1), ('r', 1)]
+
 defaultdict
 ^^^^^^^^^^^
 
