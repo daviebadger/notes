@@ -1815,12 +1815,16 @@ Seznam již existujících funkcí::
 * ``zip(*iterables)``
 
   * vrať ``zip`` objekt, který propojí jednotlivé položky v ``iterables`` do
-    entic::
+    entic v seznamu nebo naopak rozbalí ``zip`` objekt::
 
-       >>> zip([1, 2, 3], ["a", "b", "c"])
+       >>> a = [1, 2, 3]
+       >>> b = ["a", "b", "c"]
+       >>> zip(a, b)
        <zip object at 0x7fdb4258dc88>
-       >>> list(zip([1, 2, 3], ["a", "b", "c"]))
+       >>> list(zip(a, b))
        [(1, 'a'), (2, 'b'), (3, 'c')]
+       >>> list(zip(*zip(a, b)))
+       [(1, 2, 3), ('a', 'b', 'c')]
 
 .. note::
 
