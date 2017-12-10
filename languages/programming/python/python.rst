@@ -5824,6 +5824,40 @@ Vytvoř slovník, kde chybějící klíč bude mít konkrétní výchozí hodnot
         File "<stdin>", line 1, in <module>
       KeyError: 'roots'
 
+OrderedDict
+^^^^^^^^^^^
+
+Vytvoř seřazený slovník včetně podpory pro obrácenou iteraci nad slovníky,
+která chybí u klasického slovníku::
+
+   >>> x = OrderedDict.fromkeys("abc")
+   >>> for key in x:
+   ...     print(key)
+   ...
+   a
+   b
+   c
+   >>> for key in reversed(x):
+   ...     print(key)
+   ...
+   c
+   b
+   a
+
+.. note::
+
+   Pomocí ``OrderedDict`` slovníku lze mít zpětně kompatibilní seřazený
+   slovník i pro starší verze Pythonu než je 3.6.
+
+.. tip::
+
+   Vytvoř obrácený seřazený slovník::
+
+      >>> x = OrderedDict.fromkeys("abc")
+      >>> y = OrderedDict(reversed(x.items()))
+      >>> y
+      OrderedDict([('c', None), ('b', None), ('a', None)])
+
 PEPs
 ====
 
