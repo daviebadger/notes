@@ -209,7 +209,7 @@ Balení a nahrávání
 Balení balíčku
 --------------
 
-Vytvoř nezdbuildovaný balíček (archív)::
+Vytvoř nezbuildovaný balíček (archív)::
 
    $ python setup.py sdist
 
