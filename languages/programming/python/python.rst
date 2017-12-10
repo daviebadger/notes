@@ -1458,7 +1458,7 @@ Seznam již existujících funkcí::
    classmethod()   getattr()     locals()        repr()       zip()
    compile()       globals()     map()           reversed()   __import__()
    complex()       hasattr()     max()           round()
-   delattr()       hash()        memoryviews()   set()
+   delattr()       hash()        memoryview()   set()
 
 * ``abs(number)``
 
@@ -2186,7 +2186,7 @@ Zachyť více výjimek najednou::
 
 .. tip::
 
-   Taktéž lze spustit kód, ať už se výjimka stala nebo ne:
+   Taktéž lze spustit kód, ať už se výjimka stala nebo ne::
 
       >>> def number():
       ...     try:
@@ -4782,6 +4782,17 @@ Metody řetězců
        >>> name.split(" ")
        ['Davie', 'Badger']
 
+* ``.splitlines()``
+
+  * vrať seznam, ve kterém jsou položky rozsekané z řetězce podle oddělovačů
+    řádků::
+
+       >>> text = "Hello World,\n\nmy name is Davie\n"
+       >>> text.splitlines()
+       ['Hello World,', '', 'my name is Davie']
+       >>> text.split("\n")
+       ['Hello World,', '', 'my name is Davie', '']
+
 * ``.startswith(prefix, start=0, end=-1)``
 
   * vrať ``True``, pokud řetězec začíná od začátku ``start`` na daný ``prefix``
@@ -5692,6 +5703,14 @@ Metody slovníků
 
 Pokročilé datové typy
 =====================
+
+Modifikované n-tice
+-------------------
+
+namedtuple
+^^^^^^^^^^
+
+
 
 Modifikované slovníky
 ---------------------
