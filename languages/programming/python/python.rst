@@ -81,16 +81,11 @@ Shell lze vypnout klávesovou zkratkou ``CTRL + D`` nebo zavoláním funkce
 
 .. tip::
 
-   Jsou-li nainstalované i jiné verze Pythonu, lze je spustit s označením
-   vedlejší verze:
+   Uvnitř shellu lze použít klávesu ``TAB`` pro automatické dokončování slov,
+   je-li to možné::
 
-   .. code:: none
-
-      $ python3.5
-      Python 3.5.3+ (default, Jun  7 2017, 23:23:48)
-      [GCC 6.3.0 20170519] on linux
-      Type "help", "copyright", "credits" or "license" for more information.
-      >>>
+      >>> a
+      abs(     all(     and      any(     as       ascii(   assert ) ) ) )
 
 Skript
 ------
