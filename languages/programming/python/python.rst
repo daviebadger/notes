@@ -5710,7 +5710,89 @@ Modifikované n-tice
 namedtuple
 ^^^^^^^^^^
 
+Vytvoř speciální n-tici, kde k položkám n-tice lze přistupovat jako k
+atributům::
 
+   >>> from collections import namedtuple
+   >>> point = (0, 1)
+   >>> point.x
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: 'tuple' object has no attribute 'x'
+   >>> Point = namedtuple("Point", ["x", "y"])
+   >>> point = Point(0, 1)
+   >>> point.x
+   0
+   >>> point.y
+   1
+   >>> point[0]
+   0
+   >>> point[1]
+   1
+   >>> point[2]
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   IndexError: tuple index out of range
+   >>> x, y = point
+   >>> x
+   0
+   >>> y
+   1
+   >>> point
+   Point(x=0, y=1)
+   >>> point["x"]
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: tuple indices must be integers or slices, not str
+   >>> point._fields
+   ('x', 'y')
+
+Vytvoř ``namedtuple`` včetně dědičnosti::
+
+   >>> from collections import namedtuple
+   >>> Point2D = namedtuple("Point2D", ["x", "y"])
+   >>> Point3D = namedtuple("Point3D", Point2D._fields + ("z",))
+   >>> point = Point3D(0, 1, 2)
+   >>> point
+   Point3D(x=0, y=1, z=2)
+
+.. note::
+
+   Názvy atributů lze zadat i pomocí řetězce, kde oddělovačem je mezera nebo
+   čárka::
+
+      >>> from collections import namedtuple
+      >>> Point = namedtuple("Point", "x y")
+      >>> Point(0, y=1)._asdict()
+      OrderedDict([('x', 0), ('y', 1)])
+      >>> Point = namedtuple("Point", "x, y")
+      >>> Point(x=0, y=1)._asdict()
+      OrderedDict([('x', 0), ('y', 1)])
+
+.. tip::
+
+   Přidej vlastní metody do ``namedtuple``::
+
+      >>> from collections import namedtuple
+      >>> class Point(namedtuple("Point", ["x", "y"])):
+      ...     __slots__ = ()
+      ...     @property
+      ...     def distance_from_zero(self):
+      ...         return (self.x ** 2 + self.y ** 2) ** 0.5
+      ...     def __str__(self):
+      ...         return f"Point: x={self.x}, y={self.y}, distance_from_zero={self.distance_from_zero}"
+      ...
+      >>> point = Point(0, 1)
+      >>> point
+      Point(x=0, y=1)
+      >>> print(point)
+      Point: x=0, y=1, distance_from_zero=1.0
+      >>> point.x
+      0
+      >>> point.y
+      1
+      >>> point.distance_from_zero
+      1.0
 
 Modifikované slovníky
 ---------------------
@@ -5920,11 +6002,12 @@ TODO
 * multithreading a multiprocessing a aio
 * meta třídy
 * itertools
-* ostatní magické metody, např. __new__ (konstruktor)
+* ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
 * closures (callable)
 * partial, single_dispatch
 * yield from
 * Decimal
+* total_ordering
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
