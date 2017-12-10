@@ -173,14 +173,29 @@ Závislosti
     nainstalovat::
 
        setup(
-          install_requires=[
-              "requests",
-          ],
+           install_requires=[
+               "requests",
+           ],
        )
 
 .. note::
 
    Závislosti se pišou v duchu Requirements formátu.
+
+.. tip::
+
+   Externí závislosti se zpravidla načítájí z ``requirements.txt`` souboru,
+   kde jsou závislosti taktéž v Requirements formátu::
+
+      with open("requirements.txt") as file:
+          requirements = file.read().splitlines()
+
+      setup(
+          install_requires=requirements,
+      )
+
+   Díky existenci ``requirements.txt`` souboru mohou jiné aplikace správně
+   detekovat, že se jedná o Python projekt.
 
 Klasifikátory
 -------------
