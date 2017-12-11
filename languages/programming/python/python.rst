@@ -5912,6 +5912,14 @@ Vytvoř slovník s počtem jednotlivých položek z ``iterable``::
    >>> counter["a"]
    2
 
+Vytvoř ``Counter`` z již předpřipraveného slovníku::
+
+   >>> from collections import Counter
+   >>> Counter(cats=0, dog=1)
+   Counter({'dog': 1, 'cats': 0})
+   >>> Counter({"cats": 0, "dog": 1})
+   Counter({'dog': 1, 'cats': 0})
+
 .. note::
 
    Pokud se klíč nenachází v ``Counter`` objektu, tak defaultně se vrátí nula::
@@ -5920,6 +5928,8 @@ Vytvoř slovník s počtem jednotlivých položek z ``iterable``::
       >>> count = Counter()
       >>> count["test"]
       0
+      >>> count
+      Counter()
 
 .. tip::
 
