@@ -5792,6 +5792,114 @@ Vytvoř ``namedtuple`` včetně dědičnosti::
 Modifikované slovníky
 ---------------------
 
+ChainMap
+^^^^^^^^
+
+Spoj několik slovníků do jednoho jednoho velkého::
+
+   >>> from collections import ChainMap
+   >>> default = {"user": "admin", "password": "admin", "host": "localhost", "port": 12345}
+   >>> real = {"user": "davie", "password": "password"}
+   >>> config = ChainMap(real, default)
+   >>> config["user"]
+   'davie'
+   >>> config["password"]
+   'password'
+   >>> config["host"]
+   'localhost'
+   >>> config["port"]
+   12345
+   >>> config
+   ChainMap({'user': 'davie', 'password': 'password'}, {'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+   >>> config
+   ChainMap({'user': 'davie', 'password': 'password', 'ssl': True}, {'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+   >>> del config["user"]
+   >>> config["user"]
+   'admin'
+   >>> del config["host"]
+   Traceback (most recent call last):
+     File "/usr/lib/python3.6/collections/__init__.py", line 934, in __delitem__
+       del self.maps[0][key]
+   KeyError: 'host'
+
+   During handling of the above exception, another exception occurred:
+
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "/usr/lib/python3.6/collections/__init__.py", line 936, in __delitem__
+       raise KeyError('Key not found in the first mapping: {!r}'.format(key))
+   KeyError: "Key not found in the first mapping: 'host'"
+   >>> config.parents
+   ChainMap({'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+   >>> config.maps
+   [{'user': 'davie', 'password': 'password'}, {'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345}]
+   >>> dict(config)
+   {'port': 12345, 'host': 'localhost', 'password': 'password', 'user': 'davie'}
+
+.. note::
+
+   Pokud se ve slovnících v ``ChainMap`` nachází duplicitní klíče, tak hodnota
+   těchto duplicitních klíčů výchází z prvního slovníku nalevo, ve kterém se
+   klíč nachází.
+
+   Je-li třeba na první místo přesunout jiný slovník, je nutné vytvořit nový
+   ``ChainMap``::
+
+      >>> from collections import ChainMap
+      >>> default = {"user": "admin", "password": "admin", "host": "localhost", "port": 12345}
+      >>> config = ChainMap(default)
+      >>> config
+      ChainMap({'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+      >>> config_new = config.new_child()
+      >>> config_new
+      ChainMap({}, {'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+      >>> config_new = config.new_child({"host": "10.0.0.10", "port": 54321})
+      >>> config_new
+      ChainMap({'host': '10.0.0.10', 'port': 54321}, {'user': 'admin', 'password': 'admin', 'host': 'localhost', 'port': 12345})
+      >>> config_new["host"]
+      '10.0.0.10'
+      >>> config_new["port"]
+      54321
+
+.. tip::
+
+   Upravuj a maž klíče jen v těch slovnících, ve kterých existují, nikoliv jen
+   z prvního slovníku::
+
+      >>> from collections import ChainMap
+      >>> class DeepChainMap(ChainMap):
+      ...     def __setitem__(self, key, value):
+      ...         for mapping in self.maps:
+      ...             if key in mapping:
+      ...                 mapping[key] = value
+      ...                 return
+      ...         self.maps[0][key] = value
+      ...     def __delitem__(self, key):
+      ...         for mapping in self.maps:
+      ...             if key in mapping:
+      ...                 del mapping[key]
+      ...                 return
+      ...         raise KeyError(key)
+      ...
+      >>> default = {"user": "admin", "password": "admin"}
+      >>> real = {"password": "password"}
+      >>> config = DeepChainMap(real, default)
+      DeepChainMap({'password': 'password'}, {'user': 'admin', 'password': 'admin'})
+      >>> config["user"] = "davie"
+      DeepChainMap({'password': 'password'}, {'user': 'davie', 'password': 'admin'})
+      >>> del config["password"]
+      >>> config["password"]
+      'admin'
+      >>> del config["password"]
+      >>> config["password"]
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "/usr/lib/python3.6/collections/__init__.py", line 883, in __getitem__
+          return self.__missing__(key)            # support subclasses that define __missing__
+        File "/usr/lib/python3.6/collections/__init__.py", line 875, in __missing__
+          raise KeyError(key)
+      KeyError: 'password'
+
 Counter
 ^^^^^^^
 
