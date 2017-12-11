@@ -2623,7 +2623,20 @@ instancí::
 
    Pokud není tato situace řádně ošetřena, k žádnému šetření paměti nedojde
    a na instanci půjde přidávat další nové atributy, neboť bude přítomný
-   speciální atribut ``__dict__``, což je slovník atributů a jejich hodnot.
+   speciální atribut ``__dict__``, což je slovník atributů a jejich hodnot::
+
+      >>> class Person(object):
+      ...     def __init__(self, name, age):
+      ...             self.name = name
+      ...             self.age = age
+      ...
+      >>> p = Person("Davie", 22)
+      >>> p.__dict__
+      {'name': 'Davie', 'age': 22}
+      >>> vars(p)
+      {'name': 'Davie', 'age': 22}
+      >>> vars() == locals()
+      True
 
 Metody
 ^^^^^^
