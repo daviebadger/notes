@@ -5712,6 +5712,84 @@ Metody slovníků
 Pokročilé datové typy
 =====================
 
+Modifikované seznamy
+--------------------
+
+deque
+^^^^^
+
+Vytvoř speciální seznam, do kterého lze přidávat nebo mazat položky z obou
+stran::
+
+   >>> from collections import deque
+   >>> d = deque()
+   >>> d
+   deque([])
+   >>> d.append(0)
+   >>> d
+   deque([0])
+   >>> d.append(1)
+   >>> d.appendleft(-1)
+   >>> d
+   deque([-1, 0, 1])
+   >>> d.extend("cba")
+   >>> d.extendleft("abc")
+   >>> d
+   deque(['c', 'b', 'a', -1, 0, 1, 'c', 'b', 'a'])
+   >>> d.pop()
+   'a'
+   >>> d.popleft()
+   'c'
+   >>> d
+   deque(['b', 'a', -1, 0, 1, 'c', 'b'])
+
+.. note::
+
+   Pomocí metody ``rotate`` lze přesouvat položky na krajích na opačnou
+   stranu::
+
+      >>> from collections import deque
+      >>> d = deque(range(10))
+      >>> d
+      deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+      >>> d.rotate()  # last to first
+      >>> d
+      deque([9, 0, 1, 2, 3, 4, 5, 6, 7, 8])
+      >>> d.rotate(1)  # last to first
+      >>> d
+      deque([8, 9, 0, 1, 2, 3, 4, 5, 6, 7])
+      >>> d.rotate(-1)  # first to last
+      >>> d
+      deque([9, 0, 1, 2, 3, 4, 5, 6, 7, 8])
+      >>> d.rotate(-2)  # first two to last
+      deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+
+.. tip::
+
+   Nastav fixní velikost ``deque``::
+
+      >>> from collections import deque
+      >>> d = deque(range(3), maxlen=3)
+      >>> d
+      deque([0, 1, 2], maxlen=3)
+      >>> d.append(3)
+      >>> d
+      deque([1, 2, 3], maxlen=3)
+      >>> d.appendleft(0)
+      >>> d
+      deque([0, 1, 2], maxlen=3)
+      >>> d.pop()
+      2
+      >>> d
+      deque([0, 1], maxlen=3)
+      >>> d.appendleft(-1)
+      >>> d
+      deque([-1, 0, 1], maxlen=3)
+      >>> d.insert(0, 0)
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      IndexError: deque already at its maximum size
+
 Modifikované n-tice
 -------------------
 
