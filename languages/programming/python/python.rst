@@ -4517,6 +4517,11 @@ Operace s čísly
 
    Další operace lze provádět pomocí ``math`` knihovny.
 
+.. tip::
+
+   Pro lepší a přesnější výsledky operací s desetinnými čísly lze použít
+   ``decimal`` knihovnu.
+
 Řetězce
 -------
 
@@ -6210,7 +6215,6 @@ TODO
 * closures (callable)
 * partial, single_dispatch
 * yield from
-* Decimal
 * total_ordering
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
