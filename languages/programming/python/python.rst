@@ -6168,6 +6168,120 @@ která chybí u klasického slovníku::
       >>> y
       OrderedDict([('c', None), ('b', None), ('a', None)])
 
+Ostatní
+-------
+
+enum
+^^^^
+
+Vytvoř manuálně speciální neměnitelnou třídu s pojmenovanými hodnotami::
+
+   >>> from enum import Enum
+   >>> class Color(Enum):
+   ...     red = 255, 0, 0
+   ...     green = 0, 255, 0
+   ...     blue = 0, 0, 255
+   ...
+   >>> Color
+   <enum 'Color'>
+   >>> Color.red
+   <Color.red: (255, 0, 0)>
+   >>> Color["red"]
+   <Color.red: (255, 0, 0)>
+   >>> Color((255, 0, 0))
+   <Color.red: (255, 0, 0)>
+   >>> Color.red.name
+   'red'
+   >>> Color.red.value
+   (255, 0, 0)
+   >>> Color.red = "ff0000"
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "/usr/lib/python3.6/enum.py", line 361, in __setattr__
+       raise AttributeError('Cannot reassign members.')
+   AttributeError: Cannot reassign members.
+   >>> Color.red == (255, 0, 0)
+   False
+   >>> Color.red.value == (255, 0, 0)
+   True
+   >>> Color.red is Color.green
+   False
+   >>> Color.red is not Color.blue
+   True
+   >>> list(Color)
+   [<Color.red: (255, 0, 0)>, <Color.green: (0, 255, 0)>, <Color.blue: (0, 0, 255)>]
+
+Vytvoř automaticky ``Enum`` ze seznamu pojmenovaných hodnot::
+
+   >>> from enum import Enum
+   >>> Fruit = Enum("Fruit", ["apple", "banana", "cherry"])
+   >>> Fruit.apple
+   <Fruit.apple: 1>
+   >>> Fruit.apple.name
+   'apple'
+   >>> Fruit.apple.value
+   1
+   >>> Fruit.banana
+   <Fruit.banana: 2>
+   >>> Fruit.cherry
+   <Fruit.cherry: 3>
+
+.. note::
+
+   Pojmenované hodnoty mohou obsahovat aliasy::
+
+      >>> from enum import Enum
+      >>> class Fruit(Enum):
+      ...     apple = 0
+      ...     apples = 0
+      ...     banana = 1
+      ...     bananas = 1
+      ...     cherry = 2
+      ...     cherries = 2
+      ...
+      >>> Fruit(0)
+      <Fruit.apple: 0>
+      >>> Fruit["apples"]
+      <Fruit.apple: 0>
+
+   Pro zabránění vytváření aliasů lze použít ``unique`` dekorátor na ``Enum``
+   třídě::
+
+      >>> from enum import Enum, unique
+      >>> @unique
+      ... class Fruit(Enum):
+      ...     apple = 0
+      ...     apples = 0
+      ...
+      Traceback (most recent call last):
+        File "<stdin>", line 2, in <module>
+        File "/usr/lib/python3.6/enum.py", line 834, in unique
+          (enumeration, alias_details))
+      ValueError: duplicate values found in <enum 'Fruit'>: apples -> apple
+
+.. tip::
+
+   Jestliže pojmenované hodnoty obsahují jen celá čísla, lze dědit přímo z
+   ``IntEnum`` třídy pro lepší porovnávání hodnot::
+
+      >>> from enum import IntEnum
+      >>> class Firewall(IntEnum):
+      ...     disabled = 0
+      ...     enabled = 1
+      ...
+      >>> Firewall
+      <enum 'Firewall'>
+      >>> Firewall.enabled
+      <Firewall.enabled: 1>
+      >>> Firewall.enabled == 1
+      True
+      >>> Firewall.disabled != 0
+      False
+      >>> Firewall.enabled is Firewall.enabled
+      True
+      >>> Firewall.disabled is Firewall.disabled
+      False
+
 PEPs
 ====
 
@@ -6216,6 +6330,9 @@ TODO
 * partial, single_dispatch
 * yield from
 * total_ordering
+* bisect
+* heapq
+* weakref
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
