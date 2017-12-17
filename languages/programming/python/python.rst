@@ -3213,12 +3213,29 @@ Vytvoř generátor, respektive iterátor z funkce::
    ...         yield a
    ...         a, b = b, a + b
    ...
+   >>> fibonacci(100)
+   <generator object fibonacci at 0x7faf49e69f68>
    >>> for number in fibonacci(100):
    ...     print(number, end=" ")
    ... else:
    ...     print()
    ...
    0 1 1 2 3 5 8 13 21 34 55 89
+
+Vytvoř generátor, který tahá data z dalšího generátoru::
+
+   >>> def flatten(sequence):
+   ...     for item in sequence:
+   ...         if isinstance(item, (list, tuple)):
+   ...             yield from flatten(item)
+   ...         else:
+   ...             yield item
+   ...
+   >>> l = [1, [2, [3, [4, [5]]]]]
+   >>> flatten(l)
+   <generator object flatten at 0x7faf46c52360>
+   >>> list(flatten(l))
+   [1, 2, 3, 4, 5]
 
 .. note::
 
@@ -6322,13 +6339,12 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* multithreading a multiprocessing a aio
+* multithreading a multiprocessing a aio (dříve yield from)
 * meta třídy
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
 * closures (callable)
 * partial, single_dispatch
-* yield from
 * total_ordering
 * bisect
 * heapq
