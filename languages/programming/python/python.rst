@@ -3059,6 +3059,72 @@ Vytvoř deskriptor pro validaci vstupních hodnot při inicializaci objektu::
         File "<stdin>", line 8, in __set__
       ValueError: gender must be one of ['M', 'F']
 
+Abstraktní třídy
+^^^^^^^^^^^^^^^^
+
+Vytvoř abstraktní třídu, která poslouží jako rozhraní pro ostatní třídy::
+
+   >>> from abc import ABCMeta, abstractmethod
+   >>> class Animal(metaclass=ABCMeta):
+   ...     @abstractmethod
+   ...     def sound(self):
+   ...         pass
+   ...
+   >>> class Dog(Animal):
+   ...     pass
+   ...
+   >>> d = Dog()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: Can't instantiate abstract class Dog with abstract methods sound
+   >>> class Dog(Animal):
+   ...     def sound(self):
+   ...         return "Woof! Woof!"
+   ...
+   >>> d = Dog()
+   >>> d.sound()
+   'Woof! Woof!'
+
+.. note::
+
+   Abstraktní metody lze použít spolu se zabudovanými dekorátory pro třidu,
+   viz `Zabudované dekorátory`_::
+
+      >>> from abc import ABCMeta, abstractmethod
+      >>> class Abstract(metaclass=ABCMeta):
+      ...     @property
+      ...     @abstractmethod
+      ...     def abstract_property(self):
+      ...         pass
+      ...     @staticmethod
+      ...     @abstractmethod
+      ...     def abstract_static_method(self):
+      ...         pass
+      ...     @classmethod
+      ...     @abstractmethod
+      ...     def abstract_class_method(self):
+      ...         pass
+      ...
+      >>>
+
+.. tip::
+
+   Abstraktní třídu lze vytvořít zkráceně pomocí dědičnost z ``ABC`` třídy::
+
+      >>> from abc import ABC, abstractmethod
+      >>> class Animal(ABC):
+      ...     @abstractmethod
+      ...     def sound(self):
+      ...         pass
+      ...
+      >>> class Dog(Animal):
+      ...     pass
+      ...
+      >>> d = Dog()
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: Can't instantiate abstract class Dog with abstract methods sound
+
 Datové modely
 -------------
 
@@ -6342,7 +6408,7 @@ TODO
 * multithreading a multiprocessing a aio (dříve yield from)
 * meta třídy
 * itertools
-* ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
+* ostatní magické metody, např. __new__ (konstruktor, getattr on dict), __del__ je jenom hook před smazáním
 * closures (callable)
 * partial, single_dispatch
 * total_ordering
