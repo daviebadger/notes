@@ -2672,31 +2672,6 @@ Vytvoř speciální destrukční metodu, která se zavolá před smazáním obje
    >>> del point
    Good bye
 
-Vytvoř speciální metodu pro přetěžení operátoru rovnítka pro porovnání
-shodnosti dvou bodů::
-
-   >>> class Point(object):
-   ...     def __init__(self, x, y):
-   ...         self.x = x
-   ...         self.y = y
-   ...     def __eq__(self, other):
-   ...         return (
-   ...             isinstance(other, Point) and
-   ...             self.x == other.x and
-   ...             self.y == other.y
-   ...         )
-   ...
-   >>> a = Point(0, 1)
-   >>> b = Point(1, 0)
-   >>> a == b
-   False
-   >>> a != b
-   True
-   >>> a == [0, 1]
-   False
-   >>> a != [0, 1]
-   True
-
 Vytvoř normální metodu pro výpočet vzdálenosti dvou bodů::
 
    >>> class Point(object):
@@ -3935,6 +3910,105 @@ Vytvoř číselný objekt s podporou pro zabudované číselné funkce::
       Traceback (most recent call last):
         File "<stdin>", line 1, in <module>
       TypeError: unsupported operand type(s) for +: 'Number' and 'str'
+
+Odbočka k porovnávání objektů
+"""""""""""""""""""""""""""""
+
+Povol použití relačních operátorů na vlastní objekty::
+
+   >>> class Number(object):
+   ...     def __init__(self, value):
+   ...         self._value = value
+   ...
+   >>> x = Number(0)
+   >>> y = Number(1)
+   >>> x < y
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: '<' not supported between instances of 'Number' and 'Number'
+   >>> class Number(object):
+   ...     def __init__(self, value):
+   ...         self._value = value
+   ...     def __lt__(self, other):
+   ...         return isinstance(other, Number) and self._value < other._value
+   ...     def __le__(self, other):
+   ...         return isinstance(other, Number) and self._value <= other._value
+   ...     def __eq__(self, other):
+   ...         return isinstance(other, Number) and self._value == other._value
+   ...
+   >>> x = Number(0)
+   >>> y = Number(1)
+   >>> x < y
+   True
+   >>> x <= y
+   True
+   >>> x == y
+   False
+   >>> x != y
+   True
+   >>> x > y
+   False
+   >>> x >= y
+   False
+
+.. note::
+
+   Relační magické metody mohou taktéž vracet ``NotImplemented`` objekt,
+   avšak žádná výjimka se nevyvolá, když se porovnávájí nepodporované objekty::
+
+      >>> class Number(object):
+      ...     def __init__(self, value=0):
+      ...         self._value = value
+      ...     def __eq__(self, other):
+      ...         if not isinstance(other, Number):
+      ...             return NotImplemented
+      ...         return self._value == other._value
+      ...
+      >>> n = Number()
+      >>> n._value
+      >>> n == 0
+      False
+      >>> bool(n)
+      True
+      >>> True == 0
+      False
+
+   V případě ``NotImplemented`` objektu Python interně ziská booleanskou
+   hodnotu z metody ``__bool__`` a tu teprve porovnává s druhým objektem.
+
+.. tip::
+
+   Pomocí dekorátoru ``total_ordering`` z knihovny ``functools`` stačí
+   vytvořit jen ``__eq__`` a jednu z ``__lt__`` / ``__le__`` / ``__gt__`` /
+   ``__ge__`` metod, aby dekorátor sám odvodil ostatní relační operace::
+
+      >>> from functools import total_ordering
+      >>> @total_ordering
+      ... class Number(object):
+      ...     def __init__(self, value=0):
+      ...         self._value = value
+      ...     def __lt__(self, other):
+      ...         return isinstance(other, Number) and self._value < other._value
+      ...     def __eq__(self, other):
+      ...         return isinstance(other, Number) and self._value == other._value
+      ...
+      >>> x = Number(0)
+      >>> y = Number(1)
+      >>> x < y
+      True
+      >>> x <= y
+      True
+      >>> x == y
+      False
+      >>> x != y
+      True
+      >>> x > y
+      False
+      >>> x >= y
+      False
+
+   Avšak nevýhodou této verze je o něco pomalejší exekuce kódu při porovnávání
+   objektů. Nejlepší je explicitně popsat všechny relační operace.
 
 Odbočka k vyhodnocování pravdivosti objektu
 """""""""""""""""""""""""""""""""""""""""""
@@ -6551,7 +6625,6 @@ TODO
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
 * single_dispatch
-* total_ordering
 * bisect
 * heapq
 * weakref
