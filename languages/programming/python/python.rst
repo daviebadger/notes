@@ -2575,8 +2575,8 @@ vzniklé instance::
    Objekty, které začínájí na podtržítko slouží pro interní potřebu programu a
    tudíž nejsou součásti veřejné API (dokumentace aj.).
 
-Odbočka ke speciální __slots__ proměnné na třídě
-""""""""""""""""""""""""""""""""""""""""""""""""
+Odbočka omezenému počtu atributů
+""""""""""""""""""""""""""""""""
 
 Pomocí proměnné ``__slots__`` na třídě lze striktně definovat, jaké atributy
 mohou existovat, čímž lze ušetřit na paměti, je-li v programu velké množství
@@ -3925,6 +3925,51 @@ Vytvoř číselný objekt s podporou pro zabudované číselné funkce::
       Traceback (most recent call last):
         File "<stdin>", line 1, in <module>
       TypeError: unsupported operand type(s) for +: 'Number' and 'str'
+
+Odbočka k vyhodnocování pravdivosti objektu
+"""""""""""""""""""""""""""""""""""""""""""
+
+Nastav pravdivost objektu::
+
+   >>> class Number(object):
+   ...     def __init__(self, number):
+   ...         self._number = number
+   ...     def __repr__(self):
+   ...         return str(self._number)
+   ...
+   >>> x = Number(0)
+   >>> x
+   0
+   >>> bool(x)
+   True
+   >>> y = Number(1)
+   >>> y
+   1
+   >>> bool(y)
+   True
+   >>> class Number(object):
+   ...     def __init__(self, number):
+   ...         self._number = number
+   ...     def __bool__(self):
+   ...         return self._number != 0
+   ...
+   >>> x = Number(0)
+   >>> bool(x)
+   False
+   >>> y = Number(-1)
+   >>> bool(y)
+   True
+   >>> z = Number(1)
+   >>> bool(z)
+   True
+
+.. note::
+
+   Pokud třída nemá definovanou metodu ``__bool__``, ale má aspoň ``__len__``
+   metodu, tak pravdivý je každý objekt, jehož návratova hodnota z funkce
+   ``len`` na objekt se nerovná nule.
+
+   Bez definovaných metod ``__bool__`` a ``__len__`` je objekt vždy pravdivý.
 
 Kontextový manažer
 ^^^^^^^^^^^^^^^^^^
@@ -6500,7 +6545,6 @@ TODO
 * bisect
 * heapq
 * weakref
-* yield v proměnné
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
