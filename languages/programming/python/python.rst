@@ -3077,6 +3077,10 @@ Vytvoř abstraktní třídu, která poslouží jako rozhraní pro ostatní tří
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    TypeError: Can't instantiate abstract class Dog with abstract methods sound
+   >>> Animal.sound.__isabstractmethod__
+   True
+   >>> Dog.sound.__isabstractmethod__
+   True
    >>> class Dog(Animal):
    ...     def sound(self):
    ...         return "Woof! Woof!"
@@ -3084,6 +3088,12 @@ Vytvoř abstraktní třídu, která poslouží jako rozhraní pro ostatní tří
    >>> d = Dog()
    >>> d.sound()
    'Woof! Woof!'
+   >>> Animal.sound.__isabstractmethod__
+   True
+   >>> Dog.sound.__isabstractmethod__
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: 'function' object has no attribute '__isabstractmethod__'
 
 .. note::
 
@@ -6450,7 +6460,7 @@ TODO
 ====
 
 * multithreading a multiprocessing a aio (dříve yield from)
-* meta třídy
+* meta třídy (např. pořadí proměnných na třídě)
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor, getattr on dict), __del__ je jenom hook před smazáním
 * partial, single_dispatch
