@@ -2662,6 +2662,16 @@ objektu::
    >>> point.y
    1
 
+Vytvoř speciální destrukční metodu, která se zavolá před smazáním objektu::
+
+   >>> class Point(object):
+   ...     def __del__(self):
+   ...         print("Good bye")
+   ...
+   >>> point = Point()
+   >>> del point
+   Good bye
+
 Vytvoř speciální metodu pro přetěžení operátoru rovnítka pro porovnání
 shodnosti dvou bodů::
 
@@ -6539,7 +6549,7 @@ TODO
 
 * meta třídy (např. pořadí proměnných na třídě)
 * itertools
-* ostatní magické metody, např. __new__ (konstruktor, getattr on dict), __del__ je jenom hook před smazáním
+* ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
 * single_dispatch
 * total_ordering
 * bisect
