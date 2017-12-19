@@ -4358,6 +4358,39 @@ Vytvoř uzávěru, která pracuje se zadaným kontextem::
       >>> callable(Multiplier)
       True
 
+.. tip::
+
+   Uzávěru lze napodobit pomocí funkce ``partial`` z knihovny ``functools``,
+   která vytvoří z jiné funkce předpřipravenou funkci s argumenty::
+
+      >>> from functools import partial
+      >>> def multiply(x, y):
+      ...     return x * y
+      ...
+      >>> multiply_with3 = partial(multiply, 3)
+      >>> multiply_with3(3)
+      9
+      >>> callable(multiply_with3)
+      True
+
+   Stejný princip lze aplikovat i u metod pomocí funkce ``partialmethod``::
+
+      >>> from functools import partialmethod
+      >>> class Request(object):
+      ...     @staticmethod
+      ...     def request(method, **kwargs):
+      ...         return method, kwargs
+      ...     get = partialmethod(request, "GET")
+      ...     post = partialmethod(request, "POST")
+      ...     put = partialmethod(request, "PUT")
+      ...     patch = partialmethod(request, "PATCH")
+      ...     delete = partialmethod(request, "DELETE")
+      ...
+      >>> Request.get()
+      ('GET', {})
+      >>> Request.request("POST", name="Davie")
+      ('POST', {'name': 'Davie'})
+
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -6459,11 +6492,10 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* multithreading a multiprocessing a aio (dříve yield from)
 * meta třídy (např. pořadí proměnných na třídě)
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor, getattr on dict), __del__ je jenom hook před smazáním
-* partial, single_dispatch
+* single_dispatch
 * total_ordering
 * bisect
 * heapq
