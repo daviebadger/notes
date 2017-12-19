@@ -4304,6 +4304,50 @@ kešování výsledků. Kromě vlastní implementace memoizace lze použit i dek
    Maximální pamět může být neomezená (``None``) nebo nejlepé omezená s
    mocninami dvojky (2, 4, 8, 16, 32, 64, 128, 256 atd.).
 
+Odbočka k uzávěrám
+""""""""""""""""""
+
+Vytvoř uzávěru, která pracuje se zadaným kontextem::
+
+   >>> def validate_countries(countries):
+   ...     def validate_country(country):
+   ...         return country in countries
+   ...     return validate_country
+   ...
+   >>> validate_country = validate_countries(["CZ", "SK"])
+   >>> validate_country("CZ")
+   True
+   >>> validate_country("PL")
+   False
+   >>> callable(validate_country)
+   True
+   >>> callable(validate_countries)
+   True
+   >>> validate_country.__closure__
+   (<cell at 0x7faf49ecc438: list object at 0x7faf46c58108>,)
+   >>> validate_country.__closure__[0].cell_contents
+   ['CZ', 'SK']
+
+.. note::
+
+   Uzávěru lze vytvořit i pomocí třídy::
+
+      >>> class Multiplier(object):
+      ...     def __init__(self, factor):
+      ...         self.factor = factor
+      ...     def __call__(self, number):
+      ...         return self.factor * number
+      ...
+      >>> multiply_with3 = Multiplier(3)
+      >>> multiply_with3(3)
+      9
+      >>> multiply_with3.factor
+      3
+      >>> callable(multiply_with3)
+      True
+      >>> callable(Multiplier)
+      True
+
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -6409,12 +6453,12 @@ TODO
 * meta třídy
 * itertools
 * ostatní magické metody, např. __new__ (konstruktor, getattr on dict), __del__ je jenom hook před smazáním
-* closures (callable)
 * partial, single_dispatch
 * total_ordering
 * bisect
 * heapq
 * weakref
+* yield v proměnné
 
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
