@@ -1453,7 +1453,7 @@ Seznam již existujících funkcí::
    classmethod()   getattr()     locals()        repr()       zip()
    compile()       globals()     map()           reversed()   __import__()
    complex()       hasattr()     max()           round()
-   delattr()       hash()        memoryview()   set()
+   delattr()       hash()        memoryview()    set()
 
 * ``abs(number)``
 
@@ -1505,7 +1505,8 @@ Seznam již existujících funkcí::
 
        >>> callable("test")
        False
-       >>> def test(): pass
+       >>> def test():
+       ...     pass
        ...
        >>> callable(test)
        True
@@ -3954,7 +3955,8 @@ Povol použití relačních operátorů na vlastní objekty::
 .. note::
 
    Relační magické metody mohou taktéž vracet ``NotImplemented`` objekt,
-   avšak žádná výjimka se nevyvolá, když se porovnávájí nepodporované objekty::
+   avšak žádná výjimka se nevyvolá u porovnávání různých objektů, neboť Python
+   bude místo ``NotImplemented`` hodnoty pracovat s ``__bool__`` hodnotou::
 
       >>> class Number(object):
       ...     def __init__(self, value=0):
@@ -3966,6 +3968,7 @@ Povol použití relačních operátorů na vlastní objekty::
       ...
       >>> n = Number()
       >>> n._value
+      0
       >>> n == 0
       False
       >>> bool(n)
@@ -3973,8 +3976,86 @@ Povol použití relačních operátorů na vlastní objekty::
       >>> True == 0
       False
 
-   V případě ``NotImplemented`` objektu Python interně ziská booleanskou
-   hodnotu z metody ``__bool__`` a tu teprve porovnává s druhým objektem.
+   Pokud už je definována vlastní ``__eq__``, tak se objekt stane
+   nehashovatelným a nepůjde jej použít jako prvek v množine nebo klíč ve
+   slovníku, neboť tyto datové typy pracují s hashovací tabulkou::
+
+      >>> class Test(object):
+      ...     pass
+      ...
+      >>> hash(Test)
+      -9223372036852324379
+      >>> t = Test()
+      >>> hash(t)
+      -9223363262430825023
+      >>> {1, 2, 3, t}
+      {1, 2, 3, <__main__.Test object at 0x7faf46c35c18>}
+      >>> class Number(object):
+      ...     def __init__(self, value):
+      ...         self._value = value
+      ...     def __eq__(self, other):
+      ...         return isinstance(other, Number) and self._value == other._value
+      ...
+      >>> hash(Number)
+      -9223372036852324213
+      >>> n = Number(0)
+      >>> hash(n)
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: unhashable type: 'Number'
+      >>> {n: 0}
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: unhashable type: 'Number'
+      >>> {0: 0}
+      {0: 0}
+
+   Hashovatelné jsou všechny neměnitelný objekty a vlastní objekty bez upravené
+   ``__eq__`` metody. Pokud se vlastní objekt chová jako neměnitelný datový typ
+   a má vlastní ``__eq__`` metodu, měl by mít i vlastní ``__hash__`` metodu::
+
+      >>> class Point(object):
+      ...     __slots__ = ["x", "y"]
+      ...     def __init__(self, x, y):
+      ...         super().__setattr__("x", x)
+      ...         super().__setattr__("y", y)
+      ...     def __setattr__(self, name, value):
+      ...         if hasattr(self, name):
+      ...             raise AttributeError(f"Cannot change value of {name} to {value}")
+      ...         else:
+      ...             raise AttributeError(f"Cannot set value of {name} to {value}")
+      ...     def __delattr__(self, name):
+      ...         raise AttributeError(f"Cannot delete {name}")
+      ...     def __eq__(self, other):
+      ...         return (
+      ...             isinstance(other, Point) and
+      ...             self.x == other.x and
+      ...             self.y == other.y
+      ...         )
+      ...     def __hash__(self):
+      ...         return hash((self.x, self.y))
+      ...
+      >>> p = Point(0, 1)
+      >>> p.x
+      0
+      >>> p.x = 1
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 8, in __setattr__
+      AttributeError: Cannot change value of x to 1
+      >>> del p.x
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 12, in __delattr__
+      AttributeError: Cannot delete x
+      >>> hash(p)
+      3713080549409410656
+      >>> {1, 2, 3, p}
+      {<__main__.Point object at 0x7faf46bed940>, 1, 2, 3}
+
+   Vlastní objekty, které jsou měnitelné a mají upravenou ``__eq__`` metodu,
+   tak implicitně je atribut ``__hash__`` nastaven na ``None``. V žádném
+   případě by neměla ``__hash__`` metoda existovat sama bez ``__eq__`` metody.
 
 .. tip::
 
@@ -4501,6 +4582,12 @@ Vytvoř uzávěru, která pracuje se zadaným kontextem::
       9
       >>> callable(multiply_with3)
       True
+      >>> multiply_with3.func
+      <function multiply at 0x7faf46be9e18>
+      >>> multiply_with3.args
+      (3,)
+      >>> multiply_with3.keywords
+      {}
 
    Stejný princip lze aplikovat i u metod pomocí funkce ``partialmethod``::
 
