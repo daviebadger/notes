@@ -2921,7 +2921,6 @@ Zděd třídu a přepiš původní chování metody::
       >>> employee.salary.net_salary()
       800
 
-
 Modifikace tříd
 ---------------
 
@@ -6248,7 +6247,7 @@ Vytvoř ``namedtuple`` včetně dědičnosti::
 
 .. tip::
 
-   Přidej vlastní metody do ``namedtuple``::
+   Vytvoř vlastní neměnitelný objekt z ``namedtuple``::
 
       >>> from collections import namedtuple
       >>> class Point(namedtuple("Point", ["x", "y"])):
@@ -6266,10 +6265,22 @@ Vytvoř ``namedtuple`` včetně dědičnosti::
       Point: x=0, y=1, distance_from_zero=1.0
       >>> point.x
       0
+      >>> point[0]
+      0
       >>> point.y
+      1
+      >>> point[1]
       1
       >>> point.distance_from_zero
       1.0
+      >>> point.x = 1
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      AttributeError: can't set attribute
+      >>> del point.x
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      AttributeError: can't delete attribute
 
 Modifikované slovníky
 ---------------------
