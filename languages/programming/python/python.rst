@@ -3729,6 +3729,183 @@ Vytvoř napodobeninu měnitelného slovníku::
       >>> d["test"]
       0
 
+Odbočka k přístupu k atributům
+""""""""""""""""""""""""""""""
+
+Povol přístupování ke klíčům slovníků i přes atributy::
+
+   >>> class SuperDict(dict):
+   ...     def __getattr__(self, name):
+   ...         try:
+   ...             return dict.__getitem__(self, name)
+   ...         except KeyError:
+   ...             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+   ...
+   >>> d = SuperDict(a=0)
+   >>> d["a"]
+   >>> d.a
+   0
+   >>> d.b
+   Traceback (most recent call last):
+     File "<stdin>", line 4, in __getattr__
+   KeyError: 'b'
+
+   During handling of the above exception, another exception occurred:
+
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 6, in __getattr__
+   AttributeError: 'SuperDict' object has no attribute 'b'
+   >>> getattr(d, "b", 1)
+   >>> d.pop
+   <built-in method pop of SuperDict object at 0x7f4886801f68>
+   >>> d.pop("a")
+   0
+   >>> d
+   {}
+   >>> d.keys()
+   dict_keys([])
+
+Povol změnu hodnotu klíčů přes atribut::
+
+   >>> class SuperDict(dict):
+   ...     def __getattr__(self, name):
+   ...         try:
+   ...             return dict.__getitem__(self, name)
+   ...         except KeyError:
+   ...             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+   ...     def __setattr__(self, name, value):
+   ...         dict.__setitem__(self, name, value)
+   ...
+   >>> d = SuperDict(a=0)
+   >>> d.a
+   0
+   >>> d.a = 1
+   >>> d.a
+   1
+   >>> setattr(d, "b", 2)
+   >>> d
+   {'a': 1, 'b': 2}
+   >>> d.pop = 3
+   >>> d.pop
+   <built-in method pop of SuperDict object at 0x7f48835b19e8>
+   >>> d
+   {'a': 1, 'b': 2, 'pop': 3}
+   >>> d.pop("pop")
+   3
+
+Povol mázání klíčů přes atribut::
+
+   >>> class SuperDict(dict):
+   ...     def __getattr__(self, name):
+   ...         try:
+   ...             return dict.__getitem__(self, name)
+   ...         except KeyError:
+   ...             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+   ...     def __delattr__(self, name):
+   ...         try:
+   ...             dict.__delitem__(self, name)
+   ...         except KeyError:
+   ...             raise AttributeError(f"{name}")
+   ...
+   >>> d = SuperDict(a=0)
+   >>> d.a
+   0
+   >>> del d.a
+   >>> d
+   {}
+   >>> del d.a
+   Traceback (most recent call last):
+     File "<stdin>", line 9, in __delattr__
+   KeyError: 'a'
+
+   During handling of the above exception, another exception occurred:
+
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 11, in __delattr__
+   AttributeError: a
+   >>> d
+   {}
+   >>> del d.pop
+   Traceback (most recent call last):
+     File "<stdin>", line 9, in __delattr__
+   KeyError: 'pop'
+
+   During handling of the above exception, another exception occurred:
+
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 11, in __delattr__
+   AttributeError: pop
+   >>> d.pop
+   <built-in method pop of SuperDict object at 0x7f4886801f68>
+
+.. note::
+
+   Pro volání původních magických metod je lepší místo zabudované funkce
+   ``super`` volat explicitně předka, např. ``dict.__setattr__`` nebo u
+   vlastních objektů skrze ``object.__setattr__``.
+
+   Volání metod ``__getattr__``, ``__setattr__`` a ``__delattr__`` lze také
+   kromě volání těchto verzi na předcích přeskočit díky přímé manipulaci
+   atributů uložených v ``__dict__``::
+
+      >>> class Dog(object):
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...     def __setattr__(self, name, value):
+      ...         raise AttributeError("Forbidden")
+      ...
+      >>> dog = Dog("Buddy")
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 3, in __init__
+        File "<stdin>", line 5, in __setattr__
+      AttributeError: Forbidden
+      >>> class Dog(object):
+      ...     def __init__(self, name):
+      ...         object.__setattr__(self, "name", name)
+      ...     def __setattr__(self, name, value):
+      ...         raise AttributeError("Forbidden")
+      ...
+      >>> dog = Dog("Buddy")
+      >>> dog.name
+      'Buddy'
+      >>> class Dog(object):
+      ...     def __init__(self, name):
+      ...         self.__dict__["name"] = name
+      ...     def __setattr__(self, name, value):
+      ...         raise AttributeError("Forbidden")
+      ...
+      >>> dog = Dog("Buddy")
+      >>> dog.name
+      'Buddy'
+
+.. tip::
+
+   Pomocí metody ``__dir__`` lze upravit introspekci atributů na objektu::
+
+      >>> class SuperDict(dict):
+      ...     def __getattr__(self, name):
+      ...         try:
+      ...             return dict.__getitem__(self, name)
+      ...         except KeyError:
+      ...             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+      ...     def __dir__(self):
+      ...         return set(dict.__dir__(self) + list(self.keys()))
+      ...
+      >>> d = SuperDict(a=0, pop=1)
+      >>> dir(d)
+      ['__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattr__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'a', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+      >>> "a" in dir(d)
+      True
+      >>> d.pop
+      <built-in method pop of SuperDict object at 0x7f48835b1b48>
+
+   Ve vlastní metodě ``__dir__`` stačí vrátit sekvenci, přičemž Python si sám
+   tuto sekveni převede na seznam a položky v něm seřadí.
+
 Čísla
 ^^^^^
 
@@ -4016,8 +4193,8 @@ Povol použití relačních operátorů na vlastní objekty::
       >>> class Point(object):
       ...     __slots__ = ["x", "y"]
       ...     def __init__(self, x, y):
-      ...         super().__setattr__("x", x)
-      ...         super().__setattr__("y", y)
+      ...         object.__setattr__(self, "x", x)
+      ...         object.__setattr__(self, "y", y)
       ...     def __setattr__(self, name, value):
       ...         if hasattr(self, name):
       ...             raise AttributeError(f"Cannot change value of {name} to {value}")
@@ -6719,9 +6896,8 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* meta třídy (např. pořadí proměnných na třídě)
+* meta třídy (např. pořadí proměnných na třídě, __new__ třída)
 * itertools
-* ostatní magické metody, např. __new__ (konstruktor, getattr on dict)
 * single_dispatch
 * bisect
 * heapq
