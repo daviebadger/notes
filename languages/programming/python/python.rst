@@ -2804,6 +2804,102 @@ kterou si uživatel definuje sám, nejčastěji při dědičnosti::
    >>> str(dog)
    'Buddy'
 
+Odbočka k varování
+""""""""""""""""""
+
+Uživatele lze varovat, že používá starou funkci či metodu, která se v
+budoucnosti smaže a že má používat alternativu::
+
+   >>> from warnings import warn
+   >>> def old_function():
+   ...     warn("'old_function' is deprecated, use 'new_function' instead")
+   ...
+   >>> old_function()
+   __main__:2: UserWarning: 'old_function' is deprecated, use 'new_function' instead
+   >>> def old_function():
+   ...     warn("'old_function' is deprecated, use 'new_function' instead", DeprecationWarning)
+   ...
+   >>> old_function()
+   >>> def old_function():
+   ...     warn("'old_function' will be deprecated, use 'new_function' instead", PendingDeprecationWarning)
+   ...
+   >>> old_function()
+   >>>
+
+.. note::
+
+   Várování ``DeprecationWarning`` a ``PendingDeprecationWarning`` jsou
+   defaultně potlačeny, aby nemátly uživatele. Zobrazit je lze pomocí varovného
+   filtru::
+
+      >>> import warnings
+      >>> warnings.simplefilter("always")  # show all warnings
+      >>> warnings.warn("test", DeprecationError)
+      __main__:1: DeprecationWarning: test
+      >>> warnings.simplefilter("default")  # show suppressed default warnings
+      >>> warnings.warn("test", DeprecationError)
+      __main__:1: DeprecationWarning: test
+
+   Varovné hlášky lze taktéž zapnout pomocí volby ``-W`` a patřičného filtr
+   argumentu:
+
+   .. code:: none
+
+      $ cat test.py
+      import warnings
+
+
+      def old_function():
+          warnings.warn("'old_function' is deprecated, use 'new_function' instead", DeprecationWarning)
+
+
+      old_function()
+      $ python3 -W default test.py
+      test.py:5: DeprecationWarning: 'old_function' is deprecated, use 'new_function' instead
+        warnings.warn("'old_function' is deprecated, use 'new_function' instead", DeprecationWarning)
+      $ python3 -Wd test.py
+      test.py:5: DeprecationWarning: 'old_function' is deprecated, use 'new_function' instead
+        warnings.warn("'old_function' is deprecated, use 'new_function' instead", DeprecationWarning)
+
+   Hlášky lze kompletně ignorovat nebo je proměnit ve výjimky:
+
+   .. code:: none
+
+      $ python3 -W ignore test.py
+      $ python3 -Wi test.py
+      $ python3 -q
+      >>> import warnings
+      >>> warnings.simplefilter("ignore")  # for all warnings
+      >>> warnings.warn("test")
+      >>> warnings.simplefilter("error", UserWarning)  # for this warning
+      >>> warnings.warn("test")
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      UserWarning: test
+      >>> warnings.warn("test", DeprecationWarning)
+      >>>
+
+.. tip::
+
+   Stejně jako výjimky, i varování lze zachytit::
+
+      >>> from warnings import catch_warnings, warn
+      >>> with catch_warnings():
+      ...     warn("test")
+      ...
+      >>> with catch_warnings(record=True) as warns:
+      ...     warn("test")
+      ...     print(warns)
+      ...
+      [<warnings.WarningMessage object at 0x7f05bdaf7ef0>]
+      >>> with catch_warnings(record=True) as warns:
+      ...     warn("test")
+      ...     print(str(warns[0].message) == "test")
+      ...
+      True
+
+   Seznam všech varování lze najít `ZDE <https://docs.python.org/3/library/exceptions.html#warnings>`_.
+
 Dědičnost
 ^^^^^^^^^
 
