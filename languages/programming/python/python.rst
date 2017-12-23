@@ -5722,6 +5722,53 @@ Metody seznamů
        >>> y
        [{'name': 'Jacob', 'age': 17}, {'name': 'Davie', 'age': 22}]
 
+.. tip::
+
+   Pokud seznam tvoří seřazené položky, tak lze pomocí funkce ``insort`` z
+   knihovny ``bisect`` vložit další položku tak, aby seznam byl stále seřazený
+   bez nutnosti volat seřazovací funkci::
+
+      >>> from bisect import insort
+      >>> x = list(range(10))
+      >>> insort(x, -1)
+      >>> x
+      [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      >>> insort(x, 10)
+      >>> x
+      [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      >>> y = ["a", "b", "c"]
+      >>> insort(y, "d")
+      >>> y
+      ['a', 'b', 'c', 'd']
+
+   Na jaké misto bude položka vložena lze zjístit pomocí funkce ``bisect``::
+
+      >>> from bisect import bisect
+      >>> x = list(range(10))
+      >>> bisect(x, -1)
+      0
+      >>> x.insert(0, -1)
+      >>> x
+      [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      >>> bisect(x, -1)
+      1
+
+   Pokud se už položka nachází v seznamu, tak ``bisect`` defaultně vrací index
+   následující za existující položkou. Stejný principem se chová i funkce
+   ``insort``, není-li použit opačný algoritmus::
+
+      >>> from bisect import bisect, bisect_left, insort, insort_left
+      >>> x = list(range(10))
+      >>> bisect(x, 0)
+      1
+      >>> bisect_left(x, 0)
+      0
+      >>> insort(x, 0)
+      >>> x
+      [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      >>> insort_left(x, 0)
+      [0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 N-tice
 ------
 
@@ -6995,7 +7042,6 @@ TODO
 * meta třídy (např. pořadí proměnných na třídě, __new__ třída)
 * itertools
 * single_dispatch
-* bisect
 * heapq
 * weakref
 
