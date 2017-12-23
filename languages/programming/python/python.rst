@@ -3359,6 +3359,71 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
       b
       a
 
+Kombinační iterátory
+""""""""""""""""""""
+
+* ``product(*iterables, repeat=1)``
+
+  * vrať iterátor s kartézským součinem mezi ``iterables``::
+
+       >>> from itertools import product
+       >>> i = "ABC"
+       >>> product(i)
+       <itertools.product object at 0x7f745ac8dcf0>
+       >>> list(product(i))
+       [('A',), ('B',), ('C',)]
+       >>> list(product(i, repeat=2))
+       [('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'B'), ('B', 'C'), ('C', 'A'), ('C', 'B'), ('C', 'C')]
+       >>> list(product(i, repeat=3))
+       [('A', 'A', 'A'), ('A', 'A', 'B'), ('A', 'A', 'C'), ('A', 'B', 'A'), ('A', 'B', 'B'), ('A', 'B', 'C'), ('A', 'C', 'A'), ('A', 'C', 'B'), ('A', 'C', 'C'), ('B', 'A', 'A'), ('B', 'A', 'B'), ('B', 'A', 'C'), ('B', 'B', 'A'), ('B', 'B', 'B'), ('B', 'B', 'C'), ('B', 'C', 'A'), ('B', 'C', 'B'), ('B', 'C', 'C'), ('C', 'A', 'A'), ('C', 'A', 'B'), ('C', 'A', 'C'), ('C', 'B', 'A'), ('C', 'B', 'B'), ('C', 'B', 'C'), ('C', 'C', 'A'), ('C', 'C', 'B'), ('C', 'C', 'C')]
+
+* ``permutations(iterable, r=None)``
+
+  * vrať iterátor s permutacemi v n-tici::
+
+       >>> from itertools import permutations
+       >>> i = "ABC"
+       >>> permutations(i)
+       <itertools.permutations object at 0x7f745dea2e08>
+       >>> list(permutations(i))
+       [('A', 'B', 'C'), ('A', 'C', 'B'), ('B', 'A', 'C'), ('B', 'C', 'A'), ('C', 'A', 'B'), ('C', 'B', 'A')]
+       >>> list(permutations(i, 1))
+       [('A',), ('B',), ('C',)]
+       >>> list(permutations(i, 2))
+       [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
+       >>> list(permutations(i, 3))
+       [('A', 'B', 'C'), ('A', 'C', 'B'), ('B', 'A', 'C'), ('B', 'C', 'A'), ('C', 'A', 'B'), ('C', 'B', 'A')]
+
+* ``combinations(iterable, r)``
+
+  * vrať iterátor se seřazenými kombinacemi bez opakování v n-tici::
+
+       >>> from itertools import combinations
+       >>> i = "ABC"
+       >>> combinations(i, 1)
+       <itertools.combinations object at 0x7f745d7ff458>
+       >>> list(combinations(i, 1))
+       [('A',), ('B',), ('C',)]
+       >>> list(combinations(i, 2))
+       [('A', 'B'), ('A', 'C'), ('B', 'C')]
+       >>> list(combinations(i, 3))
+       [('A', 'B', 'C')]
+
+* ``combinations_with_replacement(iterable, r)``
+
+  * vrať iterátor se seřazenými kombinacemi s opakováním v n-tici::
+
+       >>> from itertools import combinations_with_replacement
+       >>> i = "ABC"
+       >>> combinations_with_replacement(i, 1)
+       <itertools.combinations_with_replacement object at 0x7f745d80c368>
+       >>> list(combinations_with_replacement(i, 1))
+       [('A',), ('B',), ('C',)]
+       >>> list(combinations_with_replacement(i, 2))
+       [('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'B'), ('B', 'C'), ('C', 'C')]
+       >>> list(combinations_with_replacement(i, 3))
+       [('A', 'A', 'A'), ('A', 'A', 'B'), ('A', 'A', 'C'), ('A', 'B', 'B'), ('A', 'B', 'C'), ('A', 'C', 'C'), ('B', 'B', 'B'), ('B', 'B', 'C'), ('B', 'C', 'C'), ('C', 'C', 'C')]
+
 Generátory
 ^^^^^^^^^^
 
@@ -7040,7 +7105,6 @@ TODO
 ====
 
 * meta třídy (např. pořadí proměnných na třídě, __new__ třída)
-* itertools
 * single_dispatch
 * heapq
 * weakref
