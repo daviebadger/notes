@@ -3359,6 +3359,89 @@ Vytvoř vlastní iterátor s podporou pro iteraci nad obráceným iterátorem::
       b
       a
 
+Nekonečné iterátory
+"""""""""""""""""""
+
+* ``count(start=0, step=1)``
+
+  * vrať iterátor, který generuje do nekonečna čísla od ``start`` s krokem
+    ``step``::
+
+       >>> from itertools import count
+       >>> i = count(step=-1)
+       >>> for _ in range(10):
+       ...     next(i)
+       ...
+       0
+       -1
+       -2
+       -3
+       -4
+       -5
+       -6
+       -7
+       -8
+       -9
+
+* ``cycle(iterable)``
+
+  * vrať iterátor, který nekonečně vrací prvky z ``iterable``::
+
+       >>> from itertools import cycle
+       >>> i = cycle("ABC")
+       >>> for _ in range(9):
+       ...     next(i)
+       ...
+       'A'
+       'B'
+       'C'
+       'A'
+       'B'
+       'C'
+       'A'
+       'B'
+       'C'
+
+* ``repeat(object, times=None)``
+
+  * vrať iterátor, kde se ``object`` opakuje ``times`` krát, defaultně
+    nekonečně krát::
+
+       >>> from itertools import repeat
+       >>> repeat(3)
+       repeat(3)
+       >>> next(repeat(3))
+       3
+       >>> list(repeat(3, 3))
+       [3, 3, 3]
+
+.. tip::
+
+   Zabudované funkce ``map`` umí pro zadanou funkci rozbalit argumenty z
+   vícero iterátorů, dokud nějaký nedojde::
+
+      >>> from operator import mul
+      >>> for number in range(1, 11):
+      ...     list(map(mul, range(1, 11)))
+      ...
+      Traceback (most recent call last):
+        File "<stdin>", line 2, in <module>
+      TypeError: op_mul expected 2 arguments, got 1
+      >>> from itertools import repeat
+      >>> for number in range(1, 11):
+      ...     list(map(mul, range(1, 11), repeat(number)))
+      ...
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+      [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+      [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+      [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+      [6, 12, 18, 24, 30, 36, 42, 48, 54, 60]
+      [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
+      [8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
+      [9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
+      [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
 Kombinační iterátory
 """"""""""""""""""""
 
