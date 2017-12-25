@@ -2055,6 +2055,14 @@ Pokud je interaktivní shell spuštěn z místa, ve kterém se nachází adresá
 
       __all__ = ["X"]
 
+Odbočka k externím balíčkům
+"""""""""""""""""""""""""""
+
+Pomocí instalátoru `pip`_ lze nainstalovat i externí balíčky, které se
+zpravidla nacházejí v repozitáři `PyPI`_.
+
+Přehled těch nejznámějších balíčků lze najít na `Awesome Python`_.
+
 Odbočka ke způsobu importování
 """"""""""""""""""""""""""""""
 
@@ -7360,6 +7368,7 @@ TODO
 * heapq
 * weakref
 
+.. _Awesome Python: https://github.com/vinta/awesome-python
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
 .. _Google: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _IPython: https://ipython.org/index.html
@@ -7369,3 +7378,5 @@ TODO
 .. _PEP: https://www.python.org/dev/peps/
 .. _PEP 8: https://www.python.org/dev/peps/pep-0008/
 .. _PEP 20: https://www.python.org/dev/peps/pep-0020/
+.. _pip: https://pip.pypa.io/en/stable/
+.. _PyPI: https://pypi.python.org/pypi
