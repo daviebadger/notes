@@ -1522,7 +1522,7 @@ Seznam již existujících funkcí::
 
 * ``divmod(x, y)``
 
-  * vrať entici s výsledkem celočíselného dělení a zbytkem::
+  * vrať n-tici s výsledkem celočíselného dělení a zbytkem::
 
        >>> divmod(2, 1)
        (2, 0)
@@ -1550,6 +1550,8 @@ Seznam již existujících funkcí::
        <filter object at 0x7fdb42584e48>
        >>> list(filter(lambda number: number % 2 == 0, range(11)))
        [0, 2, 4, 6, 8, 10]
+       >>> list(filter(None, [0, 1, "", "2", {}, {3}]))
+       [1, '2', {3}]
 
 * ``float(value=0.0)``
 
@@ -1792,7 +1794,7 @@ Seznam již existujících funkcí::
 
 * ``tuple(iterable=())``
 
-  * převeď ``iterable`` na entici, je-li to možné::
+  * převeď ``iterable`` na n-tici, je-li to možné::
 
        >>> tuple()
        ()
@@ -1811,7 +1813,8 @@ Seznam již existujících funkcí::
 * ``zip(*iterables)``
 
   * vrať ``zip`` objekt, který propojí jednotlivé položky v ``iterables`` do
-    entic v seznamu nebo naopak rozbalí ``zip`` objekt::
+    n-tic, dokud se některý ``iterable`` nevyčerpá nebo naopak rozbalí
+    ``zip`` objekt::
 
        >>> a = [1, 2, 3]
        >>> b = ["a", "b", "c"]
@@ -3441,6 +3444,171 @@ Nekonečné iterátory
       [8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
       [9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
       [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+Konečné iterátory
+"""""""""""""""""
+
+* ``chain(*iterables)``
+
+  * vrať iterátor, který spojí dohromady ``iterables``::
+
+       >>> from itertools import chain
+       >>> chain("ABC", [1, 2, 3])
+       <itertools.chain object at 0x7f47fc053e48>
+       >>> list(chain("ABC", [1, 2, 3]))
+       ['A', 'B', 'C', 1, 2, 3]
+
+* ``chain.from_iterable(iterable)``
+
+  * vrať iterátor, který spojí dohromady vnořené ``iterable`` položky v
+    ``iterable``::
+
+       >>> from itertools import chain
+       >>> chain.from_iterable(["ABC", [1, 2, 3]])
+       <itertools.chain object at 0x7f47fb9954e0>
+       >>> list(chain.from_iterable(["ABC", [1, 2, 3]]))
+       ['A', 'B', 'C', 1, 2, 3]
+
+* ``filterfalse(predicate, iterable)``
+
+  * vrať iterátor, který pomocí funkce ``predicate`` profiltruje položky z
+    ``iterable`` tak, aby položka byla nepravdivá (opak funkce ``filter``)::
+
+       >>> from itertools import filterfalse
+       >>> filterfalse(None, [0, 1, "", "2", {}, {3}])
+       <itertools.filterfalse object at 0x7fdea34bde80>
+       >>> list(filterfalse(None, [0, 1, "", "2", {}, {3}]))
+       [0, '', {}]
+       >>> list(filterfalse(lambda x: x % 2 == 0, range(10)))
+       [1, 3, 5, 7, 9]
+
+* ``islice(iterable, stop)``
+* ``islice(iterable, start, stop, step=1)``
+
+  * vrať iterátor, který vrátí jen položky v rozsahu ``start`` a ``stop`` s
+    volitelným krokem ``step``, obdobně jako funkce ``range``::
+
+       >>> from itertools import islice
+       >>> i<itertools.islice object at 0x7f03c0395e08>
+       <itertools.islice object at 0x7f03c0395e08>
+       >>> list(islice(range(10), 3))
+       [0, 1, 2]
+       >>> i = iter(range(10))
+       >>> list(islice(i, 3))
+       [0, 1, 2]
+       >>> list(islice(i, 3))
+       [3, 4, 5]
+       >>> list(islice(i, 3))
+       [6, 7, 8]
+       >>> list(islice(i, 3))
+       [9]
+       >>> list(islice(i, 3))
+       []
+
+* ``starmap(function, iterable)``
+
+  * vrať iterátor, který vrací položky z ``iterable`` po aplikaci funkce
+    ``function``, avšak na rozdíl od ``map`` funkce, ``iterable`` musí
+    obsahovat vnořené ``iterable``::
+
+       >>> from operator import mul
+       >>> from itertools import starmap
+       >>> z = zip(range(1, 11), range(1, 11))
+       >>> starmap(mul, z)
+       <itertools.starmap object at 0x7f03c198f860>
+       >>> list(starmap(mul, z))
+       [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+* ``tee(iterable, n=2)``
+
+  * vrať iterátory v n-tici, které se ``n`` krát vytvoří z ``iterable``::
+
+       >>> from itertools import tee
+       >>> i = range(10)
+       >>> tee(i)
+       (<itertools._tee object at 0x7f03bd179c88>, <itertools._tee object at 0x7f03bd179cc8>)
+       >>> t = tee(i)
+       >>> next(t[0])
+       0
+       >>> list(t[0])
+       [1, 2, 3, 4, 5, 6, 7, 8, 9]
+       >>> list(t[1])
+       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+       >>> list(i)  # origin iterable
+       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+       >>> list(t[0])
+       []
+       >>> list(t[1])
+       []
+
+* ``zip_longest(*iterables, fillvalue=None)``
+
+  * vrať iterátor, který propojí jednotlivé položky v ``iterables`` do n-tic,
+    avšak na rozdíl od ``zip`` funkce se zipování neukonči, pokud se nějaký
+    ``iterable`` vyčerpá, neboť se doplní do n-tice hodnotou ``fillvalue``::
+
+       >>> from itertools import zip_longest
+       >>> a = "ABC"
+       >>> b = [0, 1]
+       >>> zip_longest(a, b)
+       <itertools.zip_longest object at 0x7f47fc0639f8>
+       >>> list(zip_longest(a, b))
+       [('A', 0), ('B', 1), ('C', None)]
+
+.. note::
+
+   Další funkce pro práci s ``iterable`` objekty lze najíst v knihovně
+   ```itertools`` včetně návodu na vytváření vlastních
+   `iter funkcí <https://docs.python.org/3/library/itertools.html#itertools-recipes>`_
+   nebo v externích balíčcích zaměřené na funkcionální programování.
+
+.. tip::
+
+   Vrať iterátor, který rozseká ``iterable`` na úplné celky o délce ``size`` a
+   neúplné zahodí::
+
+      >>> def chunks(iterable, size):
+      ...     return zip(*[iter(iterable)] * size)
+      ...
+      >>> chunks(range(10), 3)
+      <zip object at 0x7f3e12c83d48>
+      >>> list(chunks(range(10), 3))
+      [(0, 1, 2), (3, 4, 5), (6, 7, 8)]
+
+   Vrať iterátor, který rozseká ``iterable`` na úplné celky o délce ``size`` a
+   neúplné ponechá na konci::
+
+      >>> from itertools import islice
+      >>> def chunks(iterable, size):
+      ...     iterable = iter(iterable)
+      ...     return iter(lambda: tuple(islice(iterable, size)), ())
+      ...
+      >>> list(chunks(range(10), 3))
+      [(0, 1, 2), (3, 4, 5), (6, 7, 8), (9,)]
+
+   Vrať iterátor, který rozseká ``iterable`` na úplné celky o délce ``size`` a
+   neúplné vyplní hodnotou ``fill``::
+
+      >>> from itertools import zip_longest
+      >>> def chunks(iterable, size, fillvalue=None):
+      ...     return zip_longest(*[iter(iterable)] * size, fillvalue=fillvalue)
+      ...
+      >>> chunks(range(10), 3)
+      <itertools.zip_longest object at 0x7f3e15e9fe58>
+      >>> list(chunks(range(10), 3))
+      [(0, 1, 2), (3, 4, 5), (6, 7, 8), (9, None, None)]
+      >>> list(chunks(range(10), 3, "X"))
+      [(0, 1, 2), (3, 4, 5), (6, 7, 8), (9, 'X', 'X')]
+
+   Pokud funkce ``iter`` dostane i druhý argument, tzv. sentinel, tak první
+   argument musí být volatelný objekt, který se bude volat tak dlouho, dokud
+   se nevrátí hodnota rovna sentinelu::
+
+      >>> with open("test.py") as file:
+      ...     for line in iter(file.readline, "\n"):  # Until line == blank line
+      ...          print(repr(line))
+      ...
+      'import itertools\n'
 
 Kombinační iterátory
 """"""""""""""""""""
