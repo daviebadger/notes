@@ -5627,6 +5627,55 @@ její instancí::
       >>> point.origin_y()
       1
 
+Odbočka k delegaci argumentů
+""""""""""""""""""""""""""""
+
+Spusť různé funkce na základě datového typu argumentu::
+
+   >>> from functools import singledispatch
+   >>> @singledispatch
+   >>> def hello(name):
+   ...     pass
+   ...
+   >>> @hello.register(str)
+   ... def hello_str(name):
+   ...     return f"Hello {name}"
+   ...
+   >>> hello(0)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "/usr/lib/python3.6/functools.py", line 803, in wrapper
+       return dispatch(args[0].__class__)(*args, **kw)
+     File "<stdin>", line 3, in hello
+   ValueError: int is not supported
+   >>> hello("Davie")
+   'Hello Davie'
+
+.. note::
+
+   Povolené datové typy lze seskupovat do sebe::
+
+      >>> from functools import singledispatch
+      >>> @singledispatch
+      >>> def hello(name):
+      ...     pass
+      ...
+      >>> @hello.register(list)
+      ... @hello.register(tuple)
+      ... def hello_container(name):
+      ...     conjuction = " and "
+      ...     names = " and ".join(name).rstrip(conjuction)
+      ...     return f"Hello {names}"
+      ...
+      >>> hello(["Davie", "Jacob"])
+      'Hello Davie and Jacob'
+
+.. tip::
+
+   Pro komplexnější podporu datových typů a jejich definování u vícero
+   argumentů najednou lze použít externí knihovnu
+   `multipledispatch <https://github.com/mrocklin/multipledispatch>`.
+
 Základní datové typy
 ====================
 
@@ -7556,7 +7605,6 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* single_dispatch
 * heapq
 
 .. _Awesome Python: https://github.com/vinta/awesome-python
