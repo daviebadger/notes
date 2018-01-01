@@ -3151,6 +3151,198 @@ Vytvoř deskriptor pro validaci vstupních hodnot při inicializaci objektu::
         File "<stdin>", line 8, in __set__
       ValueError: gender must be one of ['M', 'F']
 
+
+Meta třídy
+^^^^^^^^^^
+
+Vytvoř meta třídu, která si pamatuje počet volání dané metody::
+
+   >>> from functools import wraps
+   >>> class CounterMeta(type):
+   ...     def __new__(cls, name, bases, namespace, debug=False):
+   ...         if debug:
+   ...             print(cls)
+   ...             print(name)
+   ...             print(bases)
+   ...             print(namespace)
+   ...         for attr in namespace:
+   ...             if not attr.startswith("__") and callable(namespace[attr]):
+   ...                 namespace[attr] = cls.count(namespace[attr])
+   ...         return type.__new__(cls, name, bases, namespace)
+   ...     @staticmethod
+   ...     def count(func):  # Decorator
+   ...         @wraps(func)
+   ...         def wrapper(*args, **kwargs):
+   ...             wrapper.count += 1
+   ...             return func(*args, **kwargs)
+   ...         wrapper.count = 0
+   ...         return wrapper
+   ...
+   >>> class Point(metaclass=CounterMeta):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...     def distance_from_zero(self):
+   ...         return (self.x ** 2 + self.y ** 2) ** 0.5
+   ...
+   >>> p = Point(0, 1)
+   >>> p.x
+   0
+   >>> p.y
+   1
+   >>> p.distance_from_zero()
+   1.0
+   >>> p.distance_from_zero()
+   1.0
+   >>> p.distance_from_zero()
+   1.0
+   >>> p.distance_from_zero.count
+   3
+   >>> class Point(metaclass=CounterMeta, debug=True):
+   ...     def __init__(self, x, y):
+   ...         self.x = x
+   ...         self.y = y
+   ...     def distance_from_zero(self):
+   ...         return (self.x ** 2 + self.y ** 2) ** 0.5
+   ...
+   <class '__main__.CounterMeta'>
+   Point
+   ()
+   {'__module__': '__main__', '__qualname__': 'Point', '__init__': <function Point.__init__ at 0x7fdd5a7f0620>, 'distance_from_zero': <function Point.distance_from_zero at 0x7fdd5a7f06a8>}
+   >>> p = Point(0, 1)
+
+Vytvoř meta třídu, která si pamatuje pořadí definovaných atributů na třídě::
+
+   >>> from collections import OrderedDict
+   >>> class OrderedMeta(type):
+   ...     @classmethod
+   ...     def __prepare__(cls, name, bases):  # Structure for namespace
+   ...         return OrderedDict()
+   ...     def __new__(cls, name, bases, namespace):
+   ...         result = type.__new__(cls, name, bases, dict(namespace))
+   ...         result._order = [key for key in namespace if not key.startswith("_")]
+   ...         return result
+   ...
+   >>> class Point(metaclass=OrderedMeta):
+   ...     z = 0
+   ...     y = 1
+   ...     x = 0
+   ...
+   >>> Point._order
+   ['z', 'y', 'x']
+   >>> Point.a = "a"
+   >>> Point._order
+   ['z', 'y', 'x']
+
+.. note::
+
+   Pomocí ``type`` objektu lze taktéž dynamicky vytvářet třídy::
+
+      >>> class Point(object):
+      ...     x = 0
+      ...     y = 1
+      ...
+      >>> def distance_from_zero(self):
+      ...     return (self.x ** 2 + self.y ** 2) ** 0.5
+      ...
+      >>> Point = type("Point", (object,), {"x": 0, "y": 1, "distance_from_zero": distance_from_zero})
+      >>> point = Point()
+      >>> point.x
+      0
+      >>> point.y
+      1
+      >>> point.distance_from_zero()
+      1.0
+
+   Metoda ``__call__`` v ``type`` objektu interně volá metodu ``__new__``,
+   která vytvoří instanci dané třídy a posléze metodu ``__init__``, pomocí
+   které se upraví atributy této instance.
+
+   Pokud se volá objekt ``type`` jen s jedním argumentem, tak se vrátí daný
+   typ objektu::
+
+      >>> type(0)
+      <class 'int'>
+      >>> type(int)
+      <class 'type'>
+      >>> type(type)
+      <class 'type'>
+
+   Je-li argumentem instance nějakého objektu, vrátí se název třídy, ze které
+   tato instance vznikla. Je-li argumentem třída, vrátí se vždy ``type`` třída,
+   neboť všechny třídy jsou interně vytvořeny z této meta třidy::
+
+      >>> class Point(object):
+      ...     x = 0
+      ...     y = 1
+      ...
+      >>> point = Point()
+      >>> type(point)
+      <class '__main__.Point'>
+      >>> type(Point)
+      <class 'type'>
+
+.. tip::
+
+   Povol jen jednu instanci z dané třídy::
+
+      >>> class SingletonMeta(type):
+      ...     _instances = None
+      ...     def __call__(cls, *args, **kwargs):
+      ...         if cls._instances is None:
+      ...             cls._instances = type.__call__(cls, *args, **kwargs)
+      ...         return cls._instances
+      ...
+      >>> class Test(metaclass=SingletonMeta):
+      ...     pass
+      ...
+      >>> a = Test()
+      >>> b = Test()
+      >>> a is b
+      True
+      >>> id(a) == id(b)
+      True
+      >>> class Dog(metaclass=Singleton):
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...
+      >>> buddy = Dog("Buddy")
+      >>> charlie = Dog("Charlie")
+      >>> buddy.name
+      'Buddy'
+      >>> charlie.name
+      'Buddy'
+
+   Singleton lze taktéž vytvořit bez metatřídy pomocí upravení ``__new__``
+   metody, avšak na rozdíl od metatřídy se vždy bude volat metoda ``__init__``,
+   která může upravit atributy na instanci::
+
+      >>> class Singleton(object):
+      ...     _instance = None
+      ...     def __new__(cls, *args, **kwargs):
+      ...         if cls._instance is None:
+      ...             print("Singleton._instance is None")
+      ...             cls._instance = object.__new__(cls)
+      ...         else:
+      ...             print("Singleton._instance is not None")
+      ...         return cls._instance
+      ...
+      >>> class Dog(Singleton):
+      ...     def __init__(self, name):
+      ...         self.name = name
+      ...
+      >>> buddy = Dog("Buddy")
+      Singleton._instance is None
+      >>> charlie = Dog("Charlie")
+      Singleton._instance is not None
+      >>> buddy.name
+      'Charlie'
+      >>> charlie.name
+      'Charlie'
+      >>> buddy is charlie
+      True
+      >>> id(buddy) == id(charlie)
+
 Abstraktní třídy
 ^^^^^^^^^^^^^^^^
 
@@ -3211,7 +3403,8 @@ Vytvoř abstraktní třídu, která poslouží jako rozhraní pro ostatní tří
 
 .. tip::
 
-   Abstraktní třídu lze vytvořít zkráceně pomocí dědičnost z ``ABC`` třídy::
+   Abstraktní třídu lze vytvořít zkráceně pomocí dědičnost z ``ABC`` třídy,
+   která už obsahuje v sobě metařídu ``ABCMeta``::
 
       >>> from abc import ABC, abstractmethod
       >>> class Animal(ABC):
@@ -7363,10 +7556,8 @@ nejznámější PEPy patří:
 TODO
 ====
 
-* meta třídy (např. pořadí proměnných na třídě, __new__ třída)
 * single_dispatch
 * heapq
-* weakref
 
 .. _Awesome Python: https://github.com/vinta/awesome-python
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
