@@ -84,6 +84,11 @@ Aktivuj virtualenv::
 
       $ python
 
+   To samé platí pro instalátor ``pip``, kde není nutné používat volbu
+   ``--user``, neboť se balíček instaluje jen pro daný virtualenv::
+
+      $ pip install flake8
+
 Deaktivace
 ^^^^^^^^^^
 
