@@ -272,3 +272,18 @@ použije::
       $ flake8 file.py
       $ flake8 --enable-extensions=T file.py
       ./file.py:1:1: T001 print found.
+
+Konfigurace
+===========
+
+Některé volby příkazu ``flake8`` lze uložit do konfiguračního souboru,
+zpravidla se jedná o ``setup.cfg`` soubor ve formátu ``INI`` v rootu projektu::
+
+   [flake8]
+   # disable-noqa = True
+   # enable-extensions = T
+   exclude = docs,tests
+   # ignore = F401
+   max-complexity = 10
+   max-line-length = 99
+   select = E,F,W
