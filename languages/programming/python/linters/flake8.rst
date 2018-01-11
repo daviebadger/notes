@@ -180,6 +180,14 @@ Zobraz jen konkrétní chybové hlášky::
    ./test/b.py:7:1: E302 expected 2 blank lines, found 1
    ./test/a.py:1:1: F401 'this' imported but unused
 
+.. note::
+
+   Některé chybové hlášky z ``pycodestyle`` jsou defaultně deaktivovány, např.
+   ``E226`` pro chybějící mezery okolo aritmetických operátorů. Z tohoto důvodu
+   je třeba explicitně povolit všechny hlášky::
+
+      $ flake8 --select E,F,W
+
 flake8 --disable-noqa
 ^^^^^^^^^^^^^^^^^^^^^
 
