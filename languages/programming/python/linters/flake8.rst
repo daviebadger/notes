@@ -65,6 +65,18 @@ Zkontroluj kódy v adresáři::
       $ echo $?
       0
 
+.. tip::
+
+   ``flake8`` lze použít jako pre-commit hook v gitu, který zabrání vytvoření
+   commitu, pokud se objeví chybová hláška::
+
+      $ flake8 --install-hook git
+      $ git config --bool flake8.strict true
+      $ git config --bool flake8.lazy true
+      $ git commit
+      ./test.py:1:6: E211 whitespace before '('
+      $
+
 Odbočka k chybovým hláškám
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
