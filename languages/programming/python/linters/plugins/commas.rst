@@ -16,7 +16,7 @@ Instalace
 
 ::
 
-   $ pip install --user flake8
+   $ pip install --user flake8-commas
 
 Ukázka
 ======
