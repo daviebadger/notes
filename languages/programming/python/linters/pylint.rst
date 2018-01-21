@@ -319,3 +319,26 @@ Zobraz vygenerovaný konfigurační soubor::
    souboru ``.pylintrc``::
 
       $ pylint --generate-rcfile > .pylintrc
+
+Konfigurace
+===========
+
+Některé volby příkazu ``pylint`` lze nakonfigurovat ve vygenerovaném
+konfiguračním souboru::
+
+   [MASTER]
+
+   # List of plugins (as comma separated values of python modules names) to load,
+   # usually to register additional checkers.
+   load-plugins=pylint.extensions.bad_builtin,pylint.extensions.docparams,pylint.extensions.redefined_variable_type
+
+.. note::
+
+   Rozšíření ``docparams`` pro kontrolu správné struktury docstringů je třeba
+   ještě dodatečně nakonfigurovat, aby se zobrazovaly správně chybové hlášky::
+
+      # docparams
+      accept-no-param-doc=no
+      accept-no-raise-doc=no
+      accept-no-return-doc=no
+      accept-no-yields-doc=no
