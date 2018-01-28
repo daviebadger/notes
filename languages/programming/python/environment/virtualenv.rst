@@ -18,6 +18,27 @@ Instalace
 
    $ pip install --user virtualenv
 
+.. note::
+
+   Alternativně lze použít již zabudovaný a osekaný ``venv`` nástroj v Pythonu,
+   přičemž je třeba mít nainstalovaný systémový balíček ``python3-venv``::
+
+      $ python3 -m venv venv
+      The virtual environment was not created successfully because ensurepip is not
+      available.  On Debian/Ubuntu systems, you need to install the python3-venv
+      package using the following command.
+
+          apt-get install python3-venv
+
+      You may need to use sudo with that command.  After installing the python3-venv
+      package, recreate your virtual environment.
+
+      Failing command: ['/home/davie/github/notes/venv/bin/python3', '-Im', 'ensurepip', '--upgrade', '--default-pip']
+      $ sudo apt install python3-venv
+      $ python3 -m venv venv
+      $ ls
+      venv
+
 Virtuální prostředí
 ===================
 
