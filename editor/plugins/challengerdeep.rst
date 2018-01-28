@@ -1,6 +1,6 @@
-===========
- FlatColor
-===========
+================
+ ChallengerDeep
+================
 -------------
  Vzhled Vimu
 -------------
@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   Plug 'MaxSt/FlatColor'
+   Plug 'challenger-deep-theme/vim'
 
 Konfigurace
 ===========
@@ -29,7 +29,6 @@ Konfigurace
 
    set termguicolors
 
-   colorscheme flatcolor
+   colorscheme challenger_deep
 
    highlight LineNr guifg=#cbe3e7
-   highlight MatchParen guifg=#c991e1 gui=bold
