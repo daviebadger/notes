@@ -330,7 +330,7 @@ konfiguračním souboru::
 
    # List of plugins (as comma separated values of python modules names) to load,
    # usually to register additional checkers.
-   load-plugins=pylint.extensions.bad_builtin,pylint.extensions.docparams,pylint.extensions.redefined_variable_type
+   load-plugins=pylint.extensions.docparams,pylint.extensions.redefined_variable_type
 
 .. note::
 
