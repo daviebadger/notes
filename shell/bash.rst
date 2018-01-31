@@ -166,9 +166,9 @@ Pro ukončení práce s příkazovým řádkem (zavření terminálu) existuje p
 
       (reverse-i-search)`hist`: history
 
-   Pokud nalezený příkaz není ten pravý, je třeba více rozepsat příkaz do
-   vyhledávače nebo jej ukončit pomocí klávesové zkratky ``CTRL + c`` a příkaz
-   napsat explicitně.
+   Pokud nalezený příkaz není ten pravý, je třeba více rozepsat hledaný příkaz
+   nebo znovu stisknout ``CTRL + R`` pro zobrazení dalšího výsledku nebo
+   vyhledávání ukončit pomocí zkratky ``CTRL + c`` a příkaz napsat explicitně.
 
    Naopak, jestliže vyhledávač příkaz našel, stačí stisknout klávesu ``ENTER``
    pro spuštění nalezeného příkazu.
