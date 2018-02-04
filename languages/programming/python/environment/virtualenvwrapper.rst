@@ -183,6 +183,8 @@ Vytvoř projekt s konkrétní verzi Pythonu ve virtualenvu::
    Vytvoř virtualenv pro projekt mimo ``PROJECT_HOME``::
 
       $ mkvirtualenv -a ~/test venv
+      $ # or
+      $ mkvirtualenv -a . venv
 
 Ovládání projektu s virtualenvem
 --------------------------------
@@ -210,20 +212,18 @@ Aktivuj virtualenv a zároveň zmeň aktuální pracovní adresář na projektov
    Virtualenv lze aktivovat i pomocí skriptu v ``.bashrc``, je-li v kořenu
    projektového adresáře skrytý soubor ``.venv`` s názvem virtualenvu uvnitř::
 
-      # aktivuj virtualenv po inicializaci terminálu, je-li to možné
+      activate_venv() {
+        if [ -e ".venv" ] && ! [ -d ".venv" ]; then
+          workon "$(cat .venv)"
+        fi
+      }
 
-      if [ -e ".venv" ]; then
-          workon `cat .venv`
-      fi
-
-      # aktivuj virtualenv při zmeně adresáře, je-li to možné
+      activate_venv
 
       function cd {
-          builtin cd "$@"
+        builtin cd "$@"
 
-          if [ -e ".venv" ]; then
-              workon `cat .venv`
-          fi
+        activate_venv
       }
 
 Smazání projektu s virtualenvem
