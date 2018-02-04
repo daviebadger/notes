@@ -213,7 +213,7 @@ Aktivuj virtualenv a zároveň zmeň aktuální pracovní adresář na projektov
    projektového adresáře skrytý soubor ``.venv`` s názvem virtualenvu uvnitř::
 
       activate_venv() {
-        if [ -e ".venv" ] && ! [ -d ".venv" ]; then
+        if [ -e ".venv" ] && ! [ -f ".venv" ]; then
           workon "$(cat .venv)"
         fi
       }
