@@ -26,7 +26,9 @@ Instalace
 
    Ačkoliv plugin očekává systémový příkaz ``ack`` z balíčku ``ack-grep``,
    tak jej lze překonfigurovat na ``ag`` z ``silversearcher-ag``, neboť
-   původní ``ack`` již není podporován v Ubuntu od verze 17.10.
+   původní ``ack`` již není podporován v Ubuntu od verze 17.10::
+
+      $ sudo apt install silversearcher-ag
 
 Ovládání
 ========
