@@ -209,6 +209,30 @@ Nainstaluj konkrétní balíček(y) pro vývoj::
       $ cat Pipfile | grep "path ="
       "e1839a8" = {path = ".", editable = true}
 
+pipenv update
+^^^^^^^^^^^^^
+
+Odinstaluj a nainstaluj znova všechny balíčky::
+
+   $ pipenv update
+
+pipenv update --dry-run
+"""""""""""""""""""""""
+
+Zobraz jen zastaralé balíčky::
+
+   $ pipenv update --dry-run
+
+.. note::
+
+   Pokud má balíček v ``Pipfile`` natvrdo závislost pomocí ``==`` operátoru,
+   tak se nové verze balíčku nebudou zobrazovat. To ovšem neplatí pro
+   benevolentnější operátory, např. ``*``::
+
+      $ pipenv update --dry-drun
+      Checking dependencies…
+      sphinx==1.6.7 is available (1.5.4 installed)!
+
 pipenv uninstall
 ^^^^^^^^^^^^^^^^
 
