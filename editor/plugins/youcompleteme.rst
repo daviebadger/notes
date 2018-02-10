@@ -20,12 +20,12 @@ Instalace
 
 ::
 
-   Plug 'valloric/youcompleteme', {'do': 'python3 install.py --tern-completer'}
+   Plug 'valloric/youcompleteme', {'do': 'sudo python3 install.py'}
 
 .. note::
 
-   Pro Javascriptový autodokončovač (``--tern-completer``) je třeba mít ještě
-   nainstalovaný NodeJS a npm.
+   Pro úspěšně nainstalování plugin je třeba nainstalovat ještě systémové
+   balíčky ``build-essential`` a ``cmake``.
 
 Konfigurace
 ===========
