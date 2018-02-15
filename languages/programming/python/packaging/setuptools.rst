@@ -178,24 +178,33 @@ Závislosti
            ],
        )
 
+* ``extras_require``
+
+  * seznam externích balíčků, které lze dobrovolně doinstalovat::
+
+       setup(
+           extras_require={
+               "dev": [
+                   "flake8",
+               ],
+           },
+       )
+
 .. note::
 
-   Závislosti se pišou v duchu Requirements formátu.
+   Dobrovolné závilosti lze nainstalovat pomocí ``pip`` instalátoru::
+
+      $ pip install package[dev]
 
 .. tip::
 
-   Externí závislosti se zpravidla načítájí z ``requirements.txt`` souboru,
-   kde jsou závislosti taktéž v Requirements formátu::
-
-      with open("requirements.txt") as file:
-          requirements = file.read().splitlines()
+   Závislosti lze psát v duchu Requirements formátu::
 
       setup(
-          install_requires=requirements,
+          install_requires=[
+               "requests == 2.0.0"
+          ],
       )
-
-   Díky existenci ``requirements.txt`` souboru mohou jiné aplikace správně
-   detekovat, že se jedná o Python projekt.
 
 Klasifikátory
 -------------
