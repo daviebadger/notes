@@ -2102,6 +2102,42 @@ Odbočka ke způsobu importování
       from package import X
       from package.a import X
 
+   U absolutní cesty je akorát nutné dávat pozor, aby se balíček nebo modul
+   nejmenoval stejně jako již existující modul ve standardní knihovně, např.
+   ``random``, neboť by došlo k jeho nahrazení lokálním modulem:
+
+   .. code:: none
+
+      $ ls
+      random.py
+      $ cat random.py
+      $ python3 -q
+      >>> from random import choice
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      ImportError: cannot import name 'choice'
+      Error in sys.excepthook:
+      Traceback (most recent call last):
+        File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+          from apport.fileutils import likely_packaged, get_recent_crashes
+        File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+          from apport.report import Report
+        File "/usr/lib/python3/dist-packages/apport/report.py", line 12, in <module>
+          import subprocess, tempfile, os.path, re, pwd, grp, os, time
+        File "/usr/lib/python3.6/tempfile.py", line 184, in <module>
+          from random import Random as _Random
+      ImportError: cannot import name 'Random'
+
+      Original exception was:
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      ImportError: cannot import name 'choice'
+      >>>
+      $ rm random.py
+      $ python3 -q
+      >>> from random import choice
+      >>>
+
 .. tip::
 
    Z modulu / balíčku lze naimportovat i více objektu najednou::
