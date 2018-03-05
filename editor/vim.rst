@@ -718,6 +718,27 @@ Přepisování po znaku
 
   * přepiš znak v místě kurzoru na jiný
 
+.. tip::
+
+   Pokud se v místě kurzoru nachází číslo, lze jej klávesovými zkratkami
+   zvyšovat nebo zmenšovat:
+
+   * ``CTRL + a``
+
+     * zvětši číslo o jedno::
+
+          -1
+          0
+          1
+
+   * ``CTRL + x``
+
+     * zmenši číslo o jedno::
+
+          1
+          0
+          -1
+
 Přepisování po slovu
 ^^^^^^^^^^^^^^^^^^^^
 
