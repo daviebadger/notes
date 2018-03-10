@@ -296,7 +296,7 @@ Skok na kraj řádku
 .. tip::
 
    Pokud řádek začíná odsazením, tak na začátek odsazeného textu se posune
-   kurzor pomocí ``^``::
+   kurzor pomocí ``^`` nebo ``_``::
 
          <-------------------------
          Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur
@@ -770,13 +770,19 @@ Přepisování na kraj řádku
 
   * přepiš text až na začátek řádku
 
-* ``d$``
+* ``c$``
 
   * přepiš text až po konec řádku
 
-* ``d^``
+* ``c^`` nebo i ``c_``
 
   * přepiš text až do začátku odsazení řádku
+
+.. note::
+
+   Přepisovat text až na kraj řádku lze i odbočkou přes Visual mód, akorát pro
+   konec řádku je nutné namísto znaku ``$`` použít ``g_``, jinak bude zahrnut
+   do označeného textu i nový řádek (``\n``).
 
 Přepisování po řádku
 ^^^^^^^^^^^^^^^^^^^^
