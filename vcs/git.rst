@@ -247,6 +247,31 @@ Taktéž jdou použít zástupné znaky::
 
    $ git add *
 
+.. note::
+
+   Pokud je adresář prázdný, tak Git jej bude ignorovat, leda že by se v něm
+   nachazel prázdný skrytý soubor, zpravidla zvaný ``.gitkeep``, aby byl
+   v repozitáři veden i tento prázdný adresář::
+
+      $ mkdir test
+      $ git status
+      On branch master
+
+      No commits yet
+
+      nothing to commit (create/copy files and use "git add" to track)
+      $ touch test/.gitkeep
+      On branch master
+
+      No commits yet
+
+      Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+         test/
+
+      nothing added to commit but untracked files present (use "git add" to track)
+
 Odbočka k ignorování některých souborů
 """"""""""""""""""""""""""""""""""""""
 
