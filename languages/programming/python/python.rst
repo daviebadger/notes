@@ -2453,6 +2453,19 @@ Vytvoř a vyvolej vlastní výjimku::
      File "<stdin>", line 1, in <module>
    __main__.MyError: Error
 
+.. note::
+
+   Vlastní výjimky lze i formátovat::
+
+      >>> class MyError(Exception):
+      ...     def __init__(self, code, description):
+      ...         super().__init__(f"{code}: {description}")
+      ...
+      >>> raise MyError("ABC123", "bla bla bla")
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      __main__.MyError: ABC123: bla bla bla
+
 .. tip::
 
    Pomocí aliasu zachycené výjimky se lze dostat k chybové zprávě::
