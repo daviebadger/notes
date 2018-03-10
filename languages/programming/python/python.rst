@@ -548,6 +548,8 @@ Namísto zřetězení řetězců je vhodné použít formátování řetězců::
    >>> year = 1995
    >>> "Today is " + str(day) + "." + str(month) + "." + str(year)
    'Today is 11.4.1995'
+   >>> "Today is {}.{}.{}".format(day, month, year)
+   'Today is 11.4.1995'
    >>> "Today is {0}.{1}.{2}".format(day, month, year)
    'Today is 11.4.1995'
    >>> "Today is {0}.{1}.{2} or {1}.{0}.{1995}?".format(day, month, year)
