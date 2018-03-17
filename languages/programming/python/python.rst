@@ -1489,6 +1489,7 @@ Seznam již existujících funkcí::
        >>> any([0])
        False
        >>> any([0, 1])
+       True
 
 * ``bool(value=False)``
 
@@ -1946,7 +1947,6 @@ soubor ``fibonacci.py`` nachází v místě, odkud je shell spuštěn::
    >>> from fibonacci import fibonacci
    >>> fibonacci(100)
    1 1 2 3 5 8 13 21 34 55 89
-   >>>
 
 .. note::
 
@@ -2134,7 +2134,7 @@ Odbočka ke způsobu importování
       Traceback (most recent call last):
         File "<stdin>", line 1, in <module>
       ImportError: cannot import name 'choice'
-      >>>
+      >>> # CTRL + d
       $ rm random.py
       $ python3 -q
       >>> from random import choice
@@ -2513,6 +2513,7 @@ Vytvoř instanci třídy::
       >>> class Pet(object):
       ...     pass
       ...
+      >>>
 
 .. tip::
 
@@ -2587,6 +2588,7 @@ Vytvoř atributy na instanci::
    >>> hasattr(point, "x")
    False
    >>> delattr(point, "y")
+   >>>
 
 Vytvoř defaultní atributy (proměnné na třídě), které budou stejné u každé
 vzniklé instance::
@@ -2989,6 +2991,7 @@ Zděd třídu a přidej navíc metodu::
    >>> isinstance(dog, (Dog, Pet))
    True
    >>> issubclass(Dog, Pet)
+   True
 
 Zděd třídu a uprav inicializační metodu pro příjem dalších argumentů::
 
@@ -3048,8 +3051,9 @@ Zděd třídu a přepiš původní chování metody::
       ...
       >>> class Base1(object): pass
       ...
-      >>> class Base(Base1, Base2, Base3)
+      >>> class Base(Base1, Base2, Base3): pass
       ...
+      >>>
 
    Nicméně při několika násobné dědičnosti může vzniknout chaos, kdy se ztratí
    přehled o tom, jaké atributy a metody a na jaké třídě se budou vlastně
@@ -3201,7 +3205,6 @@ Vytvoř deskriptor pro validaci vstupních hodnot při inicializaci objektu::
         File "<stdin>", line 5, in __init__
         File "<stdin>", line 8, in __set__
       ValueError: gender must be one of ['M', 'F']
-
 
 Meta třídy
 ^^^^^^^^^^
@@ -3393,6 +3396,7 @@ Vytvoř meta třídu, která si pamatuje pořadí definovaných atributů na tř
       >>> buddy is charlie
       True
       >>> id(buddy) == id(charlie)
+      True
 
 Abstraktní třídy
 ^^^^^^^^^^^^^^^^
@@ -5024,6 +5028,7 @@ zavře::
       ...     def __exit__(self, *args):
       ...         self.open_file.close()
       ...
+      >>>
 
 .. tip::
 
@@ -5277,6 +5282,7 @@ Vytvoř a použij několik dekorátorů za sebou::
       ...         if n not in self.cache:
       ...             self.cache[n] = self.func(n)
       ...         return self.cache[n]
+      >>>
 
    V obou případech má dekorovaná funkce magický atribut ``__wrapped__``, ve
    kterém je ukryta původní funkce bez dekorátorů::
@@ -5315,7 +5321,7 @@ Vytvoř a použij několik dekorátorů za sebou::
       ...                 file.write(f"{log}\n")
       ...             return func(*args, **kwargs)
       ...         return wrapper
-      ...     return wrapper
+      ...     return decorator
       ...
       >>> def sleep(seconds):
       ...     print("before sleep")
@@ -5501,6 +5507,7 @@ Použij property pro validaci vstupu, jako u deskriptoru::
    ValueError: age must be greater than zero
    >>> p = Person("Davie", 22)
    >>> del p.age
+   >>>
 
 .. note::
 
@@ -5924,6 +5931,7 @@ Metody řetězců
        >>> "{} {1}".format("Davie", "Badger")
        'Davie Badger'
        >>> "{first_name} {last_name}".format(first_name="Davie", last_name="Badger")
+       'Davie Badger'
 
 * ``.index(sub, start=0, end=-1)``
 
@@ -7652,11 +7660,6 @@ nejznámější PEPy patří:
         If the implementation is hard to explain, it's a bad idea.
         If the implementation is easy to explain, it may be a good idea.
         Namespaces are one honking great idea -- let's do more of those!
-
-TODO
-====
-
-* heapq
 
 .. _Awesome Python: https://github.com/vinta/awesome-python
 .. _formátování řetězců: https://docs.python.org/3/library/string.html#format-specification-mini-language
