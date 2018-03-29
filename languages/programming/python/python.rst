@@ -5767,6 +5767,18 @@ Vytvoření čísel
    >>> -(-x)
    1
 
+.. tip::
+
+   Od Pythonu 3.6 lze použít podtržítko pro přehlednější oddělování tísíců
+   u velkých čísel::
+
+      >>> 1_000_000 == 1000000
+      True
+      >>> 1_000_000
+      1000000
+      >>> 1_0_0
+      100
+
 Operace s čísly
 ^^^^^^^^^^^^^^^
 
