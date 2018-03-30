@@ -29,6 +29,14 @@ Zobraz verzi ``pip`` příkazu a napojenou verzi Pythonu::
    $ pip --version
    pip 9.0.1 from /home/davie/.local/lib/python3.5/site-packages (python 3.5)
 
+.. tip::
+
+   Pokud je ``pip`` napojen na jinou verzi Pythonu, lze konkrétní ``pip``
+   modul zavolat jako skript::
+
+      $ python3.6 -m pip --version
+      pip 9.0.1 from /home/davie/.local/lib/python3.6/site-packages (python 3.6)
+
 install
 ^^^^^^^
 
