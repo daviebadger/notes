@@ -78,7 +78,7 @@ Nainstaluj a zkompiluj ze zdroje konkrétní verzi Pythonu::
    * ``libssl-dev``
    * ``libsqlite3-dev``
 
-   Po úspěšné kompilaci se spustistelné soubory budou nacházet v adresáři
+   Po úspěšné kompilaci se spustitelné soubory budou nacházet v adresáři
    ``~/.pyenv/versions/<version>/bin``::
 
       $ ls ~/.pyenv/versions/3.5.5/bin/
