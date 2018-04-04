@@ -29,7 +29,6 @@ Zobraz použítí ``pipenv`` příkazu::
    Usage: pipenv [OPTIONS] COMMAND [ARGS]...
 
    Options:
-     --update         Update Pipenv & pip to latest.
      --where          Output project home information.
      --venv           Output virtualenv information.
      --py             Output Python interpreter information.
@@ -41,7 +40,6 @@ Zobraz použítí ``pipenv`` příkazu::
      --three / --two  Use Python 3/2 when creating virtualenv.
      --python TEXT    Specify which version of Python virtualenv should use.
      --site-packages  Enable site-packages for the virtualenv.
-     --jumbotron      An easter egg, effectively.
      --version        Show the version and exit.
      -h, --help       Show this message and exit.
 
@@ -65,9 +63,13 @@ Zobraz použítí ``pipenv`` příkazu::
       Install a local setup.py into your virtual environment/Pipfile:
       $ pipenv install -e .
 
+      Use a lower-level pip command:
+      $ pipenv run pip freeze
+
    Commands:
      check      Checks for security vulnerabilities and against PEP 508 markers
                 provided in Pipfile.
+     clean      Uninstalls all packages not specified in Pipfile.lock.
      graph      Displays currently–installed dependency graph information.
      install    Installs provided packages and adds them to Pipfile, or (if none
                 is given), installs all packages.
@@ -75,9 +77,9 @@ Zobraz použítí ``pipenv`` příkazu::
      open       View a given module in your editor.
      run        Spawns a command installed into the virtualenv.
      shell      Spawns a shell within the virtualenv.
+     sync       Installs all packages specified in Pipfile.lock.
      uninstall  Un-installs a provided package and removes it from Pipfile.
-     update     Uninstalls all packages, and re-installs package(s) in [packages]
-                to latest compatible versions.
+     update     Runs lock, then sync.
 
 pipenv --three
 ^^^^^^^^^^^^^^
@@ -103,22 +105,15 @@ Vytvoř virtuální prostředí pro daný projekt s trojkovou verzí Pythonu::
 
       $ cat Pipfile
       [[source]]
-
       url = "https://pypi.python.org/simple"
       verify_ssl = true
       name = "pypi"
 
-
       [packages]
-
-
 
       [dev-packages]
 
-
-
       [requires]
-
       python_version = "3.6"
 
 .. tip::
@@ -153,14 +148,6 @@ Smaž vytvořený virtualenv pro daný projekt::
    $ pipenv --rm
    Removing virtualenv (/home/davie/test/.venv)…
 
-pipenv --update
-^^^^^^^^^^^^^^^
-
-Updatuj verze balíčku ``pipenv`` a ``pip``::
-
-   $ pipenv --update
-   All good!
-
 pipenv install
 ^^^^^^^^^^^^^^
 
@@ -184,6 +171,11 @@ pipenv install --ignore-pipfile
 Nainstaluj všechny balíčky z ``Pipfile.lock`` souboru pro produkci::
 
    $ pipenv install --ignore-pipfile
+
+.. tip::
+
+   Zkráceně lze použít příkaz ``pipenv sync`` pro instalací závislostí z
+   ``Pipfile.lock`` souboru.
 
 pipenv install --dev
 """"""""""""""""""""
@@ -212,26 +204,21 @@ Nainstaluj konkrétní balíček(y) pro vývoj::
 pipenv update
 ^^^^^^^^^^^^^
 
-Odinstaluj a nainstaluj znova všechny balíčky::
+Upgraduj všechny zastaralé balíčky::
 
    $ pipenv update
 
-pipenv update --dry-run
-"""""""""""""""""""""""
+pipenv update --outdated
+""""""""""""""""""""""""
 
 Zobraz jen zastaralé balíčky::
 
-   $ pipenv update --dry-run
+   $ pipenv update --outdated
 
 .. note::
 
-   Pokud má balíček v ``Pipfile`` natvrdo závislost pomocí ``==`` operátoru,
-   tak se nové verze balíčku nebudou zobrazovat. To ovšem neplatí pro
-   benevolentnější operátory, např. ``*``::
-
-      $ pipenv update --dry-drun
-      Checking dependencies…
-      sphinx==1.6.7 is available (1.5.4 installed)!
+   Pokud má balíček v ``Pipfile`` natvrdo závislost, např. pomocí ``==``
+   operátoru, tak se nové verze balíčku nebudou zobrazovat.
 
 pipenv uninstall
 ^^^^^^^^^^^^^^^^
@@ -257,6 +244,23 @@ pipenv lock
 Vytvoř nebo aktualizuj ``Pipfile.lock``::
 
    $ pipenv lock
+
+.. note::
+
+   V ``Pipfile.lock`` se nachází natvrdo všechny verze nainstalovaných balíčků
+   tak, aby i na jiném počítači mohlo vzniknout totožné prostředí po instalací
+   závilostí z tohoto souboru.
+
+pipenv check
+^^^^^^^^^^^^
+
+Zkontroluj bezpečnost závislých balíčků::
+
+   $ pipenv check
+   Checking PEP 508 requirements…
+   Passed!
+   Checking installed package safety…
+   All good!
 
 pipenv shell
 ^^^^^^^^^^^^
