@@ -214,10 +214,10 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
    Zpravidla se ``.PHONY`` vyskytuje před každým příkazem::
 
       $ cat Makefile
-      .PHONE: doc
+      .PHONY: doc
       doc:
               @echo "doc"
 
-      .PHONE: test
+      .PHONY: test
       test:
               @echo "test"
