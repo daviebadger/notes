@@ -35,14 +35,21 @@ Minimální verze balícího skriptu ``setup.py``::
        packages=find_packages(),
    )
 
+.. note::
+
+   Vlastní projekt lze nainstalovat pomocí ``pip`` příkazu nebo přes balící
+   skript::
+
+      $ pip install .
+      $ python setup.py install
+
 .. tip::
 
-   Nainstaluj vlastní balíček s balícím skriptem v editačním módu::
+   Pro vývoj je však vhodně nainstalovat projekt v editačním módu, aby se
+   reflektovala každá změna v souboru nez nutností opětovně instalace::
 
       $ pip install -e .
-
-   Nainstalovaný vlastní balíček v editačním módu se bude automaticky měnit v
-   závilosti na struktuře projektu.
+      $ python setup.py develop
 
 Informace o balíčku
 -------------------
@@ -259,9 +266,17 @@ Vytvoř zbuildovaný balíček (wheel)::
 Nahrání balíčku na PyPI
 -----------------------
 
-Nahrej balíčky na PyPI::
+Nahrej balíčky na produkční PyPI::
 
    $ twine upload dist/foo-0.1.0-py3-none-any.whl dist/foo-0.1.0.tar.gz
+   $ # or
+   $ twine upload dist/*
+
+Nahrej balíčky na testovací PyPI::
+
+   $ twine upload -r testpypi dist/*
+   $ # or
+   $ twine upload --repository testpypi dist/*
 
 .. note::
 
@@ -274,7 +289,23 @@ Odbočka k PyPI
 ^^^^^^^^^^^^^^
 
 Pro nahrávání balíčků do centrálního PyPI repozitáře je třeba mít vytvořený
-účet a konfigurační soubor ``~/.pypirc``::
+účet a konfigurační soubor ``.pypirc`` v domovském adresáři::
+
+   $ cat ~/.pypirc
+   [distutils]
+   index-servers = pypi testpypi
 
    [pypi]
-   username = john-doe
+   repository = https://upload.pypi.org/legacy/
+   username = johndoe
+
+   [testpypi]
+   repository = https://test.pypi.org/legacy/
+   username = johndoe
+
+.. note::
+
+   Adresy PyPI serverů pro registraci účtu (nutno ještě potvrdit email):
+
+   * produkční (https://pypi.org/)
+   * testovací (https://test.pypi.org/)
