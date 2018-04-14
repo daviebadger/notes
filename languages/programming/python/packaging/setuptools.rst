@@ -119,7 +119,7 @@ Zdrojové kódy
 
 * ``packages``
 
-  * manuální seznam modulů, které půjdou po instalaci naimportovat::
+  * manuální seznam adresářů (balíčků), které půjdou po instalaci naimportovat::
 
        setup(
            packages=[
@@ -127,7 +127,7 @@ Zdrojové kódy
            ],
        )
 
-  * automatický seznam modulů::
+  * automatický seznam balíčků včetně vnořených, jsou-li nějaké v projektu::
 
        from setuptools import find_packages
 
@@ -144,6 +144,14 @@ Zdrojové kódy
                "": "*.rst",
                "foo": ["*.txt"],
            }
+       )
+
+* ``py_modules``
+
+  * manuální seznam modulů, které půjdou po instalaci naimportovat::
+
+       setup(
+           py_modules=["foo"]
        )
 
 Spustitelné soubory
