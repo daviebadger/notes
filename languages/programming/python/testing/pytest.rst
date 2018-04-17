@@ -1582,6 +1582,11 @@ Označ test vlastní značkou::
 
       @pytest.mark.trylast: mark a hook implementation function such that the plugin machinery will try to call it last/as late as possible.
 
+   Aby nedocházelo k překlepům v názvech značek, je vhodné ještě použít
+   volbu ``--strict`` při spuštění testů::
+
+      $ pytest --strict
+
 Pluginy
 =======
 
