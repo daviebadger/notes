@@ -457,7 +457,8 @@ Vytvoř adresář(e) v aktuálním pracovním prostředí či na jiném místě:
 mkdir -p
 """"""""
 
-Vytvoř zárověň i nadřazené adresáře, pokud neexistují::
+Vytvoř zárověň i nadřazené adresáře, pokud neexistují nebo ignoruj již
+existující adresář::
 
    $ mkdir -p ~/parent/child
 
@@ -521,6 +522,23 @@ rm
 Smaž navždy soubor(y)::
 
    $ rm a.txt b.txt c.txt
+
+rm -i
+"""""
+
+Vyžádej potvrzení pro smazání souboru::
+
+   $ touch a.txt
+   $ rm -i a.txt
+   rm: remove regular empty file 'a.txt'? n
+   $ rm -i a.txt
+   rm: remove regular empty file 'a.txt'? y
+   $ ls
+   $
+
+.. tip::
+
+   Příkazy bez možnosti návratu je vhodné aliasovat v konfiguračním souboru.
 
 rm -r
 """""
@@ -645,6 +663,15 @@ Přesuň soubor nebo adresář na jiné místo a zároveň ho přejmenuj::
    Bash umí sám vyhodnotit, zda došlo k přejmenování nebo přesunutí nebo k
    obojím najednou.
 
+mv -i
+"""""
+
+Vyžádej potvrzení při přepsání souboru nebo adresáře::
+
+   $ touch a.txt b.txt
+   $ mv -i a.txt b.txt
+   mv: overwrite 'b.txt'?
+
 cp
 ^^
 
@@ -660,6 +687,15 @@ Zkopíruj soubor na jiné místo, a případně i přejmenuj, je-li to třeba::
 Zkopíruj soubory na jiné misto::
 
    $ cp a.txt b.txt c.txt dir/
+
+cp -i
+"""""
+
+Vyžádej potvrzení pro přepsání souboru při kopírování::
+
+   $ touch a.txt b.txt
+   $ cp -i a.txt b.txt
+   cp: overwrite 'b.txt'?
 
 cp -r
 """""
