@@ -2087,23 +2087,48 @@ rozhodne, co má udělat (např. načtení správného konfiguračního souboru)
 export
 ^^^^^^
 
-Vypiš veškeré proměnné spolu s hodnotami::
+Vypiš veškeré exportované proměnné spolu s hodnotami::
 
    $ export
 
-Taktéž vytvoř novou proměnnou s nebo bez hodnoty::
+Vytvoř novou proměnnou s nebo bez hodnoty nebo změn její hodnotu::
 
    $ export test
    $ export TEST="Hello world!"
+   $ export TEST="Hello Davie!"
+   $ export | grep -i test
+   declare -x TEST="Hello Davie!"
+   declare -x test
+
+Vytvoř nebo změn proměnnou bez exportu::
+
+   $ HOST=localhost
+   $ echo $HOST
+   localhost
+   $ HOST=1.2.3.4 python3 -c "import os; print(os.environ['HOST'])"
+   1.2.3.4
 
 .. note::
 
-   Stejný postup bude použit i pro změnu hodnoty.
+   Proměnnou vytvořené pomocí exportu budou viditelné i vytvořené subshelly,
+   kdežto proměnné bez exportu nikoliv::
 
-Zobrazit hodnoty konkrétní proměnné lze pomocí příkazu ``echo``::
+      $ HOST=localhost
+      $ bash # new subshell
+      $ echo $HOST
 
-   $ echo $TEST
-   Hello world!
+      $ exit
+      $ export HOST=localhost
+      $ bash
+      $ echo $HOST
+      localhost
+
+.. tip::
+
+   Zobrazit hodnoty konkrétní proměnné lze pomocí příkazu ``echo``::
+
+      $ echo $TEST
+      Hello world!
 
 unset
 ^^^^^
