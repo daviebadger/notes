@@ -1256,8 +1256,26 @@ Spusť nějaký příkaz pro každý nalezený soubor::
 
 .. note::
 
-   Na místo ``{}`` se automaticky vloží cesta nalezeného souboru a ``\;`` značí
-   konec řádku pro daný příkaz za ``-exec`` volbou.
+   Na místo ``{}`` se automaticky vloží cesta nalezeného souboru. ``\;`` spustí
+   daný příkaz pro každý soubor, což může vyůstit ve standardní error::
+
+      $ mkdir __pycache__
+      $ ls
+      __pycache__
+      $ find . -type d -name "__pycache__" -exec rm -rf {} \;
+      find: ‘./__pycache__’: No such file or directory
+      $ ls | grep __pycache__
+      $
+
+   Místo ``\;`` lze ještě použít ``+``, kdy se každý soubor nastrká jako
+   argument pro příkaz::
+
+      $ mkdir __pycache__
+      $ ls
+      __pycache__
+      $ find . -type d -name "__pycache__" -exec rm -rf {} +
+      $ ls | grep __pycache__
+      $
 
 .. tip::
 
