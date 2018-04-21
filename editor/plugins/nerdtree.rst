@@ -175,3 +175,8 @@ Konfigurace
 
    autocmd StdinReadPre * let s:std_in=1
    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+.. tip::
+
+   Po zapnutí zobrazení skrytých souboru lze pomocí zkrakty ``SHIFT + i``
+   zapnout nebo vypnout zobrazení těchto skrytých souborů.
