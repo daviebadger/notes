@@ -149,7 +149,7 @@ Zaznamenávání změn v repozitáři
 status
 ^^^^^^
 
-Zobraz aktuální stav repozitáře::
+Zobraz aktuální stav vytvořného repozitáře::
 
    $ git status
    On branch master
@@ -158,17 +158,23 @@ Zobraz aktuální stav repozitáře::
 
    nothing to commit (create/copy files and use "git add" to track)
 
-Pokud není žádná zmíňka o souborech v adresáři, tak se aktuální obsah
-repozitáře nijak neliší od předchozího uloženého stavu, respektive snímku.
+Zobraz aktuální stav naklonovaného repozitáře::
+
+   $ git status
+   On branch master
+   Your branch is up-to-date with 'origin/master'.
+   nothing to commit, working tree clean
 
 .. note::
 
-   V případě naklonovaného adresáře by byl stav následující::
+   Pokud není žádná zmíňka o souborech v adresáři, tak se aktuální obsah
+   repozitáře nijak neliší od předchozího uloženého stavu, respektive snímku.
 
-      $ git status
-      On branch master
-      Your branch is up-to-date with 'origin/master'.
-      nothing to commit, working tree clean
+.. tip::
+
+   Zobraz aktuální stav repozitáře v konkrétním adresáři::
+
+      $ git status .
 
 Odbočka ke stavům souborů
 """""""""""""""""""""""""
@@ -328,12 +334,6 @@ Zobraz rozdíly v souborech::
    @@ -0,0 +1 @@
    +Hello World!
 
-.. note::
-
-   Rozdíly se zobrazí jen u těch souborů, které nejsou ve ``Staged`` módu a
-   zároveň u nich existuje poslední zaznamenána změna nebo snímek, aby vůbec
-   bylo možné nějaké rozdíly zobrazit.
-
 Zobraz rozdíl jen u konkrétních adresářů::
 
    $ git diff dir/
@@ -341,6 +341,12 @@ Zobraz rozdíl jen u konkrétních adresářů::
 Zobraz rozdíly jen u konkrétních souborů::
 
    $ git diff file.txt
+
+.. note::
+
+   Rozdíly se zobrazí jen u těch souborů, které nejsou ve ``Staged`` módu a
+   zároveň u nich existuje poslední zaznamenána změna nebo snímek, aby vůbec
+   bylo možné nějaké rozdíly zobrazit.
 
 diff --staged
 """""""""""""
@@ -862,12 +868,6 @@ Ukaž poslední commit spolu s rozdíly::
 
    $ git show
 
-.. note::
-
-   Ekvivalentní postup by byl::
-
-      $ git log -p -1
-
 Ukaž konkrétní commit spolu s rozdíly::
 
    $ git show cb95d79
@@ -884,6 +884,12 @@ Ukaž konkrétní commit spolu s rozdíly::
    +++ b/file.txt
    @@ -0,0 +1 @@
    +Hello World!
+
+.. note::
+
+   Ekvivalentní postup pro ``git show`` by byl::
+
+      $ git log -p -1
 
 Verzování
 ---------
@@ -964,12 +970,6 @@ následující tvar::
     taky k vylepšení algoritmů (zrychlení běhu programu) při zachování zpětné
     kompatibility
 
-.. note::
-
-   Zpravidla první tag začína na verzi ``0.1.0``, přičemž v rámci této nulové
-   hlavní verze může dojít k nekompatibilitám mezi vedlejší verzemi, dokud
-   se vývoj nedostatne do stabilní verze ``1.0.0``.
-
 V případě potřeby lze vydat ještě předbězné verze, vyžaduje-li to situace,
 např. maximální otestování softwaru. Tyto předběžné verze používájí následující
 tvar::
@@ -1003,6 +1003,12 @@ tvar::
        0.3.1-rc.2
 
   * příprava na vydání finální verze (X.Y.Z)
+
+.. note::
+
+   Zpravidla první tag začína na verzi ``0.1.0``, přičemž v rámci této nulové
+   hlavní verze může dojít k nekompatibilitám mezi vedlejší verzemi, dokud
+   se vývoj nedostatne do stabilní verze ``1.0.0``.
 
 tag -l
 """"""
