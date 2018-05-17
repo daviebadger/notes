@@ -1542,6 +1542,24 @@ rootem. U běžného PC může ``sudo`` používat první vytvořený uživatel.
    * ``su davie``
    * ``su - davie``
 
+.. tip::
+
+   Pomocí volby ``-E`` u příkazu ``sudo`` lze při spuštění příkazu pomocí
+   administrátorské oprávnění ponechat exportované proměnné v shellu::
+
+      $ cat test.sh
+      #!/usr/bin/env bash
+
+      echo $TEST
+      $ chmod +x test.sh
+      $ export TEST=test
+      $ ./test.sh
+      test
+      $ sudo ./test.sh
+
+      $ sudo -E ./test.sh
+      test
+
 chown -R
 """"""""
 
