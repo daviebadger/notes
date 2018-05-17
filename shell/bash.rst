@@ -892,12 +892,20 @@ Vypiš posledních deset řádků ze souboru::
 tail -n
 """""""
 
-Vypiše jen Ntý počet posledních řádků ze souboru::
+Vypiš jen Ntý počet posledních řádků ze souboru::
 
    $ tail -3 numbers.txt
    18
    19
    20
+
+tail -f
+"""""""
+
+Vypiš posledních deset řádků ze souboru a čekej, dokud se nezobrazí další nové
+řádky přidané na konec souboru::
+
+   $ tail -f /var/log/syslog
 
 Přesměrování
 ------------
