@@ -58,6 +58,14 @@ Konfigurace
 
 ::
 
+   " klasické Vimovské odsazení
+
+   let g:riv_disable_indent = 1
+
+   " informace o foldech v levé časti
+
+   let g:riv_fold_info_pos = 'left'
+
    " foldování jen pro sekce (nadpisy)
 
    let g:riv_fold_level = 1
