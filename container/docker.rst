@@ -595,40 +595,40 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
           ; \
           apk del .build-deps;
       $ docker build .
-   Sending build context to Docker daemon  741.4kB
-   Step 1/2 : FROM alpine
-    ---> 3fd9065eaf02
-   Step 2/2 : RUN set -ex;     apk add --no-cache --virtual .build-deps             curl             make             wget     ;     apk del .build-deps;
-    ---> Running in 598222f56512
-   - apk add --no-cache --virtual .build-deps curl make wget
-   fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz
-   fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz
-   (1/7) Installing ca-certificates (20171114-r0)
-   (2/7) Installing libssh2 (1.8.0-r2)
-   (3/7) Installing libcurl (7.60.0-r1)
-   (4/7) Installing curl (7.60.0-r1)
-   (5/7) Installing make (4.2.1-r0)
-   (6/7) Installing wget (1.19.5-r0)
-   (7/7) Installing .build-deps (0)
-   Executing busybox-1.27.2-r7.trigger
-   Executing ca-certificates-20171114-r0.trigger
-   OK: 6 MiB in 18 packages
-   - apk del .build-deps
-   WARNING: Ignoring APKINDEX.70c88391.tar.gz: No such file or directory
-   WARNING: Ignoring APKINDEX.5022a8a2.tar.gz: No such file or directory
-   (1/7) Purging .build-deps (0)
-   (2/7) Purging curl (7.60.0-r1)
-   (3/7) Purging make (4.2.1-r0)
-   (4/7) Purging wget (1.19.5-r0)
-   (5/7) Purging libcurl (7.60.0-r1)
-   (6/7) Purging ca-certificates (20171114-r0)
-   Executing ca-certificates-20171114-r0.post-deinstall
-   (7/7) Purging libssh2 (1.8.0-r2)
-   Executing busybox-1.27.2-r7.trigger
-   OK: 4 MiB in 11 packages
-   Removing intermediate container 598222f56512
-    ---> 78f7f8e58091
-   Successfully built 78f7f8e58091
+      Sending build context to Docker daemon  741.4kB
+      Step 1/2 : FROM alpine
+       ---> 3fd9065eaf02
+      Step 2/2 : RUN set -ex;     apk add --no-cache --virtual .build-deps             curl             make             wget     ;     apk del .build-deps;
+       ---> Running in 598222f56512
+      1. apk add --no-cache --virtual .build-deps curl make wget
+      fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz
+      fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz
+      (1/7) Installing ca-certificates (20171114-r0)
+      (2/7) Installing libssh2 (1.8.0-r2)
+      (3/7) Installing libcurl (7.60.0-r1)
+      (4/7) Installing curl (7.60.0-r1)
+      (5/7) Installing make (4.2.1-r0)
+      (6/7) Installing wget (1.19.5-r0)
+      (7/7) Installing .build-deps (0)
+      Executing busybox-1.27.2-r7.trigger
+      Executing ca-certificates-20171114-r0.trigger
+      OK: 6 MiB in 18 packages
+      1. apk del .build-deps
+      WARNING: Ignoring APKINDEX.70c88391.tar.gz: No such file or directory
+      WARNING: Ignoring APKINDEX.5022a8a2.tar.gz: No such file or directory
+      (1/7) Purging .build-deps (0)
+      (2/7) Purging curl (7.60.0-r1)
+      (3/7) Purging make (4.2.1-r0)
+      (4/7) Purging wget (1.19.5-r0)
+      (5/7) Purging libcurl (7.60.0-r1)
+      (6/7) Purging ca-certificates (20171114-r0)
+      Executing ca-certificates-20171114-r0.post-deinstall
+      (7/7) Purging libssh2 (1.8.0-r2)
+      Executing busybox-1.27.2-r7.trigger
+      OK: 4 MiB in 11 packages
+      Removing intermediate container 598222f56512
+        ---> 78f7f8e58091
+      Successfully built 78f7f8e58091
 
 build -t
 """"""""
