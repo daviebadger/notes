@@ -24,11 +24,11 @@ Instalace
 
 .. note::
 
-   Ačkoliv plugin očekává systémový příkaz ``ack`` z balíčku ``ack-grep``,
-   tak jej lze překonfigurovat na ``ag`` z ``silversearcher-ag``, neboť
-   původní ``ack`` již není podporován v Ubuntu od verze 17.10::
+   Ačkoliv plugin očekává systémový spustitelný soubor ``ack`` z balíčku
+   ``ack-grep``, tak jej lze překonfigurovat na ``rg`` z ``ripgrep``
+   vyhledávače::
 
-      $ sudo apt install silversearcher-ag
+      $ cargo install ripgrep
 
 Ovládání
 ========
@@ -92,14 +92,14 @@ Konfigurace
 
 ::
 
-   if executable('ag')
-     let g:ackprg = 'ag --vimgrep'
+   if executable('rg')
+     let g:ackprg = 'rg --vimgrep'
    endif
 
    " neskakej hned na první vyhledaný soubor
 
-   cnoreabbrev Ack Ack!
-   nnoremap <Leader>a :Ack!<Space>
+   cnoreabbrev rg Ack!
+   nnoremap <Leader>r :Ack!<Space>
 
    " rozděl okno jako nastavení splitbelow a splitright
 
