@@ -22,6 +22,12 @@ Instalace
 
    $ pip install --user cookiecutter
 
+.. note::
+
+   Pokud není ``pip`` instalován, tak lze nainstalovat pomocí příkazu::
+
+      $ sudo apt install python3-pip
+
 Vytvoření projektu
 ==================
 
