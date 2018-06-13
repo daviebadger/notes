@@ -2085,9 +2085,34 @@ Porovnej vedle sebe soubory::
 df -h
 ^^^^^
 
-Zobraz informaci o využití diskového prostoru::
+Zobraz informaci o využití diskového prostoru v lidských jednotkách::
 
    $ df -h
+   Filesystem                           Size  Used Avail Use% Mounted on
+   udev                                 1,9G     0  1,9G   0% /dev
+
+du -h
+^^^^^
+
+Zobraz informace o velikosti adresáře včetně jeho zanořených adresářů v
+lidských jednotkách::
+
+   $ df -h
+   28K	./editor/plugins/css
+   28K	./editor/plugins/rst
+   68K	./editor/plugins/html
+   16K	./editor/plugins/python
+   40K	./editor/plugins/git
+   4,0K	./editor/plugins/.mypy_cache
+   392K	./editor/plugins
+   452K	./editor
+
+.. tip::
+
+   Pomocí volby ``-s`` lze zobrazit celkovou velikost adresáře::
+
+      $ df -hs ~/Downloads
+      2,4G	/home/davie/Downloads/
 
 time
 ^^^^
