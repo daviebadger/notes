@@ -1167,6 +1167,19 @@ Zobraz seznam větví, které ještě nejsou mergnuté::
 
    $ git branch --no-merged
 
+branch -u
+"""""""""
+
+Nastav aktuální větev, aby sledovala jinou větev::
+
+   $ git branch -u dev  # local dev
+   $ git branch -u origin dev
+
+.. note::
+
+   Při sledování jiné větve umí Git zjistit, jak se liší kód oproti sledované
+   větvi, zda je aktuální větev popředu nebo pozadu.
+
 branch -m
 """""""""
 
