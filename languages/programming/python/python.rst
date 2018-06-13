@@ -781,11 +781,25 @@ Podmínky včetně logických spojek::
       >>> is_even
       True
 
-   Případně i jen pomocí logických operátorů::
+   Taktéž lze použít logické operátory ``and`` a ``or``::
 
       >>> is_married = True or False
       >>> is_married
       True
+
+   U operátoru ``and`` je třeba dávat pozor, ze při pravdivosti všech
+   objektů se jako výsledek uloží hodnota posledního objektu::
+
+      >>> a = 1
+      >>> b = "1"
+      >>> c = [1]
+      >>> x = a and b and c
+      >>> x
+      [1]
+      >>> True and True and True
+      True
+      >>> True and True and False
+      False
 
 Cykly
 -----
