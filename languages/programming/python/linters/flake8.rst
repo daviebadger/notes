@@ -215,6 +215,14 @@ Spusť kontrolu s ignorováním ``noqa`` komentářů::
 
       # noqa: E731,E123
 
+.. tip::
+
+   Celý soubor lze ignorovat pomocí ``noqa`` komentáře na začátku řádku, pokud
+   nelze použít volbu ``--exclude`` pro explicitní ignorování souborů::
+
+      $ cat file.py
+      # flake8: noqa
+
 flake8 --isolated
 ^^^^^^^^^^^^^^^^^
 
