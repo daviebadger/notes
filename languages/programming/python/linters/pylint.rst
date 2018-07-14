@@ -128,7 +128,7 @@ Ignoruj dané chybové hlášky::
 
 .. note::
 
-   Taktéž lze použít i další reference na chybové hlášky:
+   Taktéž lze použít i další reference na chybové hlášky::
 
       $ pylint --disable=C0326 file.py
       $ pylint --disable=C file.py
