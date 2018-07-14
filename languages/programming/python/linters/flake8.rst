@@ -188,6 +188,10 @@ Zobraz jen konkrétní chybové hlášky::
 
       $ flake8 --select E,F,W
 
+   Zaroveň při použítí ``--select`` dojde k vypnutí pluginů, které nepoužívají
+   AST pro detekci chyb, proto je třeba tyto plugin explicitně zapnout pomocí
+   volby ``--enable-extensions``.
+
 flake8 --disable-noqa
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -267,7 +271,8 @@ použije::
 
 .. note::
 
-   Pluginy mohou být defaultně vypnuty, není-li nastaveno jinak::
+   Pluginy mohou být defaultně vypnuty nebo upozaděny kvůli ``--select`` volbě,
+   není-li nastaveno jinak::
 
       $ flake8 file.py
       $ flake8 --enable-extensions=T file.py
