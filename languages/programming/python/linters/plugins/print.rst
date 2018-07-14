@@ -26,10 +26,13 @@ Ukázka
    $ cat file.py
    print("Hello World!")
    $ flake8 file.py
-   $ flake8 --enable-extensions=T file.py
-   file.py:3:1: T001 print found.
-   file.py:4:1: T003 pprint found.
+   file.py:1:1: T001 print found.
 
 .. note::
 
-   Plugin je defaultně vypnutý.
+   Plugin bude vypnutý, pokud při použití ``flake8`` je použita volba
+   ``--select`` na konkrétní chybové hlášky, proto je třeba jej zapnout
+   pomocí volby ``--enable-extensions=T``::
+
+      $ flake8 --select E,F,W --enable-extensions=T file.py
+      file.py:1:1: T001 print found.
