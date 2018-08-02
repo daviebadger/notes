@@ -36,15 +36,15 @@ config --global
 
 Nastav globálně identitu uživatele pro všechny repozitáře::
 
-   $ git config --global user.name "Davie Badger"
-   $ git config --global user.email "davie.badger@gmail.com"
+   $ git config --global user.name 'Davie Badger'
+   $ git config --global user.email 'davie.badger@gmail.com'
 
 .. note::
 
    Bez použítí volby ``--global`` bude nastavení platné jen v daném
    repozitáři::
 
-      $ git config user.name "Davie Badger"
+      $ git config user.name 'Davie Badger'
 
 config --list
 """""""""""""
@@ -316,7 +316,7 @@ kromě prázdných adresářů. Tomuto chování lze zabránit pomocí souboru
    např. v ``~/.gitignore``::
 
       $ git config --global core.excludesfile ~/.gitignore
-      $ echo "*.txt" > ~/.gitignore
+      $ echo '*.txt' > ~/.gitignore
 
 diff
 ^^^^
@@ -478,7 +478,7 @@ commit -m
 Vytvoř commit repozitáře bez nutnosti otevření editoru a jako zprávu použij
 argument pro volbu ``-m``::
 
-   $ git commit -m "Add file.txt"
+   $ git commit -m 'Add file.txt'
    [master (root-commit) 26b70d6] Add file.txt
     1 file changed, 1 insertion(+)
     create mode 100644 file.txt
@@ -501,7 +501,7 @@ commit::
    +++ b/file.txt
    @@ -1 +0,0 @@
    -Hello World!
-   $ git commit -am "Clear content of file.txt"
+   $ git commit -am 'Clear content of file.txt'
    [master 65a55c2] Clear content of file.txt
     1 file changed, 1 deletion(-)
 
@@ -563,7 +563,7 @@ Změn stav souboru z ``Staged`` zpět na ``Modified``, respektive na
 
       $ cat new.txt
       $ git add new.txt
-      $ git commit -m "Add new.txt"
+      $ git commit -m 'Add new.txt'
       $ echo new > new.txt
       $ cat new.txt
       new
@@ -778,7 +778,7 @@ log --pretty
 
 Uprav výstup historie commitů podle vlastního formátu::
 
-   $ git log --pretty=format:"%h - %s (%an, %cr)"
+   $ git log --pretty=format:'%h - %s (%an, %cr)'
    239e88d - Remove file.txt from Git (Davie Badger, 3 hours ago)
    65a55c2 - Clear content of file.txt (Davie Badger, 7 hours ago)
    cb95d79 - Add file.txt (Davie Badger, 7 hours ago)
@@ -811,7 +811,7 @@ log --author
 
 Zobraz jen ty commity, které vytvořil daný autor::
 
-   $ git log --author="Davie Badger"
+   $ git log --author='Davie Badger'
 
 log --grep
 """"""""""
@@ -843,7 +843,7 @@ log --before
 Zobraz jen ty commity, které byly vytvořeny před daným datem::
 
    $ git log --before=2017-05-21
-   $ git log --before="2017-05-21 20:00"
+   $ git log --before='2017-05-21 20:00'
 
 .. note::
 
@@ -915,7 +915,7 @@ Vytvoř nový tag::
 Stejně jako u vytvoření commitu, i zde se objeví editor pro vytvoření zprávy
 popisující tag. Otevření editoru lze taktéž přeskočit přes volbu ``-m``::
 
-   $ git tag -a v0.2.0 -m "v0.2.0"
+   $ git tag -a v0.2.0 -m 'v0.2.0'
 
 .. note::
 
@@ -1039,14 +1039,14 @@ Nastav alias na nějaký příkaz::
 
 Nastav alias na nějaký příkaz s volbami::
 
-   $ git config --global alias.h 'log --pretty=format:"%h - %s (%an, %cr)" --graph'
+   $ git config --global alias.h 'log --pretty=format:'%h - %s (%an, %cr)' --graph'
 
 .. tip::
 
    Aliasy jdou nastavit i na úrovni shellu (Bash), pokud nedojde ke kolizi s
    jinými příkazy::
 
-      $ alias g="git"
+      $ alias g='git'
       $ g status
 
 Pokročilé ovládání
@@ -1400,13 +1400,13 @@ soubor(y) a Git neví, která verze je ta správná::
 
    $ git init
    $ echo hello > hello.txt
-   $ git add hello.txt && git commit -m "Add hello.txt"
+   $ git add hello.txt && git commit -m 'Add hello.txt'
    $ git checkout -b update-hello
    $ echo davie >> hello.txt
-   $ git add hello.txt && git commit -m "Update hello.txt"
+   $ git add hello.txt && git commit -m 'Update hello.txt'
    $ git checkout master
    $ echo world >> hello.txt
-   $ git add hello.txt && git commit -m "Update hello.txt"
+   $ git add hello.txt && git commit -m 'Update hello.txt'
    $ git merge update-hello
    Auto-merging hello.txt
    CONFLICT (content): Merge conflict in hello.txt
@@ -1665,7 +1665,7 @@ historie po sloučení::
    $ git checkout -b devel
    $ echo hello > hello.txt
    $ git add .
-   $ git commit -m "Add hello.txt"
+   $ git commit -m 'Add hello.txt'
    $ git rebase master
    First, rewinding head to replay your work on top of it...
    Applying: Add hm.txt
@@ -1758,7 +1758,7 @@ grep
 
 Najdi v repozitáři určitý text napříč adresáři a soubory::
 
-   $ git grep "git"
+   $ git grep 'git'
    vimrc:Plug 'tpope/vim-fugitive'
 
 .. note::
@@ -1771,7 +1771,7 @@ Najdi v repozitáři určitý text napříč adresáři a soubory::
    Najdi text v souborech a nahraď je jiný textem pomocí stejného principu
    jako ve Vimu::
 
-      $ git grep -l "git" | xargs sed -i "s/git/vcs/g"
+      $ git grep -l 'git' | xargs sed -i 's/git/vcs/g'
 
 blame
 ^^^^^
@@ -1788,9 +1788,9 @@ změnu::
 
    Datum a čas lze formátovat pomocí volby ``--date``::
 
-      $ git blame --date="relative" vimrc
+      $ git blame --date='relative' vimrc
       51edaaff vim/.vimrc (Davie Badger 6 weeks ago            1) " *********
-      $ git blame --date="local" vimrc
+      $ git blame --date='local' vimrc
       51edaaff vim/.vimrc (Davie Badger Sat Apr 22 22:26:33 2017       1) " *********
 
 blame -L
