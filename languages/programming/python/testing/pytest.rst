@@ -1543,7 +1543,7 @@ Označ test vlastní značkou::
       test_add.py .                                                                                                   [100%]
 
       =============== 1 passed, 1 deselected in 0.01 seconds ================
-      $ pytest -m "not one"
+      $ pytest -m 'not one'
       ========================= test session starts =========================
       platform linux -- Python 3.6.3, pytest-3.5.0, py-1.5.3, pluggy-0.6.0
       rootdir: /home/davie/test, inifile:
@@ -1627,7 +1627,7 @@ kódu testy::
 
    Skrze volbu ``--trace--config`` lze vidět aktivované pluginy::
 
-      $ pytest --trace-config | grep "^plugins:"
+      $ pytest --trace-config | grep '^plugins:'
       plugins: cov-2.5.1
 
 .. tip::
@@ -1731,7 +1731,7 @@ Spusť doctesty v textových souborech::
 
       >>> 2 + 2
       4
-   $ pytest --doctest-modules --doctest-glob="*.rst" add.rst
+   $ pytest --doctest-modules --doctest-glob='*.rst' add.rst
    ========================== test session starts ==========================
    platform linux -- Python 3.6.3, pytest-3.5.0, py-1.5.3, pluggy-0.6.0
    rootdir: /home/davie/test, inifile:
@@ -1910,4 +1910,4 @@ Přepiš zabudovaný spoušteč testů v ``setuptools`` projektu na ``pytest``::
    Pokud chcí poslat pro ``test`` příkaz volby z ``pytest`` příkazu, je nutné
    je uvést ve volbě ``--adopts``::
 
-      $ python3 setup.py test --addopts "-v"
+      $ python3 setup.py test --addopts '-v'
