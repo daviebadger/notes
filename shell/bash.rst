@@ -1046,7 +1046,7 @@ grep
 
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
 
-   $ ls ~ | grep "Doc"
+   $ ls ~ | grep 'Doc'
    Documents
 
 .. note::
@@ -1054,8 +1054,14 @@ Zobraz jen ty řádky, na kterých se vyskytuje zadaný text::
    ``grep`` příkaz lze použít i samostatně, nicméně je třeba mít nějaký
    soubor po ruce::
 
-      $ grep "Bash" bash.rst
+      $ grep 'Bash' bash.rst
       Bash
+
+.. tip::
+
+   Při předávání řetězcových argumentů pro příkazy je vhodnější používat
+   jednoduché uvozovky, neboť při dvojitých může docházet k expanzi speciálních
+   znaků a výsledný řetězec bude vypadat jinak, pokud to není cílem.
 
 Odbočka k rourám
 """"""""""""""""
@@ -1076,7 +1082,7 @@ grep -n
 
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text spolu s čísly řádků::
 
-   $ grep -n "Bash" bash.rst
+   $ grep -n 'Bash' bash.rst
    2: Bash
 
 grep -i
@@ -1085,7 +1091,7 @@ grep -i
 Zobraz jen ty řádky, na kterých se vyskytuje zadaný text a nerozlišuj malá
 a velká písmena::
 
-   $ grep -i "bAsH" bash.rst
+   $ grep -i 'bAsH' bash.rst
    Bash
    BASH
 
@@ -1094,15 +1100,15 @@ grep -r
 
 Vyhledej text rekurzivně napříč adresářemi a soubory::
 
-   $ grep -r "foo"
+   $ grep -r 'foo'
    a.txt:foo
    a/a.txt:foo
    a/a/a.txt:foo
-   $ grep -rl "foo"
+   $ grep -rl 'foo'
    a.txt
    a/a.txt
    a/a/a.txt
-   $ grep -r "foo" ~/test
+   $ grep -r 'foo' ~/test
    /home/davie/test/a.txt:foo
    /home/davie/test/a/a.txt:foo
    /home/davie/test/a/a/a.txt:foo
@@ -1112,7 +1118,7 @@ Vyhledej text rekurzivně napříč adresářemi a soubory::
    Nahraď text v nalezených souborech jiným textem pomocí stejného principu,
    jako je Vimu::
 
-      $ grep -rl "foo" | xargs sed -i "/s/foo/bar/g"
+      $ grep -rl 'foo' | xargs sed -i '/s/foo/bar/g'
 
 tee
 ^^^
@@ -1225,7 +1231,7 @@ find -name
 
 Vyhledej jen ty soubory, které odpovídájí danému jménu (patternu)::
 
-   $ find ~ -type f -name "*.rst"
+   $ find ~ -type f -name '*.rst'
 
 .. note::
 
@@ -1270,7 +1276,7 @@ Spusť nějaký příkaz pro každý nalezený soubor::
       $ mkdir __pycache__
       $ ls
       __pycache__
-      $ find . -type d -name "__pycache__" -exec rm -rf {} \;
+      $ find . -type d -name '__pycache__' -exec rm -rf {} \;
       find: ‘./__pycache__’: No such file or directory
       $ ls | grep __pycache__
       $
@@ -1281,7 +1287,7 @@ Spusť nějaký příkaz pro každý nalezený soubor::
       $ mkdir __pycache__
       $ ls
       __pycache__
-      $ find . -type d -name "__pycache__" -exec rm -rf {} +
+      $ find . -type d -name '__pycache__' -exec rm -rf {} +
       $ ls | grep __pycache__
       $
 
@@ -1983,7 +1989,7 @@ Příkazem ``exit`` se pak odpojím.
 
       $ ssh-keygen -t rsa
       $ # nebo náročněji a bezpečněji, jak je tomu u GitLabu
-      $ ssh-keygen -t rsa -C "můj_email" -b 4096
+      $ ssh-keygen -t rsa -C 'můj_email' -b 4096
 
    Ve složce ``~/.ssh`` pak vzniknou dva nové klíče, soukromný ``id_rsa`` a
    veřejný ``id_rsa.pub``. Obsah veřejného klíče se pak předá admistrátorovi
@@ -2048,12 +2054,12 @@ Zobraz aktuální čas a datum v počítači::
 
 Zobraz jen čas::
 
-   $ date +"%T"
+   $ date +'%T'
    18:15:14
 
 Zobraz jen datum ve formátu ``DD-MM-YYYY``::
 
-   $ date +"%d-%m-%y"
+   $ date +'%d-%m-%y'
    07-05-17
 
 diff
@@ -2119,7 +2125,7 @@ time
 
 Změř, jak dlouho trvalo vykonání příkazu::
 
-   $ time find ~ -type f -name "*.rst" 2> /dev/null
+   $ time find ~ -type f -name '*.rst' 2> /dev/null
 
    real  0m0,134s
    user  0m0,024s
@@ -2163,8 +2169,8 @@ Vypiš veškeré exportované proměnné spolu s hodnotami::
 Vytvoř novou proměnnou s nebo bez hodnoty nebo změn její hodnotu::
 
    $ export test
-   $ export TEST="Hello world!"
-   $ export TEST="Hello Davie!"
+   $ export TEST='Hello world!'
+   $ export TEST='Hello Davie!'
    $ export | grep -i test
    declare -x TEST="Hello Davie!"
    declare -x test
@@ -2174,7 +2180,7 @@ Vytvoř nebo změn proměnnou bez exportu::
    $ HOST=localhost
    $ echo $HOST
    localhost
-   $ HOST=1.2.3.4 python3 -c "import os; print(os.environ['HOST'])"
+   $ HOST=1.2.3.4 python3 -c 'import os; print(os.environ["HOST"])'
    1.2.3.4
 
 .. note::
@@ -2229,7 +2235,7 @@ Pokud je nějaký příkaz dlouhý nebo je těžký na zapamatování, tak si mo
 vytvořit alias(y)::
 
    $ which here             # zda příkaz existuje
-   $ alias here="pwd"
+   $ alias here='pwd'
    $ here
    /home/davie/
    $ unalias here
@@ -2240,7 +2246,7 @@ vytvořit alias(y)::
 
    Do konfiguračního souboru ``.bashrc`` budu tedy psát::
 
-      alias here="pwd"
+      alias here='pwd'
 
    Aliasy lze psát separátně do souboru ``.bash_aliases``. pokud se v
    konfiguračním souboru se nachází následující podmínka::
