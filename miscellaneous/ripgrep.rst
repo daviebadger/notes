@@ -39,10 +39,10 @@ Instalace
    Velikost ``rg`` binárky lze osekat o debugovací symboly pomocí  ``strip``
    příkazu::
 
-      $ ls -lht ~/.cargo/bin | grep -w "rg"
+      $ ls -lht ~/.cargo/bin | grep -w 'rg'
       -rwxr-xr-x 1 davie davie 43M čen  9 10:34 rg
       $ strip ~/.cargo/bin/rg
-      $ ls -lht ~/.cargo/bin | grep -w "rg"
+      $ ls -lht ~/.cargo/bin | grep -w 'rg'
       -rwxr-xr-x 1 davie davie 3,9M čen  9 10:40 rg
 
 Příkaz
@@ -53,19 +53,19 @@ rg
 
 Vyhledej pattern v aktuálním adresáři včetně vnořených adresářů::
 
-   $ rg "Lorem ipsum"
+   $ rg 'Lorem ipsum'
    editor/vim.rst
    140:   Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
 
 Vyhledej pattern v daném adresáři včetně vnořených adresářů::
 
-   $ rg "Lorem ipsum" editor/
+   $ rg 'Lorem ipsum' editor/
    editor/vim.rst
    140:   Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
 
 Vyhledej pattern v daném souboru::
 
-   $ rg "Lorem ipsum" editor/vim.rst
+   $ rg 'Lorem ipsum' editor/vim.rst
    editor/vim.rst
    140:   Lorem ipsum dolor sit amet, eos eu aperiri moderatius. Eam utamur nostrud
 
@@ -107,7 +107,7 @@ Vyhledej pattern a nastav barvy výstupu::
 
    Barevné nastavení je jen dočasné, proto je třeba jej uložit jako alias::
 
-      $ export rg=""
+      $ export rg=''
 
    Ripgep defaultně umí detekovat, kdy má ve výstupu použít barvy a kdy naopak
    ne, např. při přesměrování výstupu.
@@ -198,10 +198,10 @@ rg -F (--fixed-strings)
 Vyhledej pattern jako obyčejný text bez interpolace speciálních znaků, jako
 u regulárních výrazů::
 
-   $ rg "^C"
+   $ rg '^C'
    LICENSE
    5:Creative Commons Corporation ("Creative Commons") is not a law firm and
-   $ rg -F "^C"
+   $ rg -F '^C'
    container/docker.rst
    1114:      ^P^C
 
@@ -210,13 +210,14 @@ rg -g (--glob)
 
 Vyhledej pattern jenom v souborech splňující daný glob::
 
-   $ rg -g "*.rst" lorem
+   $ rg -g '*.rst' lorem
 
 .. note::
 
    Pomocí vykričníku lze inverzeně obrátit glob::
 
-      $ rg -g "!*.min.js" txt
+      $ rg -g '!*.min.js' txt
+      $ rg -g '__pycache__/' txt
 
 rg -i (--ignore-case)
 ^^^^^^^^^^^^^^^^^^^^^
@@ -282,11 +283,11 @@ Vyhledej obraceně pattern::
    b = 2
    # comment
    c = 3
-   $ rg "#" text.txt
+   $ rg '#' text.txt
    1:# comment
    3:# comment
    5:# comment
-   $ rg -v "#" text.txt
+   $ rg -v '#' text.txt
    2:a = 1
    4:b = 2
    6:c = 3
