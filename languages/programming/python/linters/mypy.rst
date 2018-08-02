@@ -50,7 +50,7 @@ Zkontroluj správné používání datových typů v adresáři::
       $ mypy file.py
       file.py:1: error: Cannot find module named 'foo'
       file.py:1: note: (Perhaps setting MYPYPATH or using the "--ignore-missing-imports" flag would help)
-      $ echo "import foo  # type: ignore" > file.py
+      $ echo 'import foo  # type: ignore' > file.py
       $ mypy file.py
       $
 
@@ -61,7 +61,7 @@ Zkontroluj správné používání datových typů v adresáři::
       import foo  # type: ignore
       $ flake8 file.py
       file.py:1:1: F401 'foo' imported but unused
-      $ echo "import foo  # type: ignore  # noqa" > file.py
+      $ echo 'import foo  # type: ignore  # noqa' > file.py
       $ mypy file.py
       $ flake8 file.py
       $
