@@ -60,8 +60,8 @@ Nainstaluj konkrétní verzi balíčku::
 
    Nainstaluj podmíněnou verzi balíčku::
 
-      $ pip install "virtualenv<15.1.0"
-      $ pip install "virtualenv>=15.0.0"
+      $ pip install 'virtualenv<15.1.0'
+      $ pip install 'virtualenv>=15.0.0'
 
 install --user
 """"""""""""""
