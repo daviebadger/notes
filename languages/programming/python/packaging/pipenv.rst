@@ -186,19 +186,19 @@ Nainstaluj všechny balíčky z ``Pipfile`` pro vývoj::
 
 Nainstaluj konkrétní balíček(y) pro vývoj::
 
-   $ pipenv install --dev "pytest>=3.0.0" sphinx
+   $ pipenv install --dev 'pytest>=3.0.0' sphinx
 
 .. tip::
 
    Vlastní projekt se ``setup.py`` souborem lze nainstalovat do editačního
    módu stejně jako u ``pip`` příkazu::
 
-      $ pipenv install --dev "-e ."
+      $ pipenv install --dev '-e .'
 
    Při odinstalaci vlastního projektu bude třeba použít hash jako název
    balíčku, který se vygeneroval pro vlastní projekt::
 
-      $ cat Pipfile | grep "path ="
+      $ cat Pipfile | grep 'path ='
       "e1839a8" = {path = ".", editable = true}
 
 pipenv update
@@ -291,7 +291,7 @@ Aktivuj virtualenv v novém subshellu::
    adresáři v projektu::
 
       activate_venv() {
-        if [ -e ".venv" ] && [ -d ".venv" ]; then
+        if [ -e '.venv' ] && [ -d '.venv' ]; then
           pipenv shell
         fi
       }
