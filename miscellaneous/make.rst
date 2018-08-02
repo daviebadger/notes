@@ -40,7 +40,7 @@ Příkazy se konfigurují v souboru ``Makefile``.
 
       $ cat Makefile
       test:
-          echo "test"
+          echo 'test'
       $ make test
       Makefile:2: *** missing separator.  Stop.
 
@@ -53,9 +53,9 @@ Vytvoř příkaz, který volá jiný příkaz::
    # subcommand test
 
    test:
-           echo "test"
+           echo 'test'
    $ make test
-   echo "test"
+   echo 'test'
    test
 
 Vytvoř příkaz, který volá jiné příkazy za sebou tak, dokud je předchozí příkaz
@@ -63,25 +63,25 @@ Vytvoř příkaz, který volá jiné příkazy za sebou tak, dokud je předchoz�
 
    $ cat Makefile
    right:
-           echo "a"
-           echo "b"
-           echo "c"
+           echo 'a'
+           echo 'b'
+           echo 'c'
 
    wrong:
-           echo "a"
-           echoecho "b"
-           echo "c"
+           echo 'a'
+           echoecho 'b'
+           echo 'c'
    $ make right
-   echo "a"
+   echo 'a'
    a
-   echo "b"
+   echo 'b'
    b
-   echo "c"
+   echo 'c'
    c
    $ make wrong
-   echo "a"
+   echo 'a'
    a
-   echoecho "b"
+   echoecho 'b'
    /bin/sh: 1: echoecho: not found
    Makefile:7: recipe for target 'wrong' failed
    make: *** [wrong] Error 127
@@ -91,17 +91,17 @@ exitovém kódu předchozího příkazu::
 
    $ cat Makefile
    wrong:
-           echo "a"
-           - echoecho "b"
-           echo "c"
+           echo 'a'
+           - echoecho 'b'
+           echo 'c'
    $ make wrong
-   echo "a"
+   echo 'a'
    a
-   echoecho "b"
+   echoecho 'b'
    /bin/sh: 1: echoecho: not found
    Makefile:7: recipe for target 'wrong' failed
    make: [wrong] Error 127 (ignored)
-   echo "c"
+   echo 'c'
    c
 
 Vytvoř příkaz, který závísí na jiných příkazech nebo souborech v projektu, než
@@ -109,21 +109,21 @@ se pustí samotný příkaz::
 
    $ cat Makefile
    test: test-one test-two test-three
-           echo "test"
+           echo 'test'
    test-one:
-           echo "test-one"
+           echo 'test-one'
    test-two:
-           echo "test-two"
+           echo 'test-two'
    test-three:
-           echo "test-three"
+           echo 'test-three'
    $ make test
-   echo "test-one"
+   echo 'test-one'
    test-one
-   echo "test-two"
+   echo 'test-two'
    test-two
-   echo "test-three"
+   echo 'test-three'
    test-three
-   echo "test"
+   echo 'test'
    test
 
 Vytvoř příkaz, který spustí příkazy s potlačením standardního výstupu::
@@ -149,11 +149,11 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
            $(MAKE) -C docs html
    $ cat docs/Makefile
    html:
-           echo "html"
+           echo 'html'
    $ make test
    make -C docs html
    make[1]: Entering directory '/home/davie/test/docs'
-   echo "html"
+   echo 'html'
    html
    make[1]: Leaving directory '/home/davie/test/docs'
 
@@ -164,9 +164,9 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
 
       $ cat Makefile
       a:
-              @echo "a"
+              @echo 'a'
       b:
-              @echo "b"
+              @echo 'b'
       $ make
       a
       $ make a
@@ -181,10 +181,10 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
       .DEFAULT_GOAL := all
 
       all:
-              @echo "install"
-              @echo "test"
-              @echo "build"
-              @echo "deploy"
+              @echo 'install'
+              @echo 'test'
+              @echo 'build'
+              @echo 'deploy'
       $ make
       install
       test
@@ -199,15 +199,15 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
 
       $ cat Makefile
       test:
-              @echo "test"
+              @echo 'test'
       $ touch test
       $ make test
       make: 'test' is up to date.
-      $ echo -e ".PHONY: test\n$(cat Makefile)" > Makefile
+      $ echo -e '.PHONY: test\n$(cat Makefile)' > Makefile
       $ cat Makefile
       .PHONY: test
       test:
-              @echo "test"
+              @echo 'test'
       $ make test
       test
 
@@ -216,8 +216,8 @@ Vytvoř příkaz, který zavolá příkaz z jiného ``Makefile`` souboru::
       $ cat Makefile
       .PHONY: doc
       doc:
-              @echo "doc"
+              @echo 'doc'
 
       .PHONY: test
       test:
-              @echo "test"
+              @echo 'test'
