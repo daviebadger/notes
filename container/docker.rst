@@ -21,7 +21,7 @@ Instalace
 ::
 
    $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-   $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+   $ sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
    $ sudo apt update
    $ sudo apt install docker-ce
 
@@ -364,7 +364,7 @@ Zobraz seznam nepojmenovaných lokálních obrazů::
    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
    <none>              <none>              c43c34f7551d        14 seconds ago      87.4MB
    python              3-alpine            27e79c0fa4d2        5 weeks ago         87.4MB
-   $ docker images -f "dangling=true"
+   $ docker images -f 'dangling=true'
    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
    <none>              <none>              c43c34f7551d        3 minutes ago       87.4MB
 
@@ -394,7 +394,7 @@ Zobraz seznam nepojmenovaných lokálních obrazů::
     ---> 320192481d5f
    Successfully built 320192481d5f
    Successfully tagged python-test:latest
-   $ sed -i "s/World/Davie/" Dockerfile
+   $ sed -i 's/World/Davie/' Dockerfile
    $ cat Dockerfile
    FROM python:3-alpine
 
@@ -414,7 +414,7 @@ Zobraz seznam nepojmenovaných lokálních obrazů::
    python-test         latest              82727637a829        17 seconds ago       87.4MB
    <none>              <none>              320192481d5f        About a minute ago   87.4MB
    python              3-alpine            27e79c0fa4d2        5 weeks ago          87.4MB
-   $ docker images -f "dangling=true"
+   $ docker images -f 'dangling=true'
    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
    <none>              <none>              320192481d5f        2 minutes ago       87.4MB
 
@@ -485,7 +485,7 @@ Vytvoř nepojmenovaný obraz z ``Dockerfile`` souboru::
       Removing intermediate container de89ff42a1e1
        ---> 540305bb23fa
       Successfully built 540305bb23fa
-      $ echo ".git" > .dockerignore
+      $ echo '.git' > .dockerignore
       $ docker build .
       Sending build context to Docker daemon  695.3kB
       Step 1/2 : FROM python:3-alpine
@@ -826,7 +826,7 @@ Smaž konkrétní nepojmenovaný obraz podle jeho ID::
 
 Smaž všechny dangling obrazy::
 
-   $ docker rmi $(docker images -f "dangling=true" -q)
+   $ docker rmi $(docker images -f 'dangling=true' -q)
 
 Smaž všechny obrazy::
 
@@ -1190,15 +1190,19 @@ ps -f
 
 Zobraz vyfiltrovaný seznam kontejnerů podle statusu::
 
-   $ docker ps -f "status=running"
+   $ docker ps -f 'status=running'
    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
    ef45ce5483dc        nginx:alpine        "nginx -g 'daemon of…"   3 days ago          Up 2 days           0.0.0.0:8000->80/tcp   nginx
+
+Zobraz vyfiltrovaný seznam kontejnerů podle názvu::
+
+   $ docker ps -f 'name=container'
 
 .. tip::
 
    Filtry lze kombinovat::
 
-      $ docker ps -f "status=created" -f "status=paused" -f "status=exited"
+      $ docker ps -f 'status=created' -f 'status=paused' -f 'status=exited'
 
 ps -l
 """""
@@ -1470,12 +1474,12 @@ inspect -f
 
 Zobraz zdrojový obraz kontejneru::
 
-   $ docker inspect -f "{{.Config.Image}}" nginx
+   $ docker inspect -f '{{.Config.Image}}' nginx
    nginx:alpine
 
 Zobraz IP adresu kontejneru::
 
-   $ docker inspect -f "{{.NetworkSettings.IPAddress}}" nginx
+   $ docker inspect -f '{{.NetworkSettings.IPAddress}}' nginx
    172.17.0.2
 
 Zobraz namapované porty kontejneru::
@@ -1485,7 +1489,7 @@ Zobraz namapované porty kontejneru::
 
 Zobraz volumy kontejneru::
 
-   $ docker inspect -f "{{range .Mounts }} {{.Source}} {{end}}" nginx
+   $ docker inspect -f '{{range .Mounts }} {{.Source}} {{end}}' nginx
    /var/lib/docker/volumes/3349e238e567d0b51aa287d88790248f7978a2d79ba1e481b142be6f6ff78207/_data
 
 rename
@@ -1602,7 +1606,7 @@ Spusť příkaz s danou proměnnou v běžícím kontejneru::
 
    $ docker exec -e TEST=test nginx echo $TEST
 
-   $ docker exec -e TEST=test nginx sh -c "echo $TEST"
+   $ docker exec -e TEST=test nginx sh -c 'echo $TEST'
    test
 
 .. note::
@@ -1793,7 +1797,7 @@ Ukonči šetrně několik kontejnerů::
 
 Ukonči šetrně všechny běžící kontejnery::
 
-   $ docker stop $(docker ps -f "status=running")
+   $ docker stop $(docker ps -f 'status=running')
 
 .. note::
 
@@ -1817,7 +1821,7 @@ Ukonči šetrně několik kontejnerů a opět je nastartuj::
 
 Ukonči šetrně všechny běžící kontejnery a opět je nastartuj::
 
-   $ docker restart $(docker ps -f "status=running")
+   $ docker restart $(docker ps -f 'status=running')
 
 .. note::
 
@@ -1840,7 +1844,7 @@ Ukonči násilně několik kontejnerů::
 
 Ukonči násilně všechny běžící kontejnery::
 
-   $ docker kill $(docker ps -f "status=running")
+   $ docker kill $(docker ps -f 'status=running')
 
 rm
 ^^
@@ -1922,7 +1926,7 @@ Zobraz všechny volumy podle jejich ID::
 
 Zobraz jen nepoužité dangling volumy::
 
-   $ docker volume ls -f "dangling=true"
+   $ docker volume ls -f 'dangling=true'
    DRIVER              VOLUME NAME
    local               ea5a9d4c6085cbd88bdb84c41a50c0a14323eb474d5ddb01d99aca1353509744
 
@@ -1984,7 +1988,7 @@ Smaž násilně volume, který se používá::
 
 Smaž všechny danling volumy::
 
-   $ docker volume rm $(docker volume ls -f "dangling=true" -q)
+   $ docker volume rm $(docker volume ls -f 'dangling=true' -q)
 
 prune
 """""
