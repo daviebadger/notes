@@ -4886,9 +4886,9 @@ Povol použití relačních operátorů na vlastní objekty::
       ...         raise AttributeError(f"Cannot delete {name}")
       ...     def __eq__(self, other):
       ...         return (
-      ...             isinstance(other, Point) and
-      ...             self.x == other.x and
-      ...             self.y == other.y
+      ...             isinstance(other, Point)
+      ...             and self.x == other.x
+      ...             and self.y == other.y
       ...         )
       ...     def __hash__(self):
       ...         return hash((self.x, self.y))
