@@ -575,7 +575,7 @@ Namísto zřetězení řetězců je vhodné použít formátování řetězců::
 
 .. tip::
 
-   Formátovaný řetězec lze ještě dále naformátovat::
+   Formátovaný řetězec lze ještě dále naformátovat, případně dědit::
 
       >>> "{}".format(123)
       '123'
@@ -585,6 +585,10 @@ Namísto zřetězení řetězců je vhodné použít formátování řetězců::
       '123          '
       >>> "{:^13}".format(123)
       '     123     '
+      >>> "{x} {{y}}".format(x=0)
+      '0 {y}'
+      >>> "{x} {{y}}".format(x=0).format(y=1)
+      '0 1'
 
 Pořadí aritmetických operací
 """"""""""""""""""""""""""""
