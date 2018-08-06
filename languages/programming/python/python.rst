@@ -5471,6 +5471,24 @@ Vytvoř uzávěru, která pracuje se zadaným kontextem::
       >>> Request.request("POST", name="Davie")
       ('POST', {'name': 'Davie'})
 
+   V případě nanesení ``partial`` funkce na sebe sama není nutné zadávat
+   argumenty zleva doprava podle parametrů, ale lze i volně pomocí klíčových
+   argumentů::
+
+      >>> from functools import partial
+      >>> def multiply(x, y):
+      ...     return x * y
+      ...
+      >>> multiply_with3 = partial(partial, multiply)
+      >>> multiply_with3(y=3)
+      functools.partial(<function multiply at 0x7f3e26f31ea0>, y=3)
+      >>> multiply_with3(y=3)()
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      TypeError: multiply() missing 1 required positional argument: 'x'
+      >>> multiply_with3(y=3)(1)
+      3
+
 Zabudované dekorátory
 ^^^^^^^^^^^^^^^^^^^^^
 
