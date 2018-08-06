@@ -904,11 +904,6 @@ Vytvoř nový nepojmenovaný kontejner z daného obrazu::
    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
    09db668cb007        hello-world         "/hello"            3 seconds ago       Created                                 blissful_volhard
 
-Vytvoř nový nepojmenovaný kontejner z daného obrazu a při nastartování
-kontejneru spusť konkrétní příkaz::
-
-   $ docker create alpine ls -l
-
 .. note::
 
    Pokud obraz neexistuje lokálně, tak se Docker pokusí pullnost obraz z
@@ -923,6 +918,19 @@ kontejneru spusť konkrétní příkaz::
       Digest: sha256:f5233545e43561214ca4891fd1157e1c3c563316ed8e237750d59bde73361e77
       Status: Downloaded newer image for hello-world:latest
       20995e7ec95b360dfea7ed756b58061248768ceb6c5aa84f297daf0d68669a19
+
+.. tip::
+
+   Vytvoř nový nepojmenovaný kontejner z daného obrazu a při nastartování
+   kontejneru spusť konkrétní příkaz::
+
+      $ docker create alpine ls -l
+      $ docker create -it alpine /bin/sh
+      $ docker create -it ubuntu /bin/bash
+
+   Příkaz poslaný do vytvořeného kontejneru přepíše příkaz ``CMD`` v obrazu,
+   pokud se nachází. Je-li v obrazu příkaz ``ENTRYPOINT`` (nedoporučuje se),
+   tak se příkaz nepřepíše a spustí se až za ním.
 
 create -e
 """""""""
@@ -1612,7 +1620,8 @@ Spusť příkaz s danou proměnnou v běžícím kontejneru::
 .. note::
 
    Někdy příkazy nemusí fungovat, proto je vhodné je spustit jako příkaz
-   v shellu pomocí příkazu ``sh -c "echo $TEST"``.
+   v shellu pomocí příkazu ``sh -c "echo $TEST"``, případně v bashi, pokud
+   existuje, jako ``/bin/bash -c 'echo $TEST'``.
 
 exec -it
 """"""""
