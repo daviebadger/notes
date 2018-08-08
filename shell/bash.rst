@@ -1120,6 +1120,19 @@ Vyhledej text rekurzivně napříč adresářemi a soubory::
 
       $ grep -rl 'foo' | xargs sed -i '/s/foo/bar/g'
 
+grep -v
+"""""""
+
+Zobraz jenom ty řádky, které neobsahují daný text::
+
+   $ cat test.py
+   a
+   b
+   c
+   $ grep -v b test.py
+   a
+   c
+
 tee
 ^^^
 
