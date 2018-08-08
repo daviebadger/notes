@@ -1160,6 +1160,12 @@ Zobraz seznam větví, které už jsou sloučené do nějaké jiné větve::
    Mergnuté větve je třeba pravidelně mazat, neboť už nemají žádný další užitek
    a svůj účel už naplnily, aby nedošlo k nepořádkům v repozitáři.
 
+.. tip::
+
+   Smaž všechny sloučené větvě kromě ``master`` větve::
+
+      $ git branch -d $(git branch --merged | grep -v master)
+
 branch --no-merged
 """"""""""""""""""
 
