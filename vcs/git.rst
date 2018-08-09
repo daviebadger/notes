@@ -882,6 +882,39 @@ Zobraz jen ty commity, které byly vytvořeny po daném datu::
    Volby ``--before`` a ``--after`` lze zkombinovat pro vytvoření rozsahu od
    do.
 
+log -S
+""""""
+
+Zobraz jen ty commity, které v diffu, respektive změn v kódu, najde patřičný
+hledaný text::
+
+   $ git log -S 'apt install git'
+   commit 51a6c475f32e4d6d178008ad818d6ffc56f19c0c
+   Author: Davie Badger <davie.badger@gmail.com>
+   Date:   Sat May 20 20:41:36 2017 +0200
+
+       Update git.rst
+
+.. note::
+
+   Nalezené commity lze dále formátovat pomocí voleb pro ``git log``, např.
+   pro zobrazení ID commitu, commit zprávy a výpis souborů::
+
+      $ git log --oneline --name-status -S 'apt install git'
+      51a6c47 Update git.rst
+      M       vcs/git.rst
+
+.. tip::
+
+   Zobraz rychle hledaný text v historii kódu::
+
+      $ git log -p -S 'apt install git' | grep -C 2 'apt install git'
+      +Příkazem::
+      +
+      1.   $ sudo apt install git
+      +
+      +Základní ovládání
+
 show
 ^^^^
 
