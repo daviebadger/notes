@@ -1077,6 +1077,22 @@ Alternativní zápis místo roury by zřejmě vypadal následovně::
    $ less output.txt
    $ rm file.txt
 
+.. tip::
+
+   Pomocí speciálního příkazu ``--`` se ukončuje možnost zadávání voleb pro
+   daný příkaz a jakýkoliv argument za dvojitou pomlčkou je považován čistě
+   jako poziční argument, byť může vypadat jako volba::
+
+      $ grep --help | grep -v
+      Usage: grep [OPTION]... PATTERN [FILE]...
+      Try 'grep --help' for more information.
+      $ grep --help | grep '-v'
+      Usage: grep [OPTION]... PATTERN [FILE]...
+      Try 'grep --help' for more information.
+      $ grep --help | grep -- -v
+        -v, --invert-match        select non-matching lines
+        -V, --version             display version information and exit
+
 grep -n
 """""""
 
