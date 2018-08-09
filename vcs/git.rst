@@ -714,6 +714,27 @@ Zobraz historii všech commitů::
 
        Add file.txt
 
+Zobraz historii všech commitů daného souboru::
+
+   $ git log file.txt
+   commit 239e88de07b21c1be080cc36be8a71ab6264b29f
+   Author: Davie Badger <davie.badger@gmail.com>
+   Date:   Sun May 21 19:56:34 2017 +0200
+
+       Remove file.txt from Git
+
+   commit 65a55c2b66d00ed6fc3137e307a975ad4e720711
+   Author: Davie Badger <davie.badger@gmail.com>
+   Date:   Sun May 21 15:19:35 2017 +0200
+
+       Clear content of file.txt
+
+   commit cb95d79e17f67de125688d875d3eda72760c541a
+   Author: Davie Badger <davie.badger@gmail.com>
+   Date:   Sun May 21 15:14:51 2017 +0200
+
+       Add file.txt
+
 .. note::
 
    Z commitů jsou vytažený jenom předměty zpráv.
