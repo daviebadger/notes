@@ -1093,6 +1093,28 @@ Alternativní zápis místo roury by zřejmě vypadal následovně::
         -v, --invert-match        select non-matching lines
         -V, --version             display version information and exit
 
+grep -C
+"""""""
+
+Zobraz jen ty řádky, na kterých se vyskytuje zadaný text včetně řádků okolo pro
+poskytnutí kontextu::
+
+   $ grep -C 1 'TILIX' ~/.bashrc
+   fi
+   if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # Ubuntu Budgie END
+   source ~/.shell_prompt.sh
+
+.. note::
+
+   Lze použit i zkrácenou variantu bez volby ``-C``::
+
+      $ grep -1 'TILIX' ~/.bashrc
+
+.. tip::
+
+   Pomocí volby ``-B`` lze zobrazit kontext před najitým řádkem a skrze ``-A``
+   naopak jenom za nalezeným textem.
+
 grep -n
 """""""
 
