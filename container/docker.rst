@@ -200,7 +200,7 @@ Zobraz nápovědu::
 pull
 ^^^^
 
-Stáhni obraz z veřejného Docker Hub registru::
+Stáhni nejnovější ``latest`` obraz z veřejného Docker Hub registru::
 
    $ docker pull hello-world
    Using default tag: latest
@@ -224,8 +224,17 @@ Stáhni obraz z vlastního registru::
 
 .. note::
 
-   Není-li uveden konkrétní tag u obrazu, tak se jako defaultní tag pouvažuje
-   ``latest``.
+   Pokud se vlastní repozitář nachází ve vnitřní síti a navíc nemá SSL
+   certifikát, pak je třeba nakonfigurovat Docker démona, aby nevznikal error
+   x509, který prověřuje platnost a validitu certifikátu pro SSL zabezpečení::
+
+      $ sudo cat /etc/docker/daemon.json
+      {
+        "dns": ["1.2.3.4"],
+        "insecure-registry": [
+          "myregistry:5000"
+        ]
+      }
 
 .. tip::
 
