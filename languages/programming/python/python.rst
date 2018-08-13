@@ -2038,7 +2038,7 @@ Pokud je interaktivní shell spuštěn z místa, ve kterém se nachází adresá
 .. note::
 
    U importování může dojít zacyklení, pokud např. soubor A importuje objekt
-   ze souboru B a ten naopak importuje ze souboru A::
+   ze souboru B a ten naopak importuje ze souboru A pomocí syntaxe ``from``::
 
       >>> from a import X
       Traceback (most recent call last):
@@ -2052,6 +2052,48 @@ Pokud je interaktivní shell spuštěn z místa, ve kterém se nachází adresá
    Řešením je zpravidla neimportovat navzájem mezi sebou, nýbrž vytvořit
    další nezávisly soubor C pro export, ze kterého budou soubory A a B
    importovat.
+
+   Alternativně lze importovat tak, aby nic nebylo spuštěno během startu
+   programu. Dále je pak třeba kód zaobalit do funkcí či jiných objektů, které
+   se volají, až když je to nutné a to z nezávislého třetího souboru::
+
+      $ cat a.py
+      import b
+
+      X = 0
+
+
+      def foo():
+          # or use from import here like:
+          #
+          # from b import Y
+          #
+          # print(Y)
+
+          print(b.Y)
+      $ cat b.py
+      import a
+
+      Y = 1
+
+
+      def bar():
+          # or
+          #
+          # from a import X
+          #
+          # print(X)
+
+          print(a.X)
+      $ cat c.py
+      from a import foo
+      from b import bar
+
+      foo()
+      bar()
+      $ python3 c.py
+      1
+      0
 
 .. tip::
 
