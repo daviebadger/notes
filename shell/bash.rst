@@ -2154,7 +2154,7 @@ du -h
 Zobraz informace o velikosti adresáře včetně jeho zanořených adresářů v
 lidských jednotkách::
 
-   $ df -h
+   $ du -h
    28K	./editor/plugins/css
    28K	./editor/plugins/rst
    68K	./editor/plugins/html
@@ -2168,7 +2168,7 @@ lidských jednotkách::
 
    Pomocí volby ``-s`` lze zobrazit celkovou velikost adresáře::
 
-      $ df -hs ~/Downloads
+      $ du -hs ~/Downloads
       2,4G	/home/davie/Downloads/
 
 time
