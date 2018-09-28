@@ -2037,10 +2037,9 @@ Smaž všechny dangling obrazy, kontejnery, volumy a nastavené sítě::
            4. all build cache
    Are you sure you want to continue? [y/N]
 
-Smaž všechny dangling objekty včetně nepouživaných obrazů a pozastavených
-kontejnerů::
+Smaž všechny dangling objekty včetně nepouživaných obrazů a volume::
 
-   $ docker system prune -a
+   $ docker system prune -av
 
 .. note::
 
