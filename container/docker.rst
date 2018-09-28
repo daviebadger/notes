@@ -639,6 +639,33 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
         ---> 78f7f8e58091
       Successfully built 78f7f8e58091
 
+build --no-cache
+""""""""""""""""
+
+Vytvoř nejpojmenovaný obraz bez cache::
+
+   $ cat Dockerfile
+   FROM python:3-alpine
+
+   CMD ["python3", "-c", "print('Hello World!')"]
+   $ docker build .
+   Sending build context to Docker daemon  7.679MB
+   Step 1/2 : FROM python:3-alpine
+    ---> d30308ec4dc1
+   Step 2/2 : CMD ["python3", "-c", "print('Hello World!')"]
+    ---> Using cache
+    ---> d05cf6f122ac
+   Successfully built d05cf6f122ac
+   $ docker build --no-cache .
+   Sending build context to Docker daemon  7.679MB
+   Step 1/2 : FROM python:3-alpine
+    ---> d30308ec4dc1
+   Step 2/2 : CMD ["python3", "-c", "print('Hello World!')"]
+    ---> Running in c122cdcc8418
+   Removing intermediate container c122cdcc8418
+    ---> f33e51215c84
+   Successfully built f33e51215c84
+
 build -t
 """"""""
 
