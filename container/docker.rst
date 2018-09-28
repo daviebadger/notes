@@ -560,7 +560,7 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
    mimo kontejner na hostovaném počítači jako volume pro pozdější obnovu,
    pokud kontejner selže::
 
-      VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+      VOLUME ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
 .. tip::
 
@@ -575,18 +575,18 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
       # List of packages: https://pkgs.alpinelinux.org/packages
 
       RUN apk add --no-cache --virtual .build-deps \
-                  ca-certificates \
-                  gcc \
-                  wget \
+              ca-certificates \
+              gcc \
+              wget \
           && apk del .build-deps
 
       # Debian / Ubuntu Linux
 
       RUN apt-get update \
           && apt install -y --no-install-recommends \
-                         ca-certificates \
-                         gcc \
-                         wget \
+              ca-certificates \
+              gcc \
+              wget \
           && rm -rf /var/lib/apt/lists/*
 
    Spolu s hromadnými příkazy v jednom ``RUN`` příkazu je vhodné použít i
@@ -598,9 +598,9 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
 
       RUN set -ex; \
           apk add --no-cache --virtual .build-deps \
-                  curl \
-                  make \
-                  wget \
+              curl \
+              make \
+              wget \
           ; \
           apk del .build-deps;
       $ docker build .
