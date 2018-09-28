@@ -473,9 +473,9 @@ Vytvoř nepojmenovaný obraz z ``Dockerfile`` souboru::
 
 .. tip::
 
-   Pomocí ``.dockerignore`` souboru (stejný princip jako ``.gitignore`` v Gitu)
-   lze urychlit vytváření obrazů, neboť defaultně se do Docker démonu posílá
-   celý kontext adresáře obsahující ``Dockerfile`` pro možné pozdější použití::
+   Pomocí ``.dockerignore`` souboru lze urychlit vytváření obrazů, neboť
+   defaultně se do Docker démonu posílá celý kontext adresáře, odkud bylo
+   buildovaní spuštěno::
 
       $ docker build .
       Sending build context to Docker daemon  6.689MB
@@ -503,6 +503,36 @@ Vytvoř nepojmenovaný obraz z ``Dockerfile`` souboru::
        ---> Using cache
        ---> 540305bb23fa
       Successfully built 540305bb23fa
+
+   Ignorování souborů lze taktéž ověřit při kopírování souborů do obrazu::
+
+      $ ls container
+      docker.rst  docker.txt
+      $ cat Dockerfile
+      FROM alpine
+
+      COPY container/ /notes/container
+
+      CMD ["find", "/notes/container"]
+      $ cat .dockerignore
+      **/*.txt
+      $ docker build -t test-context .
+      Sending build context to Docker daemon  7.758MB
+      Step 1/3 : FROM alpine
+       ---> 3fd9065eaf02
+      Step 2/3 : COPY container/ /notes/container
+       ---> fcaec8de11cd
+      Step 3/3 : CMD ["find", "/notes/container"]
+       ---> Running in 43ace2c5e0ca
+      Removing intermediate container 43ace2c5e0ca
+       ---> 75372a2a85a7
+      Successfully built 75372a2a85a7
+      Successfully tagged test-context:latest
+      $ docker run -it --rm test-context
+      /notes/container
+      /notes/container/docker.rst
+      $ ls container
+      docker.rst  docker.txt
 
 Odbočka k Dockerfile souboru
 """"""""""""""""""""""""""""
