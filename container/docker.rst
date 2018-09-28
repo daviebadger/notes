@@ -596,13 +596,13 @@ Vytvoř vlastní obraz s jednoduchou Flask aplikací::
 
    Aby byl build obrazu co nejmenší a nejrychlejší, je třeba správně zvolit
    bázový obraz, vážit pořádí instrukcí a jejich četnost, zejména u ``COPY``
-   a ``RUN`` instrukcí, jelikož tyto vrstvy zvětšuji obraz buildu::
+   a ``RUN`` instrukcí, jelikož tyto vrstvy zvětšuji obraz buildu.
+
+   Velikost obrazu ovlivňují i nepoužité soubory v každé vrstvě, např. cache
+   po instalaci závislostí. Proto je třeba mazat i tyhle soubory na konci
+   hromadné ``RUN`` instrukce::
 
       # Alpine Linux
-      #
-      # apk is package manager for Alpine linux
-      #
-      # List of packages: https://pkgs.alpinelinux.org/packages
 
       RUN apk add --no-cache --virtual .build-deps \
               ca-certificates \
