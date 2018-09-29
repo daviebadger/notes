@@ -2084,7 +2084,7 @@ system
 prune
 """""
 
-Smaž všechny dangling obrazy, kontejnery, volumy a nastavené sítě::
+Smaž všechny dangling obrazy, kontejnery a nastavené sítě::
 
    $ docker system prune
    WARNING! This will remove:
@@ -2096,7 +2096,14 @@ Smaž všechny dangling obrazy, kontejnery, volumy a nastavené sítě::
 
 Smaž všechny dangling objekty včetně nepouživaných obrazů a volume::
 
-   $ docker system prune -av
+   $ docker system prune -a --volumes
+   WARNING! This will remove:
+           1. all stopped containers
+           2. all networks not used by at least one container
+           3. all volumes not used by at least one container
+           4. all images without at least one container associated to them
+           5. all build cache
+   Are you sure you want to continue? [y/N] y
 
 .. note::
 
