@@ -2010,3 +2010,33 @@ zprávou::
       .PHONY: init
       init:
          git config core.hooksPath .githooks/
+
+commit-msg
+----------
+
+Vytvoř commit-msg hook, který kontroluje správný formát commit zprávy::
+
+   $ cat .githooks/commit-msg
+   #!/usr/bin/env python3
+
+   import sys
+
+   PREFIXES = (
+       "bug",
+       "conf",
+       "doc",
+       "feat",
+       "test",
+   )
+
+   with open(sys.argv[1]) as file:
+       message = file.read()
+
+   if not message.startswith(PREFIXES):
+       sys.exit("Invalid commit message")
+
+   sys.exit(0)
+   $ echo "test" > test.txt
+   $ git add test.txt
+   $ git commit -m "Test commit"
+   Invalid commit message
