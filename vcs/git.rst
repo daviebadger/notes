@@ -1952,3 +1952,61 @@ Zobraz stručne statistiku commitů::
 
    $ git shortlog -s
         3  Davie Badger
+
+Hooky
+=====
+
+pre-commit
+----------
+
+Vytvoř pre-commit hook, který se spustí před otevřením editoru s commit
+zprávou::
+
+   $ cat .git/hooks/pre-commit
+   #!/bin/bash
+
+   files=$(git diff --staged --name-only | grep '.py$')
+
+   if ! [ -z "$files" ]; then
+     flake8 $files
+
+     exit $?
+   fi
+
+   exit 0
+   $ chmod +x .git/hooks/pre-commit
+
+.. note::
+
+   Pokud pre-commit skript končí nenulovým exitovým kódem, tak nelze vytvořit
+   commit. Tento hook lze násilně preskočit pomocí volby `-n`, respektive
+   ``--no-verify``::
+
+      $ cat test.py
+      test
+      $ git commit -m "Test commit"
+      test.py:1:1: F821 undefined name 'test'
+      $ git commit --no-verify -m "Test commit"
+      $
+
+.. tip::
+
+   Aby bylo možné hooky verzovat, je třeba je vyjmout z adresáře ``.git`` např.
+   do adresáře ``.githooks``::
+
+      $ mkdir .githooks
+      $ mv .git/hooks/pre-commit .githooks/  # pre-commit is executable
+      $ git add .githooks/
+      $ git commit -m "Add pre-commit hook"
+
+   Poté je třeba lokálně nastavit cestu pro tyto verzované hooky::
+
+      $ git config core.hooksPath .githooks/
+
+   Tuto lokální konfiguraci hooku lze umístit do ``Makefile`` souboru, kde
+   např. příkaz ``init`` nastaví správně projekt pro vývoj::
+
+      $ cat Makefile
+      .PHONY: init
+      init:
+         git config core.hooksPath .githooks/
