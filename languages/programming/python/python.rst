@@ -261,6 +261,15 @@ Při použítí klíčového slova v názvu proměnná vznikne syntaktický erro
       SyntaxError: invalid syntax
       $
 
+.. tip::
+
+   Pokud nelze vymyslet jiný název pro proměnnou, aby neobsahovala klíčové
+   slovo, tak lze za klíčové slovo doplnit podtržítko, aniž by vznikl error::
+
+      >>> from_ = "Czech Republic"
+      >>> from_
+      'Czech Republic'
+
 Typy hodnot
 ^^^^^^^^^^^
 
@@ -674,7 +683,7 @@ Logické
    Negaci lze taktéž použít na přepínání mezi ``True`` a ``False`` hodnotou::
 
       >>> is_active = True
-      >>> is_active = not is_activate
+      >>> is_active = not is_active
       >>> is_active
       False
 
@@ -2152,10 +2161,10 @@ Odbočka ke způsobu importování
 
       # Relative
 
-      from . import X  # from actual __init__.py
-      from .a import X
       from .. import X  # from higher __init__.py
       from ..a import X
+      from . import X  # from actual __init__.py
+      from .a import X
 
       # Absolute
 
