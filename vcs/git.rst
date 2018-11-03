@@ -21,6 +21,8 @@ Instalace
 Příkazem::
 
    $ sudo apt install git
+   $ git --version
+   git version 2.17.1
 
 Základní ovládání
 =================
