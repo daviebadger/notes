@@ -1,6 +1,6 @@
-==========================
- Tilix (původně Terminix)
-==========================
+=======
+ Tilix
+=======
 --------------------------------
  Terminálový emulátor pro Linux
 --------------------------------
@@ -14,6 +14,23 @@
 .. sectnum::
    :depth: 3
    :suffix: .
+
+Instalace
+=========
+
+Tilix je defaultně nainstalovaný a nastavený jako terminálový emulátor v Ubuntu
+Budgie::
+
+   $ tilix --version
+   Versions
+      Tilix version: 1.7.7
+      VTE version: 0.52
+      GTK Version: 3.22.30
+
+   Tilix Special Features
+      Notifications enabled=0
+      Triggers enabled=0
+      Badges enabled=0
 
 Klávesové zkratky
 =================
@@ -118,16 +135,16 @@ Uložení nové session
 
 * ``CTRL + SHIFT + s``
 
+.. note::
+
+   Session je třeba uložit explicitně jako JSON soubor, např. `test.json`.
+
 Zobrazení session přehledu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * ``F12``
 
   * zobraz v bočním panelu přehled a náhled všech otevřených session
-
-* ``CTRL + ALT + p``
-
-  * zobraz přepínač otevřených a zavřených (uložených) session
 
 Přepínání mezi session
 ^^^^^^^^^^^^^^^^^^^^^^
