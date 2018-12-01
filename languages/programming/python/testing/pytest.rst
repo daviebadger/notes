@@ -474,19 +474,19 @@ hodnoty dovnitř testů jen uvnitř tříd::
    from add import add
 
 
-   def setup_module():
+   def setup_module(module):  # module parameter is not required
        print("before-module ", end="")
 
 
-   def teardown_module():
+   def teardown_module(module):
        print(" after-module", end="")
 
 
-   def setup_function():
+   def setup_function(function):  # function parameter is not required
        print(" before-function ", end="")
 
 
-   def teardown_function():
+   def teardown_function(function):
        print(" after-function ", end="")
 
 
