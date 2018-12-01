@@ -417,7 +417,7 @@ hodnoty::
       ====================== 2 passed in 0.02 seconds =======================
 
    V neposlední řádě lze explitně nastavit na úrovni testovacího souboru,
-   jaké fixtury se mají automaticky použít:
+   jaké fixtury se mají automaticky použít::
 
       $ cat conftest.py
       import pytest
