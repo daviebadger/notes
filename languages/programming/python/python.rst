@@ -5841,7 +5841,7 @@ Spusť různé funkce na základě datového typu argumentu::
 
    Pro komplexnější podporu datových typů a jejich definování u vícero
    argumentů najednou lze použít externí knihovnu
-   `multipledispatch <https://github.com/mrocklin/multipledispatch>`.
+   `multipledispatch <https://github.com/mrocklin/multipledispatch>`_.
 
 Základní datové typy
 ====================
