@@ -3767,7 +3767,7 @@ Nekonečné iterátory
 
 .. tip::
 
-   Zabudované funkce ``map`` umí pro zadanou funkci rozbalit argumenty z
+   Zabudovaná funkce ``map`` umí pro zadanou funkci rozbalit argumenty z
    vícero iterátorů, dokud nějaký nedojde::
 
       >>> from operator import mul
@@ -3905,9 +3905,10 @@ Konečné iterátory
 .. note::
 
    Další funkce pro práci s ``iterable`` objekty lze najíst v knihovně
-   ```itertools`` včetně návodu na vytváření vlastních
+   ``itertools`` včetně návodu na vytváření vlastních
    `iter funkcí <https://docs.python.org/3/library/itertools.html#itertools-recipes>`_
-   nebo v externích balíčcích zaměřené na funkcionální programování.
+   nebo v externích balíčcích zaměřené na funkcionální programování, např.
+   `more-itertools <https://github.com/erikrose/more-itertools>`_.
 
 .. tip::
 
