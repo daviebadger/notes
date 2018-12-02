@@ -2537,6 +2537,28 @@ Vytvoř a vyvolej vlastní výjimku::
         File "<stdin>", line 1, in <module>
       __main__.MyError: ABC123: bla bla bla
 
+   Případně i obohatit o nějaké atributy::
+
+      >>> class MyError(Exception):
+      ...     def __init__(self, code, description):
+      ...         self.code = code
+      ...         self.description = description
+      ...     def __str__(self):
+      ...         return f"{self.code}: {self.description}"
+      ...
+      >>> raise MyError("ABC123", "bla bla bla")
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      __main__.MyError: ABC123: bla bla bla
+      >>> try:
+      ...     raise MyError("ABC123", "bla bla bla")
+      ... except MyError as error:
+      ...     print(f"Code: {error.code}")
+      ...     print(f"Description: {error.description}")
+      ...
+      Code: ABC123
+      Description: bla bla bla
+
 .. tip::
 
    Pomocí aliasu zachycené výjimky se lze dostat k chybové zprávě::
