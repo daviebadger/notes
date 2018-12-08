@@ -5,6 +5,10 @@
  Kontrola prázdného řádku mezi definicí třídy a první metodou
 --------------------------------------------------------------
 
+:Author: Davie Badger
+:Contact: davie.badger@gmail.com
+:License: CC BY-SA 4.0
+
 .. contents:: Obsah:
 
 .. sectnum::

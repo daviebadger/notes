@@ -5,6 +5,10 @@
  Kontrola pojmenování objektů podle PEP 8 konvencí
 ---------------------------------------------------
 
+:Author: Davie Badger
+:Contact: davie.badger@gmail.com
+:License: CC BY-SA 4.0
+
 .. contents:: Obsah:
 
 .. sectnum::
