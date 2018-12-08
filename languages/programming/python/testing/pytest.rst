@@ -20,7 +20,7 @@ Instalace
 
 ::
 
-   pip install --user pytest
+   $ pip install --user pytest
 
 Testování
 =========
