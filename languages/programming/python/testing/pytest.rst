@@ -534,7 +534,31 @@ hodnoty dovnitř testů jen uvnitř tříd::
 
    Fixtury na rozdíl od klasického postupu mají výhodu ve znovupoužitelnosti
    napříč testy, možnosti posílat hodnoty dovnitř testů nebo tyto fixtury
-   nakešovat. Nicméně obě možnosti lze dohromady kombinovat.
+   nakešovat.
+
+   Obě možnosti lze dohromady úspěšně kombinovat, kdy fixtury se starají o
+   znovupoužitelnost napříc tesovacími funkcemi a tríd, a naopak starý postup
+   obalí opakované testy pro různé instance stejného kódu::
+
+      $ cat test_hybrid.py
+      from my_app import Config
+      from my_app import SystemConfig
+      from my_app import UserConfig
+
+      class ConfigCase(object):
+          config = None
+
+          def test_method(fixture):
+              pass
+
+
+      class TestSystemConfig(ConfigCase):
+          config = SystemConfig
+
+
+      class TestUserConfig(ConfigCase):
+          config = UserConfig
+
 
 .. tip::
 
