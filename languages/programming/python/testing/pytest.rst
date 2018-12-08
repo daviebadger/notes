@@ -1172,7 +1172,7 @@ tmpdir
 
 Otestuj soubory a adresáře v dočasném adresáři::
 
-   $ test_tmpdir.py
+   $ cat test_tmpdir.py
    def test_tmpdir(tmpdir):
        tmpdir.mkdir("test")
 
@@ -1227,6 +1227,38 @@ Otestuj soubory a adresáře v dočasném adresáři::
       test_tmpdir_factory.py ..                                       [100%]
 
       ====================== 2 passed in 0.01 seconds =======================
+
+tmp_path
+""""""""
+
+Otestuj dočasný adresář pro každou testovací funkci::
+
+   $ cat test_tmp_path.py
+   from pathlib import Path
+
+   def test_tmp_path(tmp_path):
+       assert isinstance(tmp_path, Path)
+       assert tmp_path.exists()
+   $ pytest test_tmp_path.py
+   =========================== test session starts ==========================
+   platform linux -- Python 3.6.6, pytest-4.0.1, py-1.7.0, pluggy-0.8.0
+   rootdir: /home/davie/gitlab/trainer, inifile:
+   plugins: mock-1.10.0, cov-2.6.0
+   collected 1 item
+
+   test_tmp_path.py .                                                 [100%]
+
+   ======================== 1 passed in 0.02 seconds ========================
+
+.. note::
+
+   Fixtura ``tmp_path`` na rozdíl od ``tmpdir`` fixtury vrací ``Path`` objekt
+   ze zabudované knihovny ``Pathlib``.
+
+.. tip::
+
+   Stejně jako u ``tmpdir_factory`` fixtury, lze i pomocí ``tmp_path_factory``
+   fixtury sdílet stejný dočasný adresář pro vícero testů.
 
 Modifikace testů
 ----------------
