@@ -1717,6 +1717,23 @@ Ulož volby příkazu do konfiguračního souboru ``setup.cfg``::
 
    ======================= 2 passed in 0.01 seconds ========================
 
+Přepiš násilně nakonfigurované klíče v konfiguračním souboru pomocí
+volby ``-o``::
+
+   $ cat setup.cfg
+   [tool:pytest]
+   addopts = -v
+   $ pytest -o addopts="" test_add.py
+   ========================== test session starts ==========================
+   platform linux -- Python 3.6.3, pytest-3.5.0, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
+   cachedir: .pytest_cache
+   rootdir: /home/davie/test, inifile: setup.cfg
+   collected 2 items
+
+   test_add.py ..                                                    [100%]
+
+   ======================= 2 passed in 0.01 seconds ========================
+
 .. note::
 
    Další konfigurační možnosti lze zobrazit v nápovědě pomocí ``--help`` volby
