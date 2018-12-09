@@ -466,7 +466,49 @@ hodnoty::
 
       ====================== 1 passed in 0.01 seconds =======================
 
-   Volba ``-v`` zobrazí ukecanější výsledky pytestu.
+   Volba ``-v`` zobrazí ukecanější výsledky pytestu. Dvojitá volba ``-vv`` pak
+   zobrazi kompletní diff u kolekcí místo krátkého diffu::
+
+      $ cat test_list.py
+      def test_list():
+          assert [] == dir(test_list)
+      $ pytest test_list.py
+      ========================= test session starts =========================
+      platform linux -- Python 3.6.7, pytest-3.5.0, py-1.5.3, pluggy-0.6.0
+      rootdir: /home/davie/test, inifile:
+      collected 1 item
+
+      test_list.py F                                                                [100%]
+
+      ============================== FAILURES ===============================
+      ______________________________ test_list ______________________________
+
+          def test_list():
+      >       assert [] == dir(test_list)
+      E       AssertionError: assert [] == ['__annotations__', '__call_...ode__', '__defaults__', ...]
+      E         Right contains more items, first extra item: '__annotations__'
+      E         Use -v to get the full diff
+
+      test_list.py:2: AssertionError
+      ====================== 1 failed in 0.03 seconds =======================
+      $ pytest -v test_list.py
+      ...
+
+          def test_list():
+      >       assert [] == dir(test_list)
+      E       AssertionError: assert [] == ['__annotations__', '__call_...ode__', '__defaults__', ...]
+      E         Right contains more items, first extra item: '__annotations__'
+      E         Full diff:
+      E         - []
+      E         + ['__annotations__',
+      E         +  '__call__',
+      E         +  '__class__',
+      E         +  '__closure__',...
+      E
+      E         ...Full output truncated (32 lines hidden), use '-vv' to show
+
+      ...
+      $ pytest -vv test_list.py
 
 Odbočka ke klasickému setupu a teardownu
 """"""""""""""""""""""""""""""""""""""""
@@ -1704,7 +1746,7 @@ Ulož volby příkazu do konfiguračního souboru ``setup.cfg``::
 
    $ cat setup.cfg
    [tool:pytest]
-   addopts = -v
+   addopts = -vv
    $ pytest test_add.py
    ========================== test session starts ==========================
    platform linux -- Python 3.6.3, pytest-3.5.0, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
@@ -1722,7 +1764,7 @@ volby ``-o``::
 
    $ cat setup.cfg
    [tool:pytest]
-   addopts = -v
+   addopts = -vv
    $ pytest -o addopts="" test_add.py
    ========================== test session starts ==========================
    platform linux -- Python 3.6.3, pytest-3.5.0, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
