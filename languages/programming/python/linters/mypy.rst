@@ -247,7 +247,7 @@ Typy podle protokolů
      a
      a
      $ mypy file.py
-     %
+     $
 
 * ``Iterator``::
 
