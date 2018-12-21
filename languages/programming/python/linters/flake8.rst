@@ -269,27 +269,6 @@ Zobraz na konci výstupu statistiku porušení::
    1     E999 SyntaxError: invalid syntax
    1     F401 'this' imported but unused
 
-Rozšíření
-=========
-
-Pro ``flake8`` existuje několik pluginů, které rozšiřují jeho funkčnost. Pokud
-jsou tyto pluginy nainstalovány, tak je ``flake8`` automaticky detekuje a
-použije::
-
-   $ pip install --user flake8-print
-   $ flake8 --help | tail -2
-   Installed plugins: flake8-print: 3.0.1, mccabe: 0.6.1, pycodestyle: 2.3.1,
-   pyflakes: 1.6.0
-
-.. note::
-
-   Pluginy mohou být defaultně vypnuty nebo upozaděny kvůli ``--select`` volbě,
-   není-li nastaveno jinak::
-
-      $ flake8 file.py
-      $ flake8 --enable-extensions=T file.py
-      ./file.py:1:1: T001 print found.
-
 Konfigurace
 ===========
 
@@ -298,9 +277,8 @@ zpravidla se jedná o ``setup.cfg`` soubor ve formátu ``INI`` v rootu projektu:
 
    [flake8]
    # disable-noqa = True
-   # enable-extensions = T
-   exclude = docs,tests
+   # exclude = docs,tests
    # ignore = F401
    max-complexity = 10
-   max-line-length = 99
+   # max-line-length = 99
    select = E,F,W
