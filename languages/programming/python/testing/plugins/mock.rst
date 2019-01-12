@@ -286,54 +286,54 @@ Oba mock objekty mají shodně následující atributy a metody k testovacím
 
   * ověř, že mock nebyl vůbec zavolán::
 
-    $ cat test_assert_not_called(mocker):
-    def test_called(mocker):
-        mock = mocker.Mock()
+       $ cat test_assert_not_called.py
+       def test_called(mocker):
+           mock = mocker.Mock()
 
-        mock.assert_not_called()
+           mock.assert_not_called()
 
 * ``call_count``
 
   * počet volání na mocku::
 
-    $ cat test_call_count(mocker):
-    def test_called(mocker):
-        mock = mocker.Mock()
-        mock()
+       $ cat test_call_count.py
+       def test_called(mocker):
+           mock = mocker.Mock()
+           mock()
 
-        assert mock.call_count == 1
+           assert mock.call_count == 1
 
 * ``called``
 
   * zda byl mock zavolán nebo ne::
 
-    $ cat test_called(mocker):
-    def test_called(mocker):
-        mock = mocker.Mock()
-        mock()
+       $ cat test_called.py
+       def test_called(mocker):
+           mock = mocker.Mock()
+           mock()
 
-        assert mock.called
+           assert mock.called
 
 * ``mock_calls``
 
   * seznam všech zavolaných metod včetně magických metod a řetězených metod::
 
-    $ cat test_mock_calls(mocker):
-    def test_asserts(mocker):
-        mock_object = mocker.MagicMock()
-        mock_object(0, y=1)
-        mock_object.x.y.z()
-        int(mock_object)
+       $ cat test_mock_calls.py
+       def test_asserts(mocker):
+           mock_object = mocker.magicmock()
+           mock_object(0, y=1)
+           mock_object.x.y.z()
+           int(mock_object)
 
-        assert [
-            mocker.call(0, y=1),
-            mocker.call.x.y.z(),
-            mocker.call.__int__()
-        ] == mock_object.mock_calls
+           assert [
+               mocker.call(0, y=1),
+               mocker.call.x.y.z(),
+               mocker.call.__int__()
+           ] == mock_object.mock_calls
 
-        # or using mocker.ANY for whatever arguments
+           # or using mocker.any for whatever arguments
 
-        assert [mocker.call(0, y=mocker.ANY), mocker.ANY, mocker.ANY] == mock_object.mock_calls
+           assert [mocker.call(0, y=mocker.any), mocker.any, mocker.any] == mock_object.mock_calls
 
 Další atributy a metody na mock objektech lze nalézt v
 `dokumentaci <https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock>`_.
