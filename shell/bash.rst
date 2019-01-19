@@ -43,7 +43,7 @@ $         normální uživatel (``#`` je superuživatel alias root)
 
 .. note::
 
-   Pro budoucí ukázky příkazů se bude používat zkrácený zápis::
+   Pro příklady příkazů se používá zkrácený zápis::
 
       $ <příkaz>
 
@@ -104,12 +104,14 @@ tyto podoby:
 
    $ ls -l -a
 
-Do budoucna je ještě vhodné vědět, že příkaz může mít subpříkazy a že i
-volbám lze někdy dát argument(y).
-
 .. note::
 
-   Význam jednotlivých příkazů bude vysvětlen později.
+   Volby nemusí být jen ve tvaru přepínače (true nebo false), ale mohou
+   přijímat argumenty, např.::
+
+      $ <příkaz> --volba hodnota  # preferovanější varianta
+      $ # nebo
+      $ <příkaz> --volba=hodnota
 
 .. tip::
 
