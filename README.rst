@@ -1,6 +1,6 @@
-*****
-Notes
-*****
+*************
+Davie's notes
+*************
 
 My personal notes of software technologies I've been using (written in Czech).
 
