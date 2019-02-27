@@ -22,7 +22,7 @@ V Ubuntu už je Vim nainstalovaný, nicméně se jedná o jeho osekanější ver
 kvůli zpětně kompatibilitě s editorem ``vi``. Plná verze Vimu se nainstaluje
 příkazem::
 
-   $ sudo apt install vim-gnome
+   $ sudo apt install vim-gtk3
 
 .. note::
 
