@@ -40,9 +40,17 @@ Konfigurace
 
    let g:NERDCommentEmptyLines = 1
 
+   " hezčí víceřádkové komentáře
+
+   let g:NERDCompactSexyComns = 1
+
    " přidej mezeru za komentářem
 
    let g:NERDSpaceDelims = 1
+
+   " zkontroluj všechny označené řádky, jestli zakomentovat / odkomentovat
+
+   let g:NERDToggleCheckAllLines = 1
 
    let g:NERDTrimTrailingWhitespace = 1
 
