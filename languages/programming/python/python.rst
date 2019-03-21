@@ -6054,6 +6054,8 @@ Metody řetězců
        'Davie Badger'
        >>> "{first_name} {last_name}".format(first_name="Davie", last_name="Badger")
        'Davie Badger'
+       >>> "{name}".format(name="Davie", age=23, gender="male")  # Extra kwargs
+       'Davie'
 
 * ``.index(sub, start=0, end=-1)``
 
