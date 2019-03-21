@@ -269,6 +269,21 @@ Samozřejme si lze zobrazit obsah vícero adresářů najednou::
    /home/davie:
    Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 
+ls -1
+"""""
+
+Ukaž obsah adresáře, příčemž soubory a adresáře jsou zobrazeny po řádcích::
+
+   $ ls -1
+   Desktop
+   Documents
+   Downloads
+   Music
+   Pictures
+   Public
+   Templates
+   Videos
+
 ls -a
 """""
 
