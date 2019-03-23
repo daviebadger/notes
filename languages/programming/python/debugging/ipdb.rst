@@ -623,6 +623,154 @@ Pokračuj v exekuci kódu, dokud program nenarazí na další breakpoint::
    Pokud se v debuggeru nenachází breakpoint, tak se nechá program doběhnout
    a pak znova zrestartovat na začátek.
 
+u[p]
+""""
+
+Vrať se zpátky o úroveň / úrovně nahoru v tracebacku::
+
+   $ cat file.py
+   def countdown(n):
+       import ipdb; ipdb.set_trace()
+
+       if n <= 0:
+           print("GO")
+       else:
+           print(n)
+
+           countdown(n - 1)
+
+
+   countdown(3)
+   $ python3 file.py
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   3
+   ipdb> c
+   3
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   2
+   ipdb> c
+   2
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   1
+   ipdb> c
+   1
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   0
+   ipdb> u
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   1
+   ipdb> u 2
+   > /home/davie/test/file.py(9)countdown()
+         8
+   ----> 9         countdown(n - 1)
+        10
+
+   ipdb> p n
+   3
+   ipdb> u
+   > /home/davie/test/file.py(12)<module>()
+        10
+        11
+   ---> 12 countdown(3)
+
+   ipdb> u
+   *** Oldest frame
+
+d[own]
+""""""
+
+Vrať se zpátky o úroveň / úrovně dolu v tracebacku::
+
+   $ cat file.py
+   def countdown(n):
+       import ipdb; ipdb.set_trace()
+
+       if n <= 0:
+           print("GO")
+       else:
+           print(n)
+
+           countdown(n - 1)
+
+
+   countdown(3)
+   $ python3 file.py
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> c
+   3
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> c
+   2
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> c
+   1
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> u 3
+   > /home/davie/test/file.py(9)countdown()
+         8
+   ----> 9         countdown(n - 1)
+        10
+
+   ipdb> d
+   > /home/davie/test/file.py(9)countdown()
+         8
+   ----> 9         countdown(n - 1)
+        10
+
+   ipdb> p n
+   2
+   ipdb> d 2
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> p n
+   0
+   ipdb> d
+   *** Newest frame
+
 run
 """
 
