@@ -626,7 +626,7 @@ Pokračuj v exekuci kódu, dokud program nenarazí na další breakpoint::
 u[p]
 """"
 
-Vrať se zpátky o úroveň / úrovně nahoru v tracebacku::
+Vrať se zpátky o úroveň / úrovně nahoru v trasování programu::
 
    $ cat file.py
    def countdown(n):
@@ -704,7 +704,7 @@ Vrať se zpátky o úroveň / úrovně nahoru v tracebacku::
 d[own]
 """"""
 
-Vrať se zpátky o úroveň / úrovně dolu v tracebacku::
+Vrať se zpátky o úroveň / úrovně dolu v trasování programu::
 
    $ cat file.py
    def countdown(n):
@@ -770,6 +770,65 @@ Vrať se zpátky o úroveň / úrovně dolu v tracebacku::
    0
    ipdb> d
    *** Newest frame
+
+w[here]
+"""""""
+
+Zobraz aktuální úroveň s volitelnými řádky okolo v trasování programu::
+
+   $ cat file.py
+   def countdown(n):
+       import ipdb; ipdb.set_trace()
+
+       if n <= 0:
+           print("GO")
+       else:
+           print(n)
+
+           countdown(n - 1)
+
+
+   countdown(3)
+   $ python3 file.py
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> c
+   3
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> w
+     /home/davie/test/file.py(12)<module>()
+        10
+        11
+   ---> 12 countdown(3)
+
+     /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   > /home/davie/test/file.py(4)countdown()
+         3
+   ----> 4     if n <= 0:
+         5         print("GO")
+
+   ipdb> w 1
+     /home/davie/test/file.py(12)<module>()
+   ---> 12 countdown(3)
+
+     /home/davie/test/file.py(4)countdown()
+   ----> 4     if n <= 0:
+
+   > /home/davie/test/file.py(4)countdown()
+   ----> 4     if n <= 0:
+
+   ipdb>
 
 run
 """
