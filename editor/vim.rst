@@ -1106,11 +1106,11 @@ Otevírání a zavírání záložek
 Přecházení mezi záložkami
 """""""""""""""""""""""""
 
-* ``qt``
+* ``gt``
 
   * přepni se na další záložku
 
-* ``qT``
+* ``gT``
 
   * přepni se na předchozí záložku
 
