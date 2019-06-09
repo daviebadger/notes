@@ -6,8 +6,8 @@ My personal technical notes of software I have been using.
 
 Beside these notes, there are complementary projects:
 
-* [Books][books] - books as sources for the notes
 * [Cheatsheets][cheatsheets] - cheatsheets from the notes
+* [Books][books] - books as sources for the notes
 
 [books]: https://github.com/daviebadger/books
 [cheatsheets]: https://github.com/daviebadger/cheatsheets
