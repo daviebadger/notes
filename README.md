@@ -14,7 +14,7 @@ Beside these notes, there are complementary projects:
 
 ## Notes
 
-*
+* [reStructuredText](restructuredtext/restructuredtext.rst)
 
 ## License
 
