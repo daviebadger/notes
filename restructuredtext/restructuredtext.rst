@@ -23,35 +23,40 @@ Directives are the first extension mechanism, how to extend block elements in
 .. code:: rst
 
    .. directive-name:: optional-directive-arguments (on a separate line)
-      :optional-directive-option: directive-option-value
+      :optional-directive-option: optional-directive-option-value
 
       optional-directive-body-elements
 
-Examples:
+Some examples of directive configurations:
 
 .. code:: rst
 
-   1. directive without arguments, options and body elements::
+   1. a directive without arguments, options and body elements::
 
          .. contents::
 
-   2. directive with an argument::
+   2. a directive with an argument::
 
          .. include:: path/to/file
 
-   3. directive with an argument and an option::
+   3. a directive with an argument and an option without a value::
+
+         .. include:: path/to/file
+            :literal:
+
+   4. a directive with an argument and an option with a value::
 
          .. image:: path/to/image
             :alt: Alternate text description
 
-   4. directive with an argument, an option and a body element::
+   5. a directive with an argument, an option with a value and a body element::
 
          .. figure:: path/to/image
             :scale: 50 %
 
             Image title rendered below the image
 
-   5. directive with a body element::
+   6. a directive with a body element::
 
          .. tip::
 
