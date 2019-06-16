@@ -83,6 +83,26 @@ Examples of using roles in sentences:
    * It is too :strong:`hot`.
 
 
+Sub Role
+--------
+
+Create a subscript:
+
+.. code:: rst
+
+   H\ :sub:`2`\ O is one of the famous chemical formulas.
+
+
+Sup Role
+--------
+
+Create a superscript:
+
+.. code:: rst
+
+   E=mc\ :sup:`2` is one of the famous phyhics formulas.
+
+
 PEP Role
 --------
 
