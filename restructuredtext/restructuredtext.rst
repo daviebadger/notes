@@ -80,7 +80,7 @@ Examples of using roles in sentences:
 
    * This :strong:`word` will be formatted as bold text.
    * Thisis\ :strong:`one`\ word, where the word "one" will be formatted as bold text.
-   * Today is really :strong:`hot`.
+   * It is too :strong:`hot`.
 
 
 
