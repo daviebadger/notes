@@ -83,5 +83,25 @@ Examples of using roles in sentences:
    * It is too :strong:`hot`.
 
 
+PEP Role
+--------
+
+Create a hyperlink to a specific PEP (Python Enhanced Proposal):
+
+.. code:: rst
+
+   See :PEP:`8` for Python style guide.
+
+
+RFC Role
+--------
+
+Create a hyperlink to a specific RFC (Request For Comments):
+
+.. code:: rst
+
+   See :RFC:`3339` for standardized date and time formats on the Internet.
+
+
 
 .. |RST| replace:: reStructuredText
