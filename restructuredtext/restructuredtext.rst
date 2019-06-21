@@ -89,6 +89,12 @@ Literal Role
 Math Role
 ---------
 
+Create an inline mathematical formula in LaTeX format:
+
+.. code:: rst
+
+   Create a graph of a function :math:`f(x) = x^2`.
+
 
 Sub Role
 --------
