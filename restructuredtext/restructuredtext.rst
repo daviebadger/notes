@@ -83,6 +83,13 @@ Examples of using roles in sentences:
    * It is too :strong:`hot`.
 
 
+Literal Role
+------------
+
+Math Role
+---------
+
+
 Sub Role
 --------
 
@@ -101,6 +108,16 @@ Create a superscript:
 .. code:: rst
 
    E=mc\ :sup:`2` is one of the famous phyhics formulas.
+
+
+Title Role
+----------
+
+Create a title of a work (book, chapter, other text materials):
+
+.. code:: rst
+
+  `title:`How to Title My Book` is the most selling book in the world.
 
 
 PEP Role
