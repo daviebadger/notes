@@ -86,6 +86,13 @@ Examples of using roles in sentences:
 Literal Role
 ------------
 
+Create an inline code sample which respects escaped backslahes:
+
+.. code:: rst
+
+   Double backquotes (:literal:`\`\``) are used for marking inline code samples.
+
+
 Math Role
 ---------
 
