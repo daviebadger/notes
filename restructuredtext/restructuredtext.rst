@@ -92,11 +92,23 @@ markup in |RST|. |RST| has several built-in roles. The syntax of roles is:
 
 Examples of using roles in sentences:
 
-.. code:: rst
+#. a role inside at the edge of a sentence:
 
-   * This :strong:`word` will be formatted as bold text.
-   * Thisis\ :strong:`one`\ word, where the word "one" will be formatted as bold text.
-   * It is too :strong:`hot`.
+   .. code:: rst
+
+      It is too :strong:`hot`.
+
+#. a role inside a sentence:
+
+   .. code:: rst
+
+      This :strong:`word` will be formatted as bold text.
+
+#. a role inside a word:
+
+   .. code:: rst
+
+      Thisis\ :strong:`one`\ word (thisisoneword), where the word "one" will be formatted as bold text.
 
 
 Literal Role
