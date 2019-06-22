@@ -148,7 +148,7 @@ Create a superscript:
 
 .. code:: rst
 
-   E=mc\ :sup:`2` is one of the famous phyhics formulas.
+   E=mc\ :sup:`2` is one of the famous physics formulas.
 
 
 Title Role
