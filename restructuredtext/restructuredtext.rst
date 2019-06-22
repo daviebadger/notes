@@ -118,7 +118,7 @@ Create an inline code sample which respects escaped backslashes:
 
 .. code:: rst
 
-   Double backquotes (:literal:`\`\``) are used for marking inline code samples.
+   The text inside enclosed double backquotes (:literal:`\`\`...\`\``) is treated as an inline code sample.
 
 
 Math Role
