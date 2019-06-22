@@ -114,7 +114,7 @@ Examples of using roles in sentences:
 Literal Role
 ------------
 
-Create an inline code sample which respects escaped backslahes:
+Create an inline code sample which respects escaped backslashes:
 
 .. code:: rst
 
