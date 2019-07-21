@@ -126,6 +126,16 @@ Add an extra hint to a text:
       Look at already existing roles.
 
 
+Warning Directive
+-----------------
+
+.. code:: rst
+
+   .. warning::
+
+      Do not exceed the recommended daily dose.
+
+
 
 Roles
 =====
