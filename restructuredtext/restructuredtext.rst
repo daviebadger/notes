@@ -102,6 +102,18 @@ Add extra cautious information to a text:
       Use wisely the overloaded ``raw-*`` roles.
 
 
+Danger Directive
+----------------
+
+Add extra dangerous information to a text:
+
+.. code:: rst
+
+   .. danger::
+
+      Do not try this at home!
+
+
 
 Roles
 =====
