@@ -82,7 +82,7 @@ Some examples of directive configurations:
 Attention Directive
 -------------------
 
-Add extra attentive information to a text:
+Add attentive information to a text:
 
 .. code:: rst
 
@@ -93,7 +93,7 @@ Add extra attentive information to a text:
 Caution Directive
 -----------------
 
-Add extra cautious information to a text:
+Add cautious information to a text:
 
 .. code:: rst
 
@@ -105,7 +105,7 @@ Add extra cautious information to a text:
 Danger Directive
 ----------------
 
-Add extra dangerous information to a text:
+Add dangerous information to a text:
 
 .. code:: rst
 
@@ -117,7 +117,7 @@ Add extra dangerous information to a text:
 Hint Directive
 --------------
 
-Add an extra hint to a text:
+Add a hint to a text:
 
 .. code:: rst
 
@@ -126,8 +126,22 @@ Add an extra hint to a text:
       Look at already existing roles.
 
 
+Tip Directive
+-------------
+
+Add a tip to a text:
+
+.. code:: rst
+
+   .. tip::
+
+      Subscripts are ideal candidates for substitutions.
+
+
 Warning Directive
 -----------------
+
+Add a warning to a text:
 
 .. code:: rst
 
