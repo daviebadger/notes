@@ -138,6 +138,18 @@ Add important information to a text:
       Be consistent with heading levels through a document.
 
 
+Note Directive
+--------------
+
+Add a note to a text:
+
+.. code:: rst
+
+   .. note::
+
+      Code samples using ``::`` markup are not highlighted at all.
+
+
 Tip Directive
 -------------
 
