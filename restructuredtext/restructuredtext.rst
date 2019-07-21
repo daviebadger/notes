@@ -80,7 +80,7 @@ Some examples of directive configurations:
 
 
 Attention Directive
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 Add extra attentive information to a text:
 
