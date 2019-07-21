@@ -86,11 +86,20 @@ Add extra attentive information to a text:
 
 .. code:: rst
 
-   ... (text)
-
    .. attention::
 
       The previous example is not possible to create via inline literal markup.
+
+Caution Directive
+-----------------
+
+Add extra cautious information to a text:
+
+.. code:: rst
+
+   .. caution::
+
+      Use wisely the overloaded ``raw-*`` roles.
 
 
 
