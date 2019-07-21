@@ -79,6 +79,20 @@ Some examples of directive configurations:
          This tip helps you save your money.
 
 
+Attention Directive
+^^^^^^^^^^^^^^^^^^^
+
+Add extra attentive information to a text:
+
+.. code:: rst
+
+   ... (text)
+
+   .. attention::
+
+      The previous example is not possible to create via inline literal markup.
+
+
 
 Roles
 =====
