@@ -126,6 +126,18 @@ Add a hint to a text:
       Look at already existing roles.
 
 
+Important Directive
+-------------------
+
+Add important information to a text:
+
+.. code:: rst
+
+   .. important::
+
+      Be consistent with heading levels through a document.
+
+
 Tip Directive
 -------------
 
