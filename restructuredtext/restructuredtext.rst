@@ -114,6 +114,18 @@ Add extra dangerous information to a text:
       Do not try this at home!
 
 
+Hint Directive
+--------------
+
+Add an extra hint to a text:
+
+.. code:: rst
+
+   .. hint::
+
+      Look at already existing roles.
+
+
 
 Roles
 =====
