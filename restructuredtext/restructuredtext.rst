@@ -79,6 +79,17 @@ Some examples of directive configurations:
          This tip helps you save your money.
 
 
+Admonition Directive
+--------------------
+
+Add a custom admonition with the given title to a text:
+
+.. code:: rst
+
+   .. admonition:: See also
+
+      www.example.com for more examples.
+
 Attention Directive
 -------------------
 
