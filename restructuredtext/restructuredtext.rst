@@ -125,6 +125,18 @@ Add dangerous information to a text:
       Do not try this at home!
 
 
+Default-Role Direcive
+---------------------
+
+Set a new default role in a document (a `title` role is by default):
+
+.. code:: rst
+
+   .. default-role:: math
+
+      `f(x) = x^2` == :math:`f(x) = x^2`
+
+
 Hint Directive
 --------------
 
