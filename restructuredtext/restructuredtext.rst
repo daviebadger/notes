@@ -173,6 +173,48 @@ Add a note to a text:
       Code samples using ``::`` markup are not highlighted at all.
 
 
+Role Directive
+--------------
+
+Create a new role in several ways:
+
+#. a dummy role only for styling purposes:
+
+   .. code:: rst
+
+      .. role:: strikethrough
+
+      I do :strikethrough:`not` like reStructuredText.
+
+#. an overloaded ``code`` role with a specific language for inline syntax
+   highlighting:
+
+   .. code:: rst
+
+      .. role:: python(code)
+         :language: python
+
+      Have you ever tried to run :python:`import this` in your Python interpreter?
+
+#. an overloaded ``raw`` role for a specific output format:
+
+   .. code:: rst
+
+      .. role:: raw-html(raw)
+         :format: html
+
+      I do :raw-html:`<del>not</del>` like reStructuredText.
+
+#. an aliased role to built-in roles or custom roles:
+
+   .. code:: rst
+
+      .. role:: strikethrough
+      .. role:: strike(strikethrough)
+
+      I do :strike:`not` like reStructuredText.
+
+
 Tip Directive
 -------------
 
