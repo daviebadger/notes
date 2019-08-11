@@ -22,7 +22,7 @@
 Directives
 ==========
 
-Directives are the first extension mechanism, how to extend block elements in
+Directives are the first extension mechanism, how to extend block markup in
 |RST|. |RST| has many built-in directives. The syntax of directives is:
 
 .. code:: rst
@@ -32,7 +32,7 @@ Directives are the first extension mechanism, how to extend block elements in
 
       optional-directive-body-elements
 
-Some examples of directive configurations:
+Some examples of using directives:
 
 #. a directive without arguments, options and body elements:
 
