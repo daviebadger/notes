@@ -226,6 +226,20 @@ Add a tip to a text:
       Subscripts are ideal candidates for substitutions.
 
 
+Title Directive
+---------------
+
+Set a different HTML document title for a browser tab:
+
+.. code:: rst
+
+   **************
+   Document Title
+   **************
+
+   .. title:: Alternative Document Title
+
+
 Warning Directive
 -----------------
 
