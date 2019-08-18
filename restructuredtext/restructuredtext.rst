@@ -112,6 +112,19 @@ Add cautious information to a text:
       Use wisely the overloaded ``raw-*`` roles.
 
 
+Class Directive
+---------------
+
+Add HTML classes right to the immediately following element:
+
+.. code:: rst
+
+   .. class:: my-class-name
+
+   Section Title
+   =============
+
+
 Danger Directive
 ----------------
 
