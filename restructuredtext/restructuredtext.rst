@@ -173,6 +173,19 @@ Add important information to a text:
       Be consistent with heading levels through a document.
 
 
+Meta Directive
+--------------
+
+Add HTML document meta tags:
+
+.. code:: rst
+
+   .. meta::
+      :author: Davie Badger
+      :description: reStructuredText is a markup language used for documentation.
+      :keywords: rst, reST, reStructuredText
+
+
 Note Directive
 --------------
 
