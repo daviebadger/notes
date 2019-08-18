@@ -119,7 +119,7 @@ Add HTML classes right to the immediately following element:
 
 .. code:: rst
 
-   .. class:: my-class-name
+   .. class:: heading color-red
 
    Section Title
    =============
