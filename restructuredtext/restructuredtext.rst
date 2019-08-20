@@ -176,7 +176,7 @@ Add important information to a text:
 Meta Directive
 --------------
 
-Add HTML document meta tags:
+Add HTML meta tags:
 
 .. code:: rst
 
