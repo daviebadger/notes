@@ -115,14 +115,36 @@ Add cautious information to a text:
 Class Directive
 ---------------
 
-Add HTML classes right to the immediately following element:
+Add HTML classes right to the immediately following:
 
-.. code:: rst
+#. element except for block quotes:
 
-   .. class:: heading color-red
+   .. code:: rst
 
-   Section Title
-   =============
+      .. class:: heading color-red
+
+      Section Title
+      =============
+
+#. block quotes (a special case which needs a comment right after the
+   directive):
+
+   .. code:: rst
+
+      .. class:: block-quote
+      ..
+
+         This is a block quote.
+
+#. elements inside of the directive:
+
+   .. code:: rst
+
+      .. class:: blink
+
+         This paragraph has the "blink" class.
+
+         This another paragraph also has the "blink" class.
 
 
 Danger Directive
