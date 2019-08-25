@@ -147,6 +147,57 @@ Add HTML classes right to the immediately following:
          This another paragraph also has the "blink" class.
 
 
+Contents Directive
+------------------
+
+Generate a table of contents (TOC) from sections:
+
+#. using a default title for the TOC:
+
+   .. code:: rst
+
+      .. contents::
+
+      ----
+
+      Contents
+
+      * Section A
+        * Subsection AA
+          * Subsubsection AAA
+      * Section B
+
+#. using a custom title for the TOC:
+
+   .. code:: rst
+
+      .. contents:: Table of Contents
+
+      ----
+
+      Table of Contents
+
+      * Section A
+        * Subsection AA
+          * Subsubsection AAA
+      * Section B
+
+#. limiting section levels in the TOC:
+
+   .. code:: rst
+
+      .. contents::
+         :depth: 2
+
+      ----
+
+      Contents
+
+      * Section A
+        * Subsection AA
+      * Section B
+
+
 Danger Directive
 ----------------
 
