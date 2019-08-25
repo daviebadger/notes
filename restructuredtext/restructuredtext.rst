@@ -313,6 +313,51 @@ Create a new role in several ways:
       I do :strike:`not` like reStructuredText.
 
 
+Sectnum Directive
+-----------------
+
+Automatically number section titles:
+
+#. without any options:
+
+   .. code:: rst
+
+      .. sectnum::
+
+      ----
+
+      * 1 Section A
+      * 1.1 Subsection AA
+      * 1.1.1 Subsubsection AAA
+      * 2 Section B
+
+#. with a suffix:
+
+   .. code:: rst
+
+      .. sectnum::
+         :suffix: .
+
+      ----
+
+      * 1. Section A
+      * 1.1. Subsection AA
+      * 1.1.1. Subsubsection AAA
+      * 2. Section B
+
+#. with limited section levels:
+
+   .. code:: rst
+
+      .. sectnum::
+         :depth: 2
+
+      ----
+
+      * 1 Section A
+      * 1.1 Subsection AA
+      * 2 Section B
+
 Tip Directive
 -------------
 
