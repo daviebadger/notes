@@ -89,6 +89,7 @@ Add a custom admonition with the given title to a text:
 
       www.example.com for more examples.
 
+
 Attention Directive
 -------------------
 
@@ -99,6 +100,7 @@ Add attentive information to a text:
    .. attention::
 
       The previous example is not possible to create via inline literal markup.
+
 
 Caution Directive
 -----------------
@@ -246,6 +248,42 @@ Add important information to a text:
       Be consistent with heading levels through a document.
 
 
+Include Directive
+-----------------
+
+Load text from a file to the given place:
+
+#. a custom |RST| document:
+
+   .. code:: rst
+
+      .. include:: path/to/file.rst
+
+#. a file rendered as literal code:
+
+   .. code:: rst
+
+      .. include:: test.py
+         :literal:
+
+#. a file rendered as code with syntax highlighting:
+
+   .. code:: rst
+
+      .. include:: test.py
+         :code: py
+
+#. a `built-in document`__ with substitution definitions:
+
+   .. code:: rst
+
+      .. include:: <isonum.txt>
+
+      Copyright |copy| Davie Badger 2019.
+
+__ http://docutils.sourceforge.net/docs/ref/rst/definitions.html#character-entity-sets
+
+
 Meta Directive
 --------------
 
@@ -357,6 +395,7 @@ Automatically number section titles:
       * 1 Section A
       * 1.1 Subsection AA
       * 2 Section B
+
 
 Tip Directive
 -------------
