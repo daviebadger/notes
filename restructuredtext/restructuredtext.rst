@@ -309,6 +309,34 @@ Add a note to a text:
       Code samples using ``::`` markup are not highlighted at all.
 
 
+Raw Directive
+-------------
+
+Bypass parsing text for the given output formats separated by a space:
+
+#. a text inside the directive:
+
+   .. code:: rst
+
+      .. raw:: html
+
+         <iframe id="video-player" width="200" height="200" src="www"></iframe>
+
+#. a text in a local file:
+
+   .. code:: rst
+
+      .. raw:: html
+         :file: index.html
+
+#. a text via a URL address:
+
+   .. code:: rst
+
+      .. raw:: html
+         :url: www.example.com/file.html
+
+
 Role Directive
 --------------
 
