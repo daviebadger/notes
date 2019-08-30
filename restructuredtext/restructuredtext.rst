@@ -212,6 +212,22 @@ Add dangerous information to a text:
       Do not try this at home!
 
 
+Date Directive
+--------------
+
+Substitute for a date(time) using a format string for the `time.strftime`_
+function in Python:
+
+.. code:: rst
+
+   .. |date| date::
+   .. |time| date:: %H:%M:%S
+
+   Last update: |date| at |time|
+
+.. _time.strftime: https://docs.python.org/3/library/time.html#time.strftime
+
+
 Default-Role Direcive
 ---------------------
 
