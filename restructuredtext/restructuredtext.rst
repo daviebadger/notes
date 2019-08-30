@@ -337,6 +337,18 @@ Bypass parsing text for the given output formats separated by a space:
          :url: www.example.com/file.html
 
 
+Replace Directive
+-----------------
+
+Substitute for a text:
+
+.. code:: rst
+
+   .. |RST| replace:: reStructuredText
+
+   |RST| is too long to type.
+
+
 Role Directive
 --------------
 
