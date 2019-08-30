@@ -492,8 +492,8 @@ Substitute for a Unicode character using its code:
 
       Copyright |copy| Davie Badger 2019.
 
-#. substituting with a left trim (`:ltrim:`) or a right trim (`:rtrim`) or both
-   (`:trim:`):
+#. substituting with a left trim (``:ltrim:``) or a right trim (``:rtrim``) or
+   both (``:trim:``):
 
    .. code:: rst
 
