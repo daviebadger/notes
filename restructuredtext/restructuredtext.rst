@@ -479,6 +479,30 @@ Set a different HTML document title for a browser tab:
    .. title:: Alternative Document Title
 
 
+Unicode Directive
+-----------------
+
+Substitute for a Unicode character using its code:
+
+#. substituting without trims:
+
+   .. code:: rst
+
+      .. |copy| unicode:: 0xA9 .. copyright sign
+
+      Copyright |copy| Davie Badger 2019.
+
+#. substituting with a left trim (`:ltrim:`) or a right trim (`:rtrim`) or both
+   (`:trim:`):
+
+   .. code:: rst
+
+      .. |TM| unicode:: U+2122
+         :ltrim:
+
+      Davie Badger |TM| will be rendered like ``Davie Badger^TM``.
+
+
 Warning Directive
 -----------------
 
