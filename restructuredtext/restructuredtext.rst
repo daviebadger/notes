@@ -240,6 +240,29 @@ Set a new default role in a document (a `title` role is by default):
       `f(x) = x^2` == :math:`f(x) = x^2`
 
 
+Figure Directive
+----------------
+
+Add an image with a caption:
+
+.. code:: rst
+
+   .. figure:: path/to/image.png
+
+      Caption for the image.
+
+Supported options:
+
+* ``align`` - figure alignment (either no alignment or ``center``)
+* ``alt`` - alternate image text
+* ``figclass`` - HTML classes to a figure
+* ``figwidth`` - width of an image and a caption
+* ``height`` - different image height
+* ``scale`` - proportional image scale (``100 %`` by default)
+* ``target`` - hyperlink target
+* ``width`` - different image width
+
+
 Hint Directive
 --------------
 
