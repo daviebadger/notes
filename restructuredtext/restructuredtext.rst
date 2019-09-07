@@ -275,6 +275,33 @@ Add a hint to a text:
       Look at already existing roles.
 
 
+Image Directive
+---------------
+
+Add an image:
+
+#. from a local filesystem:
+
+   .. code:: rst
+
+      .. image:: path/to/image.png
+
+#. from a remote location:
+
+   .. code:: rst
+
+      .. image:: www.example.com/image.jpg
+
+Supported options:
+
+* ``align`` - image alignment (either no alignment or ``center``)
+* ``alt`` - alternate image text
+* ``height`` - different image height
+* ``scale`` - proportional image scale (``100 %`` by default)
+* ``target`` - hyperlink target
+* ``width`` - different image width
+
+
 Important Directive
 -------------------
 
