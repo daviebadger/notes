@@ -17,8 +17,6 @@
 .. _Creative Commons Attribution 4.0 International Public License: https://creativecommons.org/licenses/by/4.0/
 .. _Davie Badger: https://github.com/daviebadger
 
-
-
 Directives
 ==========
 
@@ -77,7 +75,6 @@ Some examples of using directives:
 
          This tip helps you save your money.
 
-
 Admonition Directive
 --------------------
 
@@ -88,7 +85,6 @@ Add a custom admonition with the given title to a text:
    .. admonition:: See also
 
       www.example.com for more examples.
-
 
 Attention Directive
 -------------------
@@ -101,7 +97,6 @@ Add attentive information to a text:
 
       The previous example is not possible to create via inline literal markup.
 
-
 Caution Directive
 -----------------
 
@@ -112,7 +107,6 @@ Add cautious information to a text:
    .. caution::
 
       Use wisely the overloaded ``raw-*`` roles.
-
 
 Class Directive
 ---------------
@@ -147,7 +141,6 @@ Add HTML classes right to the immediately following:
          This paragraph has the "blink" class.
 
          This another paragraph also has the "blink" class.
-
 
 Contents Directive
 ------------------
@@ -199,7 +192,6 @@ Generate a table of contents (TOC) from sections:
         * Subsection AA
       * Section B
 
-
 Danger Directive
 ----------------
 
@@ -210,7 +202,6 @@ Add dangerous information to a text:
    .. danger::
 
       Do not try this at home!
-
 
 Date Directive
 --------------
@@ -227,7 +218,6 @@ function in Python:
 
 .. _time.strftime: https://docs.python.org/3/library/time.html#time.strftime
 
-
 Default-Role Direcive
 ---------------------
 
@@ -238,7 +228,6 @@ Set a new default role in a document (a `title` role is by default):
    .. default-role:: math
 
       `f(x) = x^2` == :math:`f(x) = x^2`
-
 
 Figure Directive
 ----------------
@@ -262,7 +251,6 @@ Supported options:
 * ``target`` - hyperlink target
 * ``width`` - different image width
 
-
 Hint Directive
 --------------
 
@@ -273,7 +261,6 @@ Add a hint to a text:
    .. hint::
 
       Look at already existing roles.
-
 
 Image Directive
 ---------------
@@ -301,7 +288,6 @@ Supported options:
 * ``target`` - hyperlink target
 * ``width`` - different image width
 
-
 Important Directive
 -------------------
 
@@ -312,7 +298,6 @@ Add important information to a text:
    .. important::
 
       Be consistent with heading levels through a document.
-
 
 Include Directive
 -----------------
@@ -349,7 +334,6 @@ Load text from a file to the given place:
 
 __ http://docutils.sourceforge.net/docs/ref/rst/definitions.html#character-entity-sets
 
-
 Meta Directive
 --------------
 
@@ -362,7 +346,6 @@ Add HTML meta tags:
       :description: reStructuredText is a markup language used for documentation.
       :keywords: rst, reST, reStructuredText
 
-
 Note Directive
 --------------
 
@@ -373,7 +356,6 @@ Add a note to a text:
    .. note::
 
       Code samples using ``::`` markup are not highlighted at all.
-
 
 Raw Directive
 -------------
@@ -402,7 +384,6 @@ Bypass parsing text for the given output formats separated by a space:
       .. raw:: html
          :url: www.example.com/file.html
 
-
 Replace Directive
 -----------------
 
@@ -413,7 +394,6 @@ Substitute for a text:
    .. |RST| replace:: reStructuredText
 
    |RST| is too long to type.
-
 
 Role Directive
 --------------
@@ -455,7 +435,6 @@ Create a new role in several ways:
       .. role:: strike(strikethrough)
 
       I do :strike:`not` like reStructuredText.
-
 
 Sectnum Directive
 -----------------
@@ -502,7 +481,6 @@ Automatically number section titles:
       * 1.1 Subsection AA
       * 2 Section B
 
-
 Tip Directive
 -------------
 
@@ -513,7 +491,6 @@ Add a tip to a text:
    .. tip::
 
       Subscripts are ideal candidates for substitutions.
-
 
 Title Directive
 ---------------
@@ -527,7 +504,6 @@ Set a different HTML document title for a browser tab:
    **************
 
    .. title:: Alternative Document Title
-
 
 Unicode Directive
 -----------------
@@ -552,7 +528,6 @@ Substitute for a Unicode character using its code:
 
       Davie Badger |TM| will be rendered like ``Davie Badger^TM``.
 
-
 Warning Directive
 -----------------
 
@@ -563,7 +538,6 @@ Add a warning to a text:
    .. warning::
 
       Do not exceed the recommended daily dose.
-
 
 
 Roles
@@ -596,7 +570,6 @@ Examples of using roles:
 
       Thisis\ :strong:`one`\ word, where the word "one" will be formatted as bold text.
 
-
 Literal Role
 ------------
 
@@ -605,7 +578,6 @@ Create an inline code sample which respects escaped backslashes:
 .. code:: rst
 
    The text inside enclosed double backquotes (:literal:`\`\`...\`\``) is treated as an inline code sample.
-
 
 Math Role
 ---------
@@ -616,7 +588,6 @@ Create an inline mathematical formula in LaTeX format:
 
    Create a graph of a function :math:`f(x) = x^2`.
 
-
 Sub Role
 --------
 
@@ -625,7 +596,6 @@ Create a subscript:
 .. code:: rst
 
    H\ :sub:`2`\ O is one of the famous chemical formulas.
-
 
 Sup Role
 --------
@@ -636,7 +606,6 @@ Create a superscript:
 
    E=mc\ :sup:`2` is one of the famous physics formulas.
 
-
 Title Role
 ----------
 
@@ -645,7 +614,6 @@ Create a title of a work (book, chapter, other text materials):
 .. code:: rst
 
   `title:`How to Title My Book` is the most selling book in the world.
-
 
 PEP Role
 --------
@@ -656,7 +624,6 @@ Create a hyperlink to a specific PEP (Python Enhanced Proposal):
 
    See :PEP:`8` for Python style guide.
 
-
 RFC Role
 --------
 
@@ -665,7 +632,6 @@ Create a hyperlink to a specific RFC (Request For Comments):
 .. code:: rst
 
    See :RFC:`3339` for standardized date and time formats on the Internet.
-
 
 
 .. |RST| replace:: reStructuredText
