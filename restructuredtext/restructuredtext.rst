@@ -142,6 +142,17 @@ Add HTML classes right to the immediately following:
 
          This another paragraph also has the "blink" class.
 
+Code Directive
+--------------
+
+Add a code sample with syntax highlighting:
+
+.. code:: rst
+
+   .. code:: py
+
+      print("Hello World")
+
 Contents Directive
 ------------------
 
