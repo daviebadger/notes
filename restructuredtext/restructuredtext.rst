@@ -262,6 +262,21 @@ Supported options:
 * ``target`` - hyperlink target
 * ``width`` - different image width
 
+Highlights Directive
+--------------------
+
+Add a summary of a document or a section:
+
+.. code:: rst
+
+   .. highlights::
+
+      A summary of the story:
+
+      * a
+      * b
+      * c
+
 Hint Directive
 --------------
 
