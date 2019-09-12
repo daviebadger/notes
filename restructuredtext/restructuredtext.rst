@@ -538,6 +538,22 @@ Set a different HTML document title for a browser tab:
 
    .. title:: Alternative Document Title
 
+Topic Directive
+---------------
+
+Add a topic container without a need to create another (sub)section:
+
+.. code:: rst
+
+   Section Title
+   =============
+
+   ...
+
+   .. topic:: Idea
+
+      Blah blah blah
+
 Unicode Directive
 -----------------
 
