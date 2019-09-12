@@ -345,6 +345,17 @@ Load text from a file to the given place:
 
 __ http://docutils.sourceforge.net/docs/ref/rst/definitions.html#character-entity-sets
 
+Math Directive
+--------------
+
+Add a mathematical formula in LaTeX format with AMS extensions:
+
+.. code:: rst
+
+   .. math::
+
+      f(x) = x^2
+
 Meta Directive
 --------------
 
