@@ -458,6 +458,17 @@ Create a new role in several ways:
 
       I do :strike:`not` like reStructuredText.
 
+Rubric Directive
+----------------
+
+Add an informal heading invisible in a table of contents:
+
+.. code::
+
+   .. rubric:: Footnotes
+
+   .. [#] text
+
 Sectnum Directive
 -----------------
 
