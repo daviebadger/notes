@@ -204,6 +204,76 @@ Generate a table of contents (TOC) from sections:
         * Subsection AA
       * Section B
 
+Csv-Table Directive
+-------------------
+
+Add a table in CSV format:
+
+#. CSV table without a header:
+
+   .. code:: rst
+
+      .. csv-table:: Users
+
+         "David", "Badger", "Male", 24
+         "Jacob", "Badger", "Male", 19
+
+#. CSV table with a header:
+
+   .. code:: rst
+
+      .. csv-table:: Users
+         :header: "Firstname", "Lastname", "Gender", "Age"
+
+         "David", "Badger", "Male", 24
+         "Jacob", "Badger", "Male", 19
+
+#. external CSV table without a header:
+
+   .. code:: rst
+
+      .. csv-table::
+         :file: data.csv
+
+      .. csv-table::
+         :url: www.example.com/data.csv
+
+#. external CSV table with a header in the first row:
+
+   .. code:: rst
+
+      .. csv-table::
+         :file: data.csv
+         :header-rows: 1
+
+      .. csv-table::
+         :url: www.example.com/data.csv
+         :header-rows: 1
+
+#. external CSV table with a header in the first column:
+
+   .. code:: rst
+
+      .. csv-table::
+         :file: data.csv
+         :stub-columns: 1
+
+      .. csv-table::
+         :url: www.example.com/data.csv
+         :stub-columns: 1
+
+Supported options:
+
+* ``align`` - table alignment (``left``, ``center`` or ``right``)
+* ``delim`` - character for separating values (``,``)
+* ``escape`` - escape character for quotes (``""``)
+* ``file`` - path to a local CSV table
+* ``header-rows`` - number of rows as a table header
+* ``quote`` - quote for multi-word values (``"``)
+* ``stub-columns`` - number of columns as a table header
+* ``url`` - a URL address to a CSV table
+* ``widths`` - ``auto`` column widths
+
 Danger Directive
 ----------------
 
