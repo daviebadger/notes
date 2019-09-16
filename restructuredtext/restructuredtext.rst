@@ -361,6 +361,63 @@ Load text from a file to the given place:
 
 __ http://docutils.sourceforge.net/docs/ref/rst/definitions.html#character-entity-sets
 
+List-Table Directive
+--------------------
+
+Add a list-like table:
+
+#. without a table header:
+
+   .. code:: rst
+
+      .. list-table:: Users
+
+         * - Davie
+           - Badger
+           - Male
+           - 24
+         * - Jacob
+           - Badger
+           - Male
+           - 19
+
+#. with a table header in the first row:
+
+   .. code:: rst
+      :header-rows: 1
+
+      .. list-table:: Users
+
+         * - Davie
+           - Badger
+           - Male
+           - 24
+         * - Jacob
+           - Badger
+           - Male
+           - 19
+
+#. with a table header in the first column:
+
+   .. code:: rst
+
+      .. list-table::
+         :stub-columns: 1
+
+         * - Name
+           - reStructuredText
+         * - Shortcut
+           - rst
+         * - Parser
+           - Docutils
+
+Supported options:
+
+* ``align`` - table alignment (``left``, ``center`` or ``right``)
+* ``header-rows`` - number of rows as a table header
+* ``stub-columns`` - number of columns as a table header
+* ``widths`` - ``auto`` column widths
+
 Math Directive
 --------------
 
