@@ -17,6 +17,7 @@
 .. _Creative Commons Attribution 4.0 International Public License: https://creativecommons.org/licenses/by/4.0/
 .. _Davie Badger: https://github.com/daviebadger
 
+
 Directives
 ==========
 
@@ -528,6 +529,27 @@ Automatically number section titles:
       * 1 Section A
       * 1.1 Subsection AA
       * 2 Section B
+
+Table Directive
+---------------
+
+Wrap a simple or a grid table with an optional title:
+
+.. code:: rst
+
+   .. table:: Users
+
+      =========  ========  ======  ===
+      Firstname  Lastname  Gender  Age
+      =========  ========  ======  ===
+      Davie      Badger    Male    24
+      Jacob      Badger    Male    19
+      =========  ========  ======  ===
+
+Supported options:
+
+* ``align`` - table alignment (``left``, ``center`` or ``right``)
+* ``widths`` - ``auto`` column widths
 
 Tip Directive
 -------------
