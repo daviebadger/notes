@@ -619,6 +619,11 @@ Create a new role in several ways:
 
       I do :strike:`not` like reStructuredText.
 
+Supported options:
+
+* ``:language: code`` -  Language syntax highlighting (only overloaded ``code`` role)
+* ``:format: output-formats`` - Render only for the formats (only overloaded ``raw`` role)
+
 Rubric Directive
 ----------------
 
