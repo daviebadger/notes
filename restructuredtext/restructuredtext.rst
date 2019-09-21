@@ -206,7 +206,7 @@ Generate a table of contents (TOC) from sections:
 
 Supported options:
 
-* ``depth`` - visible section levels
+* ``depth`` - visible section levels (up to)
 
 Csv-Table Directive
 -------------------
@@ -660,6 +660,11 @@ Automatically number section titles:
       * 1 Section A
       * 1.1 Subsection AA
       * 2 Section B
+
+Supported options:
+
+* ``depth`` - section levels for numbering (up to)
+* ``suffix`` - suffix for numbers (no suffix by default)
 
 Table Directive
 ---------------
