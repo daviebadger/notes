@@ -754,6 +754,12 @@ Substitute for a Unicode character using its code:
 
       Davie Badger |TM| will be rendered like ``Davie Badger^TM``.
 
+Supported options:
+
+* ``ltrim`` - trim whitespace before a Unicode character
+* ``rtrim`` - trim whitespace after a Unicode character
+* ``trim`` - trim whitespace before and after a Unicode character
+
 Warning Directive
 -----------------
 
