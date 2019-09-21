@@ -433,6 +433,11 @@ Load text from a file to the given place:
 
       Copyright |copy| Davie Badger 2019.
 
+Supported options:
+
+* ``:code: language`` - included file as a code block
+* ``:literal:`` - included file as a literal block
+
 __ http://docutils.sourceforge.net/docs/ref/rst/definitions.html#character-entity-sets
 
 List-Table Directive
