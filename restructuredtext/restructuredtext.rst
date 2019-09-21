@@ -513,7 +513,11 @@ Add HTML meta tags:
    .. meta::
       :author: Davie Badger
       :description: reStructuredText is a markup language used for documentation.
-      :keywords: rst, reST, reStructuredText
+
+Supported options:
+
+* ``author`` - Document author
+* ``description`` - Short document description
 
 Note Directive
 --------------
