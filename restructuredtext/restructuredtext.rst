@@ -206,7 +206,7 @@ Generate a table of contents (TOC) from sections:
 
 Supported options:
 
-* ``depth`` - visible section levels (up to)
+* ``:depth: number`` - visible section levels (up to)
 
 Csv-Table Directive
 -------------------
@@ -268,15 +268,15 @@ Add a table in CSV format:
 
 Supported options:
 
-* ``align`` - table alignment (``left``, ``center`` or ``right``)
-* ``delim`` - character for separating values (``,``)
-* ``escape`` - escape character for quotes (``""``)
-* ``file`` - path to a local CSV table
-* ``header-rows`` - number of rows as a table header
-* ``quote`` - quote for multi-word values (``"``)
-* ``stub-columns`` - number of columns as a table header
-* ``url`` - a URL address to a CSV table
-* ``widths`` - ``auto`` column widths
+* ``:align: value`` - table alignment (``left``, ``center`` or ``right``)
+* ``:delim: character`` - character for separating values (``,``)
+* ``:escape: character`` - escape character for quotes (``""``)
+* ``:file: path`` - path to a local CSV table
+* ``:header-rows: number`` - number of rows as a table header
+* ``:quote: character`` - quote for multi-word values (``"``)
+* ``:stub-columns: number`` - number of columns as a table header
+* ``:url: address`` - a URL address to a CSV table
+* ``:widths: value`` - ``auto`` column widths
 
 Danger Directive
 ----------------
@@ -328,14 +328,14 @@ Add an image with a caption:
 
 Supported options:
 
-* ``align`` - figure alignment (either no alignment or ``center``)
-* ``alt`` - alternate image text
-* ``figclass`` - HTML classes to a figure
-* ``figwidth`` - width of an image and a caption
-* ``height`` - different image height
-* ``scale`` - proportional image scale (``100 %`` by default)
-* ``target`` - hyperlink target
-* ``width`` - different image width
+* ``:align: value`` - figure alignment (either no alignment or ``center``)
+* ``:alt: text`` - alternate image text
+* ``:figclass: class-names`` - HTML classes to a figure
+* ``:figwidth: number`` - width of an image and a caption
+* ``:height: number`` - different image height
+* ``:scale: percentage`` - proportional image scale (``100 %`` by default)
+* ``:target: address`` - hyperlink target
+* ``:width: number`` - different image width
 
 Highlights Directive
 --------------------
@@ -382,12 +382,12 @@ Add an image:
 
 Supported options:
 
-* ``align`` - image alignment (either no alignment or ``center``)
-* ``alt`` - alternate image text
-* ``height`` - different image height
-* ``scale`` - proportional image scale (``100 %`` by default)
-* ``target`` - hyperlink target
-* ``width`` - different image width
+* ``:align: value`` - image alignment (either no alignment or ``center``)
+* ``:alt: text`` - alternate image text
+* ``:height: number`` - different image height
+* ``:scale: percentage`` - proportional image scale (``100 %`` by default)
+* ``:target: address`` - hyperlink target
+* ``:width: number`` - different image width
 
 Important Directive
 -------------------
@@ -492,10 +492,10 @@ Add a list-like table:
 
 Supported options:
 
-* ``align`` - table alignment (``left``, ``center`` or ``right``)
-* ``header-rows`` - number of rows as a table header
-* ``stub-columns`` - number of columns as a table header
-* ``widths`` - ``auto`` column widths
+* ``:align: value`` - table alignment (``left``, ``center`` or ``right``)
+* ``:header-rows: number`` - number of rows as a table header
+* ``:stub-columns: number`` - number of columns as a table header
+* ``:widths: value`` - ``auto`` column widths
 
 Math Directive
 --------------
@@ -521,8 +521,8 @@ Add HTML meta tags:
 
 Supported options:
 
-* ``author`` - Document author
-* ``description`` - Short document description
+* ``:author: name`` - Document author
+* ``:description: text`` - Short document description
 
 Note Directive
 --------------
@@ -565,7 +565,7 @@ Bypass parsing text for the given output formats separated by a space:
 Supported options:
 
 * ``:file: path`` - Raw content from a file
-* ``:url: adress`` - Raw content from a URL address
+* ``:url: address`` - Raw content from a URL address
 
 Replace Directive
 -----------------
@@ -682,8 +682,8 @@ Automatically number section titles:
 
 Supported options:
 
-* ``depth`` - section levels for numbering (up to)
-* ``suffix`` - suffix for numbers (no suffix by default)
+* ``:depth: number`` - section levels for numbering (up to)
+* ``:suffix: characters`` - suffix for numbers (no suffix by default)
 
 Table Directive
 ---------------
@@ -703,8 +703,8 @@ Wrap a simple or a grid table with an optional title:
 
 Supported options:
 
-* ``align`` - table alignment (``left``, ``center`` or ``right``)
-* ``widths`` - ``auto`` column widths
+* ``:align: value`` - table alignment (``left``, ``center`` or ``right``)
+* ``:widths: value`` - ``auto`` column widths
 
 Tip Directive
 -------------
@@ -771,9 +771,9 @@ Substitute for a Unicode character using its code:
 
 Supported options:
 
-* ``ltrim`` - trim whitespace before a Unicode character
-* ``rtrim`` - trim whitespace after a Unicode character
-* ``trim`` - trim whitespace before and after a Unicode character
+* ``:ltrim:`` - trim whitespace before a Unicode character
+* ``:rtrim:`` - trim whitespace after a Unicode character
+* ``:trim:`` - trim whitespace before and after a Unicode character
 
 Warning Directive
 -----------------
