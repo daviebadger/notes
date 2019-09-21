@@ -204,6 +204,10 @@ Generate a table of contents (TOC) from sections:
         * Subsection AA
       * Section B
 
+Supported options:
+
+* ``depth`` - visible section levels
+
 Csv-Table Directive
 -------------------
 
