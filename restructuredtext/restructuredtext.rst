@@ -562,6 +562,11 @@ Bypass parsing text for the given output formats separated by a space:
       .. raw:: html
          :url: www.example.com/file.html
 
+Supported options:
+
+* ``:file: path`` - Raw content from a file
+* ``:url: adress`` - Raw content from a URL address
+
 Replace Directive
 -----------------
 
