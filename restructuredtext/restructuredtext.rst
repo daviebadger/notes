@@ -860,7 +860,7 @@ Create a title of a work (book, chapter, other text materials):
 
 .. code:: rst
 
-  `title:`How to Title My Book` is the most selling book in the world.
+  :title:`How to Title My Book` is the most selling book in the world.
 
 PEP Role
 --------
