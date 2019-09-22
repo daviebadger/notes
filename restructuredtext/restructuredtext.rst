@@ -270,6 +270,7 @@ Supported options:
 
 * ``:align: value`` - table alignment (``left``, ``center`` or ``right``)
 * ``:delim: character`` - character for separating values (``,``)
+* ``:header: "comma-separated-headers"`` - table header in an embedded CSV table
 * ``:escape: character`` - escape character for quotes (``""``)
 * ``:file: path`` - path to a local CSV table
 * ``:header-rows: number`` - number of rows as a table header
@@ -463,10 +464,14 @@ Add a list-like table:
 #. with a table header in the first row:
 
    .. code:: rst
-      :header-rows: 1
 
       .. list-table:: Users
+         :header-rows: 1
 
+         * - Firstname
+           - Lastname
+           - Gender
+           - Age
          * - Davie
            - Badger
            - Male
