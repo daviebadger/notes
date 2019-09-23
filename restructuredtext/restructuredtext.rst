@@ -21,7 +21,7 @@
 Directives
 ==========
 
-Directives are the first extension mechanism, how to extend block markup in
+Directives are the first extension mechanism, how to extend block elements in
 |RST|. |RST| has many built-in directives. The syntax of directives is:
 
 .. code:: rst
