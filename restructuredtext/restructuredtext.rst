@@ -18,11 +18,13 @@
 .. _Davie Badger: https://github.com/daviebadger
 
 
+
 Markup
 ======
 
 Markup is a set of special constructs in a document which help to define its
 structure.
+
 
 Block Elements
 --------------
@@ -30,11 +32,24 @@ Block Elements
 Block elements, also body elements, are constructs which start on a new
 unindented or indented line depending on its context.
 
+Comments
+^^^^^^^^
+
+Add a comment:
+
+.. code:: rst
+
+   .. This is a comment
+      over two lines.
+
+      This paragraph is also a part of the comment.
+
 Inline Markup
 -------------
 
 Inline markup is a set of special constructs used inside body elements, which
 cannot begin or end with whitespace.
+
 
 
 Directives
