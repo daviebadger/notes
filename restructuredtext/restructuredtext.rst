@@ -32,6 +32,46 @@ Block Elements
 Block elements, also body elements, are constructs which start on a new
 unindented or indented line depending on its context.
 
+Block Quotes
+^^^^^^^^^^^^
+
+Add a block quote:
+
+#. quote without attribution:
+
+   .. code:: rst
+
+      This is an ordinary paragraph.
+
+         This is a quoted paragraph
+         over two lines.
+
+#. quote with attribution:
+
+   .. code:: rst
+
+      This is an ordinary paragraph.
+
+         This is a quote.
+
+         -- X Y
+
+#. multiple quotes:
+
+   .. code:: rst
+
+      Famous quotes from X Y:
+
+         First quote.
+
+      ..
+
+         Second quote.
+
+      ..
+
+         Third quote.
+
 Comments
 ^^^^^^^^
 
