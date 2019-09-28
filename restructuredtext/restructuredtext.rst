@@ -44,6 +44,20 @@ Add a comment:
 
       This paragraph is also a part of the comment.
 
+Horizontal Lines
+^^^^^^^^^^^^^^^^
+
+Add a horizontal line (transition):
+
+.. code:: rst
+
+   This is a paragraph.
+
+   ----
+
+   This is a completely different paragraph.
+
+
 Inline Markup
 -------------
 
