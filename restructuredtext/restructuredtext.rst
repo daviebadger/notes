@@ -57,12 +57,46 @@ Add a horizontal line (transition):
 
    This is a completely different paragraph.
 
+Substitution Definitions
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add a substitution definition for a substitution reference elsewhere in text:
+
+.. code:: rst
+
+   .. |RST| replace:: reStructuredText
+
 
 Inline Markup
 -------------
 
 Inline markup is a set of special constructs used inside body elements, which
 cannot begin or end with whitespace.
+
+Substitution References
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Add a substitution reference (must be paired with a substitution definition):
+
+#. in a line:
+
+   .. code:: rst
+
+      |RST| is really long to type, so it is better to use a word shortcut via
+      substitutions.
+
+#. in a line with a hyperlink reference:
+
+   .. code:: rst
+
+      |RST|_ is really long to type, so it is better to use a word shortcut via
+      substitutions.
+
+#. in a word:
+
+   .. code:: rst
+
+      Thisis\ |one|\ word
 
 
 
