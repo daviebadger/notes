@@ -84,10 +84,30 @@ Add a comment:
 
       This paragraph is also a part of the comment.
 
-Horizontal Lines
-^^^^^^^^^^^^^^^^
+Footnotes
+^^^^^^^^^
 
-Add a horizontal line (transition):
+Add a footnote for a footnote reference elsewhere in text:
+
+#. manual:
+
+   .. code:: rst
+
+      .. [1] Master documents are special ``index.rst`` files in directories, which
+         serve as introductory pages.
+
+#. auto-numbered:
+
+   .. code:: rst
+
+      .. [#] Master documents are special ``index.rst`` files in directories, which
+         serve as introductory pages.
+
+
+Transitions
+^^^^^^^^^^^
+
+Add a transition (horizontal line):
 
 .. code:: rst
 
@@ -112,6 +132,23 @@ Inline Markup
 
 Inline markup is a set of special constructs used inside body elements, which
 cannot begin or end with whitespace.
+
+Footnote References
+^^^^^^^^^^^^^^^^^^^
+
+Add a footnote reference (must be paired with a footnote):
+
+#. manual:
+
+   .. code:: rst
+
+      This section adornment style is used in master documents [1]_ in Sphinx.
+
+#. auto-numbered:
+
+   .. code:: rst
+
+      This section adornment style is used in master documents [#]_ in Sphinx.
 
 Substitution References
 ^^^^^^^^^^^^^^^^^^^^^^^
