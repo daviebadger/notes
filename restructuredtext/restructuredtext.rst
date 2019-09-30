@@ -72,6 +72,15 @@ Add a block quote:
 
          Third quote.
 
+Citations
+^^^^^^^^^
+
+Add a citation for a citation reference elsewhere in text:
+
+.. code:: rst
+
+   .. [CVE] CVE terminology and information; https://www.cvedetails.com/cve-help.php
+
 Comments
 ^^^^^^^^
 
@@ -103,7 +112,6 @@ Add a footnote for a footnote reference elsewhere in text:
       .. [#] Master documents are special ``index.rst`` files in directories, which
          serve as introductory pages.
 
-
 Transitions
 ^^^^^^^^^^^
 
@@ -132,6 +140,16 @@ Inline Markup
 
 Inline markup is a set of special constructs used inside body elements, which
 cannot begin or end with whitespace.
+
+Citation Refereces
+^^^^^^^^^^^^^^^^^^
+
+Add a citation reference (must be paired with a citation):
+
+.. code:: rst
+
+   CVE is a shortcut for Common Vulnerabilities and Exposures, which is a list
+   of software bugs that allow hackers to get into a system or network. [CVE]_
 
 Footnote References
 ^^^^^^^^^^^^^^^^^^^
