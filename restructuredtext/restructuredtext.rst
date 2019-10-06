@@ -26,11 +26,11 @@ Markup is a set of special constructs in a document which help to define its
 structure.
 
 
-Block Elements
---------------
+Block Markup
+------------
 
-Block elements, also body elements, are constructs which start on a new
-unindented or indented line depending on its context.
+Block markup are constructs which start on a new unindented or indented line
+depending on its context.
 
 Block Quotes
 ^^^^^^^^^^^^
@@ -198,7 +198,7 @@ Add a substitution reference (must be paired with a substitution definition):
 Directives
 ==========
 
-Directives are the first extension mechanism, how to extend block elements in
+Directives are the first extension mechanism, how to extend block markup in
 |RST|. |RST| has many built-in directives. The syntax of directives is:
 
 .. code:: rst
