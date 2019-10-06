@@ -93,6 +93,18 @@ Add a comment:
 
       This paragraph is also a part of the comment.
 
+Doctest Blocks
+^^^^^^^^^^^^^^
+
+Add a doctest block:
+
+.. code:: rst
+
+   Example from Python:
+
+   >>> print("Hello World")
+   Hello World
+
 Footnotes
 ^^^^^^^^^
 
@@ -111,6 +123,34 @@ Add a footnote for a footnote reference elsewhere in text:
 
       .. [#] Master documents are special ``index.rst`` files in directories, which
          serve as introductory pages.
+
+Literal Blocks
+^^^^^^^^^^^^^^
+
+Add a literal block:
+
+#. marked on a standalone line:
+
+   .. code:: rst
+
+      Example from Python:
+
+      ::
+
+         def hello(name="World"):
+             print(f"Hello {name}")
+
+
+         hello()
+         hello("Davie")
+
+#. marked at the end of a text:
+
+   .. code:: rst
+
+      Example from Python::
+
+         hello()
 
 Transitions
 ^^^^^^^^^^^
