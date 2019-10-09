@@ -152,6 +152,15 @@ Add a literal block:
 
          hello()
 
+Substitution Definitions
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add a substitution definition for a substitution reference elsewhere in text:
+
+.. code:: rst
+
+   .. |RST| replace:: reStructuredText
+
 Transitions
 ^^^^^^^^^^^
 
@@ -164,15 +173,6 @@ Add a transition (horizontal line):
    ----
 
    This is a completely different paragraph.
-
-Substitution Definitions
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Add a substitution definition for a substitution reference elsewhere in text:
-
-.. code:: rst
-
-   .. |RST| replace:: reStructuredText
 
 
 Inline Markup
