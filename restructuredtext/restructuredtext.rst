@@ -188,6 +188,17 @@ Add a simple table:
       Jacob  Badger  Male  19
       =====  ======  ====  ==
 
+#. with an empty table cell:
+
+   .. code:: rst
+
+      =========  ========  ======  ===
+      Firstname  Lastname  Gender  Age
+      =========  ========  ======  ===
+      Davie      Badger    Male    24
+      Jacob      Badger    Male    \
+      =========  ========  ======  ===
+
 Grid Tables
 """""""""""
 
