@@ -25,7 +25,6 @@ Markup
 Markup is a set of special constructs in a document which help to define its
 structure.
 
-
 Block Markup
 ------------
 
@@ -188,6 +187,42 @@ Add a simple table:
       Davie  Badger  Male  24
       Jacob  Badger  Male  19
       =====  ======  ====  ==
+
+Grid Tables
+"""""""""""
+
+Add a grid table:
+
+#. with a table header:
+
+   .. code:: rst
+
+      +------------+--------------------+----------+
+      | Header A   | Header B           | Header C |
+      +============+====================+==========+
+      | A1         | B1 + C1 (column span)         |
+      +------------+--------------------+----------+
+      | A2 + A3    | * first item       | C2       |
+      | (row span) | * second item      |          |
+      |            | * third item       |          |
+      |            +--------------------+----------+
+      |            | C3 is **empty**    |          |
+      +------------+--------------------+----------+
+
+#. without a table header:
+
+   .. code:: rst
+
+      +------------+-------------------------------+
+      | A1         | B1 + C1 (column span)         |
+      +------------+--------------------+----------+
+      | A2 + A3    | * first item       | C2       |
+      | (row span) | * second item      |          |
+      |            | * third item       |          |
+      |            +--------------------+----------+
+      |            | C3 is **empty**    |          |
+      +------------+--------------------+----------+
+
 
 Transitions
 ^^^^^^^^^^^
@@ -1037,6 +1072,7 @@ Add a warning to a text:
       Do not exceed the recommended daily dose.
 
 
+
 Roles
 =====
 
@@ -1129,6 +1165,7 @@ Create a hyperlink to a specific RFC (Request For Comments):
 .. code:: rst
 
    See :RFC:`3339` for standardized date and time formats on the Internet.
+
 
 
 .. |RST| replace:: reStructuredText
