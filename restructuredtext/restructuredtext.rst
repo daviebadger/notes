@@ -161,6 +161,34 @@ Add a substitution definition for a substitution reference elsewhere in text:
 
    .. |RST| replace:: reStructuredText
 
+Tables
+^^^^^^
+
+Simple Tables
+"""""""""""""
+
+Add a simple table:
+
+#. with a table header:
+
+   .. code:: rst
+
+      =========  ========  ======  ===
+      Firstname  Lastname  Gender  Age
+      =========  ========  ======  ===
+      Davie      Badger    Male    24
+      Jacob      Badger    Male    19
+      =========  ========  ======  ===
+
+#. without a table header:
+
+   .. code:: rst
+
+      =====  ======  ====  ==
+      Davie  Badger  Male  24
+      Jacob  Badger  Male  19
+      =====  ======  ====  ==
+
 Transitions
 ^^^^^^^^^^^
 
