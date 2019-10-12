@@ -126,6 +126,32 @@ Add a footnote for a footnote reference elsewhere in text:
 Hyperlinks
 ^^^^^^^^^^
 
+Named Hyperlink Targets
+"""""""""""""""""""""""
+
+Add a named hyperlink target:
+
+#. single word:
+
+   .. code:: rst
+
+      .. _Python: https://www.python.org/
+
+#. phrase:
+
+   .. code:: rst
+
+      .. _official documentation: https://docs.python.org/
+
+Anonymous Hyperlink Targets
+"""""""""""""""""""""""""""
+
+Add an anonymous hyperlink target:
+
+.. code:: rst
+
+   __ URI
+
 Internal Hyperlink Targets
 """"""""""""""""""""""""""
 
