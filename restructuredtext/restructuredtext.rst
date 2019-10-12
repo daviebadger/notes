@@ -123,6 +123,26 @@ Add a footnote for a footnote reference elsewhere in text:
       .. [#] Master documents are special ``index.rst`` files in directories, which
          serve as introductory pages.
 
+Hyperlinks
+^^^^^^^^^^
+
+Internal Hyperlink Targets
+""""""""""""""""""""""""""
+
+Add an internal hyperlink target to the immediately following body element:
+
+.. code:: rst
+
+   .. _List of shortcuts:
+
+   * rst / RST
+   * reST
+
+   ----
+
+   reStructuredtext has a few shortcuts, see `List of shortcuts`_.
+
+
 Literal Blocks
 ^^^^^^^^^^^^^^
 
