@@ -282,6 +282,23 @@ Add a footnote reference (must be paired with a footnote):
 
       This section adornment style is used in master documents [#]_ in Sphinx.
 
+Standalone Hyperlinks
+^^^^^^^^^^^^^^^^^^^^^
+
+Add a standalone hyperlink:
+
+#. URI:
+
+   .. code:: rst
+
+      Python documentation is located on https://docs.python.org/.
+
+#. email address:
+
+   .. code:: rst
+
+      Contact me on email davie.badger@gmail.com.
+
 Substitution References
 ^^^^^^^^^^^^^^^^^^^^^^^
 
