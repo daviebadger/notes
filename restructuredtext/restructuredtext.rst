@@ -302,6 +302,27 @@ Add a footnote reference (must be paired with a footnote):
 
       This section adornment style is used in master documents [#]_ in Sphinx.
 
+Hyperlink References
+^^^^^^^^^^^^^^^^^^^^
+
+Add a hyperlink reference (both word and phrase variants):
+
+#. named:
+
+   .. code:: rst
+
+      Python_, `Python 3`_, `Python 3.7`_, all point to the same location_.
+
+#. anonymous:
+
+   .. code:: rst
+
+      References
+      ==========
+
+      * link__
+      * `long link`__
+
 Standalone Hyperlinks
 ^^^^^^^^^^^^^^^^^^^^^
 
