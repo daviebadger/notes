@@ -169,6 +169,81 @@ Add an internal hyperlink target to the immediately following body element:
    reStructuredtext has a few shortcuts, see `List of shortcuts`_.
 
 
+Lists
+^^^^^
+
+Bulleted Lists
+""""""""""""""
+
+Add a bulleted list:
+
+.. code:: rst
+
+   * first item over
+     two lines
+   * second item with two paragraphs
+
+     This is the **second** pagagraph.
+
+Numbered Lists
+""""""""""""""
+
+Add a numbered (enumerated) list:
+
+#. manually-numbered:
+
+   .. code:: rst
+
+      1. first item
+      2. second item over
+         two lines
+      3. third item
+
+#. auto-numbered:
+
+   .. code:: rst
+
+      #. item
+      #. item
+      #. item
+
+Definition Lists
+""""""""""""""""
+
+Add a definition list:
+
+.. code:: rst
+
+   RST
+      Shortcut for the reStructuredText markup language.
+
+   HTML
+      Hypertext Markup Language for creating web pages.
+
+Field Lists
+"""""""""""
+
+Add a field list:
+
+.. code:: rst
+
+   :Shortcut: RST or reST
+   :Filename extension: ``.rst``
+
+Option Lists
+""""""""""""
+
+Add an option list:
+
+.. code:: rst
+
+   -v               Verbose
+   -h, --help       Display help message
+                    and exit
+   -p number        Provide a port number
+   -h, --host=host  Host to connect
+
+
 Literal Blocks
 ^^^^^^^^^^^^^^
 
