@@ -393,7 +393,7 @@ Add text with emphasis:
 
 .. code:: rst
 
-   *this piece of text will be rendered in italics.*
+   *This piece of text will be rendered in italics.*
 
 Footnote References
 ^^^^^^^^^^^^^^^^^^^
@@ -433,6 +433,15 @@ Add a hyperlink reference (both word and phrase variants):
       * link__
       * `long link`__
 
+Inline Literals
+^^^^^^^^^^^^^^^
+
+Add inline literal text:
+
+.. code:: rst
+
+   Use single ``*`` for emphasis, double ``**`` for strong emphasis.
+
 Standalone Hyperlinks
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -457,7 +466,7 @@ Add text with strong emphasis:
 
 .. code:: rst
 
-   **this piece of text will be rendered in bold.**
+   **This piece of text will be rendered in boldface.**
 
 Substitution References
 ^^^^^^^^^^^^^^^^^^^^^^^
