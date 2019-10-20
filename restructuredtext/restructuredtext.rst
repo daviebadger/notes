@@ -272,6 +272,19 @@ Add a literal block:
 
          hello()
 
+Paragraphs
+^^^^^^^^^^
+
+Add a paragraph:
+
+.. code:: rst
+
+   This is a paragraph over
+   three lines, but the line breaks
+   will not be preserved.
+
+   This is another paragraph.
+
 Substitution Definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
