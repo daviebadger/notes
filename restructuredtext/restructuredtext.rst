@@ -298,6 +298,66 @@ Add a paragraph:
 
    This is another paragraph.
 
+Sections
+^^^^^^^^
+
+Add a section:
+
+#. H1 in a standalone document with an optional subtitle:
+
+   .. code:: rst
+
+      ================
+       Document Title
+      ================
+      ----------
+       Subtitle
+      ----------
+
+#. H1 for ordinary documents in Sphinx documentation:
+
+   .. code:: rst
+
+      **************
+      Document Title
+      **************
+
+#. H1 for master documents in Sphinx documentation:
+
+   .. code:: rst
+
+      ##################
+        Document Title
+      ##################
+
+#. H2:
+
+   .. code:: rst
+
+      Section Title
+      =============
+
+#. H3:
+
+   .. code:: rst
+
+      Subsection Title
+      ----------------
+
+#. H4:
+
+   .. code:: rst
+
+      Subsubsection Title
+      ^^^^^^^^^^^^^^^^^^^
+
+#. H5:
+
+   .. code:: rst
+
+      Paragraph Title
+      """""""""""""""
+
 Substitution Definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
