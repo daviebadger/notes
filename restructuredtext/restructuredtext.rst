@@ -386,6 +386,15 @@ Add a citation reference (must be paired with a citation):
    CVE is a shortcut for Common Vulnerabilities and Exposures, which is a list
    of software bugs that allow hackers to get into a system or network. [CVE]_
 
+Emphasis
+^^^^^^^^
+
+Add text with emphasis:
+
+.. code:: rst
+
+   *this piece of text will be rendered in italics.*
+
 Footnote References
 ^^^^^^^^^^^^^^^^^^^
 
@@ -440,6 +449,15 @@ Add a standalone hyperlink:
    .. code:: rst
 
       Contact me on email davie.badger@gmail.com.
+
+Strong Emphasis
+^^^^^^^^^^^^^^^
+
+Add text with strong emphasis:
+
+.. code:: rst
+
+   **this piece of text will be rendered in bold.**
 
 Substitution References
 ^^^^^^^^^^^^^^^^^^^^^^^
