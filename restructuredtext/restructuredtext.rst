@@ -169,6 +169,19 @@ Add an internal hyperlink target to the immediately following body element:
    reStructuredtext has a few shortcuts, see `List of shortcuts`_.
 
 
+Line Blocks
+^^^^^^^^^^^
+
+Add a line block:
+
+.. code::
+
+   | First line
+   | Second line
+   | Third line
+   |
+   | Fifth line
+
 Lists
 ^^^^^
 
