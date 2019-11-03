@@ -459,8 +459,8 @@ Add a transition (horizontal line):
 Inline Markup
 -------------
 
-Inline markup is a set of special constructs used inside body elements, which
-cannot begin or end with whitespace.
+Inline markup are constructs used inside body elements, which cannot begin or
+end with whitespace.
 
 Citation Refereces
 ^^^^^^^^^^^^^^^^^^
