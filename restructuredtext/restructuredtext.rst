@@ -28,8 +28,7 @@ structure.
 Block Markup
 ------------
 
-Block markup are constructs which start on a new unindented or indented line
-depending on its context.
+Block markup are constructs which start on a new line.
 
 Block Quotes
 ^^^^^^^^^^^^
