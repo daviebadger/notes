@@ -1453,6 +1453,8 @@ Create a hyperlink to a specific RFC (Request For Comments):
 Document Converters
 ===================
 
+Document converters accept a source (input) and a destination (output).
+
 rst2html5.py
 ------------
 
