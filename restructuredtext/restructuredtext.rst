@@ -1450,4 +1450,54 @@ Create a hyperlink to a specific RFC (Request For Comments):
 
 
 
+Document Converters
+===================
+
+rst2html5.py
+------------
+
+Convert to an HTML5 document:
+
+.. code:: sh
+
+   $ rst2html5.py document.rst document.html
+
+rst2latex.py
+------------
+
+Convert to a LaTeX document:
+
+.. code:: sh
+
+   $ rst2latex.py document.rst document.tex
+
+rst2odt.py
+----------
+
+Convert to an ODT document:
+
+.. code:: sh
+
+   $ rst2odt.py document.rst document.odt
+
+rst2pseudoxml.py
+----------------
+
+Convert to a pseudo-XML document for debugging purposes only (usually to stdout):
+
+.. code:: sh
+
+   $ rst2pseudoxml.py document.rst
+
+rst2xml.py
+----------
+
+Convert to an XML document:
+
+.. code:: sh
+
+   $ rst2xml.py document.rst document.xml
+
+
+
 .. |RST| replace:: reStructuredText
