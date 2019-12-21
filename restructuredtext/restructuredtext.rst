@@ -1466,11 +1466,11 @@ Convert to an HTML5 document:
 
 Supported options:
 
-* ``--stylesheet-dirs=DIRS``
+* ``--stylesheet-dirs=DIRS`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
 
    * a comma-separated list of paths to directories where are stored CSS files
 
-* ``--stylesheet-path=FILES``
+* ``--stylesheet-path=FILES`` (default ``minimal.css,plain.css``)
 
    * a comma-separated list of relative paths to CSS files in the
      ``--stylesheet-dirs``
