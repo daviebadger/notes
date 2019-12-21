@@ -1464,6 +1464,17 @@ Convert to an HTML5 document:
 
    $ rst2html5.py document.rst document.html
 
+Supported options:
+
+* ``--stylesheet-dirs=DIRS``
+
+   * a comma-separated list of paths to directories where are stored CSS files
+
+* ``--stylesheet-path=FILES``
+
+   * a comma-separated list of relative paths to CSS files in the
+     ``--stylesheet-dirs``
+
 rst2latex.py
 ------------
 
