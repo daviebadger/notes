@@ -1,8 +1,8 @@
 # Davie's Technical Notes
 
-My personal technical notes of software I have been using for a long time.
+My personal technical notes of software I have been using for a long time:
 
----
+* [reStructuredText](restructuredtext/restructuredtext.rst)
 
 Beside these notes, there are complementary projects:
 
@@ -11,10 +11,6 @@ Beside these notes, there are complementary projects:
 
 [books]: https://github.com/daviebadger/books
 [cheatsheets]: https://github.com/daviebadger/cheatsheets
-
-## Notes
-
-* [reStructuredText](restructuredtext/restructuredtext.rst)
 
 ## License
 
