@@ -1502,7 +1502,8 @@ Convert to an ODT document:
 rst2pseudoxml.py
 ^^^^^^^^^^^^^^^^
 
-Convert to a pseudo-XML document for debugging purposes only (usually to stdout):
+Convert to a pseudo-XML document for debugging purposes only (usually to
+stdout):
 
 .. code:: sh
 
@@ -1520,6 +1521,25 @@ Convert to an XML document:
 
 Configuration
 -------------
+
+Docutils uses a configparser__ format for configuration of document converters.
+
+__ https://docs.python.org/3/library/configparser.html
+
+Configuration Files
+^^^^^^^^^^^^^^^^^^^
+
+Docutils reads configuration files in this order:
+
+#. ``/etc/docutils.conf`` - System-wide configuration file
+#. ``./docutils.conf`` - Project-specific configuration file
+#. ``~/.docutils`` - User-specific configuration file
+
+The combined result may be overridden by a ``--config=path/to/config`` option
+to a document converter.
+
+Configuration Values
+^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
