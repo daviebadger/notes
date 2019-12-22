@@ -1450,13 +1450,19 @@ Create a hyperlink to a specific RFC (Request For Comments):
 
 
 
+Docutils
+========
+
+Docutils library provides moreover document converters, which may be further
+configured.
+
 Document Converters
-===================
+-------------------
 
 Document converters accept a source (input) and a destination (output).
 
 rst2html5.py
-------------
+^^^^^^^^^^^^
 
 Convert to an HTML5 document:
 
@@ -1476,7 +1482,7 @@ Supported options:
     ``--stylesheet-dirs``
 
 rst2latex.py
-------------
+^^^^^^^^^^^^
 
 Convert to a LaTeX document:
 
@@ -1485,7 +1491,7 @@ Convert to a LaTeX document:
    $ rst2latex.py document.rst document.tex
 
 rst2odt.py
-----------
+^^^^^^^^^^
 
 Convert to an ODT document:
 
@@ -1494,7 +1500,7 @@ Convert to an ODT document:
    $ rst2odt.py document.rst document.odt
 
 rst2pseudoxml.py
-----------------
+^^^^^^^^^^^^^^^^
 
 Convert to a pseudo-XML document for debugging purposes only (usually to stdout):
 
@@ -1503,13 +1509,19 @@ Convert to a pseudo-XML document for debugging purposes only (usually to stdout)
    $ rst2pseudoxml.py document.rst
 
 rst2xml.py
-----------
+^^^^^^^^^^
 
 Convert to an XML document:
 
 .. code:: sh
 
    $ rst2xml.py document.rst document.xml
+
+
+Configuration
+-------------
+
+TODO
 
 
 
