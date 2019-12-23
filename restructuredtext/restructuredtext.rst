@@ -1522,7 +1522,7 @@ Convert to an XML document:
 Configuration
 -------------
 
-Docutils uses a configparser__ format for configuration of document converters.
+Docutils uses a configparser__ format for configuring document converters.
 
 __ https://docs.python.org/3/library/configparser.html
 
@@ -1532,16 +1532,47 @@ Configuration Files
 Docutils reads configuration files in this order:
 
 #. ``/etc/docutils.conf`` - System-wide configuration file
-#. ``./docutils.conf`` - Project-specific configuration file
+#. ``./docutils.conf`` - Project-specific configuration file (next to a |RST| document)
 #. ``~/.docutils`` - User-specific configuration file
 
-The combined result may be overridden by a ``--config=path/to/config`` option
-to a document converter.
+The mixed result may be overridden by a ``--config=path/to/config`` option to a
+document converter.
 
 Configuration Values
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+Configuration values are split into several sections.
+
+[general]
+"""""""""
+
+https://docutils.sourceforge.io/docs/user/config.html#general
+
+* ``exit_status_level`` (default ``5``, also as ``--exit-status=5``)
+
+  * exit with non-zero code if a system message is at or above the status level
+    (show all these system messages)
+
+* ``halt_level`` (default ``4``, also as ``--halt=4``)
+
+  * exit immediately with a non-zero code after a first system message at or
+    above the halt level (show only one system message)
+
+* ``language_code`` (default ``en``, also as ``--language=en``)
+
+  * language in a document
+
+* ``strip_comments`` (default ``None``, also as ``--strip-comments``)
+
+  * whether to remove comments or not
+
+System messages:
+
+* ``info`` - 1
+* ``warning`` - 2
+* ``error`` - 3
+* ``severe`` - 4
+* ``none`` - 5
 
 
 
