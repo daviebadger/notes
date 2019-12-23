@@ -1472,6 +1472,12 @@ Convert to an HTML5 document:
 
 Supported options:
 
+
+* ``--math-output`` (default ``'HTML math.css'``)
+
+  * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
+     ``LaTeX``) + options
+
 * ``--stylesheet-dirs=DIRS`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
 
   * a comma-separated list of paths to directories where are stored CSS files
@@ -1588,6 +1594,29 @@ Configuration values under nested ``[restructuredtext parser]`` subsection:
 * ``raw_enabled`` (default ``true``, also as ``--raw-enabled`` or ``--no-raw``)
 
   * whether to allow using ``raw`` directive or not
+
+[writers]
+"""""""""
+
+https://docutils.sourceforge.io/docs/user/config.html#writers
+
+Configuration values for specific document converters:
+
+* ``[html writers]``
+
+  * ``math_output`` (default ``HTML math.css``)
+
+    * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
+       ``LaTeX``) + options
+
+  * ``stylesheet_dirs`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
+
+    * a comma-separated list of paths to directories where are stored CSS files
+
+  * ``stylesheet_path`` (default ``minimal.css,plain.css``)
+
+    * a comma-separated list of relative paths to CSS files in the
+      ``stylesheet_dirs``
 
 
 
