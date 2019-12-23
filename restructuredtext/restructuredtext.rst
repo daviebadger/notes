@@ -1574,6 +1574,21 @@ System messages:
 * ``severe`` - 4
 * ``none`` - 5
 
+[parsers]
+"""""""""
+
+https://docutils.sourceforge.io/docs/user/config.html#parsers
+
+Configuration values under nested ``[restructuredtext parser]`` subsection:
+
+* ``file_insertion_enabled`` (default ``true``, also as ``--file-insertion-enabled`` or ``--no-file-insertion``)
+
+  * whether to allow external files in directives or not
+
+* ``raw_enabled`` (default ``true``, also as ``--raw-enabled`` or ``--no-raw``)
+
+  * whether to allow using ``raw`` directive or not
+
 
 
 .. |RST| replace:: reStructuredText
