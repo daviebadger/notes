@@ -1476,7 +1476,7 @@ Supported options:
 * ``--math-output`` (default ``'HTML math.css'``)
 
   * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
-     ``LaTeX``) + options
+    ``LaTeX``) + options
 
 * ``--stylesheet-dirs=DIRS`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
 
@@ -1607,7 +1607,7 @@ Configuration values for specific document converters:
   * ``math_output`` (default ``HTML math.css``)
 
     * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
-       ``LaTeX``) + options
+      ``LaTeX``) + options
 
   * ``stylesheet_dirs`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
 
