@@ -1574,11 +1574,11 @@ https://docutils.sourceforge.io/docs/user/config.html#general
 
 System messages:
 
-* ``info`` - 1
-* ``warning`` - 2
-* ``error`` - 3
-* ``severe`` - 4
-* ``none`` - 5
+* ``info`` - ``1``
+* ``warning`` - ``2``
+* ``error`` - ``3``
+* ``severe`` - ``4``
+* ``none`` - ``5``
 
 [parsers]
 """""""""
