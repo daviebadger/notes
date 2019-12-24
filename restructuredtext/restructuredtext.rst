@@ -1472,7 +1472,6 @@ Convert to an HTML5 document:
 
 Supported options:
 
-
 * ``--math-output`` (default ``'HTML math.css'``)
 
   * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
