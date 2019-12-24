@@ -1555,17 +1555,20 @@ https://docutils.sourceforge.io/docs/user/config.html#general
 
 * ``exit_status_level`` (default ``5``, also as ``--exit-status=5``)
 
-  * exit with non-zero code if a system message is at or above the status level
-    (show all these system messages)
+  * exit with non-zero code if any system message is at or above the status level
 
-* ``halt_level`` (default ``4``, also as ``--halt=4``)
+* ``halt_level`` (default ``4``, also as ``--halt=4``, other ``--strict``)
 
   * exit immediately with non-zero code after a first system message at or above
-    the halt level (show only one system message)
+    the halt level
 
 * ``language_code`` (default ``en``, also as ``--language=en``)
 
   * language in a document
+
+* ``report_level`` (default ``2``, also as ``--report=2``, other ``--v / --verbose`` or ``-q / --quiet``)
+
+  * print system messages at or above the level to stderr
 
 * ``strip_comments`` (default ``None``, also as ``--strip-comments``)
 
@@ -1592,7 +1595,7 @@ Configuration values under nested ``[restructuredtext parser]`` subsection:
 
 * ``raw_enabled`` (default ``true``, also as ``--raw-enabled`` or ``--no-raw``)
 
-  * whether to allow using ``raw`` directive or not
+  * whether to allow using ``raw`` directive and role or not
 
 [writers]
 """""""""
