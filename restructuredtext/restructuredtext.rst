@@ -1609,7 +1609,7 @@ Configuration values for specific document converters:
   * ``math_output`` (default ``HTML math.css``)
 
     * how should be math output formatted (``HTML``, ``MathJax``, ``MathML`` or
-      ``LaTeX``) + options
+      ``LaTeX``) + option
 
   * ``stylesheet_dirs`` (default ``.,/path/to/python/site-packages/docutils/writers/html5_polyglot``)
 
