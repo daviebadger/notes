@@ -1560,8 +1560,8 @@ https://docutils.sourceforge.io/docs/user/config.html#general
 
 * ``halt_level`` (default ``4``, also as ``--halt=4``)
 
-  * exit immediately with a non-zero code after a first system message at or
-    above the halt level (show only one system message)
+  * exit immediately with non-zero code after a first system message at or above
+    the halt level (show only one system message)
 
 * ``language_code`` (default ``en``, also as ``--language=en``)
 
