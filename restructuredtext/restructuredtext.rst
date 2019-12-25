@@ -1450,8 +1450,8 @@ Create a hyperlink to a specific RFC (Request For Comments):
 
 
 
-Docutils
-========
+Docutils Library
+================
 
 Docutils library provides moreover document converters, which may be further
 configured.
