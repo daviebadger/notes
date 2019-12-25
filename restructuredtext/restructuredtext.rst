@@ -1461,8 +1461,8 @@ Document Converters
 
 Document converters accept a source (input) and a destination (output).
 
-rst2html5.py
-^^^^^^^^^^^^
+rst2html5.py Converter
+^^^^^^^^^^^^^^^^^^^^^^
 
 Convert to an HTML5 document:
 
@@ -1486,8 +1486,8 @@ Supported options:
   * a comma-separated list of relative paths to CSS files in the
     ``--stylesheet-dirs``
 
-rst2latex.py
-^^^^^^^^^^^^
+rst2latex.py Converter
+^^^^^^^^^^^^^^^^^^^^^^
 
 Convert to a LaTeX document:
 
@@ -1495,8 +1495,8 @@ Convert to a LaTeX document:
 
    $ rst2latex.py document.rst document.tex
 
-rst2odt.py
-^^^^^^^^^^
+rst2odt.py Converter
+^^^^^^^^^^^^^^^^^^^^
 
 Convert to an ODT document:
 
@@ -1504,8 +1504,8 @@ Convert to an ODT document:
 
    $ rst2odt.py document.rst document.odt
 
-rst2pseudoxml.py
-^^^^^^^^^^^^^^^^
+rst2pseudoxml.py Converter
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Convert to a pseudo-XML document for debugging purposes only (usually to
 stdout):
@@ -1514,8 +1514,8 @@ stdout):
 
    $ rst2pseudoxml.py document.rst
 
-rst2xml.py
-^^^^^^^^^^
+rst2xml.py Converter
+^^^^^^^^^^^^^^^^^^^^
 
 Convert to an XML document:
 
@@ -1548,8 +1548,8 @@ Configuration Values
 
 Configuration values are split into several sections.
 
-[general]
-"""""""""
+[general] Section
+"""""""""""""""""
 
 https://docutils.sourceforge.io/docs/user/config.html#general
 
@@ -1582,8 +1582,8 @@ System messages:
 * ``severe`` - ``4``
 * ``none`` - ``5``
 
-[parsers]
-"""""""""
+[parsers] Section
+"""""""""""""""""
 
 https://docutils.sourceforge.io/docs/user/config.html#parsers
 
@@ -1597,8 +1597,8 @@ Configuration values under nested ``[restructuredtext parser]`` subsection:
 
   * whether to allow using ``raw`` directive and role or not
 
-[writers]
-"""""""""
+[writers] Section
+"""""""""""""""""
 
 https://docutils.sourceforge.io/docs/user/config.html#writers
 
