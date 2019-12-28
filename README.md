@@ -1,6 +1,6 @@
 # Davie's Technical Notes
 
-My personal technical notes of software I have been using for a long time:
+My technical notes of tools I have been using:
 
 * [reStructuredText](restructuredtext/restructuredtext.rst)
 
