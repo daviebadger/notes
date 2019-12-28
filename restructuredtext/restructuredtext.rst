@@ -7,14 +7,16 @@
 
 :Author: `Davie Badger`_
 :Contact: davie.badger@gmail.com
-:Copyright: `Creative Commons Attribution 4.0 International Public License`_
+:Copyright:
+   `Creative Commons Attribution-ShareAlike 4.0 International Public License`__
 
 .. contents::
 
 .. sectnum::
    :suffix: .
 
-.. _Creative Commons Attribution 4.0 International Public License: https://creativecommons.org/licenses/by/4.0/
+__ https://creativecommons.org/licenses/by-sa/4.0/
+
 .. _Davie Badger: https://github.com/daviebadger
 
 
