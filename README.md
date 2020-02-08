@@ -3,6 +3,7 @@
 My technical notes of tools I have been using:
 
 * [reStructuredText](restructuredtext/restructuredtext.rst)
+* [YAML](yaml/yaml.rst)
 
 Beside these notes, there are complementary projects:
 
