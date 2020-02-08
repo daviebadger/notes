@@ -2,7 +2,7 @@
  YAML
 ======
 ------------------------------------------
- Human-Readable Data-Serialization Format
+ Human-Readable Data Serialization Format
 ------------------------------------------
 
 :Author: `Davie Badger`_
