@@ -1,6 +1,6 @@
-======
- YAML
-======
+==========
+ YAML 1.2
+==========
 ------------------------------------------
  Human-Readable Data Serialization Format
 ------------------------------------------
@@ -23,6 +23,25 @@ __ https://creativecommons.org/licenses/by-sa/4.0/
 
 Scalars
 =======
+
+Booleans
+--------
+
+Use a boolean:
+
+#. true:
+
+   .. code:: yaml
+
+      true
+
+#. false:
+
+   .. code:: yaml
+
+      false
+
+
 
 Collections
 ===========
