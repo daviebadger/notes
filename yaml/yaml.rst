@@ -41,6 +41,35 @@ Use an integer:
 
      -1
 
+Floating Points
+---------------
+
+Use a floating point:
+
+* positive
+
+  .. code:: yaml
+
+     1.0
+
+* positive infinity
+
+  .. code:: yaml
+
+     .inf
+
+* negative
+
+  .. code:: yaml
+
+     -1.0
+
+* negative infinity
+
+  .. code:: yaml
+
+     -.inf
+
 Booleans
 --------
 
