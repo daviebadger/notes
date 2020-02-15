@@ -41,6 +41,15 @@ Use a boolean:
 
       false
 
+Null
+----
+
+Use a null:
+
+.. code:: yaml
+
+   null
+
 
 
 Collections
