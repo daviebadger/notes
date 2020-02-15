@@ -24,22 +24,39 @@ __ https://creativecommons.org/licenses/by-sa/4.0/
 Scalars
 =======
 
+Integers
+--------
+
+Use an integer:
+
+* positive
+
+  .. code:: yaml
+
+     1
+
+* negative
+
+  .. code:: yaml
+
+     -1
+
 Booleans
 --------
 
 Use a boolean:
 
-#. true:
+* true:
 
-   .. code:: yaml
+  .. code:: yaml
 
-      true
+     true
 
-#. false:
+* false:
 
-   .. code:: yaml
+  .. code:: yaml
 
-      false
+     false
 
 Null
 ----
