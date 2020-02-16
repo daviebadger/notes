@@ -24,18 +24,43 @@ __ https://creativecommons.org/licenses/by-sa/4.0/
 Scalars
 =======
 
+Strings
+-------
+
+Use a string:
+
+* flow style:
+
+  * plain (no escape characters):
+
+    .. code:: yaml
+
+       text
+
+  * single-quoted (no escape characters):
+
+    .. code:: yaml
+
+       'I''m David'
+
+  * double-quoted with escape characters:
+
+    .. code:: yaml
+
+       "Hello\nWorld"
+
 Integers
 --------
 
 Use an integer:
 
-* positive
+* positive:
 
   .. code:: yaml
 
      1
 
-* negative
+* negative:
 
   .. code:: yaml
 
