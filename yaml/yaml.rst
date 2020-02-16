@@ -46,29 +46,41 @@ Floating Points
 
 Use a floating point:
 
-* positive
+* positive:
 
   .. code:: yaml
 
      1.0
 
-* positive infinity
+* positive infinity:
 
   .. code:: yaml
 
      .inf
 
-* negative
+* positive scientific notation:
+
+  .. code:: yaml
+
+     1e+0
+
+* negative:
 
   .. code:: yaml
 
      -1.0
 
-* negative infinity
+* negative infinity:
 
   .. code:: yaml
 
      -.inf
+
+* negative scientific notation:
+
+  .. code:: yaml
+
+     -1e+0
 
 Booleans
 --------
