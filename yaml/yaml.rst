@@ -138,7 +138,7 @@ Use a null:
 Collections
 ===========
 
-Collections are advanced data structures that contain scalars or nested
+Collections are data containers, which contain scalars or also nested
 collections.
 
 Mappings
