@@ -55,7 +55,7 @@ Use a string:
 
   * literal style:
 
-    * clip (a string ends with a newline):
+    * clip (a newline at the end):
 
       .. code:: yaml
 
@@ -64,18 +64,18 @@ Use a string:
            ls
            touch file.txt
 
-    * strip (a string does not end with a newline at all)
+    * strip (no newline at the end)
 
       .. code:: yaml
 
-         |
+         |-
            pwd
            ls
            touch file.txt
 
   * folded style:
 
-    * clip (a string ends with a newline):
+    * clip (a newline at the end):
 
       .. code:: yaml
 
@@ -86,7 +86,7 @@ Use a string:
            This is the second paragraph
            after a line break.
 
-    * strip (a string does not end with a newline at all)
+    * strip (no newline at the end)
 
       .. code:: yaml
 
