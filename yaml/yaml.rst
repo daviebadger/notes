@@ -39,7 +39,7 @@ Use a string:
 
        text
 
-  * single-quoted (no escape characters):
+  * single-quoted (no escape characters, only double single quotes):
 
     .. code:: yaml
 
