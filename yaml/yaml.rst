@@ -51,6 +51,52 @@ Use a string:
 
        "Hello\nWorld"
 
+* block style:
+
+  * literal style:
+
+    * clip (a string ends with a newline):
+
+      .. code:: yaml
+
+         |
+           pwd
+           ls
+           touch file.txt
+
+    * strip (a string does not end with a newline at all)
+
+      .. code:: yaml
+
+         |
+           pwd
+           ls
+           touch file.txt
+
+  * folded style:
+
+    * clip (a string ends with a newline):
+
+      .. code:: yaml
+
+         >
+           This is
+           the first paragraph.
+
+           This is the second paragraph
+           after a line break.
+
+    * strip (a string does not end with a newline at all)
+
+      .. code:: yaml
+
+         >-
+           This is
+           the first paragraph.
+
+           This is the second paragraph
+           after a line break.
+
 Integers
 --------
 
