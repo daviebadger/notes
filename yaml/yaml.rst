@@ -186,19 +186,19 @@ Timestamps
 
 Use a timestamp:
 
-* date:
+* ISO date:
 
   .. code:: yaml
 
      2020-02-20
 
-* iso datetime:
+* ISO datetime:
 
   .. code:: yaml
 
      2020-02-20T00:00:00
 
-* iso datetime with a time zone:
+* ISO datetime with a time zone:
 
   .. code:: yaml
 
