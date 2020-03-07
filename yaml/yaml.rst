@@ -181,6 +181,41 @@ Use a null:
 
    null
 
+Timestamps
+----------
+
+Use a timestamp:
+
+* date:
+
+  .. code:: yaml
+
+     2020-02-20
+
+* iso datetime:
+
+  .. code:: yaml
+
+     2020-02-20T00:00:00
+
+* iso datetime with a time zone:
+
+  .. code:: yaml
+
+     2020-02-20T00:00:00+02:30
+
+* spaced datetime:
+
+  .. code:: yaml
+
+     2020-02-20 00:00:00
+
+* spaced datetime with a time zone:
+
+  .. code:: yaml
+
+     2020-02-20 00:00:00 -1
+
 
 
 Collections
