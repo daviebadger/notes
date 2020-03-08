@@ -227,5 +227,27 @@ collections.
 Mappings
 --------
 
+Use a mapping:
+
+* block style:
+
+  .. code:: yaml
+
+     boolean: true
+     floating point: 1.0
+     flow_string: "text"
+     integer: 1
+     NestedMapping:
+       blockString: |-
+         text
+     null: null
+     timestamp: 2020-02-20
+
+* flow style:
+
+  .. code:: yaml
+
+     {x: 0, y: 1}
+
 Sequences
 ---------
