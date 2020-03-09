@@ -229,6 +229,12 @@ Mappings
 
 Use a mapping:
 
+* flow style:
+
+  .. code:: yaml
+
+     {x: 0, y: 1}
+
 * block style:
 
   .. code:: yaml
@@ -237,17 +243,12 @@ Use a mapping:
      floating point: 1.0
      flow_string: "text"
      integer: 1
-     NestedMapping:
+     NestedBlockMapping:
        blockString: |-
          text
+       NestedFlowMapping: {x: 0, y: 1}
      null: null
      timestamp: 2020-02-20
-
-* flow style:
-
-  .. code:: yaml
-
-     {x: 0, y: 1}
 
 Sequences
 ---------
