@@ -252,3 +252,30 @@ Use a mapping:
 
 Sequences
 ---------
+
+Use a sequence:
+
+* flow style:
+
+  .. code:: yaml
+
+     [0, 1]
+
+* block style:
+
+  .. code:: yaml
+
+     - false
+     - -1.0
+     - "text"
+     - -1
+     - flowSequence: [0, 1]
+       NestedBlockMapping:
+         block string: >-
+           text
+         blockSequence:
+           - {x: 0, y: 1}
+           - {x: 1, y: 2}
+           - {x: 2, y: 3}
+     - null
+     - 2020-02-20
