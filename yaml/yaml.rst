@@ -277,5 +277,10 @@ Use a sequence:
            - {x: 0, y: 1}
            - {x: 1, y: 2}
            - {x: 2, y: 3}
+       NestedBlockSequence:
+         -
+           - a
+           - b
+           - c
      - null
      - 2020-02-20
