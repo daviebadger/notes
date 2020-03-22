@@ -293,6 +293,22 @@ Other Indicators
 Comment Indicator
 -----------------
 
+Add a comment:
+
+* flow style:
+
+  .. code:: yaml
+
+     key: value  # This is an inline comment.
+
+* block style:
+
+  .. code:: yaml
+
+     # This is a comment
+     # over two lines.
+     key: value
+
 Alias Indicators
 ----------------
 
