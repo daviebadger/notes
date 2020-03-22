@@ -290,6 +290,8 @@ Use a sequence:
 Other Indicators
 ================
 
+Supporting indicators for writing YAML documents.
+
 Comment Indicator
 -----------------
 
