@@ -314,6 +314,25 @@ Add a comment:
 Alias Indicators
 ----------------
 
+Anchor Indicator
+^^^^^^^^^^^^^^^^
+
+Create an anchor for a value:
+
+.. code:: yaml
+
+   &pi 3.14159265359
+
+Alias Indicator
+^^^^^^^^^^^^^^^
+
+Reuse an anchor via aliasing:
+
+.. code:: yaml
+
+   *pi
+
+
 Merge Indicator
 ---------------
 
