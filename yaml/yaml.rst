@@ -314,26 +314,17 @@ Add a comment:
 Alias Indicators
 ----------------
 
-Indicators for reusing values.
-
-Anchor Indicator
-^^^^^^^^^^^^^^^^
-
 Create an anchor for a value:
 
 .. code:: yaml
 
    &pi 3.14159265359
 
-Alias Indicator
-^^^^^^^^^^^^^^^
-
-Reuse an anchor via aliasing:
+Reuse the anchor via aliasing:
 
 .. code:: yaml
 
    *pi
-
 
 Merge Indicator
 ---------------
@@ -363,12 +354,3 @@ Merge mappings:
 
 Document Indicators
 -------------------
-
-Directive Indicator
-^^^^^^^^^^^^^^^^^^^
-
-Document Start Indicator
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Document End Indicator
-^^^^^^^^^^^^^^^^^^^^^^
