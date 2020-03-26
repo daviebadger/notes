@@ -363,3 +363,12 @@ Merge mappings:
 
 Document Indicators
 -------------------
+
+Directive Indicator
+^^^^^^^^^^^^^^^^^^^
+
+Document Start Indicator
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Document End Indicator
+^^^^^^^^^^^^^^^^^^^^^^
