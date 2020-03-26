@@ -338,5 +338,28 @@ Reuse an anchor via aliasing:
 Merge Indicator
 ---------------
 
+Merge mappings:
+
+* single mapping:
+
+  .. code:: yaml
+
+     a: &a
+       x: 0
+     b:
+       <<: *a
+       y: 1
+
+* multiple mappings:
+
+  .. code:: yaml
+
+     a: &a
+       x: 0
+     b: &b
+       y: 1
+     c:
+       <<: [*a, *b]
+
 Document Indicators
 -------------------
