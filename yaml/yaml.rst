@@ -354,3 +354,54 @@ Merge mappings:
 
 Document Indicators
 -------------------
+
+* document directive aka shebang:
+
+  .. code:: yaml
+
+     %YAML 1.2
+
+     x: 0
+
+     # Deserialized data: {"x": 0}
+
+* explicit document start:
+
+  .. code:: yaml
+
+     ---
+     x: 0
+
+     # Deserialized data: {"x": 0}
+
+* explicit document end:
+
+  .. code:: yaml
+
+     x: 0
+     ...
+
+     # Deserialized data: {"x": 0}
+
+* single document with all optional document indicators:
+
+  .. code:: yaml
+
+     %YAML 1.2
+     ---
+     X: 0
+     ...
+
+     # Deserialized data: {"x": 0}
+
+* more documents in a single file:
+
+  .. code:: yaml
+
+     x: 0
+
+     ---
+
+     x: 0
+
+     # Deserialized data: [{"x": 0}, {"x": 0}]
