@@ -341,6 +341,8 @@ Merge mappings:
        <<: *a
        y: 1
 
+     # Deserialized mapping: {"a": {"x": 0}, "b": {"x": 0, "y": 1}}
+
 * multiple mappings:
 
   .. code:: yaml
@@ -351,6 +353,8 @@ Merge mappings:
        y: 1
      c:
        <<: [*a, *b]
+
+     # Deserialized mapping: {"a": {"x": 0}, "b": {"y": 1}, "c": {"x": 0, "y": 1}}
 
 Document Indicators
 -------------------
