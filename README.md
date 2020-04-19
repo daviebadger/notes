@@ -1,6 +1,6 @@
 # Davie's Technical Notes
 
-My technical notes of tools I have been using:
+My technical notes of software I have been using:
 
 * [reStructuredText](restructuredtext/restructuredtext.rst)
 * [YAML](yaml/yaml.rst)
