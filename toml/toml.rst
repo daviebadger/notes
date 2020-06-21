@@ -32,3 +32,22 @@ Values
 
 Other
 =====
+
+Commnets
+--------
+
+Add a comment:
+
+* full-line:
+
+  .. code:: toml
+
+     # This is a full-line comment
+     # over two lines.
+     key = "value"
+
+* inline:
+
+  .. code:: toml
+
+     key = "value"  # This is an inline comment.
