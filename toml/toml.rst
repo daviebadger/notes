@@ -29,6 +29,23 @@ Keys
 Values
 ======
 
+Booleans
+--------
+
+Use a boolean:
+
+* true:
+
+  .. code:: toml
+
+     key = true
+
+* false:
+
+  .. code:: toml
+
+     key = false
+
 
 Other
 =====
