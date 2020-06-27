@@ -29,6 +29,35 @@ Keys
 Values
 ======
 
+Integers
+--------
+
+Use an integer:
+
+* positive:
+
+  .. code:: toml
+
+     key = 1
+
+* positive with underscores:
+
+  .. code:: toml
+
+     key = 1_000_000
+
+* negative:
+
+  .. code:: toml
+
+     key = -1
+
+* negative with underscores:
+
+  .. code:: toml
+
+     key = -1_000_000
+
 Floats
 ------
 
