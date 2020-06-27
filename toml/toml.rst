@@ -29,6 +29,59 @@ Keys
 Values
 ======
 
+Floats
+------
+
+Use a float:
+
+* positive:
+
+  .. code:: toml
+
+     key = 1.0
+
+* positive infinity:
+
+  .. code:: toml
+
+     key = inf
+
+* positive scientific notation:
+
+  .. code:: toml
+
+     key = 1e+0
+
+* positive with underscores:
+
+  .. code:: toml
+
+     key = 1.123_456_789
+
+* negative:
+
+  .. code:: toml
+
+     key = -1.0
+
+* negative infinity:
+
+  .. code:: toml
+
+     key = -inf
+
+* negative scientific notation:
+
+  .. code:: toml
+
+     key = -1e+0
+
+* negative with underscores:
+
+  .. code:: toml
+
+     key = -1.123_456_789
+
 Booleans
 --------
 
@@ -45,6 +98,7 @@ Use a boolean:
   .. code:: toml
 
      key = false
+
 
 
 Other
