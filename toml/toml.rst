@@ -29,6 +29,45 @@ Keys
 Values
 ======
 
+Strings
+-------
+
+Use a string:
+
+* basic:
+
+  * inline:
+
+    .. code:: toml
+
+       key = "I'm David"
+
+  * multine:
+
+    .. code:: toml
+
+       key = """
+       This is a
+       multi-line
+       basic string"""
+
+* literal
+
+  * inline:
+
+    .. code:: toml
+
+       key = 'Cannot use single quotes'
+
+  * multine:
+
+    .. code:: toml
+
+       key = '''
+       This is a
+       multi-line
+       literal string'''
+
 Integers
 --------
 
