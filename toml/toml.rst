@@ -128,6 +128,27 @@ Use a boolean:
 
      key = false
 
+Arrays
+------
+
+Use an array:
+
+* inline:
+
+  .. code:: toml
+
+     key = [ 1, 2, 3 ]
+
+* multi-line:
+
+  .. code:: toml
+
+     key = [
+       1,
+       2,
+       3,
+     ]
+
 
 
 Other
