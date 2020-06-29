@@ -173,6 +173,12 @@ Date-Times
 Dates
 -----
 
+Use a local date:
+
+.. code:: toml
+
+   key = 2020-01-31
+
 Times
 -----
 
