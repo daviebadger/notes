@@ -176,6 +176,12 @@ Dates
 Times
 -----
 
+Use a local time:
+
+.. code:: toml
+
+   key = 12:30:00
+
 Arrays
 ------
 
