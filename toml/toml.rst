@@ -170,6 +170,48 @@ Use a boolean:
 Date-Times
 ----------
 
+Use a date-time:
+
+* local:
+
+  * with T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31T12:30:00
+
+  * without T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31 12:30:00
+
+* offset:
+
+  * in UTC with T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31T12:30:00Z
+
+  * in UTC without T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31 12:30:00Z
+
+  * not in UTC with T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31T12:30:00+01:30
+
+  * not in UTC without T delimiter:
+
+    .. code:: toml
+
+       key = 2020-01-31 12:30:00+01:30
+
 Dates
 -----
 
