@@ -230,6 +230,15 @@ Use a local time:
 
    key = 12:30:00
 
+Inline Tables
+-------------
+
+Use an inline table:
+
+.. code:: toml
+
+   key = { name = "David", age = 25 }
+
 Arrays
 ------
 
