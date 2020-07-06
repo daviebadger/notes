@@ -24,6 +24,15 @@ __ https://creativecommons.org/licenses/by-sa/4.0/
 Keys
 ====
 
+Key/Value Pairs
+---------------
+
+Tables
+------
+
+Array of Tables
+---------------
+
 
 
 Values
