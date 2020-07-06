@@ -39,7 +39,15 @@ TODO
 Array of Tables
 ---------------
 
-TODO
+Wrap key/value pairs under a table in an array:
+
+.. code:: toml
+
+   [[dns]]
+   ip = "1.1.1.1"
+
+   [[dns]]
+   ip = "8.8.8.8"
 
 
 
