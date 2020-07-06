@@ -29,7 +29,29 @@ Possible key formats.
 Key/Value Pairs
 ---------------
 
-TODO
+Add a key with a value in a:
+
+* bare format:
+
+  .. code:: toml
+
+     key = "value"
+     key-with-dashes = "value"
+     key_with_underscores = "value"
+
+* quoted format:
+
+  .. code:: toml
+
+     "key with spaces" = "value"
+
+* dotted format:
+
+  .. code:: toml
+
+     state.a = "value"
+     state.b = "value"
+     state.c = "value"
 
 Tables
 ------
