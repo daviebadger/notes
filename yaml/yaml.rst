@@ -342,8 +342,6 @@ Merge mappings:
        <<: *a
        y: 1
 
-     # Deserialized mapping: {"a": {"x": 0, "y": 0}, "b": {"x": 0, "y": 1}}
-
 * multiple mappings:
 
   .. code:: yaml
@@ -357,9 +355,6 @@ Merge mappings:
      c:
        <<: [*b, *a]
 
-     # Deserialized mapping for [*b, *a]: {"a": {"x": 0, "y": 0}, "b": {"x": 0, "y": 1}, "c": {"x": 0, "y": 1}}
-     # Deserialized mapping for [*a, *b]: {"a": {"x": 0, "y": 0}, "b": {"x": 0, "y": 1}, "c": {"x": 0, "y": 0}}
-
 Document Indicators
 -------------------
 
@@ -371,8 +366,6 @@ Document Indicators
 
      x: 0
 
-     # Deserialized data: {"x": 0}
-
 * explicit document start:
 
   .. code:: yaml
@@ -380,16 +373,12 @@ Document Indicators
      ---
      x: 0
 
-     # Deserialized data: {"x": 0}
-
 * explicit document end:
 
   .. code:: yaml
 
      x: 0
      ...
-
-     # Deserialized data: {"x": 0}
 
 * single document with all optional document indicators:
 
@@ -400,8 +389,6 @@ Document Indicators
      X: 0
      ...
 
-     # Deserialized data: {"x": 0}
-
 * more documents in a single file:
 
   .. code:: yaml
@@ -411,5 +398,3 @@ Document Indicators
      ---
 
      x: 0
-
-     # Deserialized data: [{"x": 0}, {"x": 0}]
