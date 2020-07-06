@@ -34,12 +34,22 @@ TODO
 Tables
 ------
 
-TODO
+Wrap key/value pairs under a table:
+
+.. code:: toml
+
+   [dev]
+   host = "localhost"
+   port = 5000
+
+   [test]
+   host = "domain"
+   port = 5001
 
 Array of Tables
 ---------------
 
-Wrap key/value pairs under a table in an array:
+Wrap key/value pairs under a table array:
 
 .. code:: toml
 
