@@ -24,7 +24,7 @@ __ https://creativecommons.org/licenses/by-sa/4.0/
 Keys
 ====
 
-TODO
+Possible key formats.
 
 Key/Value Pairs
 ---------------
@@ -46,7 +46,7 @@ TODO
 Values
 ======
 
-TODO
+Types of values that keys may contain.
 
 Strings
 -------
@@ -284,7 +284,7 @@ Use an array:
 Other
 =====
 
-TODO
+Syntax neither related to keys nor values.
 
 Commnets
 --------
