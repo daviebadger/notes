@@ -331,6 +331,12 @@ Commnets
 
 Add a comment:
 
+* inline:
+
+  .. code:: toml
+
+     key = "value"  # This is an inline comment.
+
 * full-line:
 
   .. code:: toml
@@ -338,9 +344,3 @@ Add a comment:
      # This is a full-line comment
      # over two lines.
      key = "value"
-
-* inline:
-
-  .. code:: toml
-
-     key = "value"  # This is an inline comment.
