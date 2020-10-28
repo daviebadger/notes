@@ -110,7 +110,7 @@ Use a string:
        multi-line
        basic string"""
 
-* literal
+* literal:
 
   * inline:
 
