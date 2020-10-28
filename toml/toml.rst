@@ -101,7 +101,7 @@ Use a string:
 
        key = "I'm David"
 
-  * multine:
+  * multi-line:
 
     .. code:: toml
 
@@ -118,7 +118,7 @@ Use a string:
 
        key = 'Cannot use single quotes'
 
-  * multine:
+  * multi-line:
 
     .. code:: toml
 
