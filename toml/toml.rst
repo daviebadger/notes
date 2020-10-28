@@ -93,13 +93,14 @@ Strings
 
 Use a string:
 
-* basic:
+* basic (with escaping):
 
   * inline:
 
     .. code:: toml
 
        key = "I'm David"
+       escaped = "\""
 
   * multi-line:
 
@@ -110,13 +111,13 @@ Use a string:
        multi-line
        basic string"""
 
-* literal:
+* literal (without escaping):
 
   * inline:
 
     .. code:: toml
 
-       key = 'Cannot use single quotes'
+       key = 'Cannot use single quotes inside'
 
   * multi-line:
 
