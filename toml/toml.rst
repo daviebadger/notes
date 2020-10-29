@@ -35,23 +35,24 @@ Add a key with a value in a:
 
   .. code:: toml
 
-     key = "value"
      key-with-dashes = "value"
      key_with_underscores = "value"
+     123 = "value"
 
 * quoted format:
 
   .. code:: toml
 
-     "key with spaces" = "value"
+     "double quotes" = "value"
+     'single quotes' = "value"
 
 * dotted format:
 
   .. code:: toml
 
-     state.a = "value"
-     state.b = "value"
-     state.c = "value"
+     properties.a = "value"
+     properties.b = "value"
+     properties."a.b" = "value"
 
 Tables
 ------
